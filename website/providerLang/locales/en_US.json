@@ -1,0 +1,17 @@
+{
+  "app.userAuth.signIn": "Sign In",
+  "app.userAuth.Forgot Password": "Forgot Password",
+  "app.userAuth.Password": "Password",
+  "app.userAuth.E-mail": "E-mail",
+  "app.userAuth.The input is not valid E-mail!": "The input is not valid E-mail!",
+  "app.userAuth.Please input your Password!": "Please input your Password!",
+  "app.userAuth.Login Successfully.": "Login Successfully :)",
+  "app.userAuth.You did not login.": "You did not login :(",
+  "app.pages.customers.adressAdd": "Address Add",
+  "app.pages.customers.addressName": "Address Name",
+  "app.pages.customers.addressCity": "Search to city",
+  "app.pages.customers.addressTown": "Town",
+  "app.pages.customers.addressDistrict": "District",
+  "app.pages.customers.addressNeighbour": "Neighbourhood",
+  "app.pages.customers.addressFull": "Full Address"
+}

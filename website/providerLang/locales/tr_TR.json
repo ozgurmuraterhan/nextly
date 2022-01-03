@@ -1,0 +1,17 @@
+{
+  "app.userAuth.signIn": "Giriş Yap",
+  "app.userAuth.Forgot Password": "Şifremi Unuttum",
+  "app.userAuth.Password": "Şifre",
+  "app.userAuth.E-mail": "E-Posta",
+  "app.userAuth.The input is not valid E-mail!": "Geçerli e-posta giriniz!",
+  "app.userAuth.Please input your Password!": "Lütfen şifrenizi giriniz!",
+  "app.userAuth.Login Successfully.": "Giriş Başarılı :)",
+  "app.userAuth.You did not login.": "Giriş Yapamadınız :(",
+  "app.pages.customers.adressAdd": "Adres Ekle",
+  "app.pages.customers.addressName": "Adres Adı",
+  "app.pages.customers.addressCity": "Şehir Ara",
+  "app.pages.customers.addressTown": "İlçe",
+  "app.pages.customers.addressDistrict": "Semt",
+  "app.pages.customers.addressNeighbour": "Mahalle",
+  "app.pages.customers.addressFull": "Açık Address"
+}
