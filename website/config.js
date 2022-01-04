@@ -1,5 +1,5 @@
-export const API_URL = "backend.nextly.shop"
-export const WEBSITE_URL = "nextly.shop"
+export const API_URL = "http://backend.nextly.shop"
+export const WEBSITE_URL = "http://nextly.shop"
 
 // export const API_URL = "http://localhost:5000"
 // export const WEBSITE_URL = "http://localhost:3000"

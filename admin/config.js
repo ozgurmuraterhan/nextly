@@ -1,4 +1,4 @@
-export const API_URL = "backend.nextly.shop"
+export const API_URL = "http://backend.nextly.shop"
 //export const API_URL = "http://localhost:5000"
 
 export const languageData = [
