@@ -38,7 +38,7 @@
     "url-loader": "^4.1.0"
   },
   "license": "ISC",
-  "proxy": "localhost:5000",
+  "proxy": "http://localhost:5000",
   "devDependencies": {
     "concurrently": "^6.2.1",
     "less": "^3.13.1",
