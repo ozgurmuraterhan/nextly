@@ -4,9 +4,9 @@
   "description": "",
   "main": "ecosystem.config.js",
   "scripts": {
-    "allnpmi": "cd website && npm i -f   && cd ../admin && npm i -f   && cd ../backend && npm i -f && cd ..",
+    "allnpmi": "cd website && npm i -f   && cd ../admin && npm i -f   && cd ../backend && npm i -f && npm install pm2@latest -g && npm install nodemon -g ",
     "allnpmbuild": "cd website && npm  run build   && cd ../admin && npm run build  && cd ..",
-    "allnpmstart": "npm install pm2@latest -g && pm2 start ecosystem.config.js "
+    "allnpmstart": " pm2 start ecosystem.config.js "
   },
   "repository": {
     "type": "git",
