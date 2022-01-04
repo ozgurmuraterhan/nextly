@@ -18,8 +18,8 @@ export const languageData = [
 ];
 
 export const defaultLanguage = {
-    languageId: 'turkish',
-    locale: 'tr',
-    name: 'Türkçe',
-    icon: 'tr'
+    languageId: 'english',
+    locale: 'en',
+    name: 'English',
+    icon: 'us'
 }

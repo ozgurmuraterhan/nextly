@@ -30,6 +30,5 @@
     "tailwindcss": "^2.2.19",
     "url-loader": "^4.1.0"
   },
-  "license": "ISC",
-  "proxy": "https://backend.nextly.shop"
+  "license": "ISC"
 }
