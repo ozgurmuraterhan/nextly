@@ -17,7 +17,7 @@ const Page = ({ Component, pageProps, store }) => {
   return (
     <React.Fragment>
       <Head>
-        <title> Admin Dashboard</title>
+        <title> Nextly</title>
       </Head>
       <Provider store={store}>
         <LocaleProvider>
