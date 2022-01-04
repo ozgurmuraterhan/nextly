@@ -31,5 +31,5 @@
     "url-loader": "^4.1.0"
   },
   "license": "ISC",
-  "proxy": "http://localhost:5000"
+  "proxy": "localhost:5000"
 }
