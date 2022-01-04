@@ -38,7 +38,7 @@
     "url-loader": "^4.1.0"
   },
   "license": "ISC",
-  "proxy": "http://18.184.133.56:5000",
+  "proxy": "backend.nextly.shop",
   "devDependencies": {
     "concurrently": "^6.2.1",
     "less": "^3.13.1",
