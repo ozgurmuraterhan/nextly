@@ -8,9 +8,6 @@ const passport = require('passport');
 
 
 
-
-
-
 const uploadImage = async (req, res, next) => {
 
     try {
@@ -412,7 +409,7 @@ router.post("/deletepaymentmethodsimage", passport.authenticate('jwt', { session
 
 const storageBrands = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '../admin/public/images/uploads/Brands');
+        cb(null, '../admin/public/images/uploads/brands');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
