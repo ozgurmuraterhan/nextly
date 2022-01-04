@@ -5,7 +5,7 @@ const passportConfig = require("../passport");
 const JWT = require("jsonwebtoken");
 const Users = require("../models/users.model");
 const crypto = require("crypto");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { maillerConfig } = require("../config")
 
 require("dotenv").config();

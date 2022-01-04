@@ -5,7 +5,7 @@ const passport = require('passport');
 const JWT = require('jsonwebtoken');
 
 const crypto = require('crypto');
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcryptjs");
 const BCRYPT_SALT_ROUNDS = 10;
 
 const roleTitle = 'staff';
