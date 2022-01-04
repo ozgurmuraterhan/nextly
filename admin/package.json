@@ -31,5 +31,5 @@
     "url-loader": "^4.1.0"
   },
   "license": "ISC",
-  "proxy": "http://backend.nextly.shop"
+  "proxy": "https://backend.nextly.shop"
 }
