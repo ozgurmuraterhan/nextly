@@ -16,29 +16,28 @@ router
   .route('/')
   .get(passport.authenticate('jwt', { session: false }), (req, res, next) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-      const rolesControl = data[0].role;
 
-      if (rolesControl['staff/list']) {
+    const rolesControl = req.user.role;
 
-        Users
-          .find({ role: { $exists: true } })
-          .then((data) => { res.json(data); })
-          .catch((err) => res.json({ messagge: 'Error: ' + err, variant: 'error', }));
+    if (rolesControl['staff/list']) {
 
-      } else if (rolesControl['staffonlyyou']) {
+      Users
+        .find({ role: { $exists: true } })
+        .then((data) => { res.json(data); })
+        .catch((err) => res.json({ messagge: 'Error: ' + err, variant: 'error', }));
 
-        Users
-          .find({ $or: [{ _id: req.user._id }, { 'created_user.id': `${req.user._id}` },], })
-          .then((data) => { res.json(data); })
-          .catch((err) => res.json({ messagge: 'Error: ' + err, variant: 'error', }));
+    } else if (rolesControl['staffonlyyou']) {
 
-      } else {
+      Users
+        .find({ $or: [{ _id: req.user._id }, { 'created_user.id': `${req.user._id}` },], })
+        .then((data) => { res.json(data); })
+        .catch((err) => res.json({ messagge: 'Error: ' + err, variant: 'error', }));
 
-        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+    } else {
 
-      }
-    });
+      res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+    }
+
   });
 
 // post new items
@@ -46,22 +45,21 @@ router
   .route('/add')
   .post(passport.authenticate('jwt', { session: false }), (req, res, next) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-      const rolesControl = data[0].role;
+    const rolesControl = req.user.role;
 
-      if (rolesControl['staff/add']) {
+    if (rolesControl['staff/add']) {
 
-        new Users(req.body)
-          .save()
-          .then((data) => res.json({ messagge: title + ' Added', variant: 'success', data: data }))
-          .catch((err) => res.json({ messagge: ' Error: ' + err, variant: 'error', }));
+      new Users(req.body)
+        .save()
+        .then((data) => res.json({ messagge: title + ' Added', variant: 'success', data: data }))
+        .catch((err) => res.json({ messagge: ' Error: ' + err, variant: 'error', }));
 
-      } else {
+    } else {
 
-        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+      res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
 
-      }
-    });
+    }
+
   });
 
 // fetch data by id  
@@ -69,40 +67,39 @@ router
   .route('/:id')
   .get(passport.authenticate('jwt', { session: false }), (req, res, next) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-      const rolesControl = data[0].role;
 
-      if (rolesControl['staff/list']) {
+    const rolesControl = req.user.role;
 
-        Users
-          .findById(req.params.id)
-          .then((data) => res.json(data))
-          .catch((err) => res.status(400).json({ messagge: 'Error: ' + err, variant: 'error', }));
+    if (rolesControl['staff/list']) {
 
-      } else if (rolesControl['staffonlyyou']) {
+      Users
+        .findById(req.params.id)
+        .then((data) => res.json(data))
+        .catch((err) => res.status(400).json({ messagge: 'Error: ' + err, variant: 'error', }));
 
-        Users
-          .findOne({ 'created_user.id': `${req.user._id}` })
-          .then((data) => {
+    } else if (rolesControl['staffonlyyou']) {
 
-            if (data) {
+      Users
+        .findOne({ 'created_user.id': `${req.user._id}` })
+        .then((data) => {
 
-              res.json(data);
+          if (data) {
 
-            } else {
+            res.json(data);
 
-              res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+          } else {
 
-            }
-          })
-          .catch((err) => res.status(400).json({ messagge: 'Error: ' + err, variant: 'error', }));
+            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
 
-      } else {
+          }
+        })
+        .catch((err) => res.status(400).json({ messagge: 'Error: ' + err, variant: 'error', }));
 
-        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+    } else {
 
-      }
-    });
+      res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
   });
 
 
@@ -111,61 +108,60 @@ router
 router
   .route('/:id')
   .delete(passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.find({ username: req.user.username }).then((data) => {
-      const rolesControl = data[0].role;
 
-      if (req.params.id == req.user._id) {
-        return res.json({
-          messagge: ' Can not delete yourself.',
-          variant: 'error',
-        });
-      }
+    const rolesControl = req.user.role;
 
-      if (rolesControl['staffdelete']) {
-        Users.findByIdAndDelete(req.params.id)
-          .then((data) =>
-            res.json({
-              messagge: title + ' Deleted',
-              variant: 'info',
-            })
-          )
-          .catch((err) =>
-            res.json({
-              messagge: 'Error: ' + err,
-              variant: 'error',
-            })
-          );
-      } else if (rolesControl['staffonlyyou']) {
-        Users.deleteOne({
-          _id: req.params.id,
-          'created_user.id': `${req.user._id}`,
-        })
-          .then((resdata) => {
-            if (resdata.deletedCount > 0) {
-              res.json({
-                messagge: title + ' delete',
-                variant: 'success',
-              });
-            } else {
-              res.status(403).json({
-                messagge: 'You are not authorized, go away!',
-                variant: 'error',
-              });
-            }
+    if (req.params.id == req.user._id) {
+      return res.json({
+        messagge: ' Can not delete yourself.',
+        variant: 'error',
+      });
+    }
+
+    if (rolesControl['staffdelete']) {
+      Users.findByIdAndDelete(req.params.id)
+        .then((data) =>
+          res.json({
+            messagge: title + ' Deleted',
+            variant: 'info',
           })
-          .catch((err) =>
+        )
+        .catch((err) =>
+          res.json({
+            messagge: 'Error: ' + err,
+            variant: 'error',
+          })
+        );
+    } else if (rolesControl['staffonlyyou']) {
+      Users.deleteOne({
+        _id: req.params.id,
+        'created_user.id': `${req.user._id}`,
+      })
+        .then((resdata) => {
+          if (resdata.deletedCount > 0) {
             res.json({
-              messagge: 'Error: ' + err,
+              messagge: title + ' delete',
+              variant: 'success',
+            });
+          } else {
+            res.status(403).json({
+              messagge: 'You are not authorized, go away!',
               variant: 'error',
-            })
-          );
-      } else {
-        res.status(403).json({
-          messagge: 'You are not authorized, go away!',
-          variant: 'error',
-        });
-      }
-    });
+            });
+          }
+        })
+        .catch((err) =>
+          res.json({
+            messagge: 'Error: ' + err,
+            variant: 'error',
+          })
+        );
+    } else {
+      res.status(403).json({
+        messagge: 'You are not authorized, go away!',
+        variant: 'error',
+      });
+    }
   });
 
 
@@ -174,171 +170,167 @@ router.post(
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-      const rolesControl = data[0].role;
-      if (rolesControl['superadmin'] || req.body._id == req.user._id) {
-        Users.findOne({
-          _id: req.body._id,
-        }).then((users) => {
-          if (users != null) {
-            console.log('user exists in db');
-            bcrypt
-              .hash(req.body.password, BCRYPT_SALT_ROUNDS)
-              .then((hashedPassword) => {
-                Users.findOneAndUpdate(
-                  {
-                    _id: req.body._id,
-                  },
-                  {
-                    password: hashedPassword,
-                  }
-                )
-                  .then(() => {
-                    res.json({
-                      messagge: title + ' Password Update',
-                      variant: 'success',
-                    });
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                    res.json({
-                      messagge: 'Error: ' + err,
-                      variant: 'error',
-                    });
+
+    const rolesControl = req.user.role;
+    if (rolesControl['superadmin'] || req.body._id == req.user._id) {
+      Users.findOne({
+        _id: req.body._id,
+      }).then((users) => {
+        if (users != null) {
+          console.log('user exists in db');
+          bcrypt
+            .hash(req.body.password, BCRYPT_SALT_ROUNDS)
+            .then((hashedPassword) => {
+              Users.findOneAndUpdate(
+                {
+                  _id: req.body._id,
+                },
+                {
+                  password: hashedPassword,
+                }
+              )
+                .then(() => {
+                  res.json({
+                    messagge: title + ' Password Update',
+                    variant: 'success',
                   });
-              });
-          } else {
-            console.error('no user exists in db to update');
-            res.status(401).json('no user exists in db to update');
-          }
-        });
-      } else {
-        res.json({
-          messagge: ' You are not authorized, go away!',
-          variant: 'error',
-        });
-      }
-    });
-  }
-);
+                })
+                .catch((err) => {
+                  console.log(err);
+                  res.json({
+                    messagge: 'Error: ' + err,
+                    variant: 'error',
+                  });
+                });
+            });
+        } else {
+          console.error('no user exists in db to update');
+          res.status(401).json('no user exists in db to update');
+        }
+      });
+    } else {
+      res.json({
+        messagge: ' You are not authorized, go away!',
+        variant: 'error',
+      });
+    }
+  });
+
 /// Update password customer
 router.post(
   '/updatePasswordCustomer',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Users.find({ username: req.user.username }).then((data) => {
-      const rolesControl = data[0].role;
-      if (rolesControl['customers/id'] || req.body._id == req.user._id) {
-        Users.findOne({
-          $and: [
-            { _id: req.body._id },
-            { isCustomer: true }
-          ]
-        }).then((users) => {
-          if (users != null) {
-            console.log('user exists in db');
-            bcrypt
-              .hash(req.body.password, BCRYPT_SALT_ROUNDS)
-              .then((hashedPassword) => {
-                Users.findOneAndUpdate(
-                  {
-                    _id: req.body._id,
-                  },
-                  {
-                    password: hashedPassword,
-                  }
-                )
-                  .then(() => {
-                    res.json({
-                      messagge: title + ' Password Update',
-                      variant: 'success',
-                    });
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                    res.json({
-                      messagge: 'Error: ' + err,
-                      variant: 'error',
-                    });
+
+    const rolesControl = req.user.role;
+    if (rolesControl['customers/id'] || req.body._id == req.user._id) {
+      Users.findOne({
+        $and: [
+          { _id: req.body._id },
+          { isCustomer: true }
+        ]
+      }).then((users) => {
+        if (users != null) {
+          console.log('user exists in db');
+          bcrypt
+            .hash(req.body.password, BCRYPT_SALT_ROUNDS)
+            .then((hashedPassword) => {
+              Users.findOneAndUpdate(
+                {
+                  _id: req.body._id,
+                },
+                {
+                  password: hashedPassword,
+                }
+              )
+                .then(() => {
+                  res.json({
+                    messagge: title + ' Password Update',
+                    variant: 'success',
                   });
-              });
-          } else {
-            console.error('no user exists in db to update');
-            res.status(401).json('no user exists in db to update');
-          }
-        });
-      } else {
-        res.json({
-          messagge: ' You are not authorized, go away!',
-          variant: 'error',
-        });
-      }
-    });
-  }
-);
+                })
+                .catch((err) => {
+                  console.log(err);
+                  res.json({
+                    messagge: 'Error: ' + err,
+                    variant: 'error',
+                  });
+                });
+            });
+        } else {
+          console.error('no user exists in db to update');
+          res.status(401).json('no user exists in db to update');
+        }
+      });
+    } else {
+      res.json({
+        messagge: ' You are not authorized, go away!',
+        variant: 'error',
+      });
+    }
+  });
+
 // update data by id
 router
   .route('/:id')
   .post(passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    Users.find({ username: req.user.username }).then((data) => {
-      const rolesControl = data[0].role;
-      if (rolesControl['staff/id']) {
 
-        Users.findByIdAndUpdate(req.params.id, req.body)
-          .then(() =>
+    const rolesControl = req.user.role;
+    if (rolesControl['staff/id']) {
+
+      Users.findByIdAndUpdate(req.params.id, req.body)
+        .then(() =>
+          res.json({
+            messagge: title + ' Update',
+            variant: 'success',
+          })
+        )
+        .catch((err) =>
+          res.json({
+            messagge: 'Error: ' + err,
+            variant: 'error',
+          })
+        );
+    } else if (rolesControl['staffonlyyou']) {
+      Users.findOneAndUpdate(
+        {
+          _id: req.params.id,
+          'created_user.id': `${req.user._id}`,
+        },
+        req.body
+      )
+        .then((resdata) => {
+          if (resdata) {
             res.json({
               messagge: title + ' Update',
               variant: 'success',
-            })
-          )
-          .catch((err) =>
+            });
+          } else {
             res.json({
-              messagge: 'Error: ' + err,
+              messagge: ' You are not authorized, go away!',
               variant: 'error',
-            })
-          );
-      } else if (rolesControl['staffonlyyou']) {
-        Users.findOneAndUpdate(
-          {
-            _id: req.params.id,
-            'created_user.id': `${req.user._id}`,
-          },
-          req.body
-        )
-          .then((resdata) => {
-            if (resdata) {
-              res.json({
-                messagge: title + ' Update',
-                variant: 'success',
-              });
-            } else {
-              res.json({
-                messagge: ' You are not authorized, go away!',
-                variant: 'error',
-              });
-            }
-          })
-          .catch((err) =>
-            res.json({
-              messagge: 'Error: ' + err,
-              variant: 'error',
-            })
-          );
-      } else {
-        res.status(403).json({
-          message: {
-            messagge: 'You are not authorized, go away!',
+            });
+          }
+        })
+        .catch((err) =>
+          res.json({
+            messagge: 'Error: ' + err,
             variant: 'error',
-          },
-        });
-      }
-    });
+          })
+        );
+    } else {
+      res.status(403).json({
+        message: {
+          messagge: 'You are not authorized, go away!',
+          variant: 'error',
+        },
+      });
+    }
   });
 
 
-
 // post new items
-router.route('/add/register123123123').post((req, res, next) => {
+router.route('/add/register1231223123123').post((req, res, next) => {
   new Users(req.body)
     .save()
 

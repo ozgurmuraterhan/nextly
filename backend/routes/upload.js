@@ -37,42 +37,40 @@ const uploadImage = async (req, res, next) => {
 
 router.post("/uploadstaffavatar", passport.authenticate('jwt', { session: false }), uploadImage, (req, res) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
 
-        if (rolesControl['staff/add']) {
+    const rolesControl = req.user.role;
 
-            if (req.file) return res.json({ msg: 'image successfully uploaded' })
-            res.send('Image upload failed')
+    if (rolesControl['staff/add']) {
 
-        } else {
+        if (req.file) return res.json({ msg: 'image successfully uploaded' })
+        res.send('Image upload failed')
 
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+    } else {
 
-        }
-    });
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
 
 
 })
 
 router.post("/deletestaffavatar", passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
-        if (rolesControl['staff/id']) {
-            try {
-                fs.unlinkSync("../admin/public" + req.body.path)
-            } catch (e) {
-                console.log("not image")
-            }
 
-        } else {
-
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
-
+    const rolesControl = req.user.role;
+    if (rolesControl['staff/id']) {
+        try {
+            fs.unlinkSync("../admin/public" + req.body.path)
+        } catch (e) {
+            console.log("not image")
         }
-    });
 
-})
+    } else {
+
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
+
 
 
 
@@ -107,42 +105,40 @@ const uploadImageCustomer = async (req, res, next) => {
 
 router.post("/uploadcustomersavatar", passport.authenticate('jwt', { session: false }), uploadImageCustomer, (req, res) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
 
-        if (rolesControl['customers/add']) {
+    const rolesControl = req.user.role;
 
-            if (req.file) return res.json({ msg: 'image successfully uploaded' })
-            res.send('Image upload failed')
+    if (rolesControl['customers/add']) {
 
-        } else {
+        if (req.file) return res.json({ msg: 'image successfully uploaded' })
+        res.send('Image upload failed')
 
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+    } else {
 
-        }
-    });
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
 
 
-})
 
 router.post("/deletecustomersavatar", passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
-        if (rolesControl['customers/id']) {
-            try {
-                fs.unlinkSync("../admin/public" + req.body.path)
-            } catch (e) {
-                console.log("not image")
-            }
 
-        } else {
-
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
-
+    const rolesControl = req.user.role;
+    if (rolesControl['customers/id']) {
+        try {
+            fs.unlinkSync("../admin/public" + req.body.path)
+        } catch (e) {
+            console.log("not image")
         }
-    });
 
-})
+    } else {
+
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
+
 
 
 const storageProduct = multer.diskStorage({
@@ -168,42 +164,39 @@ let uploadproductimage = multer({ storage: storageProduct, fileFilter: fileFilte
 
 router.post("/uploadproductimage", passport.authenticate('jwt', { session: false }), uploadproductimage.single('image'), (req, res) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
 
-        if (rolesControl['productimages/add']) {
+    const rolesControl = req.user.role;
 
-            if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
-            res.send('Image upload failed')
+    if (rolesControl['productimages/add']) {
 
-        } else {
+        if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
+        res.send('Image upload failed')
 
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+    } else {
 
-        }
-    });
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
 
 
-})
 
 router.post("/deleteproductimage", passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
-        if (rolesControl['productimages/id']) {
-            try {
-                fs.unlinkSync("../admin/public" + req.body.path)
-            } catch (e) {
-                console.log("not image")
-            }
 
-        } else {
-
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
-
+    const rolesControl = req.user.role;
+    if (rolesControl['productimages/id']) {
+        try {
+            fs.unlinkSync("../admin/public" + req.body.path)
+        } catch (e) {
+            console.log("not image")
         }
-    });
 
-})
+    } else {
+
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
 
 
 
@@ -233,42 +226,40 @@ let uploadimagecargo = multer({ storage: storageCargo, fileFilter: fileFilterCar
 
 router.post("/uploadcargoimage", passport.authenticate('jwt', { session: false }), uploadimagecargo.single('image'), (req, res) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
 
-        if (rolesControl['cargoes/add']) {
-            console.log(req.file)
-            if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
-            res.send('Image upload failed')
+    const rolesControl = req.user.role;
 
-        } else {
+    if (rolesControl['cargoes/add']) {
+        console.log(req.file)
+        if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
+        res.send('Image upload failed')
 
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+    } else {
 
-        }
-    });
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
 
 
-})
 
 router.post("/deletecargoimage", passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
-        if (rolesControl['cargoes/id']) {
-            try {
-                fs.unlinkSync("../admin/public" + req.body.path)
-            } catch (e) {
-                console.log("not image")
-            }
 
-        } else {
-
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
-
+    const rolesControl = req.user.role;
+    if (rolesControl['cargoes/id']) {
+        try {
+            fs.unlinkSync("../admin/public" + req.body.path)
+        } catch (e) {
+            console.log("not image")
         }
-    });
 
-})
+    } else {
+
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
+
 
 
 
@@ -300,41 +291,39 @@ let uploadimageorderstatus = multer({ storage: storageOrderstatus, fileFilter: f
 
 router.post("/uploadorderstatusimage", passport.authenticate('jwt', { session: false }), uploadimageorderstatus.single('image'), (req, res) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
 
-        if (rolesControl['orderstatus/add']) {
-            if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
-            res.send('Image upload failed')
+    const rolesControl = req.user.role;
 
-        } else {
+    if (rolesControl['orderstatus/add']) {
+        if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
+        res.send('Image upload failed')
 
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+    } else {
 
-        }
-    });
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
 
 
-})
 
 router.post("/deleteorderstatusimage", passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
-        if (rolesControl['orderstatus/id']) {
-            try {
-                fs.unlinkSync("../admin/public" + req.body.path)
-            } catch (e) {
-                console.log("not image")
-            }
 
-        } else {
-
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
-
+    const rolesControl = req.user.role;
+    if (rolesControl['orderstatus/id']) {
+        try {
+            fs.unlinkSync("../admin/public" + req.body.path)
+        } catch (e) {
+            console.log("not image")
         }
-    });
 
-})
+    } else {
+
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
+
 
 
 
@@ -364,43 +353,38 @@ let uploadimagepaymentmethods = multer({ storage: storagePaymentmethods, fileFil
 
 router.post("/uploadpaymentmethodsimage", passport.authenticate('jwt', { session: false }), uploadimagepaymentmethods.single('image'), (req, res) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
 
-        if (rolesControl['paymentmethods/add']) {
-            if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
-            res.send('Image upload failed')
+    const rolesControl = req.user.role;
 
-        } else {
+    if (rolesControl['paymentmethods/add']) {
+        if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
+        res.send('Image upload failed')
 
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+    } else {
 
-        }
-    });
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
 
 
-})
 
 router.post("/deletepaymentmethodsimage", passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
-        if (rolesControl['paymentmethods/id']) {
-            try {
-                fs.unlinkSync("../admin/public" + req.body.path)
-            } catch (e) {
-                console.log("not image")
-            }
 
-        } else {
-
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
-
+    const rolesControl = req.user.role;
+    if (rolesControl['paymentmethods/id']) {
+        try {
+            fs.unlinkSync("../admin/public" + req.body.path)
+        } catch (e) {
+            console.log("not image")
         }
-    });
 
-})
+    } else {
 
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
 
+    }
+});
 
 
 
@@ -430,41 +414,38 @@ let uploadimageBrands = multer({ storage: storageBrands, fileFilter: fileFilterB
 
 router.post("/uploadbrandsimage", passport.authenticate('jwt', { session: false }), uploadimageBrands.single('image'), (req, res) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
 
-        if (rolesControl['brands/add']) {
-            if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
-            res.send('Image upload failed')
+    const rolesControl = req.user.role;
 
-        } else {
+    if (rolesControl['brands/add']) {
+        if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
+        res.send('Image upload failed')
 
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+    } else {
 
-        }
-    });
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
 
+    }
+});
 
-})
 
 router.post("/deletebrandsimage", passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
-        if (rolesControl['brands/id']) {
-            try {
-                fs.unlinkSync("../admin/public" + req.body.path)
-            } catch (e) {
-                console.log("not image")
-            }
 
-        } else {
-
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
-
+    const rolesControl = req.user.role;
+    if (rolesControl['brands/id']) {
+        try {
+            fs.unlinkSync("../admin/public" + req.body.path)
+        } catch (e) {
+            console.log("not image")
         }
-    });
 
-})
+    } else {
+
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
+
 
 
 
@@ -504,41 +485,37 @@ let uploadimagehomeslider = multer({ storage: storagehomeslider, fileFilter: fil
 
 router.post("/uploadhomesliderimage", passport.authenticate('jwt', { session: false }), uploadimagehomeslider.single('image'), (req, res) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
 
-        if (rolesControl['homeslider/add']) {
-            if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
-            res.send('Image upload failed')
+    const rolesControl = req.user.role;
 
-        } else {
+    if (rolesControl['homeslider/add']) {
+        if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
+        res.send('Image upload failed')
 
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+    } else {
 
-        }
-    });
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
 
+    }
+});
 
-})
 
 router.post("/deletehomesliderimage", passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
-        if (rolesControl['homeslider/id']) {
-            try {
-                fs.unlinkSync("../admin/public" + req.body.path)
-            } catch (e) {
-                console.log("not image")
-            }
 
-        } else {
-
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
-
+    const rolesControl = req.user.role;
+    if (rolesControl['homeslider/id']) {
+        try {
+            fs.unlinkSync("../admin/public" + req.body.path)
+        } catch (e) {
+            console.log("not image")
         }
-    });
 
-})
+    } else {
+
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
 
 
 
@@ -574,42 +551,38 @@ let uploadimagelogo = multer({ storage: storageLogo, fileFilter: fileFilterLogo 
 
 router.post("/uploadlogoimage", passport.authenticate('jwt', { session: false }), uploadimagelogo.single('image'), (req, res) => {
 
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
 
-        if (rolesControl['superadmin']) {
-            console.log(req.file)
-            if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
-            res.send('Image upload failed')
+    const rolesControl = req.user.role;
 
-        } else {
+    if (rolesControl['superadmin']) {
+        console.log(req.file)
+        if (req.file) return res.json({ msg: 'image successfully uploaded', path: req.file.path })
+        res.send('Image upload failed')
 
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+    } else {
 
-        }
-    });
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
 
+    }
+});
 
-})
 
 router.post("/deletelogoimage", passport.authenticate('jwt', { session: false }), (req, res) => {
-    Users.find({ username: req.user.username }).then((data) => {
-        const rolesControl = data[0].role;
-        if (rolesControl['superadmin']) {
-            try {
-                fs.unlinkSync("../admin/public" + req.body.path)
-            } catch (e) {
-                console.log("not image")
-            }
 
-        } else {
-
-            res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
-
+    const rolesControl = req.user.role;
+    if (rolesControl['superadmin']) {
+        try {
+            fs.unlinkSync("../admin/public" + req.body.path)
+        } catch (e) {
+            console.log("not image")
         }
-    });
 
-})
+    } else {
+
+        res.status(403).json({ message: { messagge: 'You are not authorized, go away!', variant: 'error', }, });
+
+    }
+});
 
 
 
