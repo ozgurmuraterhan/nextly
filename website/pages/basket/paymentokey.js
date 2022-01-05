@@ -6,7 +6,7 @@ import axios from "axios";
 import Price from "../../app/components/Price"
 
 
-import { API_URL } from "../../config"
+import { API_URL } from "../../../config"
 
 
 const Page = () => {
@@ -71,7 +71,7 @@ const Page = () => {
                                     </tr>
                                     {state.products && state.products.map(x =>
                                         <tr className="h-16 border-b">
-                                            <td><Link href={x.seo}>{x.title}</Link></td>
+                                            <td><Link href={"/" + x.seo}>{x.title}</Link></td>
                                             <td>{getVariant(x.selectedVariants)}</td>
                                             <td>{x.qty}</td>
                                             <td><Price data={x.price * x.qty} /></td>

@@ -14,7 +14,7 @@ import "swiper/css/navigation"
 
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { API_URL } from "../../../config";
+import { API_URL } from "../../../../config";
 
 
 

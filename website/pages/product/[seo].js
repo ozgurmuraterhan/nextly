@@ -11,7 +11,7 @@ import ProductGallerry from "../../app/components/ProductDetail/Gallerry"
 import PoductVariantsAndAddButton from "../../app/components/ProductDetail/PoductVariantsAndAddButton"
 import func from "../../util/helpers/func"
 
-import { API_URL, PRICE_VERSION } from "../../config"
+import { API_URL, PRICE_VERSION } from "../../../config"
 
 
 const Page = ({ data = {} }) => {

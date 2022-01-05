@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 import { Card, Divider, Form, Radio, Switch, Table, Tooltip, Button } from "antd";
 import { EditOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import { API_URL } from '../../config';
+import { API_URL } from '../../../config';
 
 import { useIntl } from 'react-intl';
 import IntlMessages from "../../util/IntlMessages";

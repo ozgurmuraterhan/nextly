@@ -6,7 +6,7 @@ import { Card, Divider, Form, Radio, Space, Tag, message, Switch, Modal, Table, 
 import { EditOutlined, DeleteOutlined, CheckCircleOutlined, CloseSquareOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useSelector } from "react-redux"
-import { API_URL } from '../../config';
+import { API_URL } from '../../../config';
 import func from "../../util/helpers/func"
 
 import { useIntl } from 'react-intl';

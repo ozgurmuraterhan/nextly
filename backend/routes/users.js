@@ -6,7 +6,7 @@ const JWT = require("jsonwebtoken");
 const Users = require("../models/users.model");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
-const { maillerConfig } = require("../config")
+const { WEBSITE_URL, maillerConfig } = require("../../config")
 
 require("dotenv").config();
 
@@ -97,36 +97,26 @@ router.put("/updatePasswordViaEmail", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-    const { username, password, role } = req.body;
+    const { username, password, name, surname, prefix, phone } = req.body;
 
-    Users.findOne({ username }, (err, user) => {
-        if (err)
-            res.status(500).json({
-                message: { msgBody: "Error has occured", msgError: true },
-            });
+    Users.findOne({ username }).then(user => {
         if (user)
-            res.status(400).json({
-                message: {
-                    msgBody: "Username is already taken",
-                    msgError: true,
-                },
+            res.status(201).json({
+                messagge: "E-mail is already taken",
+                error: true,
             });
         else {
-            const newUser = new User({ username, password, role, created_user: { a: 1 } });
-            newUsers.save((err) => {
+            new Users({ username, password, name, surname, prefix, phone, created_user: { name: "register" } }).save((err) => {
+                console.log("err", err)
                 if (err)
                     res.status(500).json({
-                        message: {
-                            msgBody: "Error has occured " + err,
-                            msgError: true,
-                        },
+                        messagge: "Error has occured " + err,
+                        error: true,
                     });
                 else
                     res.status(201).json({
-                        message: {
-                            msgBody: "Account successfully created",
-                            msgError: false,
-                        },
+                        messagge: "Account successfully created",
+                        error: false,
                     });
             });
         }
@@ -188,7 +178,7 @@ router.post("/forgotPassword", (req, res) => {
                     "If you did not request this, please ignore this email and your password will remain unchanged.\n",
             };
 
-            console.log("sending mail");
+            console.log("sending mail password" + req.body.username);
 
             transporter.sendMail(mailOptions, (err, response) => {
                 if (err) {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { API_URL } from '../../config';
+import { API_URL } from '../../../config';
 import router from "next/router"
 import { DeleteOutlined, } from "@ant-design/icons"
 import ImgCrop from 'antd-img-crop';
@@ -353,7 +353,7 @@ const Default = () => {
           </Form.Item>
           <Form.Item
             name="image"
-            label={"Avatar "+intl.messages["app.pages.common.image"]}
+            label={"Avatar " + intl.messages["app.pages.common.image"]}
           >
 
             <ImgCrop
@@ -545,7 +545,7 @@ const Default = () => {
 
               <br /> <br /><br />
 
-             <IntlMessages id="app.pages.staff.customers" />
+              <IntlMessages id="app.pages.staff.customers" />
               <Divider />
               <Checkbox
                 value={state.role["customersview"]}

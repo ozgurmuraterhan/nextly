@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout_r, changeCollapsed_r, switchLanguage } from "../../../redux/actions";
 
 import AuthService from "../../../util/services/authservice";
-import { languageData } from "../../../config"
+import { languageData } from "../../../../config"
 
 const { Header } = Layout;
 

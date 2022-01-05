@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { API_URL } from '../../config';
+import { API_URL } from '../../../config';
 import { useRouter } from "next/router"
 import { DeleteOutlined, UploadOutlined, PlusOutlined } from "@ant-design/icons"
 

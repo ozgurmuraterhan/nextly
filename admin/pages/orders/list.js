@@ -6,7 +6,7 @@ import { Select, message, Image, Table, Popconfirm, Button, Tooltip, Radio } fro
 import { EditOutlined, DeleteOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useSelector } from "react-redux"
-import { API_URL } from '../../config';
+import { API_URL } from '../../../config';
 import router from "next/router"
 import moment from "moment"
 

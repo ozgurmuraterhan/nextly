@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { API_URL } from '../../config';
+import { API_URL } from '../../../config';
 import router from "next/router"
 import { DeleteOutlined, } from "@ant-design/icons"
 import ImgCrop from 'antd-img-crop';
@@ -167,6 +167,13 @@ const Default = () => {
 
     Data["created_user"] = { name: user.name, id: user.id }
     Data["isCustomer"] = false
+
+    if (user?.role?.superadmin) {
+
+    } else {
+      Data["role"] = { "empty": true }
+
+    }
 
     if (fileList.length > 0) {
       const dataImage = await axios.post(API_URL + "/upload/uploadstaffavatar", fileList)
@@ -1303,11 +1310,10 @@ const Default = () => {
               ><IntlMessages id="app.pages.staff.deleteData" /></Checkbox>
 
 
-
-
-
             </Form.Item>
-            : ""}
+            :
+            ""
+          }
 
 
 

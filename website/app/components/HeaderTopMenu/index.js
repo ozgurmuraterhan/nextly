@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import AuthService from "../../../util/services/authservice";
 import { useDispatch, useSelector } from "react-redux";
 import { login_r, isAuthenticated_r, settings_r, logout_r } from "../../../redux/actions";
-import { API_URL } from "../../../config";
+import { API_URL } from "../../../../config";
 import axios from "axios"
 import func from "../../../util/helpers/func"
 import Link from "next/link";

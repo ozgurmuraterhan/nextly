@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import { API_URL } from "../../../config";
+import { API_URL } from "../../../../config";
 import CheckoutForm from "./CheckoutForm";
 import axios from "axios";
 

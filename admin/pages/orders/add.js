@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { API_URL } from '../../config';
+import { API_URL } from '../../../config';
 import router from "next/router"
 import { DeleteOutlined } from "@ant-design/icons"
 import { Table, Popconfirm, Radio, Button, Card, message, Divider, Col, Form, Input, Row, Select } from 'antd';

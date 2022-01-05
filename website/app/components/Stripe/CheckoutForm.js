@@ -9,7 +9,7 @@ import router from "next/router"
 import { useDispatch, useSelector } from "react-redux";
 import { getBasket_r, updateBasket_r } from "../../../redux/actions"
 import axios from "axios"
-import { WEBSITE_URL, API_URL } from "../../../config"
+import { WEBSITE_URL, API_URL } from "../../../../config"
 
 
 export default function CheckoutForm({ contract }) {
@@ -99,7 +99,6 @@ export default function CheckoutForm({ contract }) {
                                 basket: basket
                             })
 
-                        console.log("dataRes", dataRes.data.ordernumber)
                         basket[0].products = []
                         basket[0].cargoes_id = null
                         basket[0].total_price = 0
@@ -149,7 +148,7 @@ export default function CheckoutForm({ contract }) {
                         rules={[
                             {
                                 required: true,
-                                message: "please Fill",
+                                message: "Please Fill",
                             },
                         ]}
                     >
@@ -177,12 +176,12 @@ export default function CheckoutForm({ contract }) {
                         name="phone"
                         label="Phone"
                         className="col-span-4 mb-3"
-                        initialValue={user.prefix + user.phone}
+                        initialValue={user.phone ? user.prefix + user.phone : ""}
 
                         rules={[
                             {
                                 required: true,
-                                message: "please Fill",
+                                message: "Please Fill",
                             },
                         ]}
                     >

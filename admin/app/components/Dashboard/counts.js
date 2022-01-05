@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Divider } from "antd"
 import axios from "axios"
-import { API_URL } from '../../../config';
+import { API_URL } from '../../../../config';
 
 
 import { DollarCircleOutlined, UsergroupAddOutlined, CodeSandboxOutlined, OrderedListOutlined } from "@ant-design/icons"

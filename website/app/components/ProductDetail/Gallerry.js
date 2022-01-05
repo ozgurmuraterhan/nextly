@@ -19,7 +19,7 @@ import "swiper/css/navigation"
 import "swiper/css/thumbs"
 
 
-import { API_URL } from "../../../config";
+import { API_URL } from "../../../../config";
 
 
 const Default = ({ images = [] }) => {

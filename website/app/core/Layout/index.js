@@ -14,7 +14,7 @@ import Link from "next/link";
 import AuthService from "../../../util/services/authservice";
 import axios from "axios"
 import func from "../../../util/helpers/func"
-import { API_URL } from "../../../config";
+import { API_URL } from "../../../../config";
 import CategoriesMenu from "../../components/CategoriesMenu"
 import HeaderTopMenu from "../../components/HeaderTopMenu"
 import Footer from "../../components/Footer"

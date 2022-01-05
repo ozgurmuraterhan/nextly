@@ -3,7 +3,7 @@ import Head from 'next/head';
 import dynamic from "next/dynamic";
 import { Divider, Avatar, Timeline } from "antd"
 import axios from "axios"
-import { API_URL } from '../config';
+import { API_URL } from '../../config';
 
 import { useSelector } from "react-redux";
 

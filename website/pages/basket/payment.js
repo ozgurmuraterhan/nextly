@@ -10,7 +10,7 @@ import func from "../../util/helpers/func"
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripeComponent from "../../app/components/Stripe";
-import { API_URL } from "../../config"
+import { API_URL } from "../../../config"
 
 
 const Page = ({ data = {} }) => {

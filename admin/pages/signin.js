@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Router from 'next/router';
 import { switchLanguage } from "../redux/actions";
-import { languageData } from "../config"
+import { languageData } from "../../config"
 
 import AuthService from "../util/services/authservice";
 

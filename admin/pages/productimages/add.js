@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { API_URL } from '../../config';
+import { API_URL } from '../../../config';
 import router from "next/router"
 import { DeleteOutlined, CheckOutlined, CloseOutlined, QuestionCircleOutlined, PlusOutlined, UploadOutlined, MinusCircleOutlined } from "@ant-design/icons"
 
@@ -206,7 +206,7 @@ const Default = ({ getProducts = [] }) => {
           <Divider />
           <Form.Item {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit" disabled={!displaySave}>
-              <IntlMessages id="app.pages.common.save" /> 
+              <IntlMessages id="app.pages.common.save" />
             </Button>
           </Form.Item>
         </Form>

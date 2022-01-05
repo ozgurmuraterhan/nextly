@@ -1,6 +1,6 @@
 import { SWITCH_LANGUAGE, CHANGE_COLLAPSED, GET_SETTINGS, GET_ALL_FETCH_FAIL } from "../../constants/ActionTypes";
 import axios from "axios"
-import { API_URL } from '../../config';
+import { API_URL } from '../../../config';
 
 
 export function switchLanguage(locale) {

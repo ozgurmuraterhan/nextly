@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const config = require("../config")
 const Paymentmethods = require("../models/paymentmethods.model")
 const Products = require("../models/products.model")
 const Cargoes = require("../models/cargoes.model")

@@ -12,7 +12,7 @@ import { filterProducts_r } from "../../../redux/actions";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CircularProgress from "../../components/CircularProgress"
 
-import { API_URL } from "../../../config"
+import { API_URL } from "../../../../config"
 
 
 const Page = () => {

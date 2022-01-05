@@ -8,7 +8,7 @@ import BasketList from "../../app/components/Basket/BasketList"
 import BasketDetailPrice from "../../app/components/Basket/BasketDetailPrice"
 import func from "../../util/helpers/func"
 
-import { API_URL, PRICE_VERSION } from "../../config"
+import { API_URL, PRICE_VERSION } from "../../../config"
 
 
 const Page = ({ data = {} }) => {

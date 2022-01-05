@@ -1,5 +1,5 @@
 import { CHANGE_COLLAPSED, SWITCH_LANGUAGE } from "../types";
-import { defaultLanguage } from "../../config"
+import { defaultLanguage } from "../../../config"
 
 
 const initialSettings = {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Button, Checkbox, Form, Input, message, Row, Col, Typography } from "antd";
-import { API_URL } from '../config';
+import { API_URL } from '../../config';
 import IntlMessages from "../util/IntlMessages";
 
 import Router from 'next/router';

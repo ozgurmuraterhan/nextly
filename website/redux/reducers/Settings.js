@@ -1,5 +1,5 @@
 import { CHANGE_COLLAPSED, SWITCH_LANGUAGE, GET_SETTINGS, GET_ALL_FETCH_FAIL } from "../../constants/ActionTypes";
-import { defaultLanguage } from "../../config"
+import { defaultLanguage } from "../../../config"
 
 
 const initialSettings = {

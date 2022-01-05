@@ -5,7 +5,7 @@ import { Divider, Avatar, Timeline } from "antd"
 import CircularProgress from "../app/components/CircularProgress";
 import Clock from "../app/components/Clock";
 import axios from "axios"
-import { API_URL } from '../config';
+import { API_URL } from '../../config';
 
 import { useSelector } from "react-redux";
 

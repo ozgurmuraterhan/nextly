@@ -10,7 +10,7 @@ import router from "next/router"
 import axios from "axios";
 import func from "../../../util/helpers/func"
 
-import { API_URL } from "../../../config"
+import { API_URL } from "../../../../config"
 
 
 const Page = ({ data = {} }) => {

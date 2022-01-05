@@ -1,6 +1,6 @@
 import { BRANDS_FETCH, GET_ALL_FETCH_FAIL } from "../../constants/ActionTypes";
 import axios from "axios"
-import { API_URL } from '../../config';
+import { API_URL } from '../../../config';
 
 
 export const getBrands_r = () => async (dispatch) => {

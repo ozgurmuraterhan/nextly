@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios"
 import func from "../../../util/helpers/func"
-import { API_URL } from "../../../config";
+import { API_URL } from "../../../../config";
 
 
 

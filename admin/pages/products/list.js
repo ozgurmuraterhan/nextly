@@ -6,7 +6,7 @@ import { Card, Drawer, Divider, Form, Radio, Space, Tag, message, Switch, Modal,
 import { EditOutlined, DeleteOutlined, AppstoreAddOutlined, UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useSelector } from "react-redux"
-import { API_URL } from '../../config';
+import { API_URL } from '../../../config';
 
 import { useIntl } from 'react-intl';
 import IntlMessages from "../../util/IntlMessages";
