@@ -34,6 +34,19 @@ router.route("/").get(passport.authenticate("jwt", { session: false }), (req, re
                     variant: "error",
                 })
             );
+    } else if (req.user._id) {
+        Orders.find({
+            "customer_id": `${req.user._id}`,
+        })
+            .then((data) => {
+                res.json(data);
+            })
+            .catch((err) =>
+                res.json({
+                    messagge: "Error: " + err,
+                    variant: "error",
+                })
+            );
     } else {
         res.status(403).json({
             message: {
@@ -137,15 +150,50 @@ router.route("/:id").get(passport.authenticate("jwt", { session: false }), (req,
 
 // fetch data by id
 router.route("/status/:id").get(passport.authenticate("jwt", { session: false }), (req, res, next) => {
+    const rolesControl = req.user.role;
+    if (rolesControl[roleTitle + "/list"]) {
+        Orders.find({ orderstatus_id: req.params.id })
+            .then((data) => res.json(data))
+            .catch((err) =>
+                res.status(400).json({
+                    messagge: "Error: " + err,
+                    variant: "error",
+                })
+            );
 
-    Orders.find({ orderstatus_id: req.params.id })
-        .then((data) => res.json(data))
-        .catch((err) =>
-            res.status(400).json({
-                messagge: "Error: " + err,
+    } else if (rolesControl[roleTitle + "onlyyou"]) {
+        Orders.find({
+            orderstatus_id: req.params.id,
+            "created_user.id": `${req.user._id}`
+        })
+            .then((data) => res.json(data))
+            .catch((err) =>
+                res.status(400).json({
+                    messagge: "Error: " + err,
+                    variant: "error",
+                })
+            );
+
+    } else if (req.user._id) {
+        Orders.find({
+            orderstatus_id: req.params.id,
+            "customer_id": `${req.user._id}`
+        })
+            .then((data) => res.json(data))
+            .catch((err) =>
+                res.status(400).json({
+                    messagge: "Error: " + err,
+                    variant: "error",
+                })
+            );
+    } else {
+        res.status(403).json({
+            message: {
+                messagge: "You are not authorized, go away!",
                 variant: "error",
-            })
-        );
+            },
+        });
+    }
 
 });
 

@@ -34,6 +34,17 @@ router.route("/").get(passport.authenticate("jwt", { session: false }), (req, re
                     variant: "error",
                 })
             );
+    } else if (req.user._id) {
+        Orderstatus.find().sort({ order: 1 })
+            .then((data) => {
+                res.json(data);
+            })
+            .catch((err) =>
+                res.json({
+                    messagge: "Error: " + err,
+                    variant: "error",
+                })
+            );
     } else {
         res.status(403).json({
             message: {

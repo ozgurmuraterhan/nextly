@@ -188,11 +188,11 @@ router.route("/active/:id").post(passport.authenticate("jwt", { session: false }
 router.route("/:id").get(passport.authenticate("jwt", { session: false }), (req, res, next) => {
 
    const rolesControl = req.user.role;
-   if (rolesControl[roleTitle + "/list"]) {
+   if (rolesControl[roleTitle + "/list"] || req.user._id == req.params.id) {
       Users.findOne({
          $and: [
             { _id: req.params.id },
-            { 'isCustomer': true },
+            // { 'isCustomer': true },
          ],
       })
          .then((data) => res.json(data))
@@ -300,7 +300,7 @@ router.route("/:id").delete(passport.authenticate("jwt", { session: false }), (r
 router.route("/:id").post(passport.authenticate("jwt", { session: false }), (req, res, next) => {
 
    const rolesControl = req.user.role;
-   if (rolesControl[roleTitle + "/id"]) {
+   if (rolesControl[roleTitle + "/id"] || req.user._id == req.params.id) {
       Users.findByIdAndUpdate(req.params.id, req.body)
          .then(() =>
             res.json({

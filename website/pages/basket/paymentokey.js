@@ -58,7 +58,6 @@ const Page = () => {
                                 <div>{state.shipping_address}</div>
                                 <div className="font-bold mt-5">Billing Address</div>
                                 <div>{state.billing_address}</div>
-
                             </div>
                             <div className="col-span-6 ">
                                 <div className="font-bold">Products</div>

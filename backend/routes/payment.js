@@ -16,6 +16,8 @@ const filter_array_in_obj = (arr, criteria) => {
 }
 
 
+
+
 const getSaveProductsBaskettoOrders = async (data = [], products = [], allBasket = []) => {
 
     const BasketAllProducts = []
@@ -164,6 +166,22 @@ router.route('/stripeokey').post(async (req, res, next) => {
         .then(async (resData) => {
             const dataNewOrder = await getSaveProductsBaskettoOrders(resData, items, basket)
             res.json(dataNewOrder);
+        })
+
+})
+
+router.route('/stripeokeyconfirm/:pi_key').get(async (req, res, next) => {
+    Paymentmethods.findById("6132787ae4c2740b7aff7320")
+        .then(async resPay => {
+            if (resPay.secret_key != "" && req.params.pi_key != "") {
+                const stripe = require("stripe")(resPay.secret_key)
+
+                const paymentIntent = await stripe.paymentIntents.retrieve(
+                    req.params.pi_key
+                );
+
+                return res.json(paymentIntent)
+            }
         })
 
 })

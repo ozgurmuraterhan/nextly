@@ -106,8 +106,7 @@ router.post("/register", (req, res) => {
                 error: true,
             });
         else {
-            new Users({ username, password, name, surname, prefix, phone, created_user: { name: "register" } }).save((err) => {
-                console.log("err", err)
+            new Users({ username, password, name, surname, prefix, phone, isCustomer: true, created_user: { name: "register" } }).save((err) => {
                 if (err)
                     res.status(500).json({
                         messagge: "Error has occured " + err,
