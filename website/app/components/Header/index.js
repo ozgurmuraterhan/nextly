@@ -7,10 +7,11 @@ import { login_r, isAuthenticated_r, settings_r, logout_r } from "../../../redux
 import { Input, Drawer, Modal, Form, Button, message, Select, Divider } from "antd"
 import { useIntl } from 'react-intl';
 
-
+import router from "next/router"
 import Link from "next/link";
 import Router from "next/router";
-
+import LoginForm from "./LoginForm"
+import RegisterForm from "./RegisterForm"
 import IntlMessages from "../../../util/IntlMessages";
 
 import {
@@ -93,7 +94,7 @@ const Default = () => {
 
             if (isAuthenticated) {
                 dispatch(login_r(user));
-                dispatch(isAuthenticated_r(true));
+                dispatch(isAuthenticated_r({ isAuthenticated: true }));
                 message.success("Login Successfully");
                 handleCancelLogin()
                 seTopenModalSignup(false);
@@ -104,19 +105,7 @@ const Default = () => {
     };
 
 
-    const changePrefix = (selected) => {
-        seTstate({
-            ...state,
-            prefix: selected
-        })
-    }
-    const prefixSelector = (
-        <Form.Item name="prefix" noStyle initialValue={"90"}>
-            <Select onChange={changePrefix} style={{ width: 70 }}>
-                <Option value="90" >+90</Option>
-            </Select>
-        </Form.Item>
-    );
+
     return (
         <div className="w-full flex justify-between mb-6  ">
             <div className=" w-3/12 mr-3 md:w-2/12 md:mr-0  mt-4 md:mt-2 lg:mt-3" >
@@ -144,8 +133,10 @@ const Default = () => {
                             </a>
                         </Link>
                         <a className="p-2 float-left" onClick={async () => {
-                            await dispatch(logout_r());
                             await AuthService.logout()
+                            await dispatch(logout_r());
+                            router.push("/")
+
                         }}>
                             <LogoutOutlined />
                             <span className="hidden md:inline  "> Logout </span>
@@ -192,36 +183,8 @@ const Default = () => {
                 footer={null}
 
             >
-                <Form
-                    onFinish={onSubmitLogin}
-                    layout="vertical"
-                >
-                    <Form.Item
-                        rules={[{ required: true, message: <IntlMessages id="app.userAuth.The input is not valid E-mail!" /> }]}
-                        name="username"
-                        label={<IntlMessages id="app.userAuth.E-mail" />}
-                    >
-                        <Input size="large" />
-                    </Form.Item>
-                    <Form.Item
-                        rules={[{ required: true, message: <IntlMessages id="app.userAuth.Please input your Password!" /> }]}
-                        name="password"
-                        label={<IntlMessages id="app.userAuth.Password" />}
-                    >
-                        <Input.Password size="large" />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" className="mb-0 w-full" size="large" htmlType="submit">
-                            <IntlMessages id="app.userAuth.signIn" />
-                        </Button>
-                    </Form.Item>
-                </Form>
-                <Button type="link" className="float-left w-full mb-4" onClick={() => console.log("forgot password")}>
-                    Forgot Password
-                </Button>
-                <div className="mt-5"></div>
+                <LoginForm onSubmitLogin={onSubmitLogin} handleCancelLogin={handleCancelLogin} />
             </Modal>
-
 
             <Modal
                 title="Signup"
@@ -232,94 +195,7 @@ const Default = () => {
                 footer={null}
 
             >
-
-                <Form
-                    onFinish={onSubmitSignup}
-                    layout="vertical"
-                    form={form}
-
-                >
-                    <Form.Item
-                        name="username"
-                        label="E-mail"
-                        rules={[
-                            {
-                                type: 'email',
-                                message: "The input is not valid E-mail!",
-                            },
-                            {
-                                required: true,
-                                message: intl.messages["app.pages.common.inputNotValid"],
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        name="password"
-                        label={intl.messages["app.pages.common.password"]}
-                        rules={[
-                            {
-                                message: intl.messages["app.pages.common.inputNotValid"],
-                            },
-                        ]}
-                        hasFeedback
-                    >
-                        <Input.Password />
-                    </Form.Item>
-                    <Form.Item
-                        name="confirm"
-                        label={intl.messages["app.pages.common.confirmPassword"]}
-                        dependencies={['password']}
-                        hasFeedback
-                        rules={[
-                            {
-                                message: intl.messages["app.pages.common.inputNotValid"],
-                            },
-                            ({ getFieldValue }) => ({
-                                validator(rule, value) {
-                                    if (!value || getFieldValue('password') === value) {
-                                        return Promise.resolve();
-                                    }
-                                    return Promise.reject(intl.messages["app.pages.common.passwordNotMatch"]);
-                                },
-                            }),
-                        ]}
-                    >
-                        <Input.Password />
-                    </Form.Item>
-                    <Form.Item
-                        name="name"
-                        label={intl.messages["app.pages.customers.name"]}
-                        rules={[{ required: true, message: intl.messages["app.pages.common.pleaseFill"], whitespace: true }]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        name="surname"
-                        label={intl.messages["app.pages.customers.surname"]}
-                        rules={[{ required: true, message: intl.messages["app.pages.common.pleaseFill"], whitespace: true }]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        name="phone"
-                        label={intl.messages["app.pages.customers.phone"]}
-                        rules={[{ required: true, message: intl.messages["app.pages.common.pleaseFill"] }]}
-                    >
-                        <Input addonBefore={prefixSelector} />
-                    </Form.Item>
-
-                    <Divider />
-                    <Form.Item  >
-                        <Button type="primary" htmlType="submit">
-                            <IntlMessages id="app.pages.common.save" />
-                        </Button>
-                    </Form.Item>
-
-
-                </Form>
-
+                <RegisterForm onSubmitSignup={onSubmitSignup} />
             </Modal>
         </div >
     )

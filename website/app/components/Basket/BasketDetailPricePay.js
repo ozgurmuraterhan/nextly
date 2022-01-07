@@ -101,19 +101,20 @@ const Default = () => {
 
         await axios.get(`${API_URL}/cargoespublic`).then(res => {
             seTcargoes(res.data)
-
-            if (basket[0].cargoes_id) {
-                seTselectedCargo({
-                    cargo_price: basket[0].cargo_price,
-                    cargo_price_discount: basket[0].cargo_price_discount,
-                    selectedCargo: basket[0].cargoes_id
-                })
-            } else {
-                seTselectedCargo({
-                    cargo_price: res.data[0].price,
-                    cargo_price_discount: res.data[0].before_price,
-                    selectedCargo: res.data[0]._id
-                })
+            if (basket.length > 0) {
+                if (basket[0].cargoes_id) {
+                    seTselectedCargo({
+                        cargo_price: basket[0].cargo_price,
+                        cargo_price_discount: basket[0].cargo_price_discount,
+                        selectedCargo: basket[0].cargoes_id
+                    })
+                } else {
+                    seTselectedCargo({
+                        cargo_price: res.data[0].price,
+                        cargo_price_discount: res.data[0].before_price,
+                        selectedCargo: res.data[0]._id
+                    })
+                }
             }
 
         })

@@ -210,7 +210,7 @@ const Page = ({ data = {} }) => {
 
                                 <span className="text-2xl"> Price :</span>  {priceAdd.price != 0 ? <Price data={priceAdd.price} /> : "Please Select Variant "}
 
-                                {priceAdd.before_price != 0 ?
+                                {priceAdd.before_price != 0 && priceAdd.before_price > priceAdd.price ?
                                     <span className="line-through ml-3 text-sm text-black" >
                                         <Price data={priceAdd.before_price} />
                                     </span>

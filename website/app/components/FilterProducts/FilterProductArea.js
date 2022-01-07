@@ -108,7 +108,7 @@ const Page = () => {
 
                                             {val.type ? getVariantPrice(val.variant_products) : <Price data={val.price} />}
                                         </div>
-                                        <a className="add-to-cart" href="#">add to cart</a>
+                                        <a className="add-to-cart" href="#">Details</a>
                                     </div>
                                 </div>
                             </Link>

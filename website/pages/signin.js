@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Button, Checkbox, Form, Input, message, Row, Col, Typography, Select } from "antd";
-import { login_r, isAuthenticated_r } from "../redux/actions/Login";
+import { login_r, isAuthenticated_r, settings_r, logout_r } from "../redux/actions";
+
 import { isAuthenticated } from "../redux/actions";
 import { useIntl } from 'react-intl';
 import IntlMessages from "../util/IntlMessages";
@@ -12,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Router from 'next/router';
 import { switchLanguage } from "../redux/actions";
 import { languageData } from "../../config"
+import LoginForm from "../app/components/Header/LoginForm"
+import RegisterForm from "../app/components/Header/RegisterForm"
 
 import AuthService from "../util/services/authservice";
 
@@ -23,19 +26,39 @@ const SignInPage = () => {
   const { locale } = useSelector(({ settings }) => settings);
 
   if (loginab.isAuthenticated == true) {
-    return Router.replace("/dashboard")
+    return Router.push("/")
   }
 
   useEffect(() => {
 
     if (loginab.isAuthenticated == true) {
-      return Router.replace("/dashboard")
+      return Router.push("/")
     }
 
   }, [loginab]);
 
 
-  const onSubmit = (Data) => {
+  const onSubmitSignup = (Data) => {
+
+    axios.post(`${API_URL}/users/register`, Data).then(res => {
+
+      if (res.data.error) {
+        message.error(res.data.messagge)
+      } else {
+        form.resetFields();
+        message.success(res.data.messagge)
+        onSubmitLogin(Data)
+
+      }
+    })
+      .catch(err => console.log("err", err))
+  }
+
+  const handleCancelLogin = () => {
+
+  }
+
+  const onSubmitLogin = (Data) => {
 
     AuthService.login(Data).then((data) => {
 
@@ -44,79 +67,30 @@ const SignInPage = () => {
       if (isAuthenticated) {
         dispatch(login_r(user));
         dispatch(isAuthenticated_r({ isAuthenticated: true }));
-
-        Router.push("/dashboard")
-        message.success(intl.messages["app.userAuth.Login Successfully."]);
+        Router.push("/")
+        message.success("Login Successfully");
+        handleCancelLogin()
       } else {
-        message.error(intl.messages["app.userAuth.You did not login."]);
-        Router.replace("/signin")
-
+        message.error("Login not Successfully");
       }
     });
   };
 
   return (
     <>
-      <Row gutter={[16, 16]}>
-        <Col sm={6} offset={3} xs={18} className="my-5">
-          <Typography.Title className="text-center mt-5">NextLy</Typography.Title>
-          <div level={5} className="text-center fs-10 mb-5">Fortune favors the bold.</div>
-          <Form
-            initialValues={{ remember: true }}
-            onFinish={onSubmit}
-            layout="vertical"
-          >
-            <Form.Item
-              rules={[{ required: true, message: <IntlMessages id="app.userAuth.The input is not valid E-mail!" /> }]}
-              name="username"
-              label={<IntlMessages id="app.userAuth.E-mail" />}
-            >
-              <Input size="large" />
-            </Form.Item>
-            <Form.Item
-              rules={[{ required: true, message: <IntlMessages id="app.userAuth.Please input your Password!" /> }]}
-              name="password"
-              label={<IntlMessages id="app.userAuth.Password" />}
-            >
-              <Input.Password size="large" />
-            </Form.Item>
+      <div className="grid container-custom gap-10 p-20 grid-cols-12">
 
-            <Form.Item>
-              <Button type="primary" className="mb-0 w-full" size="large" htmlType="submit">
-                <IntlMessages id="app.userAuth.signIn" />
-              </Button>
-            </Form.Item>
+        <div className="col-span-6">
+          <div className="text-lg font-semibold col-span-12 text-brand-color  mb-5 " >Login  </div>
+          <LoginForm onSubmitLogin={onSubmitLogin} handleCancelLogin={handleCancelLogin} />
+        </div>
 
+        <div className="col-span-6">
+          <div className="text-lg font-semibold col-span-12 text-brand-color  mb-5 " >Register </div>
+          <RegisterForm onSubmitSignup={onSubmitSignup} />
 
-          </Form>
-          <Button type="link" className="float-left" onClick={() => Router.push("/forgotpassword")}>
-            <IntlMessages id="app.userAuth.Forgot Password" />
-          </Button>
-          <Select
-            showSearch
-            className="float-right w-10"
-            defaultValue={JSON.stringify(locale)}
-            bordered={false}
-            filterOption={(input, option) =>
-              option.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-            onChange={(newValue) => {
-              dispatch(switchLanguage(JSON.parse(newValue)))
-            }}
-          >
-
-            {languageData.map(language =>
-              <Select.Option key={JSON.stringify(language)} value={JSON.stringify(language)}>{String(language.name)}</Select.Option>
-            )}
-          </Select>
-
-
-        </Col>
-        <Col sm={3} xs={0} />
-        <Col sm={12} xs={24} >
-          <div className="loginBanner"></div>
-        </Col>
-      </Row>
+        </div>
+      </div>
 
 
 

@@ -58,7 +58,6 @@ const Page = () => {
                 <div className="w-full mt-3">
                     <FilterProductArea />
                 </div>
-                sd
             </div>
 
         </div>

@@ -10,7 +10,7 @@ const initialSettings = {
     minPrice: null,
     maxPrice: null,
     sort: "",
-    limit: 4,
+    limit: 12,
     skip: 0
   }
 };

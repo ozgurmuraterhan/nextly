@@ -43,7 +43,7 @@ const Default = ({ getData = [] }) => {
     render: (text, record) => (
       <>
         {record.image ?
-          <img src={record.image} height={80} />
+          <img src={record.image} height={80} width={100} />
           : ""}
       </>
     ),

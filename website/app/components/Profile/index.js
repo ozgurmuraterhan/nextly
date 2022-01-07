@@ -21,12 +21,15 @@ const Defaut = () => {
     const [fieldsUser, seTfieldsUser] = useState(Object.entries(user).map(([name, value]) => ({ name, value })))
     const [state, seTstate] = useState([])
     function getDataFc() {
-        axios.get(`${API_URL}/customers/${user.id}`).then((res) => {
-            const data = res.data
-            data["password"] = ""
-            seTstate(data);
-            seTfieldsUser(Object.entries(data).map(([name, value]) => ({ name, value })));
-        });
+        console.log("user.id", user.id)
+        if (user.id) {
+            axios.get(`${API_URL}/customers/${user.id}`).then((res) => {
+                const data = res.data
+                data["password"] = ""
+                seTstate(data);
+                seTfieldsUser(Object.entries(data).map(([name, value]) => ({ name, value })));
+            });
+        }
     }
     useEffect(() => {
         getDataFc()

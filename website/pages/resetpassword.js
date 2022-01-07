@@ -64,69 +64,61 @@ const SignInPage = () => {
 
   return (
     <>
-      <Row gutter={[16, 16]}>
+      <div className=" container-custom  text-center items-center py-14">
+        {username ?
+          <Form
+            initialValues={{ remember: true }}
+            onFinish={onSubmit}
+            layout="vertical"
+            className="w-6/12 mx-auto"
 
-        <Col sm={6} offset={3} xs={18}>
-          <Typography.Title className="text-center mt-5">NextLy</Typography.Title>
-          <div level={5} className="text-center fs-10 mb-5">Fortune favors the bold.</div>
-          {username ?
-            <Form
-              initialValues={{ remember: true }}
-              onFinish={onSubmit}
-              layout="vertical"
+          >
+            <Form.Item
+              name="password"
+              label="Password"
+              rules={[
+                {
+                  message: 'Please input your password!',
+                },
+              ]}
+              hasFeedback
             >
-              <Form.Item
-                name="password"
-                label="Password"
-                rules={[
-                  {
-                    message: 'Please input your password!',
+              <Input.Password />
+            </Form.Item>
+            <Form.Item
+              name="confirm"
+              label="Confirm Password"
+              dependencies={['password']}
+              hasFeedback
+              rules={[
+                {
+                  message: 'Please confirm your password!',
+                },
+                ({ getFieldValue }) => ({
+                  validator(rule, value) {
+                    if (!value || getFieldValue('password') === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject('The two passwords that you entered do not match!');
                   },
-                ]}
-                hasFeedback
-              >
-                <Input.Password />
-              </Form.Item>
-              <Form.Item
-                name="confirm"
-                label="Confirm Password"
-                dependencies={['password']}
-                hasFeedback
-                rules={[
-                  {
-                    message: 'Please confirm your password!',
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(rule, value) {
-                      if (!value || getFieldValue('password') === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject('The two passwords that you entered do not match!');
-                    },
-                  }),
-                ]}
-              >
-                <Input.Password />
-              </Form.Item>
-              <Form.Item>
-                <Button type="primary" className="mb-0 w-full" size="large" htmlType="submit">
-                  Update Password
-                </Button>
-              </Form.Item>
-            </Form>
+                }),
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" className="mb-0 w-full" size="large" htmlType="submit">
+                Update Password
+              </Button>
+            </Form.Item>
+          </Form>
 
-            : ""}
+          : ""}
 
-          <Button type="link" onClick={() => router.push("/signin")}>
-            <IntlMessages id="app.userAuth.signIn" />
-          </Button>
-        </Col>
-        <Col sm={3} xs={0} />
-
-        <Col sm={12} xs={24}>
-          <div className="loginBanner"></div>
-        </Col>
-      </Row>
+        <Button type="link" onClick={() => router.push("/signin")}>
+          <IntlMessages id="app.userAuth.signIn" />
+        </Button>
+      </div>
 
 
 

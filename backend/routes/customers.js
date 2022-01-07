@@ -64,8 +64,7 @@ router.route("/").get(passport.authenticate("jwt", { session: false }), (req, re
    const rolesControl = req.user.role;
    if (rolesControl[roleTitle + "/list"]) {
       Users.find(
-         // { 'isCustomer': true },
-         {},
+         { 'isCustomer': true },
          { isActive: 1, name: 1, surname: 1, username: 1, _id: 1, isCustomer: 1, address: 1, phone: 1, prefix: 1 })
          .then((data) => { res.json(data); })
          .catch((err) =>
