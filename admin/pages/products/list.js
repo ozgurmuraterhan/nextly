@@ -7,7 +7,7 @@ import { EditOutlined, DeleteOutlined, AppstoreAddOutlined, UploadOutlined } fro
 import axios from 'axios';
 import { useSelector } from "react-redux"
 import { API_URL } from '../../../config';
-
+import Price from "../../app/components/Price"
 import { useIntl } from 'react-intl';
 import IntlMessages from "../../util/IntlMessages";
 
@@ -18,6 +18,14 @@ const Default = ({ getData = [] }) => {
   const { user } = useSelector(({ login }) => login);
 
   const { role } = user;
+
+  const getVariantPrice = (data) => {
+    if (data.length > 0) {
+      const newData = data.sort((a, b) => { return a.price - b.price })
+      return <span> <Price data={newData[0].price} />  -  <Price data={newData[data.length - 1].price} />  </span>
+    }
+  }
+
 
   const columns = [
     {
@@ -36,6 +44,7 @@ const Default = ({ getData = [] }) => {
       title: intl.messages["app.pages.common.price"],
       dataIndex: 'price',
       key: 'price',
+      render: (text, record) => { return record.type ? getVariantPrice(record.variant_products) : <Price data={record.price} /> }
     },
     {
       title: intl.messages["app.pages.common.image"],
