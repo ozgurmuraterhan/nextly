@@ -6,7 +6,7 @@ import { Layout } from 'antd';
 
 import { useDispatch, useSelector } from "react-redux";
 import { login_r, isAuthenticated_r } from "../../../redux/actions/Login";
-import { changeCollapsed_r } from "../../../redux/actions";
+import { changeCollapsed_r, settings_r } from "../../../redux/actions";
 
 import { useRouter } from "next/router";
 
@@ -58,7 +58,13 @@ const AppLayout = ({ children }) => {
         }
     }
 
+
+    const callAllRedux = async () => {
+        await dispatch(settings_r())
+    }
+
     useEffect(() => {
+        callAllRedux()
         loginControl()
     }, [])
 

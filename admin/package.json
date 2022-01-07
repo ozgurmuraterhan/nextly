@@ -26,6 +26,7 @@
     "react-intl": "^5.8.1",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
+    "redux-thunk": "^2.4.1",
     "sass": "^1.35.2",
     "tailwindcss": "^2.2.19",
     "url-loader": "^4.1.0"
