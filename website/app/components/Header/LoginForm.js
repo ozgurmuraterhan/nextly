@@ -16,7 +16,7 @@ const Default = ({ onSubmitLogin, handleCancelLogin }) => {
     return (
 
 
-        <>
+        <div className="mb-5">
             <Form
                 onFinish={onSubmitLogin}
                 layout="vertical"
@@ -47,7 +47,7 @@ const Default = ({ onSubmitLogin, handleCancelLogin }) => {
                 </Button>
             </Link>
             <div className="mt-5"></div>
-        </>
+        </div>
     )
 }
 
