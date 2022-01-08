@@ -14,7 +14,7 @@ const Default = ({ topmenu, socialmedia }) => {
     return (<div className="float-left w-full">
         <ul className="topmenu float-left">
             {topmenu.map(val => (
-                <li key={val.title}>
+                <li key={val.title} className={`${val.isActive ? "visible" : "invisible"}`}>
                     {!val.children ?
                         <Link href={val.link ? val.link : val.seo}>
                             <a>{val.title}</a>
@@ -101,7 +101,7 @@ const Default = ({ topmenu, socialmedia }) => {
                 </li>
             ))}
         </ul>
-    </div>
+    </div >
 
     )
 }

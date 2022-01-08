@@ -69,12 +69,9 @@ const AppLayout = ({ children }) => {
 
     const getTopAndFooterMenues = () => {
 
-        axios.get(`${API_URL}/topmenupublic/true`).then(res => {
-            seTtopmenu(func.getCategoriesTree(res.data))
-        })
-
-
         axios.get(`${API_URL}/topmenupublic/not`).then(res => {
+
+            seTtopmenu(func.getCategoriesTree(res.data))
             seTsocialmedia(func.getCategoriesTree(res.data, "614b8cc75c153bab76bdf681"))
             seTfooterMenu(func.getCategoriesTree(res.data, "6154a5a279053f941d1b786c"))
         })
