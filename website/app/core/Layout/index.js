@@ -34,6 +34,8 @@ const AppLayout = ({ children }) => {
     const [isLoaded, seTisLoaded] = useState(false)
 
     const [footerMenu, seTfooterMenu] = useState([])
+    const [topmenu, seTtopmenu] = useState([])
+    const [socialmedia, seTsocialmedia] = useState([])
 
     const loginControl = async () => {
         if (!isAuthenticated) {
@@ -65,10 +67,26 @@ const AppLayout = ({ children }) => {
         fetchError()
     }
 
+    const getTopAndFooterMenues = () => {
+
+        axios.get(`${API_URL}/topmenupublic/true`).then(res => {
+            seTtopmenu(func.getCategoriesTree(res.data))
+        })
+
+
+        axios.get(`${API_URL}/topmenupublic/not`).then(res => {
+            seTsocialmedia(func.getCategoriesTree(res.data, "614b8cc75c153bab76bdf681"))
+            seTfooterMenu(func.getCategoriesTree(res.data, "6154a5a279053f941d1b786c"))
+        })
+
+
+    }
+
 
     useEffect(() => {
         loginControl()
         callAllRedux()
+        getTopAndFooterMenues()
 
     }, [])
 
@@ -78,7 +96,7 @@ const AppLayout = ({ children }) => {
             <Layout>
                 <div className="border-b-2">
                     <div className=" container-custom   ">
-                        <HeaderTopMenu />
+                        <HeaderTopMenu socialmedia={socialmedia} topmenu={topmenu} />
                         <Header />
                         <CategoriesMenu />
                     </div>
@@ -87,7 +105,7 @@ const AppLayout = ({ children }) => {
                     {children}
                 </Content>
 
-                <Footer />
+                <Footer footerMenu={footerMenu} />
             </Layout>
         </>
     );

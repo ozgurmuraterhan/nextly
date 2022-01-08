@@ -20,22 +20,12 @@ import {
 } from '@ant-design/icons';
 import { API_URL } from "../../../../config";
 
-const Default = () => {
-
-    const [footerMenu, seTfooterMenu] = useState([])
-
-    const { collapsed, settings, errorFetch } = useSelector(({ settings }) => settings);
-
-    const getFooterMenu = async () => {
-        axios.get(`${API_URL}/topmenupublic/not`).then(res => {
-            seTfooterMenu(func.getCategoriesTree(res.data, "6154a5a279053f941d1b786c"))
-        })
-    }
+const Default = ({ footerMenu }) => {
 
 
-    useEffect(() => {
-        getFooterMenu()
-    }, [])
+    const { settings } = useSelector(({ settings }) => settings);
+
+
 
 
     return (

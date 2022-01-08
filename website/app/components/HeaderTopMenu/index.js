@@ -8,28 +8,9 @@ import func from "../../../util/helpers/func"
 import Link from "next/link";
 
 
-const Default = () => {
-
-    const [topmenu, seTtopmenu] = useState([])
-    const [socialmedia, seTsocialmedia] = useState([])
+const Default = ({ topmenu, socialmedia }) => {
 
 
-    const getTopmenu = async () => {
-        axios.get(`${API_URL}/topmenupublic/true`).then(res => {
-            seTtopmenu(func.getCategoriesTree(res.data))
-        })
-    }
-
-    const getSocial = async () => {
-        axios.get(`${API_URL}/topmenupublic/not`).then(res => {
-            seTsocialmedia(func.getCategoriesTree(res.data, "614b8cc75c153bab76bdf681"))
-        })
-    }
-
-    useEffect(() => {
-        getTopmenu()
-        getSocial()
-    }, [])
     return (<div className="float-left w-full">
         <ul className="topmenu float-left">
             {topmenu.map(val => (
