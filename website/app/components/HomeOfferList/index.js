@@ -38,24 +38,7 @@ import func from "../../../util/helpers/func"
 import { API_URL } from "../../../../config";
 
 
-const Default = () => {
-
-    const [state, seTstate] = useState([])
-    const [title, seTtitle] = useState({})
-
-    const getData = async () => {
-        axios.get(`${API_URL}/homesliderpublic`).then(res => {
-
-            seTstate(func.getCategoriesTree(res.data, "6154640f79053f941d1b76c9"))
-
-            const title = res.data.filter(val => val._id === "6154640f79053f941d1b76c9")
-            seTtitle({ title: title[0].title, description: title[0].description })
-        })
-    }
-
-    useEffect(() => {
-        getData()
-    }, [])
+const Default = ({ state, title }) => {
 
 
     return (

@@ -39,20 +39,9 @@ import func from "../../../util/helpers/func"
 import { API_URL } from "../../../../config";
 
 
-const Default = () => {
+const Default = ({ state }) => {
 
-    const [state, seTstate] = useState([])
 
-    const getData = async () => {
-        axios.get(`${API_URL}/homesliderpublic`).then(res => {
-
-            seTstate(func.getCategoriesTree(res.data, "61537c2d6464c09286494c63"))
-        })
-    }
-
-    useEffect(() => {
-        getData()
-    }, [])
 
     const css = [
         " w-8/12 md:w-6/12",

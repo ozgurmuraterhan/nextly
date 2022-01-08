@@ -35,23 +35,15 @@ import { login_r, isAuthenticated_r, settings_r, logout_r } from "../../../redux
 import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios"
-import func from "../../../util/helpers/func"
 import { API_URL } from "../../../../config";
 
 
-const Default = () => {
+const Default = ({ state }) => {
 
-    const [state, seTstate] = useState([])
 
-    const getData = async () => {
-        axios.get(`${API_URL}/homesliderpublic`).then(res => {
 
-            seTstate(func.getCategoriesTree(res.data, "61535837020a748d51968ecc"))
-        })
-    }
 
     useEffect(() => {
-        getData()
     }, [])
 
 
