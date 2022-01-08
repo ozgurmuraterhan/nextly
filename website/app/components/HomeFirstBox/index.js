@@ -67,7 +67,7 @@ const Default = ({ state }) => {
 
             <div className="row homeFirsBoxs">
                 {state.map((val, i) =>
-                    <>
+                    <React.Fragment key={val._id}>
                         {i > 5 ?
                             <div className={" item " + css[i]}>
                                 <Link href={val.link}>
@@ -90,7 +90,7 @@ const Default = ({ state }) => {
 
                         }
 
-                    </>
+                    </React.Fragment>
                 )}
 
 
@@ -103,7 +103,7 @@ const Default = ({ state }) => {
             <div className="row homeFirsBoxs" style={{ transform: "scalex(-1)" }}>
 
                 {state.map((val, i) =>
-                    <>
+                    <React.Fragment key={val._id}>
                         {i < 6 ?
                             <div className={" item " + css[i]} style={{ transform: "scalex(-1)" }}>
                                 <Link href={val.link}>
@@ -125,7 +125,7 @@ const Default = ({ state }) => {
 
                         }
 
-                    </>
+                    </React.Fragment>
                 )}
             </div>
 

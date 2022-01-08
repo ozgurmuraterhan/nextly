@@ -90,7 +90,7 @@ const Default = ({ state, title }) => {
                                 }}
                             >
                                 {state.map(val =>
-                                    <SwiperSlide>
+                                    <SwiperSlide key={val._id}>
 
                                         <Link href={val.link} >
                                             <a className="itemzoom">

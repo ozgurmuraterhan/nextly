@@ -59,7 +59,7 @@ const Default = ({ state }) => {
                     }}
                     className="w-full">
                     {state.map(val =>
-                        <SwiperSlide>
+                        <SwiperSlide key={val._id}>
                             <div className="item">
                                 <Link href={val.link}>
                                     <a>

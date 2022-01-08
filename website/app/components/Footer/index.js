@@ -30,7 +30,7 @@ const Default = ({ footerMenu }) => {
         <div className="bg-black py-10">
             <div className=" container-custom">
                 <ul className=" grid grid-cols-2 md:grid-cols-4   ">
-                    {footerMenu.map(val => (
+                    {footerMenu && footerMenu.map(val => (
                         <li key={val.title} className="mt-2">
                             {!val.children ?
                                 <Link href={val.link ? val.link : val.seo}>

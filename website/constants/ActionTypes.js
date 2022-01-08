@@ -31,4 +31,5 @@ export const BASKET_FETCH = "BASKET_FETCH"
 
 
 
-
+//Topmenu
+export const TOPMENU_FETCH = "TOPMENU_FETCH"

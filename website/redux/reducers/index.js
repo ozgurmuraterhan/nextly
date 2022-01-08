@@ -5,7 +5,7 @@ import Brands from "./Brands";
 import FilterProducts from "./FilterProducts";
 import Categories from "./Categories";
 import Basket from "./Basket";
-
+import Topmenu from "./Topmenu";
 
 const reducers = combineReducers({
   settings: Settings,
@@ -13,7 +13,8 @@ const reducers = combineReducers({
   brands: Brands,
   filterProducts: FilterProducts,
   categories: Categories,
-  basket: Basket
+  basket: Basket,
+  topmenu: Topmenu
 
 });
 

@@ -13,10 +13,10 @@ const Default = ({ topmenu, socialmedia }) => {
 
     return (<div className="float-left w-full">
         <ul className="topmenu float-left">
-            {topmenu.map(val => (
+            {topmenu && topmenu.map(val => (
                 <li key={val.title} className={`${val.isActive ? "visible" : "invisible"}`}>
                     {!val.children ?
-                        <Link href={val.link ? val.link : val.seo}>
+                        <Link href={val.link ? val.link : "/content/" + val.seo}>
                             <a>{val.title}</a>
                         </Link>
                         :
@@ -28,7 +28,7 @@ const Default = ({ topmenu, socialmedia }) => {
                                 {val?.children.map(val2 => (
                                     <li key={val2.title}>
                                         {!val2.children ?
-                                            <Link href={val2.link ? val2.link : val2.seo}>
+                                            <Link href={val2.link ? val2.link : "/content/" + val2.seo}>
                                                 <a>{val2.title}</a>
                                             </Link>
                                             :
@@ -39,7 +39,7 @@ const Default = ({ topmenu, socialmedia }) => {
                                                 <ul key={val2.title}>
                                                     {val2?.children.map(val3 => (
                                                         <li key={val3.title}>
-                                                            <Link href={val3.link ? val3.link : val3.seo}>
+                                                            <Link href={val3.link ? val3.link : "/content/" + val3.seo}>
                                                                 <a>{val3.title}</a>
                                                             </Link>
                                                         </li>
@@ -57,11 +57,11 @@ const Default = ({ topmenu, socialmedia }) => {
         </ul>
 
         <ul className="topmenu float-right hidden md:block">
-            {socialmedia.map(val => (
+            {socialmedia && socialmedia.map(val => (
                 <li key={val.title}>
 
                     {!val.children ?
-                        <Link href={val.link ? val.link : val.seo}>
+                        <Link href={val.link ? val.link : "/content/" + val.seo}>
                             <a>{val.title}</a>
                         </Link>
                         :
@@ -73,7 +73,7 @@ const Default = ({ topmenu, socialmedia }) => {
                                 {val?.children.map(val2 => (
                                     <li key={val2.title}>
                                         {!val2.children ?
-                                            <Link href={val2.link ? val2.link : val2.seo}>
+                                            <Link href={val2.link ? val2.link : "/content/" + val2.seo}>
                                                 <a>{val2.title}</a>
                                             </Link>
                                             :
@@ -84,7 +84,7 @@ const Default = ({ topmenu, socialmedia }) => {
                                                 <ul key={val2.title}>
                                                     {val2?.children.map(val3 => (
                                                         <li key={val3.title}>
-                                                            <Link href={val3.link ? val3.link : val3.seo}>
+                                                            <Link href={val3.link ? val3.link : "/content/" + val3.seo}>
                                                                 <a>{val3.title}</a>
                                                             </Link>
                                                         </li>

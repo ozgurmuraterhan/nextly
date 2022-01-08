@@ -7,7 +7,16 @@ import CircularProgress from "../../components/CircularProgress";
 
 
 import { useDispatch, useSelector } from "react-redux";
-import { login_r, isAuthenticated_r, settings_r, logout_r, getBrands_r, getCategories_r, getBasket_r } from "../../../redux/actions";
+import {
+    login_r,
+    isAuthenticated_r,
+    settings_r,
+    logout_r,
+    getBrands_r,
+    getCategories_r,
+    getBasket_r,
+    getTopmenu_r
+} from "../../../redux/actions";
 
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -31,11 +40,10 @@ const AppLayout = ({ children }) => {
     const { collapsed, settings, errorFetch } = useSelector(({ settings }) => settings);
 
     const { isAuthenticated, user } = useSelector(({ login }) => login);
+    const { topmenu } = useSelector(({ topmenu }) => topmenu);
+
     const [isLoaded, seTisLoaded] = useState(false)
 
-    const [footerMenu, seTfooterMenu] = useState([])
-    const [topmenu, seTtopmenu] = useState([])
-    const [socialmedia, seTsocialmedia] = useState([])
 
     const loginControl = async () => {
         if (!isAuthenticated) {
@@ -64,26 +72,15 @@ const AppLayout = ({ children }) => {
         await dispatch(getBrands_r())
         await dispatch(settings_r())
         await dispatch(getCategories_r())
+        await dispatch(getTopmenu_r())
         fetchError()
     }
 
-    const getTopAndFooterMenues = () => {
-
-        axios.get(`${API_URL}/topmenupublic/not`).then(res => {
-
-            seTtopmenu(func.getCategoriesTree(res.data))
-            seTsocialmedia(func.getCategoriesTree(res.data, "614b8cc75c153bab76bdf681"))
-            seTfooterMenu(func.getCategoriesTree(res.data, "6154a5a279053f941d1b786c"))
-        })
-
-
-    }
 
 
     useEffect(() => {
         loginControl()
         callAllRedux()
-        getTopAndFooterMenues()
 
     }, [])
 
@@ -93,7 +90,7 @@ const AppLayout = ({ children }) => {
             <Layout>
                 <div className="border-b-2">
                     <div className=" container-custom   ">
-                        <HeaderTopMenu socialmedia={socialmedia} topmenu={topmenu} />
+                        <HeaderTopMenu socialmedia={func.getCategoriesTree(topmenu, "614b8cc75c153bab76bdf681")} topmenu={func.getCategoriesTree(topmenu)} />
                         <Header />
                         <CategoriesMenu />
                     </div>
@@ -102,7 +99,7 @@ const AppLayout = ({ children }) => {
                     {children}
                 </Content>
 
-                <Footer footerMenu={footerMenu} />
+                <Footer footerMenu={func.getCategoriesTree(topmenu, "6154a5a279053f941d1b786c")} />
             </Layout>
         </>
     );

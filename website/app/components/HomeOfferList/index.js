@@ -49,7 +49,7 @@ const Default = ({ state, title }) => {
             </div>
             <div className=" w-full gap-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {state.map(val =>
-                    <div>
+                    <div key={val._id}>
 
                         <Link href={val.link} >
                             <a className="itemzoom mb-3">
