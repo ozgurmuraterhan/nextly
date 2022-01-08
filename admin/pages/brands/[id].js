@@ -11,7 +11,6 @@ import func from "../../util/helpers/func"
 import { useIntl } from 'react-intl';
 import IntlMessages from "../../util/IntlMessages";
 
-
 const Default = ({ getData = [] }) => {
   const intl = useIntl();
 
@@ -199,7 +198,7 @@ const Default = ({ getData = [] }) => {
             name="image"
             label={intl.messages["app.pages.brands.uploatedImage"]}
           >
-            <Image src={state.image} width={200} />
+            <Image src={API_URL + state.image} width={200} />
           </Form.Item>
 
           <Divider />

@@ -252,7 +252,7 @@ const Default = ({ getData = [] }) => {
             name="image"
             label={intl.messages["app.pages.common.uploatedImage"]}
           >
-            <Image src={state.image} width={200} />
+            <Image src={API_URL + state.image} width={200} />
           </Form.Item> */}
 
           <Divider />

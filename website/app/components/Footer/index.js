@@ -26,8 +26,6 @@ const Default = ({ footerMenu }) => {
     const { settings } = useSelector(({ settings }) => settings);
 
 
-
-
     return (
         <div className="bg-black py-10">
             <div className=" container-custom">

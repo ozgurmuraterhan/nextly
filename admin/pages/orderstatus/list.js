@@ -38,7 +38,7 @@ const Default = ({ getData = [] }) => {
     key: 'image',
     render: (text, record) => (
       <>
-        <Image src={record.image} height={80} />
+        <Image src={API_URL + record.image} height={80} />
       </>
     ),
 
