@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import func from "../../../util/helpers/func"
 import { useIntl } from 'react-intl';
 
-const Default = ({ data }) => {
+const Default = ({ data = 0 }) => {
+
     const { settings } = useSelector(({ settings }) => settings);
 
     return (

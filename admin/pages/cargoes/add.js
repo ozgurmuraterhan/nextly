@@ -63,7 +63,7 @@ const Default = () => {
       formData.append("image", Data.image.file.originFileObj)
 
       const dataImage = await axios.post(`${API_URL}/upload/uploadcargoimage`, formData, { headers: { "Content-Type": "multipart/form-data" } })
-      console.log("dataImage", dataImage)
+
       Data["image"] = dataImage.data.path.replace("../admin/public/", "/")
     } else {
       Data["image"] = ""

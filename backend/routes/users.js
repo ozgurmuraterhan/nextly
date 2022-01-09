@@ -60,7 +60,7 @@ router.post("/login", passport.authenticate("local", { session: false }), (req, 
 
 
 router.put("/updatePasswordViaEmail", (req, res) => {
-    console.log("req.body", req.body)
+
     Users.findOne({
         username: req.body.username,
         resetPasswordToken: req.body.resetPasswordToken,
@@ -131,7 +131,6 @@ router.get("/reset", (req, res) => {
         resetPasswordExpires: { $gte: Date.now() },
     }).then((user) => {
 
-        console.log("user", user)
         if (user == null) {
             console.error("password reset link is invalid or has expired");
             res.status(403).send(

@@ -13,7 +13,11 @@ import { filterProducts_r } from "../../redux/actions";
 
 const Page = () => {
     const { filterProducts } = useSelector(({ filterProducts }) => filterProducts);
+
     const [state, seTstate] = useState({ brands: [], count: 1 })
+
+    const { isAuthenticated, user } = useSelector(({ login }) => login);
+
 
     const dispatch = useDispatch()
 
@@ -32,9 +36,6 @@ const Page = () => {
         callUrltoRedux()
 
     }, [router.router.asPath])
-
-    // const brandsCheckboxOption = func.getCategoriesTreeLabels(brands)
-    // console.log("brandsCheckboxOption", brandsCheckboxOption)
 
 
     return (

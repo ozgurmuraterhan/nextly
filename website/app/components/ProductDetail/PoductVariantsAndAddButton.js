@@ -26,21 +26,13 @@ const Page = ({ data = {} }) => {
     const dispatch = useDispatch()
     const seo = router.query.seo
 
-    const getProduct = () => {
-        axios.get(`${API_URL}/productspublic/${seo}`).then((res) => {
-            if (res.data.length > 0) {
-                seTstate(res.data[0])
-            }
-        })
-            .catch(err => console.log(err))
-    }
+
 
     const getBasket = (id) => {
         dispatch(getBasket_r(id))
     }
 
     useEffect(() => {
-        getProduct()
         getBasket(user.id)
     }, [])
 
@@ -71,7 +63,6 @@ const Page = ({ data = {} }) => {
 
 
                 axios.post(`${API_URL}/basket/add`, post).then((res) => {
-                    console.log("res", res)
                     getBasket(user.id)
                     seTloadingButton(true)
                     form.resetFields()
@@ -80,7 +71,6 @@ const Page = ({ data = {} }) => {
                 })
                     .catch(err => {
                         message.error({ content: "Some Error, Please Try Again", duration: 3 });
-                        console.log(err)
                     })
 
             } else {
@@ -89,7 +79,6 @@ const Page = ({ data = {} }) => {
                 form.resetFields()
                 message.success({ content: 'Product Added!', duration: 3 });
                 dispatch(updateBasket_r([post]))
-                console.log([post])
 
             }
 
@@ -164,7 +153,6 @@ const Page = ({ data = {} }) => {
                 products: productsData.sort((a, b) => (a.seo + JSON.stringify(a.selectedVariants)).length - (b.seo + JSON.stringify(b.selectedVariants)).length),
 
             }
-            console.log("postpost", post)
             if (isAuthenticated) {
 
                 axios.post(`${API_URL}/basket/${basket[0]._id}`, post).then((res) => {
@@ -183,7 +171,6 @@ const Page = ({ data = {} }) => {
                 form.resetFields()
                 message.success({ content: 'Product Added!', duration: 3 });
                 dispatch(updateBasket_r([post]))
-                console.log([post])
 
             }
 

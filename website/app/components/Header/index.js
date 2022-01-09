@@ -70,7 +70,6 @@ const Default = () => {
     };
 
     const onSubmitSignup = (Data) => {
-        console.log("Data", Data)
 
         axios.post(`${API_URL}/users/register`, Data).then(res => {
 
@@ -94,7 +93,7 @@ const Default = () => {
 
             if (isAuthenticated) {
                 dispatch(login_r(user));
-                dispatch(isAuthenticated_r({ isAuthenticated: true }));
+                dispatch(isAuthenticated_r(true));
                 message.success("Login Successfully");
                 handleCancelLogin()
                 seTopenModalSignup(false);
@@ -103,6 +102,11 @@ const Default = () => {
             }
         });
     };
+
+
+    useEffect(() => {
+
+    }, [isAuthenticated])
 
 
 

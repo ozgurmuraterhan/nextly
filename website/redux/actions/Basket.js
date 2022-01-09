@@ -10,19 +10,14 @@ export const updateBasket_r = (data) => {
 };
 
 export const getBasket_r = (id) => async (dispatch) => {
+  if (id) {
+    await
+      axios.get(`${API_URL}/basket/customer/${id}`).then(res => {
+        dispatch({
+          type: BASKET_FETCH,
+          payload: res.data
+        });
 
-  await
-    axios.get(`${API_URL}/basket/customer/${id}`).then(res => {
-      dispatch({
-        type: BASKET_FETCH,
-        payload: res.data
-      });
-
-    }).catch(err => {
-      dispatch({
-        type: GET_ALL_FETCH_FAIL,
-        payload: err.message + ": " + err.config.url.replace(API_URL, "api"),
-      });
-    })
-
+      })
+  }
 };

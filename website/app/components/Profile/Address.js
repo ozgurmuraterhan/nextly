@@ -32,7 +32,6 @@ const Defaut = () => {
 
   function getDataFc() {
     axios.get(`${API_URL}/customers/${user.id}`).then((res) => {
-      console.log("res", res)
       const data = res.data
       data["password"] = ""
       seTstate(data);

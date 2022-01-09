@@ -135,7 +135,6 @@ const Default = () => {
   function getUserData() {
     axios.get(`${API_URL}/staff/${id}`).then((response) => {
       seTstate({ ...response.data, password: "" });
-      console.log("ssd", response.data.image)
       if (response.data.image) {
         setFileList([{
           uid: '-1',

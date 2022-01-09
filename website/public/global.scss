@@ -32,8 +32,8 @@
     @apply text-lg
   }
 
-  .container-custom {
-    @apply w-11/12 sm:w-9/12 mx-auto
+  .container-custom { 
+    @apply lg:w-10/12 w-full px-1 mx-auto
   }
 
   input[type="checkbox"]:focus {

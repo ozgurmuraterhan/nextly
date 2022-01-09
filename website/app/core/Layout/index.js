@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl';
 import { Input, Layout, message, Drawer, Modal, Form, Button, Menu } from 'antd';
 import CircularProgress from "../../components/CircularProgress";
 
+import { wrapper } from "../../../redux/store"
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -40,10 +41,10 @@ const AppLayout = ({ children }) => {
     const { collapsed, settings, errorFetch } = useSelector(({ settings }) => settings);
 
     const { isAuthenticated, user } = useSelector(({ login }) => login);
+
     const { topmenu } = useSelector(({ topmenu }) => topmenu);
 
     const [isLoaded, seTisLoaded] = useState(false)
-
 
     const loginControl = async () => {
         if (!isAuthenticated) {
@@ -51,8 +52,7 @@ const AppLayout = ({ children }) => {
                 if (auth.isAuthenticated) {
                     await dispatch(getBasket_r(auth.user.id))
                     await dispatch(login_r(auth.user));
-                    await dispatch(login_r(auth.user));
-                    await dispatch(isAuthenticated_r({ isAuthenticated: true }));
+                    await dispatch(isAuthenticated_r(true));
                 }
             })
         }
@@ -68,21 +68,10 @@ const AppLayout = ({ children }) => {
     }
 
 
-    const callAllRedux = async () => {
-        await dispatch(getBrands_r())
-        await dispatch(settings_r())
-        await dispatch(getCategories_r())
-        await dispatch(getTopmenu_r())
-        fetchError()
-    }
-
-
-
     useEffect(() => {
         loginControl()
-        callAllRedux()
-
-    }, [])
+        fetchError()
+    }, [isAuthenticated])
 
 
     return !isLoaded ? <CircularProgress /> : (
@@ -104,8 +93,6 @@ const AppLayout = ({ children }) => {
         </>
     );
 }
-
-
 
 export default AppLayout;
 

@@ -34,38 +34,10 @@ const AppLayout = ({ children }) => {
     const { collapsed } = useSelector(({ settings }) => settings);
     const { isAuthenticated } = useSelector(({ login }) => login);
 
-    const loginControl = async () => {
-        if (!isAuthenticated) {
-            AuthService.isAuthenticated().then(async auth => {
-                if (auth.isAuthenticated) {
-                    await dispatch(login_r(auth.user));
-                    await dispatch(isAuthenticated_r(true));
-                } else {
-                    if (router.pathname == "/signup") {
-                        router.push("/signup")
-                    } else if (router.pathname == "/forgotpassword") {
-                        router.push("/forgotpassword")
-                    } else if (router.pathname == "/resetpassword") {
-                        router.push({
-                            path: "/resetpassword",
-                            query: router.query
-                        })
-                    } else {
-                        router.push("/signin")
-                    }
-                }
-            })
-        }
-    }
 
-
-    const callAllRedux = async () => {
-        await dispatch(settings_r())
-    }
 
     useEffect(() => {
-        callAllRedux()
-        loginControl()
+
     }, [])
 
 

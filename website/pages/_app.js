@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head'
 import App from 'next/app'
-import withRedux from 'next-redux-wrapper';
+import { wrapper } from "../redux/store";
 
 //import 'bootstrap/dist/css/bootstrap.css';
 
@@ -13,24 +13,42 @@ import { Provider } from "react-redux";
 import LocaleProvider from "../app/core/LocaleProvider";
 import AppLayout from "../app/core/Layout";
 
-const Page = ({ Component, pageProps, store }) => {
-  return (
-    <React.Fragment>
-      <Head>
-        <title> Nextly</title>
-      </Head>
-      <Provider store={store}>
+import {
+  login_r,
+  isAuthenticated_r,
+  settings_r,
+  logout_r,
+  getBrands_r,
+  getCategories_r,
+  getBasket_r,
+  getTopmenu_r
+} from "../redux/actions";
+
+class HomeApp extends App {
+
+  static getInitialProps = wrapper.getInitialAppProps(store => async ({ Component, ctx }) => {
+    await store.dispatch(getBrands_r())
+    await store.dispatch(settings_r())
+    await store.dispatch(getCategories_r())
+    await store.dispatch(getTopmenu_r())
+  });
+
+  render() {
+    const { Component, pageProps } = this.props;
+
+    return (
+      <React.Fragment>
+        <Head>
+          <title> Nextly</title>
+        </Head>
         <LocaleProvider>
           <AppLayout>
             <Component {...pageProps} />
           </AppLayout>
         </LocaleProvider>
-      </Provider>
-    </React.Fragment>
-  );
-};
-Page.getInitialProps = async (appContext) => {
-  const appProps = await App.getInitialProps(appContext)
-  return { ...appProps }
+      </React.Fragment>
+    );
+  }
 }
-export default withRedux(initStore)(Page);
+
+export default wrapper.withRedux(HomeApp)

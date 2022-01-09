@@ -66,7 +66,7 @@ const SignInPage = () => {
 
       if (isAuthenticated) {
         dispatch(login_r(user));
-        dispatch(isAuthenticated_r({ isAuthenticated: true }));
+        dispatch(isAuthenticated_r(true));
         Router.push("/")
         message.success("Login Successfully");
         handleCancelLogin()

@@ -147,15 +147,18 @@ const Default = () => {
 
 
     const getSelectedAddress = () => {
-        if (basket[0].shipping_address) {
-            seTselectedShippingAddress(JSON.stringify(basket[0].shipping_address))
-        }
-        if (basket[0].billing_address) {
-            seTselectedBillingAddress(JSON.stringify(basket[0].billing_address))
-        }
+        if (basket.length > 0) {
+            if (basket[0].shipping_address) {
+                seTselectedShippingAddress(JSON.stringify(basket[0].shipping_address))
+            }
+            if (basket[0].billing_address) {
+                seTselectedBillingAddress(JSON.stringify(basket[0].billing_address))
+            }
 
-        if (JSON.stringify(basket[0].billing_address) != JSON.stringify(basket[0].shipping_address)) {
-            seTbillingAdressSame(false)
+            if (JSON.stringify(basket[0].billing_address) != JSON.stringify(basket[0].shipping_address)) {
+                seTbillingAdressSame(false)
+            }
+
         }
     }
 

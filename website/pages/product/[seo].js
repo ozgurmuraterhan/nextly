@@ -14,61 +14,51 @@ import func from "../../util/helpers/func"
 import { API_URL, PRICE_VERSION } from "../../../config"
 
 
-const Page = ({ data = {} }) => {
+const Page = ({ resData = {} }) => {
     const { isAuthenticated, user } = useSelector(({ login }) => login);
 
-    const [state, seTstate] = useState(data)
+
+    const [state, seTstate] = useState(resData[0])
 
     const [form] = Form.useForm();
 
     const dispatch = useDispatch()
     const seo = router.query.seo
 
-    const getProduct = () => {
-        axios.get(`${API_URL}/productspublic/${seo}`).then((res) => {
-            if (res.data.length > 0) {
-                seTstate(res.data[0])
-            }
-        })
-            .catch(err => console.log(err))
-    }
 
     const getBasket = (id) => {
-        dispatch(getBasket_r(id))
+        if (user.id) {
+            dispatch(getBasket_r(id))
+        }
     }
 
     useEffect(() => {
-        getProduct()
-        getBasket(user.id)
+        getBasket()
     }, [])
 
 
     return (
         <div className="container-custom h-full ">
-            <div className="grid shadow-lg p-4 grid-cols-2 my-8 gap-9">
-                <div className=" border pb-3 ">
+            <div className=" shadow-lg p-0 lg::p-4 grid grid-cols-12 my-0 lg:my-8 gap-2 lg:gap-9">
+                <div className=" col-span-12 lg:col-span-6 border pb-3 ">
                     <ProductGallerry images={state.allImages} />
                 </div>
-                <div>
+                <div className=" col-span-12 lg:col-span-6">
                     <PoductVariantsAndAddButton data={state} />
                 </div>
             </div>
-
         </div >
     )
-
 }
 
 
-Page.getInitialProps = async ({ req, query }) => {
-    const getData = await axios.get(API_URL + "/productspublic/" + query.seo);
-    if (getData.data.length > 0) {
-        const geTdataManipulate = getData.data[0]
-        return { data: geTdataManipulate }
+export const getServerSideProps = async ({ req, query }) => {
 
-    } else {
-        return { data: {} }
-
+    const response = await axios.get(`${API_URL}/productspublic/${query.seo}`)
+    return {
+        props: {
+            resData: response.data
+        }
     }
 }
 

@@ -163,7 +163,6 @@ const Default = ({ getCategories = [] }) => {
 
     const formData = form.getFieldsValue()
 
-    console.log("formData", formData)
 
     const varib = []
     if (formData.variants.length > 0) {

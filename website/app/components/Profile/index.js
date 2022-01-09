@@ -21,7 +21,6 @@ const Defaut = () => {
     const [fieldsUser, seTfieldsUser] = useState(Object.entries(user).map(([name, value]) => ({ name, value })))
     const [state, seTstate] = useState([])
     function getDataFc() {
-        console.log("user.id", user.id)
         if (user.id) {
             axios.get(`${API_URL}/customers/${user.id}`).then((res) => {
                 const data = res.data
@@ -38,9 +37,7 @@ const Defaut = () => {
 
     const onSubmitPassword = (pass) => {
 
-        console.log("pass", pass)
         AuthService.login({ username: state.username, password: pass.currentpassword }).then((data) => {
-            console.log("datadata", data)
             const { isAuthenticated, user } = data;
             if (isAuthenticated) {
                 axios

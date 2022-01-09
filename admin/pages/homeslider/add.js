@@ -34,7 +34,7 @@ const Default = ({ getCategories = [] }) => {
       .then((res) => {
         if (res.data.length > 0) {
           const data = func.getCategoriesTreeOptions(res.data)
-          console.log("res.data", res.data)
+
           data.unshift({ label: intl.messages["app.pages.category.rootCategory"], value: null, })
           seTdataCategories(data);
         }
@@ -81,7 +81,7 @@ const Default = ({ getCategories = [] }) => {
       formData.append("image", Data.image.file.originFileObj)
 
       const dataImage = await axios.post(`${API_URL}/upload/uploadhomesliderimage`, formData, { headers: { "Content-Type": "multipart/form-data" } })
-      console.log("dataImage", dataImage)
+
       Data["image"] = dataImage.data.path.replace("../admin/public/", "/")
     } else {
       Data["image"] = ""

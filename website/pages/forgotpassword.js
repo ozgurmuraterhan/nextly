@@ -13,7 +13,6 @@ const SignInPage = () => {
 
   const onSubmit = (Data) => {
 
-    console.log("Data", Data)
 
     axios.post(`${API_URL}/users/forgotpasswordcustomer`, Data).then(res => {
       if (res.data == "email not in db") {

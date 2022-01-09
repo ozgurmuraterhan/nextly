@@ -32,7 +32,7 @@ const Default = ({ images = [] }) => {
 
 
     return (
-        <>
+        <div className="w-full">
             <Swiper style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
                 spaceBetween={0}
                 navigation={true}
@@ -41,13 +41,13 @@ const Default = ({ images = [] }) => {
                     "delay": 15000,
                     "disableOnInteraction": false
                 }}
-                className="w-full mb-4">
+                className="w-full mb-1">
                 {state.map(val =>
                     <SwiperSlide key={val.image}>
                         <div className="item">
                             <div
                                 className="  bg-contain bg-no-repeat bg-center w-full"
-                                style={{ height: "600px", backgroundImage: "url(" + API_URL + "/" + val.image + ")" }}
+                                style={{ height: "400px", backgroundImage: "url(" + API_URL + "/" + val.image + ")" }}
                             />
                         </div>
                     </SwiperSlide>
@@ -55,24 +55,32 @@ const Default = ({ images = [] }) => {
             </Swiper>
             <Swiper
                 onSwiper={setThumbsSwiper}
-                spaceBetween={10}
-                slidesPerView={10}
                 freeMode={true}
                 watchSlidesProgress={true}
                 className="mySwiper"
+                breakpoints={{
+                    "100": {
+                        "slidesPerView": 4,
+                        "spaceBetween": 15
+                    },
+                    "1024": {
+                        "slidesPerView": 8,
+                        "spaceBetween": 30
+                    }
+                }}
             >
                 {state.map(val =>
                     <SwiperSlide>
                         <div className="item">
                             <div
-                                className="bg-cover bg-center w-full border"
-                                style={{ height: "50px", backgroundImage: "url(" + API_URL + "/" + val.image + ")" }}
+                                className="bg-cover bg-center  border-2  h-20 w-20"
+                                style={{ backgroundImage: "url(" + API_URL + "/" + val.image + ")" }}
                             />
                         </div>
                     </SwiperSlide>
                 )}
             </Swiper>
-        </>
+        </div>
     );
 }
 

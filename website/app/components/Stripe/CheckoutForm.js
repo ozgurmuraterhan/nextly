@@ -27,17 +27,14 @@ export default function CheckoutForm({ contract }) {
         if (!stripe) {
             return;
         }
-        console.log("geldi2")
 
         const clientSecret = new URLSearchParams(window.location.search).get(
             "payment_intent_client_secret"
         );
-        console.log("geldi3")
 
         if (!clientSecret) {
             return;
         }
-        console.log("geldi4")
 
         stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
             switch (paymentIntent.status) {
@@ -107,7 +104,7 @@ export default function CheckoutForm({ contract }) {
                         basket[0].cargo_price_discount = 0
 
 
-                        if (isAuthenticated.isAuthenticated) {
+                        if (isAuthenticated) {
 
                             await axios.post(`${API_URL}/basket/${id}`, basket[0]).then(async (res) => {
                                 await dispatch(getBasket_r(user.id))

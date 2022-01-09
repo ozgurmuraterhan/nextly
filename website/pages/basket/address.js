@@ -31,11 +31,11 @@ const Page = ({ data = {} }) => {
 
     return (
         <div className="container-custom h-full grid grid-cols-12 ">
-            <div className="col-span-9 shadow-lg m-4 grid-cols-2 my-8 gap-9">
+            <div className=" col-span-12 lg:col-span-9 shadow-lg m-4 grid-cols-2 my-8 gap-9">
                 <BasketAddressList />
 
             </div>
-            <div className="col-span-3 h-auto shadow-lg m-4 grid-cols-2 my-8 gap-9">
+            <div className=" col-span-12 lg:col-span-3 shadow-lg m-4 grid-cols-2 my-8 gap-9">
                 <BasketDetailPriceAddress />
             </div>
         </div>

@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import router from "next/router"
-import { Table, Popconfirm, Select, Divider, message } from "antd"
+import { Table, Popconfirm, Select, Divider, message, Button } from "antd"
 
 import Price from "../Price"
 import { CheckSquareOutlined } from "@ant-design/icons"
@@ -20,6 +20,7 @@ const Default = () => {
     const [basketProducts, seTbasketProducts] = useState(false)
     const [state, seTstate] = useState([])
     const [cargoes, seTcargoes] = useState([])
+    const [disableButton, seTdisableButton] = useState(false)
     const [selectedCargo, seTselectedCargo] = useState({ cargo_price_discount: 0, cargo_price: 0, selectedCargo: 0 })
 
     const [isLoaded, seTisLoaded] = useState(false)
@@ -89,6 +90,7 @@ const Default = () => {
             await axios.post(`${API_URL}/basket/allproducts`, { _id: arrayId }).then(res => {
                 getBasketProducts(res.data, basket[0].products)
             })
+            seTdisableButton(true)
         }
     }
 
@@ -97,19 +99,20 @@ const Default = () => {
 
         await axios.get(`${API_URL}/cargoespublic`).then(res => {
             seTcargoes(res.data)
-
-            if (basket[0].cargoes_id) {
-                seTselectedCargo({
-                    cargo_price: basket[0].cargo_price,
-                    cargo_price_discount: basket[0].cargo_price_discount,
-                    selectedCargo: basket[0].cargoes_id
-                })
-            } else {
-                seTselectedCargo({
-                    cargo_price: res.data[0].price,
-                    cargo_price_discount: res.data[0].before_price,
-                    selectedCargo: res.data[0]._id
-                })
+            if (basket.length > 0) {
+                if (basket[0].cargoes_id) {
+                    seTselectedCargo({
+                        cargo_price: basket[0].cargo_price,
+                        cargo_price_discount: basket[0].cargo_price_discount,
+                        selectedCargo: basket[0].cargoes_id
+                    })
+                } else {
+                    seTselectedCargo({
+                        cargo_price: res.data[0].price,
+                        cargo_price_discount: res.data[0].before_price,
+                        selectedCargo: res.data[0]._id
+                    })
+                }
             }
 
         })
@@ -369,10 +372,11 @@ const Default = () => {
                 </span>
             </div>
             <div className="h-24">
-                <button className="bg-black w-full absolute bottom-0 cursor-pointer hover:bg-brand-color transition-all text-xl text-white p-5" onClick={onSubmit}>
+                <Button disabled={basket[0]?.products.length > 0 ? false : true} className="bg-black w-full h-auto absolute bottom-0 cursor-pointer hover:text-white hover:bg-brand-color transition-all text-xl text-white p-5" onClick={onSubmit}>
                     Confirm Basket
                     <CheckSquareOutlined className="float-right text-3xl" />
-                </button>
+                </Button>
+
             </div>
         </div>
     )

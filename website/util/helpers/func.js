@@ -285,7 +285,6 @@ export default {
         } else {
 
             const firstdata = clean(nest(data))
-            console.log("nest(data)", nest(data))
 
             const Optiondata = firstdata.map(function (obj) {
 

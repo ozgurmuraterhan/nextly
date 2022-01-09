@@ -22,7 +22,6 @@ const Page = () => {
     const updateBasketandOrder = async () => {
         axios.get(`${API_URL}/payment/stripeconfirm/${payment_intent}/${ordernumber}`).then(res => {
             seTstate(...res.data)
-            console.log("res.data1", res.data)
         })
     }
     useEffect(() => {
@@ -70,7 +69,7 @@ const Page = () => {
                                     </tr>
                                     {state.products && state.products.map(x =>
                                         <tr className="h-16 border-b">
-                                            <td><Link href={"/" + x.seo}>{x.title}</Link></td>
+                                            <td><Link href={"/product/" + x.seo}>{x.title}</Link></td>
                                             <td>{getVariant(x.selectedVariants)}</td>
                                             <td>{x.qty}</td>
                                             <td><Price data={x.price * x.qty} /></td>
