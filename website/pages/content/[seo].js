@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import Link from "next/link"
+import HTMLRenderer from 'react-html-renderer'
+
 import { ShoppingCartOutlined } from "@ant-design/icons"
 import { getBasket_r } from "../../redux/actions"
 import { wrapper } from "../../redux/store"
@@ -43,8 +45,15 @@ const Page = ({ data = {} }) => {
                 <div className=" col-span-9  ">
 
                     <div className="text-2xl font-semibold col-span-12 text-brand-color  mb-5  " >      {content.title} </div>
+                    <HTMLRenderer
+                        html={content.description}
+                    // components={{
+                    //   h1: props => <Heading color="red" {...props} />,
+                    //   h2: Subheading,
+                    //   a: Link,
+                    // }}
+                    />
 
-                    {content.description}
                 </div>
             </div>
 

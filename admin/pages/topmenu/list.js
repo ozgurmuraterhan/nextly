@@ -31,11 +31,6 @@ const Default = ({ getData = [] }) => {
     key: 'title',
     render: text => <span className="link">{text}</span>,
   }, {
-    title: intl.messages["app.pages.common.description"],
-    dataIndex: 'description',
-    key: 'description',
-
-  }, {
     title: intl.messages["app.pages.common.action"],
     key: '_id',
     width: 360,

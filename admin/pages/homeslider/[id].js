@@ -178,6 +178,13 @@ const Default = ({ getData = [], getCategories = [] }) => {
             label={intl.messages["app.pages.common.description"]}
 
           >
+            <AlloyEditor
+              content={this.state.content}
+              events={{
+                "change": this.onChange
+              }}
+              className="my-editor"
+            />
             <Input />
           </Form.Item>
           <Form.Item

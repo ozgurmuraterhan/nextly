@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from '../../../config';
 import { useRouter } from "next/router"
@@ -11,14 +12,17 @@ import func from "../../util/helpers/func"
 import { useIntl } from 'react-intl';
 import IntlMessages from "../../util/IntlMessages";
 
+
 const Default = ({ getData = [], getCategories = [] }) => {
+  const Editor = dynamic(() => import('../../app/components/Editor/index'))
+
   const intl = useIntl();
 
   const [state, seTstate] = useState(getData)
+  const [editor, seTeditor] = useState(null)
   const [fields, seTfields] = useState(Object.entries(getData).map(([name, value]) => ({ name, value })))
 
   const [dataCategories, seTdataCategories] = useState(getCategories)
-
   const { user } = useSelector(({ login }) => login);
   const [form] = Form.useForm();
 
@@ -102,7 +106,6 @@ const Default = ({ getData = [], getCategories = [] }) => {
   };
 
 
-
   return (
 
     <div>
@@ -127,12 +130,7 @@ const Default = ({ getData = [], getCategories = [] }) => {
               treeData={dataCategories}
               placeholder={intl.messages["app.pages.common.pleaseSelect"]}
               treeDefaultExpandAll
-              filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-              filterSort={(optionA, optionB) =>
-                optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-              }
+
               onChange={(newValue) => {
                 seTstate({ ...state, categories_id: newValue });
               }}
@@ -152,7 +150,6 @@ const Default = ({ getData = [], getCategories = [] }) => {
           >
             <InputNumber style={{ width: 200 }} />
           </Form.Item>
-
           <Form.Item
             name="title"
             label={intl.messages["app.pages.common.title"]}
@@ -173,7 +170,6 @@ const Default = ({ getData = [], getCategories = [] }) => {
 
             }} />
           </Form.Item>
-
           <Form.Item
             name="description"
             label={intl.messages["app.pages.common.description"]}
@@ -184,9 +180,15 @@ const Default = ({ getData = [], getCategories = [] }) => {
               },
             ]}
           >
-            <Input />
-          </Form.Item>
 
+            <Editor
+              value={editor}
+              seTeditor={seTeditor}
+              form={form}
+            />
+
+
+          </Form.Item>
           <Form.Item
             name="seo"
             label="Seo Url"
@@ -200,7 +202,6 @@ const Default = ({ getData = [], getCategories = [] }) => {
           >
             <Input />
           </Form.Item>
-
           <Divider />
           <Form.Item {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit">

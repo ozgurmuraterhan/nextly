@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from '../../../config';
+import dynamic from "next/dynamic";
 import router from "next/router"
 import { DeleteOutlined, CheckOutlined, CloseOutlined, QuestionCircleOutlined, PlusOutlined, UploadOutlined, MinusCircleOutlined } from "@ant-design/icons"
 
@@ -16,9 +17,14 @@ const { TreeNode } = TreeSelect;
 
 
 const Default = ({ getCategories = [] }) => {
+  const Editor = dynamic(() => import('../../app/components/Editor/index'))
+
+
   const intl = useIntl();
 
   const [state, seTstate] = useState({ categories_id: null })
+  const [editor, seTeditor] = useState(null)
+
   const fields = Object.entries(state).map(([name, value]) => ({ name, value }))
 
   const [dataCategories, seTdataCategories] = useState([{ label: intl.messages["app.pages.topmenu.rootCategory"], value: null, }, ...getCategories])
@@ -183,7 +189,11 @@ const Default = ({ getCategories = [] }) => {
               },
             ]}
           >
-            <Input />
+            <Editor
+              value={editor}
+              seTeditor={seTeditor}
+              form={form}
+            />
           </Form.Item>
 
           <Form.Item
