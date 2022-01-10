@@ -47,14 +47,14 @@ const Page = () => {
                 <PriceFilter />
                 <BrandsFilter />
             </div>
-            <div className=" sm:col-span-9  col-span-12 grid-cols-12 grid ">
-                <div className="col-span-9">
+            <div className=" sm:col-span-9  col-span-12  ">
+                <div className="w-8/12 float-left">
                     <FilterSelectedTop />
                 </div>
-                <div className="col-span-3">
+                <div className="w-4/12 float-left">
                     <SortProducts />
                 </div>
-                <div className="col-span-12 mt-3">
+                <div className="w-full mt-3 float-left">
                     <FilterProductArea />
                 </div>
             </div>

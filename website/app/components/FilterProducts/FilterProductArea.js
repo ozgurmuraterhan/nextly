@@ -75,7 +75,7 @@ const Page = () => {
                     className="grid grid-cols-12"
                 >
                     {products.map(val => (
-                        <div className=" lg:col-span-3 md:col-span-4 col-span-6 " key={products._id}>
+                        <div className=" lg:col-span-3 md:col-span-4 col-span-6 m-2" key={products._id}>
                             <Link href={"/product/" + val.seo}>
                                 <div className="product-grid">
                                     <div className="product-image">
