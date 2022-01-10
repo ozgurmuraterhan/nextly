@@ -39,29 +39,28 @@ const Page = () => {
 
 
     return (
-        <div className="container-custom h-full my-2 py-2">
+        <div className="container-custom grid grid-cols-12 h-full my-2 py-2">
 
-            <div className="sm:w-2/12 w-full  float-left  p-2  shadow-sm border-top ">
+            <div className=" sm:col-span-3 col-span-12   p-2  shadow-sm border-top ">
                 <TextFilter />
                 <CategoriesFilter />
                 <PriceFilter />
                 <BrandsFilter />
             </div>
-            <div className=" sm:w-10/12 w-full  float-left ">
-                <div className="flex justify-between">
-                    <div className="w-9/12">
-                        <FilterSelectedTop />
-                    </div>
-                    <div className="w-3/12">
-                        <SortProducts />
-                    </div>
+            <div className=" sm:col-span-9  col-span-12 grid-cols-12 grid ">
+                <div className="col-span-9">
+                    <FilterSelectedTop />
                 </div>
-                <div className="w-full mt-3">
+                <div className="col-span-3">
+                    <SortProducts />
+                </div>
+                <div className="col-span-12 mt-3">
                     <FilterProductArea />
                 </div>
             </div>
 
-        </div>
+
+        </div >
     )
 
 }

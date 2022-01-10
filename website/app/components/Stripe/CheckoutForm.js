@@ -134,9 +134,9 @@ export default function CheckoutForm({ contract }) {
             onFinish={handleSubmit}
             layout="vertical"
         >
-            <div className="grid grid-cols-12 gap-10 m-10">
-                <div className="col-span-4 ">
-                    <div className="text-lg font-semibold col-span-12 text-brand-color  mb-5 " >Receiver  </div>
+            <div className="grid grid-cols-12 lg:gap-10 lg:m-10 lg:p-0 p-5 ">
+                <div className="lg:col-span-4 col-span-12 ">
+                    <div className="text-lg font-semibold col-span-12 text-brand-color  mb-5  mt-5" >Receiver  </div>
                     <Form.Item
                         name="name"
                         label="Name"
@@ -185,8 +185,8 @@ export default function CheckoutForm({ contract }) {
                         <Input size="large" className="p-2" />
                     </Form.Item>
                 </div>
-                <div className="col-span-8">
-                    <div className="text-lg font-semibold    text-brand-color " >Stripe Payment </div>
+                <div className="lg:col-span-8 col-span-12">
+                    <div className="text-lg font-semibold    text-brand-color  mt-5" >Stripe Payment </div>
                     <PaymentElement className="  mt-5" />
                 </div>
                 <div className="col-span-12">

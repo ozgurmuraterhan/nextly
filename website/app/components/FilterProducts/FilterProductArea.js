@@ -66,16 +66,16 @@ const Page = () => {
     }
     return (
         <>
-            <div className="container" >
+            <div className="container " >
                 <InfiniteScroll
                     dataLength={products.length}
                     next={fetchMoreData}
                     hasMore={hasMore}
                     loader={<CircularProgress />}
-                    className="row"
+                    className="grid grid-cols-12"
                 >
                     {products.map(val => (
-                        <div className=" w-3/12 float-left p-3" key={products._id}>
+                        <div className=" lg:col-span-3 md:col-span-4 col-span-6 " key={products._id}>
                             <Link href={"/product/" + val.seo}>
                                 <div className="product-grid">
                                     <div className="product-image">

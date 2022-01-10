@@ -33,16 +33,10 @@ const Page = ({ data = {} }) => {
 
     return (
         <div className="container-custom h-full grid grid-cols-12 ">
-            <div className="col-span-9 shadow-lg m-4 grid-cols-2 my-8 gap-9">
-                <div className="col-span-4">
-
-                </div>
-                <div className="col-span-8">
-                    <StripeComponent basket={basket} public_key={public_key} contract={contract} />
-                </div>
-
+            <div className=" col-span-12 lg:col-span-9 shadow-lg m-4 grid-cols-2 my-8 gap-9 order-2 lg:order-1">
+                <StripeComponent basket={basket} public_key={public_key} contract={contract} />
             </div>
-            <div className="col-span-3 shadow-lg m-4 grid-cols-2 my-8 gap-9">
+            <div className=" col-span-12 lg:col-span-3 shadow-lg m-4 grid-cols-2 my-8 gap-9 order-1 lg:order-2">
                 <BasketDetailPricePay />
             </div>
         </div>

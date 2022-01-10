@@ -94,7 +94,7 @@ const Defaut = () => {
     return (
         <>
             <div className="container-custom h-full grid grid-cols-12 gap-10 p-0 m-0 w-full my-10 ">
-                <div className="col-span-6">
+                <div className=" col-span-12 lg:col-span-6 ">
                     <Form
                         onFinish={onSubmit}
                         layout="vertical"
@@ -150,7 +150,7 @@ const Defaut = () => {
 
                     </Form>
                 </div>
-                <div className="col-span-6">
+                <div className=" col-span-12 lg:col-span-6 ">
                     <Form
                         onFinish={onSubmitPassword}
                         layout="vertical"
