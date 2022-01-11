@@ -8,14 +8,14 @@ const title = 'Turkey';
 // get all items
 router
     .route('/')
-    .get(passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    .get((req, res, next) => {
         Turkey.find().then((data) => res.json(data));
     });
 
 // get item 
 router
     .route('/:id')
-    .get(passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    .get((req, res, next) => {
         Turkey.find({ name: req.params.id }).then((data) => res.json(data));
     });
 
