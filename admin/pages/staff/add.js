@@ -102,6 +102,15 @@ const Default = () => {
       "brands/list": true,
       "brandsdelete": true,
       "brandsview": true,
+
+      "homeslideronlyyou": false,
+      "homeslider/add": true,
+      "homeslider/id": true,
+      "homeslider/list": true,
+      "homesliderdelete": true,
+      "homesliderview": true,
+
+
     }
   })
 
@@ -420,7 +429,7 @@ const Default = () => {
 
               <br /> <br /><br />
 
-              <IntlMessages id="app.pages.staff.topMenuContent" />
+              Top Menu Content
               <Divider />
               <Checkbox
                 value={state.role["topmenuview"]}
@@ -903,8 +912,18 @@ const Default = () => {
               ><IntlMessages id="app.pages.staff.deleteData" /></Checkbox>
 
 
+
+
+
+
+
+
+
+
+
+
               <br /> <br /><br />
-              <IntlMessages id="app.pages.staff.productImage" />
+              <IntlMessages id="app.pages.staff.productImages" />
               <Divider />
               <Checkbox
                 value={state.role["productimagesview"]}
@@ -982,6 +1001,17 @@ const Default = () => {
 
                 }}
               ><IntlMessages id="app.pages.staff.deleteData" /></Checkbox>
+
+
+
+
+
+
+
+
+
+
+
 
 
               <br /> <br /><br />
@@ -1149,6 +1179,15 @@ const Default = () => {
                 }}
               ><IntlMessages id="app.pages.staff.deleteData" /></Checkbox>
 
+
+
+
+
+
+
+
+
+
               <br /> <br /><br />
               <IntlMessages id="app.pages.staff.brands" />
               <Divider />
@@ -1230,6 +1269,92 @@ const Default = () => {
               ><IntlMessages id="app.pages.staff.deleteData" /></Checkbox>
 
               <br /> <br /><br />
+              <IntlMessages id="app.pages.staff.homeSlider" />
+              <Divider />
+              <Checkbox
+                value={state.role["homesliderview"]}
+                checked={state.role["homesliderview"]}
+                disabled={state.role["superadmin"] ? true : false}
+                onChange={(e) => {
+                  const deg = state.role;
+                  deg["homesliderview"] = e.target.checked;
+                  if (e.target.checked == false) {
+                    deg["homeslideronlyyou"] = false;
+                    deg["homeslider/list"] = false;
+                    deg["homeslider/add"] = false;
+                    deg["homeslider/id"] = false;
+                    deg["homesliderdelete"] = false;
+                  }
+                  seTstate({ ...state, role: deg })
+
+                }}
+              > <IntlMessages id="app.pages.staff.viewPage" /></Checkbox>
+              <Checkbox
+                value={state.role["homeslideronlyyou"]}
+                checked={state.role["homeslideronlyyou"]}
+                disabled={state.role["superadmin"] ? true : false}
+                onChange={(e, val) => {
+                  const deg = state.role;
+                  deg["homeslideronlyyou"] = e.target.checked;
+                  deg["homeslider/list"] = false;
+                  console.log(deg)
+                  seTstate({ ...state, role: deg })
+                }}
+
+              > <IntlMessages id="app.pages.staff.onlyYouDataList" /></Checkbox>
+              <Checkbox
+                value={state.role["homeslider/list"]}
+                checked={state.role["homeslider/list"]}
+                disabled={state.role["superadmin"] ? true : false}
+                onChange={(e) => {
+                  const deg = state.role;
+                  deg["homeslider/list"] = e.target.checked;
+                  deg["homeslideronlyyou"] = false;
+                  seTstate({ ...state, role: deg })
+
+                }}
+              > <IntlMessages id="app.pages.staff.allDataList" /></Checkbox>
+              <Checkbox
+                value={state.role["homeslider/add"]}
+                checked={state.role["homeslider/add"]}
+                disabled={state.role["superadmin"] ? true : false}
+                onChange={(e) => {
+                  const deg = state.role;
+                  deg["homeslider/add"] = e.target.checked;
+                  seTstate({ ...state, role: deg })
+
+                }}
+              > <IntlMessages id="app.pages.staff.addData" /></Checkbox>
+              <Checkbox
+                value={state.role["homeslider/id"]}
+                checked={state.role["homeslider/id"]}
+                disabled={state.role["superadmin"] ? true : false}
+                onChange={(e) => {
+                  const deg = state.role;
+                  deg["homeslider/id"] = e.target.checked;
+                  seTstate({ ...state, role: deg })
+
+                }}
+              >  <IntlMessages id="app.pages.staff.editData" /></Checkbox>
+              <Checkbox
+                value={state.role["homesliderdelete"]}
+                checked={state.role["homesliderdelete"]}
+                disabled={state.role["superadmin"] ? true : false}
+                onChange={(e) => {
+                  const deg = state.role;
+                  deg["homesliderdelete"] = e.target.checked;
+                  seTstate({ ...state, role: deg })
+
+                }}
+              ><IntlMessages id="app.pages.staff.deleteData" /></Checkbox>
+
+
+
+
+
+
+
+              <br /> <br /><br />
               <IntlMessages id="app.pages.staff.cargoes" />
               <Divider />
               <Checkbox
@@ -1308,7 +1433,6 @@ const Default = () => {
 
                 }}
               ><IntlMessages id="app.pages.staff.deleteData" /></Checkbox>
-
 
             </Form.Item>
             :

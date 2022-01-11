@@ -2,7 +2,6 @@ import { SET_ISAUTHENTICATED, SET_LOGIN, SET_LOGOUT } from "../types";
 
 const INIT_STATE = {
   user: {
-
     role: {
       "blabla": false,
     }

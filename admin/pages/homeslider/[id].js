@@ -33,6 +33,7 @@ const Default = ({ getData = [], getCategories = [] }) => {
       seTstate(response.data);
     });
   }
+  // componentDidMount = useEffect
 
   const getDataCategory = () => {
 
@@ -41,7 +42,7 @@ const Default = ({ getData = [], getCategories = [] }) => {
       .then((res) => {
         if (res.data.length > 0) {
           const data = func.getCategoriesTreeOptions(res.data)
-
+          console.log("res.data", data)
           data.unshift({ label: intl.messages["app.pages.category.rootCategory"], value: null, })
           seTdataCategories(data);
         }
@@ -177,13 +178,7 @@ const Default = ({ getData = [], getCategories = [] }) => {
             label={intl.messages["app.pages.common.description"]}
 
           >
-            <AlloyEditor
-              content={this.state.content}
-              events={{
-                "change": this.onChange
-              }}
-              className="my-editor"
-            />
+
             <Input />
           </Form.Item>
           <Form.Item

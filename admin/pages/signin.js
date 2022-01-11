@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Button, Checkbox, Form, Input, message, Row, Col, Typography, Select } from "antd";
-import { login_r, isAuthenticated_r } from "../redux/actions/Login";
 import { isAuthenticated } from "../redux/actions";
 import { useIntl } from 'react-intl';
 import IntlMessages from "../util/IntlMessages";
@@ -10,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 import Router from 'next/router';
-import { switchLanguage } from "../redux/actions";
+import { switchLanguage, login_r, isAuthenticated_r } from "../redux/actions";
 import { languageData } from "../../config"
 
 import AuthService from "../util/services/authservice";
@@ -19,20 +18,20 @@ const SignInPage = () => {
 
   const intl = useIntl();
   const dispatch = useDispatch();
-  const loginab = useSelector(({ login }) => login);
+  const { isAuthenticated } = useSelector(({ login }) => login);
+
+  console.log("isAuthenticated", isAuthenticated)
   const { locale } = useSelector(({ settings }) => settings);
 
-  if (loginab.isAuthenticated == true) {
-    return Router.replace("/dashboard")
-  }
+
 
   useEffect(() => {
 
-    if (loginab.isAuthenticated == true) {
-      return Router.replace("/dashboard")
+    if (isAuthenticated) {
+      return Router.push("/dashboard")
     }
 
-  }, [loginab]);
+  }, [isAuthenticated]);
 
 
   const onSubmit = (Data) => {
@@ -94,7 +93,7 @@ const SignInPage = () => {
           </Button>
           <Select
             showSearch
-            className="float-right w-10"
+            className="float-right w-30"
             defaultValue={JSON.stringify(locale)}
             bordered={false}
             filterOption={(input, option) =>

@@ -96,6 +96,21 @@ const Default = () => {
       "topmenu/list": true,
       "topmenudelete": true,
       "topmenuview": true,
+
+      "brandsonlyyou": false,
+      "brands/add": true,
+      "brands/id": true,
+      "brands/list": true,
+      "brandsdelete": true,
+      "brandsview": true,
+
+      "homeslideronlyyou": false,
+      "homeslider/add": true,
+      "homeslider/id": true,
+      "homeslider/list": true,
+      "homesliderdelete": true,
+      "homesliderview": true,
+
     }
   })
 
