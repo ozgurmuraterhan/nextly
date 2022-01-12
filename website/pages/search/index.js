@@ -41,13 +41,13 @@ const Page = () => {
     return (
         <div className="container-custom grid grid-cols-12 h-full my-2 py-2">
 
-            <div className=" sm:col-span-3 col-span-12   p-2  shadow-sm border-top ">
+            <div className=" sm:col-span-2 col-span-12   p-2  shadow-sm border-top ">
                 <TextFilter />
                 <CategoriesFilter />
                 <PriceFilter />
                 <BrandsFilter />
             </div>
-            <div className=" sm:col-span-9  col-span-12  ">
+            <div className=" sm:col-span-10  col-span-12  ">
                 <div className="w-8/12 float-left">
                     <FilterSelectedTop />
                 </div>

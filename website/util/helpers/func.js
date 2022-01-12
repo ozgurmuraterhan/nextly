@@ -2,6 +2,27 @@
 
 export default {
 
+    getDiscount: (data) => {
+        if (data.variant_products.length > 0) {
+            const discount_variants = []
+            data.variant_products.map(x => {
+                if (x.price < x.before_price) {
+                    discount_variants.push(((x.before_price - x.price) / x.before_price) * 100)
+                }
+            })
+
+            return discount_variants.sort(function (a, b) { return b - a })[0]
+
+        } else {
+
+            if (data.price < data.before_price) {
+                return ((data.before_price - data.price) / data.before_price) * 100
+            }
+
+        }
+
+    },
+
     filter_array_in_obj: (arr, criteria) => {
         return arr.filter(function (obj) {
             return Object.keys(criteria).every(function (c) {
