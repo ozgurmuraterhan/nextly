@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="187px" height="187px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<svg 
+  xmlns="http://www.w3.org/2000/svg" 
+  xmlns:xlink="http://www.w3.org/1999/xlink" 
+  style="margin: auto; background: none;  display: block; shape-rendering: auto;" 
+  width="187px" 
+  height="187px" 
+  viewBox="0 0 100 100" 
+  preserveAspectRatio="xMidYMid"
+>
 <g transform="rotate(0 50 50)">
-  <rect x="39.5" y="23.5" rx="10.5" ry="6.5" width="21" height="13" fill="#1d3f72">
+  <rect x="39.5" y="23.5" rx="10.5" ry="6.5" width="21" height="13"  >
     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.5873015873015872s" begin="-1.511715797430083s" repeatCount="indefinite"></animate>
   </rect>
 </g><g transform="rotate(17.142857142857142 50 50)">
-  <rect x="39.5" y="23.5" rx="10.5" ry="6.5" width="21" height="13" fill="#1d3f72">
+  <rect x="39.5" y="23.5" rx="10.5" ry="6.5" width="21" height="13" >
     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1.5873015873015872s" begin="-1.436130007558579s" repeatCount="indefinite"></animate>
   </rect>
 </g><g transform="rotate(34.285714285714285 50 50)">

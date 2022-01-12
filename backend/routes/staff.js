@@ -19,17 +19,34 @@ router
 
     const rolesControl = req.user.role;
 
-    if (rolesControl['staff/list']) {
+    if (rolesControl['superadmin']) {
 
       Users
         .find({ role: { $exists: true } })
         .then((data) => { res.json(data); })
         .catch((err) => res.json({ messagge: 'Error: ' + err, variant: 'error', }));
 
+    } else if (rolesControl['staff/list']) {
+
+      Users
+        .find({
+          $and: [
+            { role: { $exists: true } },
+            { "role.superadmin": { $exists: false } }
+          ]
+        })
+        .then((data) => { res.json(data); })
+        .catch((err) => res.json({ messagge: 'Error: ' + err, variant: 'error', }));
+
     } else if (rolesControl['staffonlyyou']) {
 
       Users
-        .find({ $or: [{ _id: req.user._id }, { 'created_user.id': `${req.user._id}` },], })
+        .find({
+          $or: [
+            { _id: req.user._id },
+            { 'created_user.id': `${req.user._id}` }
+          ]
+        })
         .then((data) => { res.json(data); })
         .catch((err) => res.json({ messagge: 'Error: ' + err, variant: 'error', }));
 
@@ -46,6 +63,8 @@ router
   .post(passport.authenticate('jwt', { session: false }), (req, res, next) => {
 
     const rolesControl = req.user.role;
+
+    delete req.body?.role?.superadmin
 
     if (rolesControl['staff/add']) {
 

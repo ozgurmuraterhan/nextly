@@ -6,7 +6,7 @@ import router from "next/router"
 import { DeleteOutlined, } from "@ant-design/icons"
 import ImgCrop from 'antd-img-crop';
 
-import { Upload, Button, Card, message, Divider, Checkbox, Form, Input, Row, Select, } from 'antd';
+import { Upload, Button, Card, message, Divider, Popconfirm, Checkbox, Form, Input, Row, Select, } from 'antd';
 import func from "../../util/helpers/func"
 
 import { useIntl } from 'react-intl';
@@ -16,6 +16,7 @@ const Default = () => {
   const intl = useIntl();
 
   const { id } = router.query
+  const { user } = useSelector(({ login }) => login);
 
   const [deleteImageS, seTdeleteImageS] = useState(false)
   const [state, seTstate] = useState({
@@ -144,7 +145,6 @@ const Default = () => {
   }
 
 
-  const { user } = useSelector(({ login }) => login);
   const [form] = Form.useForm();
 
   function getUserData() {
@@ -184,7 +184,7 @@ const Default = () => {
 
 
 
-  const deleteData = (id) => {
+  const deleteData = () => {
     axios.delete(`${API_URL}/staff/${state._id}`).then((res) => {
       message.warning(res.data.messagge);
 
@@ -284,6 +284,11 @@ const Default = () => {
 
     <div>
       <Card className="card" title="Staff Edit">
+        {user.role["staffdelete"] ?
+          <Popconfirm title={intl.messages["app.pages.common.sureToDelete"]} onConfirm={() => deleteData()}>
+            <a><DeleteOutlined style={{ fontSize: "150%", marginLeft: "15px" }} />  </a>
+          </Popconfirm>
+          : ""}
         <Form
           {...formItemLayout}
           form={form}

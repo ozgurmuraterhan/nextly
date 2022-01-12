@@ -39,7 +39,7 @@ const UsersSchema = new mongoose.Schema({
     role: {
         type: Object,
         default: {
-
+            superadmin: false
             // "staffonlyyou": true,
             // "staff/add": false,
             // "staff/id": false,  //edit

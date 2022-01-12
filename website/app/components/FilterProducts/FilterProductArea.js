@@ -31,10 +31,10 @@ const Page = () => {
                 // seTproducts([...products, ...res.data])
                 if (filterProducts.skip == 0) {
                     seTproducts(res.data)
-                    seThasMore(true)
                 } else {
                     seTproducts([...products, ...res.data])
                 }
+                seThasMore(true)
 
             } else {
                 seThasMore(false)
@@ -76,7 +76,7 @@ const Page = () => {
                     loader={<CircularProgress />}
                     className="grid grid-cols-12"
                 >
-                    {products.map(val => (
+                    {products && products.map(val => (
                         <div className=" lg:col-span-3 md:col-span-4 rounded-lg col-span-6 m-5 group hover:scale-105 transition-all  shadow-sm hover:shadow-2xl pb-14" key={val._id}>
                             <div className="  relative  ">
                                 <Link href={"/product/" + val.seo}>
@@ -119,7 +119,7 @@ const Page = () => {
                                                 </span>
 
                                             </div>
-                                            <Button className="w-full border-0 bg-transparent font-bold rounded-lg p-0  shadow-none absolute overflow-hidden -mt-5  z-0 group-hover:mt-0 group-hover:visible invisible"  >Details <SwapRightOutlined /></Button>
+                                            <Button className="w-full border-0 bg-transparent font-bold rounded-lg p-0  shadow-none absolute overflow-hidden -mt-5  z-0 group-hover:mt-0 group-hover:visible group-hover:text-brand-color invisible"  >Details <SwapRightOutlined /></Button>
 
                                         </div>
 
