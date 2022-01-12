@@ -64,7 +64,7 @@ router
 
     const rolesControl = req.user.role;
 
-    delete req.body?.role?.superadmin
+    rolesControl["superadmin"] = false
 
     if (rolesControl['staff/add']) {
 
