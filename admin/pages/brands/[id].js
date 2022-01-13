@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { API_URL } from '../../../config';
+import { API_URL, IMG_URL } from '../../../config';
 import router from "next/router"
 import { DeleteOutlined, CheckOutlined, CloseOutlined, QuestionCircleOutlined, PlusOutlined, UploadOutlined, MinusCircleOutlined } from "@ant-design/icons"
 
@@ -198,7 +198,7 @@ const Default = ({ getData = [] }) => {
             name="image"
             label={intl.messages["app.pages.brands.uploatedImage"]}
           >
-            <Image src={API_URL + state.image} width={200} />
+            <Image src={IMG_URL + state.image} width={200} />
           </Form.Item>
 
           <Divider />

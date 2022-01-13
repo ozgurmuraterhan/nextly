@@ -59,7 +59,7 @@ const Default = () => {
                             <div className="item">
                                 <Link href={`/search?brands=${val._id}`}>
                                     <a>
-                                        <img src={`${API_URL}/${val.image}`} />
+                                        <img src={`${IMG_URL + val.image}`} />
                                         <span> {val.title}</span>
                                     </a>
                                 </Link>

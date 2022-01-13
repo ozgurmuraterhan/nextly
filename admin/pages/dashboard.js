@@ -5,7 +5,7 @@ import { Divider, Avatar, Timeline } from "antd"
 import CircularProgress from "../app/components/CircularProgress";
 import Clock from "../app/components/Clock";
 import axios from "axios"
-import { API_URL } from '../../config';
+import { API_URL, IMG_URL } from '../../config';
 
 import { useSelector } from "react-redux";
 
@@ -35,7 +35,7 @@ const CrmDashboard = () => {
         <title>Dashboard</title>
       </Head>
       <div className="dashboardProfile">
-        <Avatar size={180} src={API_URL + user.image} icon={<UserOutlined />} className="border   mt-5 mb-3" />
+        <Avatar size={180} src={IMG_URL + user.image} icon={<UserOutlined />} className="border   mt-5 mb-3" />
         <h4 >{user.name}</h4>
         <Clock />
       </div>

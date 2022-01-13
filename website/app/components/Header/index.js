@@ -22,7 +22,7 @@ import {
     UserAddOutlined
 
 } from '@ant-design/icons';
-import { API_URL } from "../../../../config";
+import { API_URL, IMG_URL } from "../../../../config";
 import axios from "axios";
 
 const Default = () => {
@@ -114,7 +114,7 @@ const Default = () => {
         <div className="w-full flex justify-between mb-6  ">
             <div className=" w-3/12 mr-3 md:w-2/12 md:mr-0  mt-4 md:mt-2 lg:mt-3" >
                 <a href="/" >
-                    <img src={`${API_URL + settings.image}`} className=" w-full sm:w-10/12 mt-3 sm:mt-0" />
+                    <img src={`${IMG_URL + settings.image}`} className=" w-full sm:w-10/12 mt-3 sm:mt-0" />
                 </a>
             </div>
             <div className=" flex-auto  w-3/12 mr-3 md:w-auto md:mr-0    mt-6  px-0 sm:px-12">

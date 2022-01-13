@@ -19,7 +19,7 @@ import "swiper/css/navigation"
 import "swiper/css/thumbs"
 
 
-import { API_URL } from "../../../../config";
+import { API_URL, IMG_URL } from "../../../../config";
 
 
 const Default = ({ images = [] }) => {
@@ -47,7 +47,7 @@ const Default = ({ images = [] }) => {
                         <div className="item">
                             <div
                                 className="  bg-contain bg-no-repeat bg-center w-full"
-                                style={{ height: "400px", backgroundImage: "url(" + API_URL + "/" + val.image + ")" }}
+                                style={{ height: "400px", backgroundImage: "url(" + IMG_URL + val.image + ")" }}
                             />
                         </div>
                     </SwiperSlide>

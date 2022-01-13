@@ -35,7 +35,7 @@ import { login_r, isAuthenticated_r, settings_r, logout_r } from "../../../redux
 import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios"
-import { API_URL } from "../../../../config";
+import { API_URL, IMG_URL } from "../../../../config";
 
 
 const Default = ({ state = [] }) => {
@@ -63,7 +63,7 @@ const Default = ({ state = [] }) => {
                             <div className="item">
                                 <Link href={val.link}>
                                     <a>
-                                        <LazyLoadImage src={`${API_URL}/${val.image}`} style={{ maxHeight: "500px", width: "100%" }} />
+                                        <LazyLoadImage src={`${IMG_URL + val.image}`} style={{ maxHeight: "500px", width: "100%" }} />
                                     </a>
                                 </Link>
                             </div>

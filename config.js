@@ -1,11 +1,15 @@
 module.exports = {
 
+    /// for server
     API_URL: "https://backend.nextly.shop",
     WEBSITE_URL: "https://nextly.shop",
+    IMG_URL: "https://backend.nextly.shop",
 
 
+    ///for Locale
     // API_URL: "http://localhost:5000",
     // WEBSITE_URL: "http://localhost:3000",
+    //IMG_URL: "http://localhost:5000",
 
     maillerConfig: {
         // host: 'smtp.gmail.com',

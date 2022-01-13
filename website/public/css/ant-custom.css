@@ -175,9 +175,6 @@ img {
   vertical-align: middle;
   border-style: none;
 }
-svg:not(:root) {
-  overflow: hidden;
-}
 a,
 area,
 button,
@@ -19324,8 +19321,6 @@ span.ant-radio + * {
 .ant-select-multiple .ant-select-selection-search {
   position: relative;
   max-width: 100%;
-  margin-top: 2px;
-  margin-bottom: 2px;
   margin-inline-start: 7px;
 }
 .ant-select-multiple .ant-select-selection-search-input,

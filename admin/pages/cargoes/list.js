@@ -6,7 +6,7 @@ import { Select, message, Image, Table, Popconfirm, Button } from "antd";
 import { EditOutlined, DeleteOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useSelector } from "react-redux"
-import { API_URL } from '../../../config';
+import { API_URL, IMG_URL } from '../../../config';
 import router from "next/router"
 
 import { useIntl } from 'react-intl';
@@ -38,7 +38,7 @@ const Default = ({ getData = [] }) => {
     key: 'image',
     render: (text, record) => (
       <>
-        {record.image ? <Image src={API_URL + record.image} height={80} /> : ""}
+        {record.image ? <Image src={IMG_URL + record.image} height={80} /> : ""}
       </>
     ),
 

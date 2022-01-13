@@ -35,7 +35,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios"
 import func from "../../../util/helpers/func"
-import { API_URL } from "../../../../config";
+import { API_URL, IMG_URL } from "../../../../config";
 
 
 const Default = ({ state = [], title = { title: "", description: "" } }) => {
@@ -54,7 +54,7 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                         <Link href={val.link} >
                             <a className="itemzoom mb-3">
 
-                                <LazyLoadImage src={`${API_URL}/${val.image}`} className="w-full" />
+                                <LazyLoadImage src={`${IMG_URL + val.image}`} className="w-full" />
                                 <div className="w-full text-center mt-3">{val.title}</div>
                                 <div className="w-full text-center my-2 h-5"> {val.description} </div>
 
