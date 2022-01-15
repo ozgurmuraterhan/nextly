@@ -374,7 +374,7 @@ const Default = () => {
                         key: "action",
                         render: (text, record) => (
 
-                            <Popconfirm title="Are You Sure?" onConfirm={() => {
+                            <Popconfirm placement="left" title="Are You Sure?" onConfirm={() => {
                                 deleteProduct(record)
 
                             }}>

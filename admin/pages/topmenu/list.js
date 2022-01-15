@@ -39,7 +39,7 @@ const Default = ({ getData = [] }) => {
 
         {role["topmenu/id"] ?
           <>
-            <Popconfirm title="Are You Sure ?" onConfirm={() => activeOrDeactive(record._id, record.isActive)}>
+            <Popconfirm placement="left" title="Are You Sure ?" onConfirm={() => activeOrDeactive(record._id, record.isActive)}>
               <Tooltip placement="bottomRight" title={+ record.isActive ? intl.messages["app.pages.common.bePassive"] : intl.messages["app.pages.common.beActive"]}>
                 <a>{record.isActive ? <CheckCircleOutlined style={{ fontSize: "150%", marginLeft: "15px" }} /> : <CloseSquareOutlined style={{ fontSize: "150%", marginLeft: "15px" }} />} </a>
               </Tooltip>
@@ -50,7 +50,7 @@ const Default = ({ getData = [] }) => {
         {role["topmenudelete"] ?
           <>
             {record.children ? "" :
-              <Popconfirm title={intl.messages["app.pages.common.sureToDelete"]} onConfirm={() => deleteData(record._id)}>
+              <Popconfirm placement="left" title={intl.messages["app.pages.common.sureToDelete"]} onConfirm={() => deleteData(record._id)}>
                 <a><DeleteOutlined style={{ fontSize: "150%", marginLeft: "15px" }} /> </a>
               </Popconfirm>
             }

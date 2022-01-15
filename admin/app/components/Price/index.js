@@ -10,7 +10,6 @@ import { useIntl } from 'react-intl';
 
 const Default = ({ data }) => {
     const { settings } = useSelector(({ settings }) => settings);
-
     return (
         <>
             {settings.price_type ?

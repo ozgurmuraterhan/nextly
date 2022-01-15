@@ -32,6 +32,7 @@
   "layout.sidebar.logout": "Çıkış Yap",
   "layout.sidebar.variants": "Varyantlar",
   "app.pages.common.bePassive": "Pasif Yap",
+  "app.pages.common.salesqty": "SAtış Adeti",
   "app.pages.common.beActive": "Aktif Yap",
   "app.pages.common.create": "Oluştur",
   "app.pages.common.save": "Kaydet",

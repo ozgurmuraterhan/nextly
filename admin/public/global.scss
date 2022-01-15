@@ -107,11 +107,7 @@ margin-top:15px
 .ant-menu-dark.ant-menu-dark:active {
 background-color:transparent;
 }
-.centerRadio{ 
-display: flex;  
-justify-content: center;
-margin-bottom: -15px;
-}
+ 
 
 .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
 background-color: #e6e6e6;
@@ -253,29 +249,29 @@ width: 300px;
 }
 
 @media screen and (max-width: 769px) {
-.dashboardProfile{
-  display: none;
-}
+  .dashboardProfile{
+    display: none;
+  }
 
 
-main.site-layout-background{
-  padding: 24px 0px;
-}
-.ant-layout-sider-collapsed{
-    margin-left: -80px;
-}
-.ant-layout-sider{
-  position: absolute;
-  width: 100%;
-  z-index: 9;
-  
-}
+  main.site-layout-background{
+    padding: 24px 0px;
+  }
+  .ant-layout-sider-collapsed{
+      margin-left: -80px;
+  } 
+  .ant-layout-sider{
+    position: absolute;
+    width: 100%;
+    z-index: 9;
+    
+  }
 
-.mobileCollapse{
-  width: 100vh;
-  height: 100vh;
-  position: fixed;
-  background: #0000007d;
-  z-index: 2;
-}
+  .mobileCollapse{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #0000007d;
+    z-index: 2;
+  }
 }

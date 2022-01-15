@@ -16,7 +16,7 @@ const Default = ({ getData = [] }) => {
 
   const { id } = router.query
 
-  const [state, seTstate] = useState({ products: [], discount_price: 0, total_price: 0 })
+  const [state, seTstate] = useState({ products: [], discount_price: 0, total_price: 0, cargo_price: 0 })
   const [fields, seTfields] = useState(Object.entries(getData).map(([name, value]) => ({ name, value })))
 
   const [customerdata, seTcustomerdata] = useState([])
@@ -25,6 +25,7 @@ const Default = ({ getData = [] }) => {
   const [paymentMethodsData, seTpaymentMethodsData] = useState([])
   const [orderStatus, seTorderStatus] = useState([])
   const [cargoes, seTcargoes] = useState([])
+  const [allCargoes, seTallCargoes] = useState([])
   const [billingAddress, seTbillingAddress] = useState([])
   const [shippingAddress, seTshippingAddress] = useState([])
   const [productsData, seTproductsData] = useState([])
@@ -169,6 +170,7 @@ const Default = ({ getData = [] }) => {
         }
 
         seTcargoes(dataManipulate);
+        seTallCargoes(res.data)
 
       }
     }).catch(err => console.log(err));
@@ -646,6 +648,7 @@ const Default = ({ getData = [] }) => {
                 key: 'selectedVariants',
                 render: (text, record) => {
                   const variants = []
+
                   for (const property in record.selectedVariants) {
                     variants.push(<div>  {property}: {record.selectedVariants[property]}  </div>)
                   }
@@ -653,16 +656,16 @@ const Default = ({ getData = [] }) => {
                 },
               },
               {
-                title: intl.messages["app.pages.common.beforePrice"],
-                dataIndex: 'before_price',
-                key: 'before_price',
+                title: intl.messages["app.pages.common.qty"],
+                dataIndex: 'qty',
+                key: 'qty',
                 render: text => text,
               },
               {
                 title: intl.messages["app.pages.common.price"],
                 dataIndex: 'price',
                 key: 'price',
-                render: text => text,
+                render: text => (text).toLocaleString(),
               },
               {
                 title: intl.messages["app.pages.common.action"],
@@ -672,7 +675,7 @@ const Default = ({ getData = [] }) => {
 
 
 
-                  <Popconfirm title={intl.messages["app.pages.common.sureToDelete"]} onConfirm={() => {
+                  <Popconfirm placement="left" title={intl.messages["app.pages.common.sureToDelete"]} onConfirm={() => {
                     let filteredArray = state.products.filter(item => item !== record)
                     let total_price = 0
                     let discount_price = 0
@@ -683,15 +686,9 @@ const Default = ({ getData = [] }) => {
                     });
                     seTstate({ ...state, products: filteredArray, total_price, discount_price })
 
-
-
-
                   }}>
                     <a><DeleteOutlined style={{ fontSize: "150%", marginLeft: "15px" }} /> </a>
                   </Popconfirm>
-
-
-
 
                 )
               }
@@ -700,16 +697,21 @@ const Default = ({ getData = [] }) => {
             dataSource={[...state.products]}
             rowKey="_id"
           />
-          <table style={{ width: "250px", fontSize: "14pt", marginTop: "15px", float: "right" }}>
-            <tr style={{ fontSize: "9pt" }}>
-              <td><IntlMessages id="app.pages.orders.totalDiscountPrice" /></td>
+          <table className=" w-64 mt-4 float-right text-right"  >
+            <tr className="text-md"  >
+              <td><IntlMessages id="app.pages.common.price" /></td>
               <td>:</td>
-              <td>{state.discount_price}</td>
+              <td><Price data={state.total_price} /></td>
             </tr>
-            <tr>
+            <tr className="text-md"  >
+              <td><IntlMessages id="app.pages.orders.cargo" /></td>
+              <td>:</td>
+              <td><Price data={state.cargo_price} /></td>
+            </tr>
+            <tr className="text-lg">
               <td><IntlMessages id="app.pages.orders.totalPrice" /></td>
               <td>:</td>
-              <td>{state.total_price + state.cargo_price}</td>
+              <td><Price data={state.total_price + state.cargo_price} /></td>
             </tr>
           </table>
 

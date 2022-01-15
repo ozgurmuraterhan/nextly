@@ -31,7 +31,7 @@ const CrmCounts = () => {
     return (
         <>
 
-            <div className="m-2">
+            <div className="m-2 col-span-6 lg:col-span-3">
                 <div className="bg-black bg-gradient-to-b from-gray-500 to-black  text-white p-3 rounded-lg float-left w-full ">
                     <span className=" text-3xl mb-3 float-left w-full">
                         <IntlMessages id="component.count.totalOrders" />
@@ -43,7 +43,7 @@ const CrmCounts = () => {
                 </div>
             </div>
 
-            <div className="m-2">
+            <div className="m-2 col-span-6 lg:col-span-3">
                 <div className="bg-black bg-gradient-to-b from-gray-500 to-black  text-white p-3 rounded-lg float-left w-full ">
                     <span className=" text-3xl mb-3 float-left w-full">
                         <IntlMessages id="component.count.totalCustomers" />
@@ -56,7 +56,7 @@ const CrmCounts = () => {
 
             </div>
 
-            <div className="m-2">
+            <div className="m-2 col-span-6 lg:col-span-3">
                 <div className="bg-black bg-gradient-to-b from-gray-500 to-black  text-white p-3 rounded-lg float-left w-full ">
                     <span className=" text-3xl mb-3 float-left w-full">
                         <IntlMessages id="component.count.totalCategories" />
@@ -69,7 +69,7 @@ const CrmCounts = () => {
 
             </div>
 
-            <div className="m-2">
+            <div className="m-2 col-span-6 lg:col-span-3">
                 <div className="bg-black bg-gradient-to-b from-gray-500 to-black  text-white p-3 rounded-lg float-left w-full ">
                     <span className=" text-3xl mb-3 float-left w-full">
                         <IntlMessages id="component.count.totalProducts" />

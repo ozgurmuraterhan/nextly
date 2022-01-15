@@ -79,6 +79,12 @@ const ProductsSchema = new Schema(
         qty: {
             type: Number,
             required: true,
+            default: 0
+        },
+        saleqty: {
+            type: Number,
+            required: true,
+            default: 0
         }
     },
     {

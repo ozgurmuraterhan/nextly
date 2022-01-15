@@ -32,6 +32,7 @@
   "layout.sidebar.logout": "Logout",
   "layout.sidebar.variants": "Variants",
   "app.pages.common.bePassive": "Be Passive",
+  "app.pages.common.salesqty": "Sales Qty",
   "app.pages.common.beActive": "Be Active",
   "app.pages.common.create": "Create",
   "app.pages.common.userName": "Username",

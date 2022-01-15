@@ -40,7 +40,7 @@ const Default = ({ getData = [] }) => {
 
         {role["customers/id"] ?
           <div>
-            <Popconfirm title={intl.messages["app.pages.common.youSure"]} onConfirm={() => activeOrDeactive(record._id, record.isActive)}>
+            <Popconfirm placement="left" title={intl.messages["app.pages.common.youSure"]} onConfirm={() => activeOrDeactive(record._id, record.isActive)}>
               <Tooltip placement="bottomRight" title={+ record.isActive ? intl.messages["app.pages.common.bePassive"] : intl.messages["app.pages.common.beActive"]}>
                 <a>{record.isActive ? <CheckCircleOutlined style={{ fontSize: "150%", marginLeft: "15px" }} /> : <CloseSquareOutlined style={{ fontSize: "150%", marginLeft: "15px" }} />} </a>
               </Tooltip>

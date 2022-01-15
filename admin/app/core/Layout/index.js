@@ -6,7 +6,7 @@ import { Layout } from 'antd';
 
 import { useDispatch, useSelector } from "react-redux";
 import { login_r, isAuthenticated_r } from "../../../redux/actions/Login";
-import { changeCollapsed_r } from "../../../redux/actions";
+import { changeCollapsed_r, settings_r } from "../../../redux/actions";
 
 import { useRouter } from "next/router";
 
@@ -35,6 +35,7 @@ const AppLayout = ({ children }) => {
     const { isAuthenticated } = useSelector(({ login }) => login);
 
     const loginControl = async () => {
+        dispatch(settings_r())
         if (!isAuthenticated) {
             AuthService.isAuthenticated().then(async auth => {
                 if (auth.isAuthenticated) {
@@ -60,6 +61,7 @@ const AppLayout = ({ children }) => {
 
     useEffect(() => {
         loginControl()
+
     }, [])
 
 

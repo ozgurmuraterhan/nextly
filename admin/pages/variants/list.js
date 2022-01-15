@@ -49,7 +49,7 @@ const Default = () => {
     render: (text, record) => (
       <span className="link ant-dropdown-link">
         {role["variantsdelete"] ?
-          <Popconfirm title="Sure to delete?" onConfirm={() => deleteData(record._id)}>
+          <Popconfirm placement="left" title="Sure to delete?" onConfirm={() => deleteData(record._id)}>
             <a><DeleteOutlined style={{ fontSize: "150%", marginLeft: "15px" }} /> </a>
           </Popconfirm>
           : ""}

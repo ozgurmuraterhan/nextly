@@ -63,7 +63,7 @@ const Default = ({ getData = [] }) => {
           {role["ordersdelete"] ?
             <>
               {record.children ? "" :
-                <Popconfirm title={intl.messages["app.pages.common.youSure"]} onConfirm={() => deleteData(record._id, record.image)}>
+                <Popconfirm placement="left" title={intl.messages["app.pages.common.youSure"]} onConfirm={() => deleteData(record._id, record.image)}>
                   <a><DeleteOutlined style={{ fontSize: "150%", marginLeft: "15px" }} /> </a>
                 </Popconfirm>
               }
@@ -131,7 +131,7 @@ const Default = ({ getData = [] }) => {
 
   return (
 
-    <div className="float-left w-full  ">
+    <div >
       {role["ordersview"] ?
         <>
           {role["orders/add"] ?
@@ -144,7 +144,7 @@ const Default = ({ getData = [] }) => {
           <h5 className="mr-5 "><IntlMessages id="app.pages.orders.list" /> </h5>
           <Select
             defaultValue="All"
-            className="w-full float-left sm:hidden block"
+            className="w-full float-left mt-3 sm:hidden block"
             onChange={(val) => {
               getDataStatusFc(val)
             }}
@@ -155,8 +155,7 @@ const Default = ({ getData = [] }) => {
             ))}
           </Select>
 
-          <Radio.Group defaultValue="All" className="centerRadio mx-auto d-none d-sm-flex" buttonStyle="solid"
-
+          <Radio.Group defaultValue="All" className=" w-full mr-0 h-0 overflow-hidden sm:h-auto sm:overflow-auto  text-center  mx-auto   " buttonStyle="solid"
             onChange={(val) => {
               getDataStatusFc(val.target.value)
 

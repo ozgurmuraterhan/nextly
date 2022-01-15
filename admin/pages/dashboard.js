@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import dynamic from "next/dynamic";
-import { Divider, Avatar, Timeline } from "antd"
+import { Divider, Avatar } from "antd"
 import CircularProgress from "../app/components/CircularProgress";
 import Clock from "../app/components/Clock";
-import axios from "axios"
-import { API_URL, IMG_URL } from '../../config';
-
+import { IMG_URL } from '../../config';
+import { UserOutlined } from "@ant-design/icons"
 import { useSelector } from "react-redux";
 
 const Orders = dynamic(() => import('./orders/list'), {
@@ -16,11 +15,6 @@ const Orders = dynamic(() => import('./orders/list'), {
 const Counts = dynamic(() => import('../app/components/Dashboard/counts'), {
   loading: () => <CircularProgress />,
 });
-
-
-import { DollarCircleOutlined, UsergroupAddOutlined, CodeSandboxOutlined, OrderedListOutlined, UserOutlined } from "@ant-design/icons"
-
-
 
 const CrmDashboard = () => {
 
@@ -39,15 +33,14 @@ const CrmDashboard = () => {
         <h4 >{user.name}</h4>
         <Clock />
       </div>
-      <div className="grid mb-5  grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+      <div className="  mb-5 grid grid-cols-12">
         <Counts />
-      </div>
-      <div className="grid  ">
         <Divider />
-
-
-        <Orders />
+        <div className=" mt-5 col-span-12">
+          <Orders />
+        </div>
       </div>
+
     </React.Fragment>
   )
 };

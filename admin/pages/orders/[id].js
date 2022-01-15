@@ -6,6 +6,7 @@ import router from "next/router"
 import { DeleteOutlined } from "@ant-design/icons"
 import { Table, Popconfirm, Radio, Button, Card, message, Divider, Col, Form, Input, Row, Select } from 'antd';
 import func from "../../util/helpers/func"
+import Price from "../../app/components/Price"
 
 
 import { useIntl } from 'react-intl';
@@ -16,7 +17,7 @@ const Default = ({ getData = [] }) => {
 
   const { id } = router.query
 
-  const [state, seTstate] = useState({ products: [], discount_price: 0, total_price: 0 })
+  const [state, seTstate] = useState({ products: [], discount_price: 0, total_price: 0, cargo_price: 0 })
   const [fields, seTfields] = useState(Object.entries(getData).map(([name, value]) => ({ name, value })))
 
   const [customerdata, seTcustomerdata] = useState([])
@@ -712,7 +713,7 @@ const Default = ({ getData = [] }) => {
 
 
 
-                  <Popconfirm title={intl.messages["app.pages.common.sureToDelete"]} onConfirm={() => {
+                  <Popconfirm placement="left" title={intl.messages["app.pages.common.sureToDelete"]} onConfirm={() => {
                     let filteredArray = state.products.filter(item => item !== record)
                     let total_price = 0
                     let discount_price = 0
@@ -734,16 +735,21 @@ const Default = ({ getData = [] }) => {
             dataSource={[...state.products]}
             rowKey="_id"
           />
-          <table style={{ width: "250px", fontSize: "14pt", marginTop: "15px", float: "right" }}>
-            <tr style={{ fontSize: "9pt" }}>
-              <td><IntlMessages id="app.pages.orders.totalDiscountPrice" /></td>
+          <table className=" w-64 mt-4 float-right text-right"  >
+            <tr className="text-md"  >
+              <td><IntlMessages id="app.pages.common.price" /></td>
               <td>:</td>
-              <td>{state.discount_price}</td>
+              <td><Price data={state.total_price} /></td>
             </tr>
-            <tr>
+            <tr className="text-md"  >
+              <td><IntlMessages id="app.pages.orders.cargo" /></td>
+              <td>:</td>
+              <td><Price data={state.cargo_price} /></td>
+            </tr>
+            <tr className="text-lg">
               <td><IntlMessages id="app.pages.orders.totalPrice" /></td>
               <td>:</td>
-              <td>{(state.total_price + state.cargo_price).toLocaleString()}</td>
+              <td><Price data={state.total_price + state.cargo_price} /></td>
             </tr>
           </table>
 

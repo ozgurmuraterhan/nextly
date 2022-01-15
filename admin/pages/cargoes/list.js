@@ -56,7 +56,7 @@ const Default = ({ getData = [] }) => {
         {role["cargoesdelete"] ?
           <>
             {record.children ? "" :
-              <Popconfirm title={intl.messages["app.pages.common.youSure"]} onConfirm={() => deleteData(record._id, record.image)}>
+              <Popconfirm placement="left" title={intl.messages["app.pages.common.youSure"]} onConfirm={() => deleteData(record._id, record.image)}>
                 <a><DeleteOutlined style={{ fontSize: "150%", marginLeft: "15px" }} /> </a>
               </Popconfirm>
             }

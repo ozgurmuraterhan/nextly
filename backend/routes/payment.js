@@ -24,6 +24,8 @@ const getSaveProductsBaskettoOrders = async (data = [], products = [], allBasket
 
     products.map(async (x, i) => {
 
+        updateProductSaleqty(x.product_id, x.qty)
+
         const array = data.find(y => y._id == x.product_id)
 
         if (array) {
@@ -32,6 +34,8 @@ const getSaveProductsBaskettoOrders = async (data = [], products = [], allBasket
             if (x.selectedVariants !== undefined) {
 
                 const priceMath = filter_array_in_obj(resData.variant_products, x.selectedVariants)
+
+                updateProductQtyVariant(x.product_id, x.selectedVariants, x.qty)
 
                 BasketAllProducts.push({
                     _id: resData._id,
@@ -48,6 +52,9 @@ const getSaveProductsBaskettoOrders = async (data = [], products = [], allBasket
                 })
 
             } else {
+
+                updateProductQtyNormal(x.product_id, x.qty)
+
 
                 BasketAllProducts.push({
                     _id: resData._id,
@@ -83,6 +90,7 @@ const getBasketProductsPrice = async (data = [], products = []) => {
 
     products.map((x, i) => {
 
+
         const array = data.find(y => y._id == x.product_id)
         if (array) {
             const resData = array
@@ -107,6 +115,8 @@ const calculateOrderAmount = (ids, items) => {
     return price
 };
 
+
+
 const calculateCargoes = async (cargoes_id) => {
 
     if (cargoes_id) {
@@ -118,8 +128,54 @@ const calculateCargoes = async (cargoes_id) => {
 };
 
 
-router.route('/stripe').post(async (req, res, next) => {
+const updateProductSaleqty = (id, qty) => {
 
+    Products.updateOne(
+        { _id: id },
+        {
+            $inc: { 'saleqty': qty }
+        })
+        .then(data => data)
+};
+
+const updateProductQtyNormal = (id, qty) => {
+
+    Products.updateOne(
+        { _id: id },
+        {
+            $inc: { 'qty': -qty }
+        })
+        .then(data => data)
+};
+
+const updateProductQtyVariant = (id, variants, qty) => {
+
+    console.log("id, variants, qty", id, variants, qty)
+    Products.updateOne(
+        {
+            $and: [
+                {
+                    _id: id
+                },
+                {
+                    variant_products: {
+                        $elemMatch: variants
+                    }
+                }
+            ]
+        },
+        {
+            $inc: {
+                'variant_products.$.qty': -qty,
+                'variant_products.$.saleqty': qty,
+            }
+        }
+    )
+    return
+};
+
+
+router.route('/stripe').post(async (req, res, next) => {
 
     Paymentmethods.findById("6132787ae4c2740b7aff7320")
         .then(async resPay => {

@@ -4,9 +4,7 @@ import withRedux from 'next-redux-wrapper';
 
 
 import 'antd/dist/antd.css';
-
 import "../public/loader.css";
-
 import "../public/global.scss"
 
 import initStore from '../redux/store';

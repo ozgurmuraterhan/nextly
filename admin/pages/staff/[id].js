@@ -285,7 +285,7 @@ const Default = () => {
     <div>
       <Card className="card" title="Staff Edit">
         {user.role["staffdelete"] ?
-          <Popconfirm title={intl.messages["app.pages.common.sureToDelete"]} onConfirm={() => deleteData()}>
+          <Popconfirm placement="left" title={intl.messages["app.pages.common.sureToDelete"]} onConfirm={() => deleteData()}>
             <a><DeleteOutlined style={{ fontSize: "150%", marginLeft: "15px" }} />  </a>
           </Popconfirm>
           : ""}
