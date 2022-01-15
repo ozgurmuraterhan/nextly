@@ -139,7 +139,7 @@ router.route("/").post((req, res, next) => {
 
             $and: [
                {
-                  $match: { isActive: true },
+                  isActive: true,
                },
                categoriesMongo,
                brandsMongo,
