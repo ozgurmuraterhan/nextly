@@ -43,7 +43,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) =>
 
     const filterObjectFirst = {
       sort: { saleqty: -1 },
-      limit: 8,
+      limit: 10,
       skip: 0
     }
 

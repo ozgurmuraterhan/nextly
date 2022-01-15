@@ -85,7 +85,10 @@ const Page = () => {
                     className="grid grid-cols-12"
                 >
                     {products && products.map(data => (
-                        <ProductCard data={data} />
+                        <ProductCard
+                            data={data}
+                            className="lg:col-span-3 md:col-span-4 rounded-lg col-span-6 m-5 bg-white  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl pb-8"
+                        />
                     ))}
 
                 </InfiniteScroll>

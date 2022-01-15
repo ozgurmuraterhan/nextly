@@ -20,7 +20,7 @@ const Default = ({ data = null }) => {
     return (
 
         <div
-            className=" float-left  rounded-lg  m-5 mb-9  bg-gray-50  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl  "
+            className=" float-left col-span-4  rounded-lg  m-5 mb-9  bg-gray-50  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl  "
             key={data._id} >
             <div className=" relative float-left h-full ">
                 <Link href={"/product/" + data.seo}>
