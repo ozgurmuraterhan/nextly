@@ -13,14 +13,9 @@ import { wrapper } from "../redux/store"
 import { API_URL } from "../../config"
 const homePage = ({ resData = [], resProductFirst = [], resProductSeccond = [] }) => {
 
-  console.log("resProductFirst", ...resProductFirst)
-
   const homeSlider = func.getCategoriesTree(resData, "61535837020a748d51968ecc")
   const homeFirstBox = func.getCategoriesTree(resData, "61537c2d6464c09286494c63")
   const homeOfferList = func.getCategoriesTree(resData, "6154640f79053f941d1b76c9")
-
-
-
 
   const homeOfferListtitle = {
     title: resData.filter(val => val._id === "6154640f79053f941d1b76c9")?.title,
@@ -32,9 +27,9 @@ const homePage = ({ resData = [], resProductFirst = [], resProductSeccond = [] }
     <div>
       <Brands />
       <HomeSlider state={homeSlider} />
-      <HomeProductsFirst state={resProductFirst} title={{ title: "Best Sellers", description: "Our most popular products" }} />
+      <HomeProductsFirst state={resProductFirst} title={{ title: "Best Sellers", description: "Our Most Popular Products" }} />
       <HomeFirstBox state={homeFirstBox} />
-      <HomeSeccoundBoxs state={resProductSeccond} title={{ title: "New Products", description: "We added new products for you" }} />
+      <HomeSeccoundBoxs state={resProductSeccond} title={{ title: "New Products", description: "We Added New Products For You" }} />
       <HomeOfferList state={homeOfferList} title={homeOfferListtitle} />
     </div>
   );
@@ -56,8 +51,8 @@ export const getServerSideProps = wrapper.getServerSideProps((store) =>
 
 
     const filterObjectSeccond = {
-      sort: { saleqty: -1 },
-      limit: 8,
+      sort: { createdAt: -1 },
+      limit: 15,
       skip: 0
     }
 

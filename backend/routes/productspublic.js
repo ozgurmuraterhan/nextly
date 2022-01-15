@@ -63,6 +63,9 @@ router.route("/:seo").get((req, res, next) => {
 router.route("/home").post((req, res, next) => {
    const mongoPost = [
       {
+         $match: { isActive: true },
+      },
+      {
          $lookup:
          {
             from: "productimages",
@@ -135,7 +138,9 @@ router.route("/").post((req, res, next) => {
          $match: {
 
             $and: [
-
+               {
+                  $match: { isActive: true },
+               },
                categoriesMongo,
                brandsMongo,
                textMongo,

@@ -20,15 +20,15 @@ const Default = ({ data = null }) => {
     return (
 
         <div
-            className=" lg:col-span-3 md:col-span-4 rounded-lg col-span-6 m-5 bg-white  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl pb-8"
+            className=" float-left  rounded-lg  m-5 mb-9  bg-gray-50  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl  "
             key={data._id} >
-            <div className="  relative  ">
+            <div className=" relative float-left h-full ">
                 <Link href={"/product/" + data.seo}>
-                    <div className="w-full">
-                        <div className="w-full relative">
+                    <div className="w-full float-left">
+                        <div className="w-5/12 float-left relative ">
 
                             <img
-                                className="w-full bg-cover rounded-t-lg "
+                                className="w-full bg-cover rounded-l-lg "
                                 src="/images/transparent.png"
                                 style={{ backgroundImage: `url(${data.allImages[0] ? API_URL + data.allImages[0].image : "/images/nofoto.jpg"})` }}
                             />
@@ -42,7 +42,7 @@ const Default = ({ data = null }) => {
                                             */}
                             </ul>
                         </div>
-                        <div className="mt-2 w-full">
+                        <div className=" text-center  float-left w-7/12">
                             {/* <ul className="rating">
                                                 <li className="fas fa-star"></li>
                                                 <li className="fas fa-star"></li>
@@ -51,20 +51,21 @@ const Default = ({ data = null }) => {
                                                 <li className="far fa-star"></li>
                                             </ul> 
                                         */}
-                            <h3 className="w-full text-center font-semibold h-11 overflow-hidden px-1 mt-2 text-brand-color "> {data.title}</h3>
-                            <div className=" text-center text-md h-12 z-10 relative ">
+                            <div className=" text-center text-md  relative  ">
+                                <h3 className="w-full text-center float-left h-11 font-semibold  overflow-hidden px-1 mt-2 mb-3  "> {data.title}</h3>
 
                                 {data.type ? getVariantPrice(data.variant_products) : <Price data={data.price} />}
 
-                                <span className=" line-through text-xs  w-full float-left ">
+                                <span className=" line-through  text-xs  w-full float-left ">
                                     {!data.type ?
                                         <>  {data.before_price != 0 ? <Price data={data.before_price} /> : ""}</>
                                         : ""}
                                 </span>
 
                             </div>
-                            <Button className="w-full border-0 bg-transparent font-bold rounded-lg p-0  shadow-none absolute overflow-hidden -mt-5  z-0 group-hover:mt-0 group-hover:visible group-hover:text-brand-color invisible"  >Details <SwapRightOutlined /></Button>
-
+                            <Button className="!bg-brand-color  rounded-r rounded-t-none !rounded-b-none !rounded-l   absolute bottom-0 right-0 b  group-hover:text-white group-hover:shadow-lg text-white">
+                                Details
+                            </Button>
                         </div>
 
                     </div>
