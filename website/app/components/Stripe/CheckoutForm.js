@@ -78,8 +78,6 @@ export default function CheckoutForm({ contract }) {
                     setMessage(res.error.message);
                 } else {
 
-
-
                     if (basket[0].products.length > 0) {
                         const arrayId = []
 
@@ -105,7 +103,6 @@ export default function CheckoutForm({ contract }) {
 
 
                         if (isAuthenticated) {
-
                             await axios.post(`${API_URL}/basket/${id}`, basket[0]).then(async (res) => {
                                 await dispatch(getBasket_r(user.id))
                                 router.push("/basket/paymentokey?payment_intent=" + dataRes.data.payment_intent + "&ordernumber=" + dataRes.data.ordernumber)
@@ -114,11 +111,8 @@ export default function CheckoutForm({ contract }) {
                                 console.log(err)
                             })
                         } else {
-
                             await dispatch(updateBasket_r(basket[0]))
                             router.push("/basket/paymentokey?payment_intent=" + dataRes.data.payment_intent + "&ordernumber=" + dataRes.data.ordernumber)
-
-
                         }
                     }
 

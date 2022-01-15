@@ -29,8 +29,6 @@ const Page = ({ data = {} }) => {
         getPaymentMethodStripe()
     }, [basket[0], public_key])
 
-
-
     return (
         <div className="container-custom h-full grid grid-cols-12 ">
             <div className=" col-span-12 lg:col-span-9 shadow-lg m-4 grid-cols-2 my-8 gap-9 order-2 lg:order-1">

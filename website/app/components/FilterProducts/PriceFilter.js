@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { SortAscendingOutlined, SortDescendingOutlined, SearchOutlined } from "@ant-design/icons"
-import { Checkbox, Input, Tag, TreeSelect, Tree, Button, InputNumber } from "antd"
+import { Form, Input, Tag, TreeSelect, Tree, Button, InputNumber } from "antd"
 import router from "next/router"
 import func from "../../../util/helpers/func"
 import filterRouteLinkGenerate from "./filterRouterLink";
@@ -33,44 +33,45 @@ const Page = () => {
         <>
             <div className="float-left   my-3">
                 <h6 className="mt-4 ">Price </h6>
+                <Form onFinish={onChange} >
+                    <Input.Group compact>
+                        <InputNumber
+                            style={{ width: "42%" }}
+                            placeholder="Minimum"
+                            label="minPrice"
+                            min={0}
+                            value={state.minPrice}
 
-                <Input.Group compact>
-                    <InputNumber
-                        style={{ width: "42%" }}
-                        placeholder="Minimum"
-                        label="minPrice"
-                        min={0}
-                        value={state.minPrice}
+                            onChange={(val) => seTstate({
+                                ...state,
+                                minPrice: val
+                            })}
+                            className=" px-0 ms-1"
 
-                        onChange={(val) => seTstate({
-                            ...state,
-                            minPrice: val
-                        })}
-                        className=" px-0 ms-1"
+                        />
 
-                    />
+                        <InputNumber
+                            style={{ width: "42%" }}
+                            label="maxPrice"
+                            min={0}
+                            placeholder="Maximum"
+                            value={state.maxPrice}
 
-                    <InputNumber
-                        style={{ width: "42%" }}
-                        label="maxPrice"
-                        min={0}
-                        placeholder="Maximum"
-                        value={state.maxPrice}
+                            onChange={(val) => seTstate({
+                                ...state,
+                                maxPrice: val
+                            })}
+                            className=" px-0"
+                        />
 
-                        onChange={(val) => seTstate({
-                            ...state,
-                            maxPrice: val
-                        })}
-                        className=" px-0"
-                    />
-
-                    <Button
-                        style={{ width: "16%" }}
-                        onClick={() => onChange()}
-                        type="primary" className="m-0 p-1" >
-                        <SearchOutlined />
-                    </Button>
-                </Input.Group>
+                        <Button
+                            style={{ width: "16%" }}
+                            onClick={() => onChange()}
+                            type="primary" htmlType="submit" className="m-0 p-1" >
+                            <SearchOutlined />
+                        </Button>
+                    </Input.Group>
+                </Form>
             </div>
 
         </>

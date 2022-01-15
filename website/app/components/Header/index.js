@@ -123,7 +123,7 @@ const Default = () => {
                     placeholder="Search..."
                     enterButton
                     onSearch={(val) => {
-                        console.log(val)
+                        router.push("/search?&text=" + val)
                     }} />
             </div>
             <div className=" mt-5   text-base text-right px-0  ">

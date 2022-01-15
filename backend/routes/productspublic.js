@@ -60,9 +60,38 @@ router.route("/:seo").get((req, res, next) => {
          })
       );
 })
+router.route("/home").post((req, res, next) => {
+   const mongoPost = [
+      {
+         $lookup:
+         {
+            from: "productimages",
+            localField: "_id",
+            foreignField: "product_id",
+            as: "allImages"
+         }
+      },
+      { $sort: req.body.sort },
+      { $limit: req.body.limit },
 
+   ]
+
+   Products.aggregate(mongoPost)
+      .then((data) => {
+         res.json(data);
+      })
+      .catch((err) =>
+         res.json({
+            messagge: "Error: " + err,
+            variant: "error",
+         })
+      );
+
+
+})
 
 router.route("/").post((req, res, next) => {
+
 
    function functionReplaceObjectID(key, data) {
       const newData = []
@@ -88,7 +117,7 @@ router.route("/").post((req, res, next) => {
 
    const sortMongo = typeof req.body.sort === "object" ? {
       $sort: req.body.sort
-   } : { $sort: { updatedAt: 1 } }
+   } : { $sort: { updatedAt: -1 } }
 
    const categoriesMongo = req.body.categories.length > 0 ? {
       $or: functionReplaceObjectID("categories_id", req.body.categories)
@@ -113,24 +142,25 @@ router.route("/").post((req, res, next) => {
 
                { isActive: true },
                {
-                  $or: [{
-                     price: {
-                        $gte: req.body.minPrice == null || req.body.minPrice == 0 ? 1 : req.body.minPrice,
-                        $lte: req.body.maxPrice == null || req.body.maxPrice == 0 ? 1000000000000000000000000000 : req.body.maxPrice
-                     }
-                  },
-                  {
-                     $and: [
-                        { "variant_products.visible": true },
+                  $or: [
+                     {
+                        price: {
+                           $gte: req.body.minPrice == null || req.body.minPrice == 0 ? 1 : req.body.minPrice,
+                           $lte: req.body.maxPrice == null || req.body.maxPrice == 0 ? 1000000000000000000000000000 : req.body.maxPrice
+                        }
+                     },
+                     {
+                        $and: [
+                           { "variant_products.visible": true },
 
-                        {
-                           "variant_products.price": {
-                              $gte: req.body.minPrice == null || req.body.minPrice == 0 ? 1 : req.body.minPrice,
-                              $lte: req.body.maxPrice == null || req.body.maxPrice == 0 ? 1000000000000000000000000000 : req.body.maxPrice
-                           }
-                        },
-                     ]
-                  }
+                           {
+                              "variant_products.price": {
+                                 $gte: req.body.minPrice == null || req.body.minPrice == 0 ? 1 : req.body.minPrice,
+                                 $lte: req.body.maxPrice == null || req.body.maxPrice == 0 ? 1000000000000000000000000000 : req.body.maxPrice
+                              }
+                           },
+                        ]
+                     }
 
                   ],
 

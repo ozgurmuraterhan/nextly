@@ -166,16 +166,24 @@ const updateProductQtyVariant = (id, variants, qty) => {
         },
         {
             $inc: {
-                'variant_products.$.qty': -qty,
                 'variant_products.$.saleqty': qty,
+                'variant_products.$.qty': -qty,
             }
         }
+
     )
+        .then(data => console.log(data))
     return
 };
 
 
+// router.route("/updateqty/:id/:qty").get((req, res, next) => {
+//     const data = updateProductSaleqty(req.params.id, req.params.qty)
+//     res.json((data))
+// })
+
 router.route('/stripe').post(async (req, res, next) => {
+
 
     Paymentmethods.findById("6132787ae4c2740b7aff7320")
         .then(async resPay => {

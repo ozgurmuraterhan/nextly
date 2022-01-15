@@ -5,7 +5,7 @@ import IntlMessages from "../../../util/IntlMessages";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { LeftOutlined, RightOutlined } from "@ant-design/icons"
-
+import ProductCard from "../ProductCard"
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Thumbs, Autoplay } from 'swiper';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -44,9 +44,9 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
         <div className="bg-gray-100" >
             <div className=" container-custom py-5 " >
                 <div className="row">
-                    <div className=" relative  homeSliderReslative mb-3 p-0 h-80"    >
+                    <div className=" relative  homeSliderReslative mb-3 pb-0  "    >
 
-                        <div className=" absolute w-full  ">
+                        <div className="  w-full  ">
 
                             <div className=" text-center mb-5 mt-3">
                                 <h2>{title.title}</h2>
@@ -57,7 +57,9 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                             <div className="home-seccound-box-arrow-left"><LeftOutlined /></div>
                             <div className="home-seccound-box-arrow-right"><RightOutlined /></div>
 
-                            <Swiper slidesPerView={1} spaceBetween={10}
+                            <Swiper
+                                slidesPerView={1}
+                                spaceBetween={10}
                                 pagination={false}
                                 navigation={true}
                                 navigation={{
@@ -71,34 +73,25 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                                 breakpoints={{
                                     "340": {
                                         "slidesPerView": 2,
-                                        "spaceBetween": 15
+                                        "spaceBetween": 0
                                     },
                                     "640": {
                                         "slidesPerView": 3,
-                                        "spaceBetween": 15
+                                        "spaceBetween": 0
                                     },
                                     "768": {
                                         "slidesPerView": 5,
-                                        "spaceBetween": 15
+                                        "spaceBetween": 0
                                     },
                                     "1024": {
-                                        "slidesPerView": 6,
-                                        "spaceBetween": 15
+                                        "slidesPerView": 5,
+                                        "spaceBetween": 0
                                     }
                                 }}
                             >
-                                {state.map(val =>
-                                    <SwiperSlide key={val._id}>
-
-                                        <Link href={val.link} >
-                                            <a className="itemzoom">
-
-                                                <LazyLoadImage src={`${IMG_URL + val.image}`} className="w-full" />
-                                                <div className="w-full text-center mt-3">{val.title}</div>
-                                                <div className="w-full text-center my-2">{val.description}</div>
-
-                                            </a>
-                                        </Link>
+                                {state && state.map(data =>
+                                    <SwiperSlide key={data._id} className="mb-5">
+                                        <ProductCard data={data} />
                                     </SwiperSlide>
                                 )}
                             </Swiper>

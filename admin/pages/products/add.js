@@ -3,9 +3,9 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from '../../../config';
 import router from "next/router"
-import { DeleteOutlined, CheckOutlined, CloseOutlined, QuestionCircleOutlined, PlusOutlined, UploadOutlined, MinusCircleOutlined } from "@ant-design/icons"
+import { DeleteOutlined, PlusOutlined } from "@ant-design/icons"
 
-import { AutoComplete, Tag, Upload, Space, Switch, TreeSelect, InputNumber, Button, Card, message, Cascader, Divider, Checkbox, Modal, Col, Form, Input, Row, Select, Tooltip, } from 'antd';
+import { Tag, TreeSelect, InputNumber, Button, Card, message, Divider, Col, Form, Input, Row, Select } from 'antd';
 import func from "../../util/helpers/func"
 
 import { useIntl } from 'react-intl';
@@ -40,14 +40,10 @@ const Default = ({ getCategories = [] }) => {
               value: res.data[i]._id,
             });
           }
-
-
           seTdataBrands(dataManipulate);
         }
       })
       .catch((err) => console.log(err));
-
-
   }
 
   // componentDidMount = useEffect
@@ -181,14 +177,10 @@ const Default = ({ getCategories = [] }) => {
         const variantsP = Object.entries(objToArr[i]).map(([key, initialValue]) => ({ key, initialValue }))
         DataS.push(variantsP)
       }
-
       seTmeta(DataS)
     } else {
-
       seTmeta([])
-
     }
-
   }
 
 
@@ -238,6 +230,10 @@ const Default = ({ getCategories = [] }) => {
           {
             name: "qty",
             value: 100
+          },
+          {
+            name: "saleqty",
+            value: 0
           },
 
         ]}
@@ -301,6 +297,7 @@ const Default = ({ getCategories = [] }) => {
               })
             }} />
           </Form.Item>
+
           <Form.Item
             name="description"
             label={intl.messages["app.pages.common.description"]}
@@ -312,6 +309,13 @@ const Default = ({ getCategories = [] }) => {
             ]}
           >
             <Input.TextArea Rows={3} />
+          </Form.Item>
+          <Form.Item
+            name="saleqty"
+            initialValue={0}
+            className="invisible"
+          >
+            <Input />
           </Form.Item>
           <Form.Item
             name="seo"
@@ -537,12 +541,18 @@ const Default = ({ getCategories = [] }) => {
                           <InputNumber className="!w-1/2" />
                         </Form.Item>
 
+                        <Form.Item
+                          name="saleqty"
+                          initialValue={0}
+                          className="invisible"
+                        >
+                          <Input />
+                        </Form.Item>
 
                         <Form.Item
                           name="visible"
                           label={intl.messages["app.pages.common.visible"]}
                           className="float-left w-full  mx-0 px-0"
-
                         >
                           <Select
                             className=" !w-1/5"

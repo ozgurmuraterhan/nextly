@@ -51,7 +51,7 @@ const Page = () => {
                 <div className="w-8/12 float-left">
                     <FilterSelectedTop />
                 </div>
-                <div className="w-4/12 float-left">
+                <div className="w-4/12 float-right">
                     <SortProducts />
                 </div>
                 <div className="w-full mt-3 float-left">

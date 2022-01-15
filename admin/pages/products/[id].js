@@ -270,10 +270,18 @@ const Default = ({ getCategories = [], getData = [] }) => {
       >
 
         <Card className="card" title={intl.messages["app.pages.product.edit"]}>
+
+          <Form.Item
+            label={intl.messages["app.pages.common.salesqty"]}
+            name="saleqty"
+            initialValue={0}
+          >
+            <Input readOnly bordered={false} />
+          </Form.Item>
+
           <Form.Item
             name="categories_id"
             label={intl.messages["app.pages.common.category"]}
-
           >
             <TreeSelect
               style={{ width: '100%' }}
@@ -292,8 +300,6 @@ const Default = ({ getCategories = [], getData = [] }) => {
                 seTstate({ ...state, categories_id: newValue });
               }}
             />
-
-
           </Form.Item>
           <Form.Item
             name="order"
@@ -541,7 +547,7 @@ const Default = ({ getCategories = [], getData = [] }) => {
                           {...formItemLayout}
                           className="float-left w-full  mx-0 px-0"
                           name="before_price"
-                          InitialValue={0}
+                          initialValue={0}
                           rules={[{ required: true, message: intl.messages["app.pages.common.pleaseFill"] }]}
                         >
                           <InputNumber className="!w-1/2" />
@@ -552,12 +558,19 @@ const Default = ({ getCategories = [], getData = [] }) => {
                           {...formItemLayout}
                           className="float-left w-full  mx-0 px-0"
                           name="qty"
-                          defaultValue={100}
+                          initialValue={100}
                           rules={[{ required: true, message: intl.messages["app.pages.common.pleaseFill"] }]}
                         >
                           <InputNumber className="!w-1/2" />
                         </Form.Item>
-
+                        <Form.Item
+                          label={intl.messages["app.pages.common.salesqty"]}
+                          name="saleqty"
+                          className="float-left w-full  mx-0 px-0"
+                          initialValue={0}
+                        >
+                          <Input readOnly className=" !w-1/5" />
+                        </Form.Item>
 
                         <Form.Item
                           name="visible"
