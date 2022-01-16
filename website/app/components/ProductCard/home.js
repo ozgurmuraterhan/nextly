@@ -7,7 +7,7 @@ import { Button } from "antd"
 import { SwapRightOutlined } from "@ant-design/icons"
 import { API_URL } from "../../../../config"
 
-const Default = ({ data = null }) => {
+const Default = ({ data = null, className }) => {
 
     const { settings } = useSelector(({ settings }) => settings);
     const getVariantPrice = (data) => {
@@ -20,7 +20,7 @@ const Default = ({ data = null }) => {
     return (
 
         <div
-            className=" float-left col-span-4  rounded-lg  m-5 mb-9  bg-gray-50  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl  "
+            className={className}
             key={data._id} >
             <div className=" relative float-left h-full ">
                 <Link href={"/product/" + data.seo}>

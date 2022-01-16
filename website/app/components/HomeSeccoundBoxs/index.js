@@ -41,7 +41,7 @@ import { API_URL, IMG_URL } from "../../../../config";
 const Default = ({ state = [], title = { title: "", description: "" } }) => {
 
     return (
-        <div className="bg-gray-100" >
+        <div className="bg-gray-100 " >
             <div className=" mx-auto w-11/12 py-5 " >
                 <div className="row">
                     <div className=" relative  homeSliderReslative mb-3 pb-0  "    >
@@ -91,7 +91,10 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                             >
                                 {state && state.map(data =>
                                     <SwiperSlide key={data._id} className="mb-15">
-                                        <ProductCardHome data={data} />
+                                        <ProductCardHome
+                                            data={data}
+                                            className=" float-left col-span-4  rounded-lg  m-5 mb-9 hover:bg-white  bg-gray-50  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl  "
+                                        />
                                     </SwiperSlide>
                                 )}
                             </Swiper>

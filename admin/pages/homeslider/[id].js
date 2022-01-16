@@ -20,7 +20,7 @@ const Default = ({ getData = [], getCategories = [] }) => {
 
   const [displaySave, seTdisplaySave] = useState(true)
 
-  const fields = Object.entries(state).map(([name, value]) => ({ name, value }))
+  const [fields, seTfields] = useState(Object.entries(getData).map(([name, value]) => ({ name, value })))
 
 
   const { user } = useSelector(({ login }) => login);
@@ -31,6 +31,9 @@ const Default = ({ getData = [], getCategories = [] }) => {
   function getDataFc() {
     axios.get(`${API_URL}/homeslider/${id}`).then((response) => {
       seTstate(response.data);
+      seTfields(Object.entries(response.data).map(([name, value]) => ({ name, value })))
+
+
     });
   }
   // componentDidMount = useEffect
@@ -42,7 +45,7 @@ const Default = ({ getData = [], getCategories = [] }) => {
       .then((res) => {
         if (res.data.length > 0) {
           const data = func.getCategoriesTreeOptions(res.data)
-          console.log("res.data", data)
+
           data.unshift({ label: intl.messages["app.pages.category.rootCategory"], value: null, })
           seTdataCategories(data);
         }
@@ -147,7 +150,14 @@ const Default = ({ getData = [], getCategories = [] }) => {
                 optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
               }
               onChange={(newValue) => {
-                seTstate({ ...state, categories_id: newValue });
+                if (newValue == "0-0") {
+                  newValue = null
+                }
+                seTstate({
+                  ...state,
+                  categories_id: newValue
+                });
+                seTfields(Object.entries({ categories_id: newValue }).map(([name, value]) => ({ name, value })))
               }}
             />
           </Form.Item>

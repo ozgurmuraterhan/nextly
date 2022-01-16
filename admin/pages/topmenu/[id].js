@@ -132,7 +132,14 @@ const Default = ({ getData = [], getCategories = [] }) => {
               treeDefaultExpandAll
 
               onChange={(newValue) => {
-                seTstate({ ...state, categories_id: newValue });
+                if (newValue == "0-0") {
+                  newValue = null
+                }
+                seTstate({
+                  ...state,
+                  categories_id: newValue
+                });
+                seTfields(Object.entries({ categories_id: newValue }).map(([name, value]) => ({ name, value })))
               }}
 
             />

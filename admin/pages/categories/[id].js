@@ -33,8 +33,9 @@ const Default = ({ getData = [], getCategories = [] }) => {
       .then((res) => {
         if (res.data.length > 0) {
           const data = func.getCategoriesTreeOptions(res.data)
-          data.unshift({ label: intl.messages["app.pages.category.rootCategory"], value: null, })
+          data.unshift({ title: intl.messages["app.pages.category.rootCategory"], value: null, })
           seTdataCategories(data);
+          console.log("data", data)
         }
       })
       .catch((err) => console.log(err));
@@ -47,8 +48,6 @@ const Default = ({ getData = [], getCategories = [] }) => {
 
     });
   }
-
-
   //componentDidMount = useEffect
   useEffect(() => {
     getDataCategory()
@@ -77,8 +76,6 @@ const Default = ({ getData = [], getCategories = [] }) => {
       },
     },
   };
-
-
   const onSubmit = (Data) => {
 
     axios
@@ -96,15 +93,11 @@ const Default = ({ getData = [], getCategories = [] }) => {
       .catch((err) => console.log(err));
   };
 
-
   const onFinishFailed = (errorInfo) => {
     console.log(errorInfo)
   };
 
-
-
   return (
-
     <div>
       <Card className="card" title={intl.messages["app.pages.category.edit"]}>
         <Form
@@ -122,7 +115,6 @@ const Default = ({ getData = [], getCategories = [] }) => {
           >
             <TreeSelect
               style={{ width: '100%' }}
-              value={state.categories_id}
               dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
               treeData={dataCategories}
               placeholder="Please select"
@@ -134,7 +126,14 @@ const Default = ({ getData = [], getCategories = [] }) => {
                 optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
               }
               onChange={(newValue) => {
-                seTstate({ ...state, categories_id: newValue });
+                if (newValue == "0-0") {
+                  newValue = null
+                }
+                seTstate({
+                  ...state,
+                  categories_id: newValue
+                });
+                seTfields(Object.entries({ categories_id: newValue }).map(([name, value]) => ({ name, value })))
               }}
 
             />
@@ -190,7 +189,6 @@ const Default = ({ getData = [], getCategories = [] }) => {
           <Form.Item
             name="seo"
             label="Seo Url"
-            value={state.seo}
           >
             <Input />
           </Form.Item>
