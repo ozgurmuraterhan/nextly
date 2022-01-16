@@ -49,7 +49,7 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                         <div className="  w-full   ">
 
                             <div className=" text-center mb-5 mt-3">
-                                <h2>{title.title}</h2>
+                                <h1>{title.title}</h1>
                                 <h6>{title.description}</h6>
                             </div>
 

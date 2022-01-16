@@ -18,7 +18,7 @@ import {
     LogoutOutlined,
 
 } from '@ant-design/icons';
-import { API_URL } from "../../../../config";
+import { IMG_URL } from "../../../../config";
 
 const Default = ({ footerMenu }) => {
 
@@ -28,10 +28,18 @@ const Default = ({ footerMenu }) => {
 
     return (
         <div className="bg-black py-10">
-            <div className=" container-custom">
-                <ul className=" grid grid-cols-2 md:grid-cols-4   ">
+            <div className=" container-custom grid grid-cols-12">
+
+                <div className="md:col-span-3 order-12  md:order-1  sm:py-0 py-5 col-span-12 !text-white">
+                    <img src={`${IMG_URL + settings.image}`} className="invert w-32 " />
+                    <h4 className="text-white text-lg mt-2">{settings.company}</h4>
+                    <p>{settings.description}</p>
+                    <img className="mt-5 w-auto" src="/images/stripepayfooter.png" />
+                </div>
+
+                <ul className=" grid grid-cols-2 md:grid-cols-4 col-span-12  sm:col-span-9 ml-0 sm:ml-20 order-1 md:order-5  ">
                     {footerMenu && footerMenu.map(val => (
-                        <li key={val.title} className="mt-2">
+                        <li key={val.title} className="mt-2 text-left">
                             {!val.children ?
                                 <Link href={val.link ? val.link : val.seo}>
                                     <a className="text-white text-2xl">{val.title}</a>
@@ -39,25 +47,25 @@ const Default = ({ footerMenu }) => {
                                 :
                                 <>
                                     <Link href="#" className="text-white">
-                                        <a className="text-white text-2xl">{val.title}</a>
+                                        <a className="text-white text-3xl">{val.title}</a>
                                     </Link>
                                     <ul key={val.title}>
                                         {val?.children.map(val2 => (
-                                            <li key={val2.title} className=" my-2">
+                                            <li key={val2.title} className=" my-1 sm:my-4  ">
                                                 {!val2.children ?
                                                     <Link href={val2.link ? val2.link : val2.seo}>
-                                                        <a className="text-white">{val2.title}</a>
+                                                        <a className="text-white">- {val2.title}</a>
                                                     </Link>
                                                     :
                                                     <>
                                                         <Link href="#">
-                                                            <a className="text-white ">{val2.title}</a>
+                                                            <a className="text-white ">- {val2.title}</a>
                                                         </Link>
                                                         <ul key={val2.title}>
                                                             {val2?.children.map(val3 => (
                                                                 <li key={val3.title} >
                                                                     <Link href={val3.link ? val3.link : val3.seo}>
-                                                                        <a className="text-white ">{val3.title}</a>
+                                                                        <a className="text-white ">-- {val3.title}</a>
                                                                     </Link>
                                                                 </li>
                                                             ))}
@@ -73,9 +81,10 @@ const Default = ({ footerMenu }) => {
                         </li>
                     ))}
                 </ul>
-                <Divider />
-                <div className="  grid grid-cols-1 ">
-                    <div className=" text-white  grid sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-6">
+
+                <Divider className="my-3 order-9 " />
+                <div className="  col-span-12 text-center order-10  ">
+                    <div className=" text-white  grid grid-cols-2  md:grid-cols-3 lg:grid-cols-6">
                         {
                             settings.address ?
                                 settings.address.map(val =>

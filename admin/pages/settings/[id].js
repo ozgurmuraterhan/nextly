@@ -262,7 +262,7 @@ const Default = () => {
           <Divider />
           <Row gutter={[20, 20]}>
 
-            <Col md={24} >
+            {/* <Col md={24} >
               <Row gutter={[20]}>
                 <Col md={8} className="text-end mt-2">
                   <h6><IntlMessages id="app.pages.settings.anyData" />:</h6>
@@ -326,9 +326,10 @@ const Default = () => {
                   </Form.List>
                 </Col>
               </Row>
-            </Col>
+            </Col> 
             <Divider />
-            <Col md={24} >
+            */}
+            {/* <Col md={24} >
               <Row gutter={[20]}>
                 <Col md={8} className="text-end mt-2">
                   <h6><IntlMessages id="app.pages.settings.companyUser" />:</h6>
@@ -406,8 +407,10 @@ const Default = () => {
                   </Form.List>
                 </Col>
               </Row>
-            </Col>
+            </Col> 
             <Divider />
+            */}
+
             <Col md={24} >
               <Row gutter={[20]}>
                 <Col md={8} className="text-end mt-2">
