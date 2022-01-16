@@ -34,12 +34,7 @@ const Default = ({ getData = [] }) => {
       key: 'title',
       render: text => <span className="link">{text}</span>,
     },
-    {
-      title: intl.messages["app.pages.common.description"],
-      dataIndex: 'description',
-      key: 'description',
 
-    },
     {
       title: intl.messages["app.pages.common.price"],
       dataIndex: 'price',
@@ -55,7 +50,7 @@ const Default = ({ getData = [] }) => {
           {role["productimagesview"] ?
             <Link href={"/productimages/list?id=" + record._id} className="link ant-dropdown-link">
               <a>
-                <IntlMessages id="app.pages.common.image" /> <UploadOutlined style={{ fontSize: "150%", marginLeft: "15px" }} />
+                <IntlMessages id="app.pages.common.image" /><UploadOutlined style={{ fontSize: "150%", marginLeft: "15px" }} />
               </a>
             </Link>
             : ""}

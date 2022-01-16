@@ -95,7 +95,7 @@ export default function CheckoutForm({ contract }) {
                             })
 
                         basket[0].products = []
-                        basket[0].cargoes_id = undefined
+                        basket[0].cargoes_id = null
                         basket[0].total_price = 0
                         basket[0].total_discount = 0
                         basket[0].cargo_price = 0

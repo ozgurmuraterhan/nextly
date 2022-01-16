@@ -39,7 +39,7 @@ const Page = ({ resData = {} }) => {
 
     return (
         <div className="container-custom h-full ">
-            <div className=" shadow-lg p-0 lg::p-4 grid grid-cols-12 my-0 lg:my-8 gap-2 lg:gap-9">
+            <div className=" shadow-lg p-0 lg::p-4 grid grid-cols-12 my-0 lg:my-8  ">
                 <div className=" col-span-12 lg:col-span-6 border pb-3 ">
                     <ProductGallerry images={state.allImages} />
                 </div>

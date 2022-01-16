@@ -180,22 +180,24 @@ const Page = ({ data = {} }) => {
     const onFinishFailed = (errorInfo) => {
         console.log(errorInfo)
     };
-
-
-
+    const getVariantPrice = (data) => {
+        if (data.length > 0) {
+            const newData = data.sort((a, b) => { return a.price - b.price })
+            return <span> <Price data={newData[0].price} />  -  <Price data={newData[data.length - 1].price} />   </span>
+        }
+    }
 
     return (
 
-        <>
-            <h2 className="font-semibold">{state.title}</h2>
-            <div className="my-4">
+        <div className="px-10">
+            <h2 className="font-semibold mb-10 mt-5">{state.title}</h2>
+            <div className="my-4 w-full">
                 {state.type ?
                     <>
                         {disabledVariant ?
-                            <h1 className=" text-brand-color">
+                            <h1 className=" text-brand-color font-semibold text-2xl">
 
-
-                                <span className="text-2xl"> Price :</span>  {priceAdd.price != 0 ? <Price data={priceAdd.price} /> : "Please Select Variant "}
+                                {priceAdd.price != 0 ? <Price data={priceAdd.price} /> : getVariantPrice(state.variant_products)}
 
                                 {priceAdd.before_price != 0 && priceAdd.before_price > priceAdd.price ?
                                     <span className="line-through ml-3 text-sm text-black" >
@@ -207,11 +209,11 @@ const Page = ({ data = {} }) => {
                             : <h2 className="text-red-500">This is variant not shipping :(</h2>}
 
                     </> :
-                    <h1 className=" text-brand-color">
+                    <h1 className="text-brand-color font-semibold text-2xl">
 
                         {disabledVariant ?
                             <>
-                                <span className="text-2xl"> Price :</span> <Price data={state.price} />
+                                <Price data={state.price} />
 
                                 {state.before_price != 0 ?
                                     <span className="line-through ml-3 text-sm text-black" >
@@ -233,6 +235,7 @@ const Page = ({ data = {} }) => {
                     onFinishFailed={onFinishFailed}
                     scrollToFirstError
                     layout="vertical"
+                    className="w-full "
                 >
 
                     {state.type ?
@@ -250,7 +253,7 @@ const Page = ({ data = {} }) => {
                                             name={x.name}
                                             optionType="button"
                                             buttonStyle="outline"
-                                            className="pl-2"
+                                            className="pl-2 "
                                             required
                                             onChange={y => {
                                                 const data = state
@@ -339,7 +342,7 @@ const Page = ({ data = {} }) => {
 
 
             </div>
-        </>
+        </div>
 
     )
 

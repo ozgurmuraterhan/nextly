@@ -84,7 +84,7 @@ const Default = ({ footerMenu }) => {
 
                 <Divider className="my-3 order-9 " />
                 <div className="  col-span-12 text-center order-10  ">
-                    <div className=" text-white  grid grid-cols-2  md:grid-cols-3 lg:grid-cols-6">
+                    <div className=" text-white  grid grid-cols-2 md:flex items-center flex-row justify-around   md:grid-cols-3 lg:grid-cols-6">
                         {
                             settings.address ?
                                 settings.address.map(val =>
