@@ -35,7 +35,6 @@ const Default = ({ getData = [], getCategories = [] }) => {
           const data = func.getCategoriesTreeOptions(res.data)
           data.unshift({ title: intl.messages["app.pages.category.rootCategory"], value: null, })
           seTdataCategories(data);
-          console.log("data", data)
         }
       })
       .catch((err) => console.log(err));

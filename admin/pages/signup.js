@@ -1,5 +1,4 @@
 import React from 'react';
-import asyncComponent from "../util/asyncComponent";
 
 import IntlMessages from "../util/IntlMessages";
 
