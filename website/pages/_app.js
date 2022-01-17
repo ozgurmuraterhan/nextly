@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head'
 import App from 'next/app'
 import { wrapper } from "../redux/store";
 
@@ -12,7 +11,7 @@ import initStore from '../redux/store';
 import { Provider } from "react-redux";
 import LocaleProvider from "../app/core/LocaleProvider";
 import AppLayout from "../app/core/Layout";
-
+import { API_URL } from '../../config';
 import {
   login_r,
   isAuthenticated_r,
@@ -33,14 +32,11 @@ class HomeApp extends App {
     await store.dispatch(getTopmenu_r())
   });
 
+
   render() {
     const { Component, pageProps } = this.props;
-
     return (
       <React.Fragment>
-        <Head>
-          <title> Nextly</title>
-        </Head>
         <LocaleProvider>
           <AppLayout>
             <Component {...pageProps} />
