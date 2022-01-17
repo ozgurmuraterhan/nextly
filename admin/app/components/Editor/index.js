@@ -5,7 +5,8 @@ import { message } from "antd";
 
 const maxFileSize = 102400; //100 kb
 
-const Default = ({ value, seTeditor, form }) => {
+const Default = ({ value = "", form }, props) => {
+
 
     const [state, seTstate] = useState(BraftEditor.createEditorState(value))
 

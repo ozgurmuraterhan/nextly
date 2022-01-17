@@ -39,6 +39,10 @@ const ProductsSchema = new Schema(
             index: true
 
         },
+        description_short: {
+            type: String,
+            trim: true,
+        },
         description: {
             type: String,
             trim: true,

@@ -54,6 +54,7 @@
   "app.pages.common.visible": "Visible",
   "app.pages.common.action": "Action",
   "app.pages.common.description": "Description",
+  "app.pages.common.descriptionShort": "Short Description",
   "app.pages.common.keywords": "Keywords",
   "app.pages.common.date": "Date",
   "app.pages.common.addItem": "Add Item",

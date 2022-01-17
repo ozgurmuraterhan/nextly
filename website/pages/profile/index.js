@@ -4,6 +4,7 @@ import Profile from "../../app/components/Profile"
 import ProfileLeftMenu from "../../app/components/Profile/LeftMenu"
 import { useIntl } from 'react-intl';
 import Link from "next/link"
+import Head from "../../app/core/Head"
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -23,6 +24,9 @@ const Default = () => {
   return (
     <>
       <div className="container-custom h-full grid grid-cols-12 gap-10 my-10 ">
+        <Head
+          title="Profile"
+        />
         <div className=" col-span-12 order-2 lg:order-1 lg:col-span-3 ">
           <div className="text-lg font-semibold col-span-12 text-brand-color  mb-5 " >Your Profile  </div>
           <ProfileLeftMenu />

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from '../../../config';
 import router from "next/router"
+import dynamic from "next/dynamic";
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons"
 
 import { Tag, TreeSelect, InputNumber, Button, Card, message, Divider, Col, Form, Input, Row, Select } from 'antd';
@@ -12,6 +13,9 @@ import { useIntl } from 'react-intl';
 import IntlMessages from "../../util/IntlMessages";
 
 const Default = ({ getCategories = [] }) => {
+
+  const Editor = dynamic(() => import('../../app/components/Editor/index'))
+
   const intl = useIntl();
 
   const [state, seTstate] = useState({ categories_id: null, type: 0 })
@@ -299,6 +303,20 @@ const Default = ({ getCategories = [] }) => {
           </Form.Item>
 
           <Form.Item
+            name="description_short"
+            label={intl.messages["app.pages.common.descriptionShort"]}
+            rules={[
+              {
+                required: true,
+                message: intl.messages["app.pages.common.pleaseFill"],
+              },
+            ]}
+          >
+            <Input.TextArea rows={3} />
+          </Form.Item>
+
+
+          <Form.Item
             name="description"
             label={intl.messages["app.pages.common.description"]}
             rules={[
@@ -308,8 +326,9 @@ const Default = ({ getCategories = [] }) => {
               },
             ]}
           >
-            <Input.TextArea Rows={3} />
+            <Editor form={form} />
           </Form.Item>
+
           <Form.Item
             name="saleqty"
             initialValue={0}

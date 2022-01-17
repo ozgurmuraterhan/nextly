@@ -9,6 +9,7 @@ import BasketDetailPriceAddress from "../../app/components/Basket/BasketDetailPr
 import func from "../../util/helpers/func"
 
 import { API_URL } from "../../../config"
+import Head from "../../app/core/Head"
 
 
 const Page = ({ data = {} }) => {
@@ -31,9 +32,12 @@ const Page = ({ data = {} }) => {
 
     return (
         <div className="container-custom h-full grid grid-cols-12 ">
+
+            <Head
+                title="Address"
+            />
             <div className=" col-span-12 lg:col-span-9 shadow-lg m-4 grid-cols-2 my-8 gap-9">
                 <BasketAddressList />
-
             </div>
             <div className=" col-span-12 lg:col-span-3 shadow-lg m-4 grid-cols-2 my-8 gap-9">
                 <BasketDetailPriceAddress />

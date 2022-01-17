@@ -11,6 +11,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripeComponent from "../../app/components/Stripe";
 import { API_URL } from "../../../config"
+import Head from "../../app/core/Head"
 
 
 const Page = ({ data = {} }) => {
@@ -31,6 +32,10 @@ const Page = ({ data = {} }) => {
 
     return (
         <div className="container-custom h-full grid grid-cols-12 ">
+
+            <Head
+                title="Payments"
+            />
             <div className=" col-span-12 lg:col-span-9 shadow-lg m-4 grid-cols-2 my-8 gap-9 order-2 lg:order-1">
                 <StripeComponent basket={basket} public_key={public_key} contract={contract} />
             </div>

@@ -27,6 +27,11 @@ const TopmenuSchema = new Schema(
             trim: true,
             default: ""
         },
+        description_short: {
+            type: String,
+            trim: true,
+            default: ""
+        },
         seo: {
             type: String,
             required: true,

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import router from "next/router"
+import Head from "../../app/core/Head"
 
 import FilterSelectedTop from "../../app/components/FilterProducts/FilterSelectedTop"
 import BrandsFilter from "../../app/components/FilterProducts/BrandsFilter"
@@ -40,7 +41,9 @@ const Page = () => {
 
     return (
         <div className="container-custom grid grid-cols-12 h-full my-2 py-2">
-
+            <Head
+                title="Search"
+            />
             <div className=" sm:col-span-2 col-span-12   p-2  shadow-sm border-top ">
                 <TextFilter />
                 <CategoriesFilter />

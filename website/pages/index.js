@@ -8,10 +8,14 @@ import HomeOfferList from "../app/components/HomeOfferList";
 import HomeProductsFirst from "../app/components/HomeProductsFirst";
 import func from "../util/helpers/func"
 import axios from "axios"
-
+import { useDispatch, useSelector } from "react-redux";
+import Head from "../app/core/Head"
 import { wrapper } from "../redux/store"
 import { API_URL } from "../../config"
 const homePage = ({ resData = [], resProductFirst = [], resProductSeccond = [] }) => {
+
+  const { settings } = useSelector(({ settings }) => settings);
+
 
   const homeSlider = func.getCategoriesTree(resData, "61535837020a748d51968ecc")
   const homeFirstBox = func.getCategoriesTree(resData, "61537c2d6464c09286494c63")
@@ -25,6 +29,7 @@ const homePage = ({ resData = [], resProductFirst = [], resProductSeccond = [] }
 
   return (
     <div>
+      <Head />
       <Brands />
       <HomeSlider state={homeSlider} />
       <HomeProductsFirst state={resProductFirst} title={{ title: "Best Sellers", description: "Our Most Popular Products" }} />

@@ -28,7 +28,7 @@ const Default = ({ data = null, className }) => {
                         <div className="w-full relative">
 
                             <img
-                                className="w-full bg-cover rounded-t-lg "
+                                className="w-full bg-cover bg-center rounded-t-lg "
                                 src="/images/transparent.png"
                                 style={{ backgroundImage: `url(${data.allImages[0] ? API_URL + data.allImages[0].image : "/images/nofoto.jpg"})` }}
                             />

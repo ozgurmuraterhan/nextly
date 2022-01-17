@@ -52,6 +52,7 @@
   "app.pages.common.company": "Şirket",
   "app.pages.common.icon": "İkon",
   "app.pages.common.description": "Açıklama",
+  "app.pages.common.descriptionShort": "Kısa Açıklama",
   "app.pages.common.keywords": "Anahtar Kelimeler",
   "app.pages.common.visible": "Görünebilirlik",
   "app.pages.common.action": "İşlem",

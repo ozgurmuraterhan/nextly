@@ -182,7 +182,7 @@ const Default = () => {
               },
             ]}
           >
-            <Input />
+            <Input.TextArea rows={3} />
           </Form.Item>
 
 
@@ -196,7 +196,7 @@ const Default = () => {
               },
             ]}
           >
-            <Input />
+            <Input.TextArea rows={3} />
           </Form.Item>
 
           <Form.Item

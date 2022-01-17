@@ -7,6 +7,7 @@ import axios from "axios";
 import BasketList from "../../app/components/Basket/BasketList"
 import BasketDetailPrice from "../../app/components/Basket/BasketDetailPrice"
 import func from "../../util/helpers/func"
+import Head from "../../app/core/Head"
 
 import { API_URL, PRICE_VERSION } from "../../../config"
 
@@ -30,6 +31,10 @@ const Page = ({ data = {} }) => {
 
     return (
         <div className="container-custom h-full grid grid-cols-12 ">
+
+            <Head
+                title="Basket"
+            />
             <div className=" col-span-12 lg:col-span-9 shadow-lg m-4 grid-cols-2 my-8 gap-9">
                 <BasketList />
             </div>

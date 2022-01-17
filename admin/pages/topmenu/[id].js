@@ -178,6 +178,18 @@ const Default = ({ getData = [], getCategories = [] }) => {
             }} />
           </Form.Item>
           <Form.Item
+            name="description_short"
+            label={intl.messages["app.pages.common.descriptionShort"]}
+            rules={[
+              {
+                required: true,
+                message: intl.messages["app.pages.common.pleaseFill"],
+              },
+            ]}
+          >
+            <Input.TextArea rows={3} />
+          </Form.Item>
+          <Form.Item
             name="description"
             label={intl.messages["app.pages.common.description"]}
             rules={[

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useIntl } from 'react-intl';
-
+import Head from "next/head"
 import { Input, Layout, message, Drawer, Modal, Form, Button, Menu } from 'antd';
 import CircularProgress from "../../components/CircularProgress";
 
@@ -38,7 +38,7 @@ const { Content } = Layout;
 const AppLayout = ({ children }) => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const { collapsed, settings, errorFetch } = useSelector(({ settings }) => settings);
+    const { settings, errorFetch } = useSelector(({ settings }) => settings);
 
     const { isAuthenticated, user } = useSelector(({ login }) => login);
 
@@ -76,7 +76,8 @@ const AppLayout = ({ children }) => {
 
     return !isLoaded ? <CircularProgress /> : (
         <>
-            <Layout>
+            <Layout >
+
                 <div className="border-b-2">
                     <div className=" container-custom   ">
                         <HeaderTopMenu socialmedia={func.getCategoriesTree(topmenu, "614b8cc75c153bab76bdf681")} topmenu={func.getCategoriesTree(topmenu)} />

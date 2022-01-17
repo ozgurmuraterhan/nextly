@@ -5,6 +5,7 @@ import Link from "next/link"
 import axios from "axios";
 import Price from "../../app/components/Price"
 
+import Head from "../../app/core/Head"
 
 import { API_URL } from "../../../config"
 
@@ -41,6 +42,10 @@ const Page = () => {
 
     return (
         <div className="container-custom h-full grid grid-cols-12 ">
+
+            <Head
+                title="Payments Succeeded"
+            />
             <div className="col-span-12 shadow-lg p-10">
                 <div className="grid grid-cols-12">
                     {state ?

@@ -25815,7 +25815,29 @@ ul.topmenu a {
 }
 ul.topmenu a:hover {
   color: inherit;
-} 
+}
+.home-seccound-box-arrow-left {
+  position: absolute;
+  height: 100%;
+  left: -70px;
+  font-size: 35pt;
+  cursor: pointer;
+}
+.home-seccound-box-arrow-left span.anticon {
+  position: absolute;
+  top: 20%;
+}
+.home-seccound-box-arrow-right {
+  position: absolute;
+  height: 100%;
+  right: -25px;
+  font-size: 35pt;
+  cursor: pointer;
+}
+.home-seccound-box-arrow-right span.anticon {
+  position: absolute;
+  top: 20%;
+}
 .top-brands-arrow-left {
   position: absolute;
   left: 0px;

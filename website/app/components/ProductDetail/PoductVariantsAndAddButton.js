@@ -244,10 +244,21 @@ const Page = ({ data = {} }) => {
                                 <div key={x.name}>
                                     <Form.Item
                                         name={x.name}
-                                        label={x.name}
+                                        label={
+                                            form.getFieldValue(x.name) ?
+                                                <span>
+                                                    {x.name} :
+                                                    <span className="text-gray-500">  {form.getFieldValue(x.name)}  </span>
+                                                </span>
+                                                :
+                                                <span>
+                                                    {x.name} :
+                                                    <span className="text-gray-500"> Please Select</span>
+                                                </span>
+                                        }
                                         labelAlign="left"
-                                        className="mb-0 pb-0 mt-2"
-                                        rules={[{ required: true, message: "Lütfen Seçiniz", whitespace: true }]}
+                                        className="mb-0 pb-0 mt-5 "
+                                        rules={[{ required: true, message: "Please Select", whitespace: true }]}
                                     >
                                         <Radio.Group
                                             name={x.name}
@@ -338,11 +349,11 @@ const Page = ({ data = {} }) => {
                 </Form>
                 <Divider />
 
-                <h3>{state.description}</h3>
+                <h3>{state.description_short}</h3>
 
 
             </div>
-        </div>
+        </div >
 
     )
 

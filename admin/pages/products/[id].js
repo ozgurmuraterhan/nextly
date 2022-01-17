@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from '../../../config';
 import router from "next/router"
+import dynamic from "next/dynamic";
 import { DeleteOutlined, CheckOutlined, CloseOutlined, QuestionCircleOutlined, PlusOutlined, UploadOutlined, MinusCircleOutlined } from "@ant-design/icons"
 
 import { AutoComplete, Tag, Upload, Space, Switch, TreeSelect, InputNumber, Button, Card, message, Cascader, Divider, Checkbox, Modal, Col, Form, Input, Row, Select, Tooltip, } from 'antd';
@@ -12,6 +13,9 @@ import { useIntl } from 'react-intl';
 import IntlMessages from "../../util/IntlMessages";
 
 const Default = ({ getCategories = [], getData = [] }) => {
+
+  const Editor = dynamic(() => import('../../app/components/Editor/index'))
+
   const intl = useIntl();
 
   const [form] = Form.useForm();
@@ -333,8 +337,8 @@ const Default = ({ getCategories = [], getData = [] }) => {
             }} />
           </Form.Item>
           <Form.Item
-            name="description"
-            label={intl.messages["app.pages.common.description"]}
+            name="description_short"
+            label={intl.messages["app.pages.common.descriptionShort"]}
             rules={[
               {
                 required: true,
@@ -344,6 +348,22 @@ const Default = ({ getCategories = [], getData = [] }) => {
           >
             <Input.TextArea rows={3} />
           </Form.Item>
+
+
+          <Form.Item
+            name="description"
+            label={intl.messages["app.pages.common.description"]}
+            rules={[
+              {
+                required: true,
+                message: intl.messages["app.pages.common.pleaseFill"],
+              },
+            ]}
+          >
+            <Editor form={form} />
+          </Form.Item>
+
+
           <Form.Item
             name="seo"
             label="Seo Url"

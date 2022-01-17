@@ -64,16 +64,16 @@ const Default = ({ images = [] }) => {
                         "spaceBetween": 15
                     },
                     "1024": {
-                        "slidesPerView": 8,
+                        "slidesPerView": 7,
                         "spaceBetween": 30
                     }
                 }}
             >
                 {state.map(val =>
-                    <SwiperSlide>
+                    <SwiperSlide >
                         <div className="item">
                             <div
-                                className="bg-cover bg-center  border-2  h-20 w-20"
+                                className="bg-cover bg-center   border-2 ml-2  h-20 w-20"
                                 style={{ backgroundImage: "url(" + API_URL + "/" + val.image + ")" }}
                             />
                         </div>
