@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useIntl } from 'react-intl';
 import IntlMessages from "../../../util/IntlMessages";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Image from "next/image";
 
 import { LeftOutlined, RightOutlined } from "@ant-design/icons"
 
@@ -54,7 +54,9 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                         <Link href={val.link} >
                             <a className="itemzoom mb-3">
 
-                                <LazyLoadImage src={`${IMG_URL + val.image}`} className="w-full" />
+                                <Image
+                                    layout='fill'
+                                    src={`${IMG_URL + val.image}`} className="w-full" />
                                 <div className="w-full text-center mt-3">{val.title}</div>
                                 <div className="w-full text-center my-2 h-5"> {val.description} </div>
 

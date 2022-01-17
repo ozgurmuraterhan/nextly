@@ -8,7 +8,7 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons"
 import ProductCardHome from "../ProductCard/home"
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Thumbs, Autoplay } from 'swiper';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Image from "next/image";
 
 // install Swiper modules
 SwiperCore.use([Navigation, Thumbs, Autoplay]);

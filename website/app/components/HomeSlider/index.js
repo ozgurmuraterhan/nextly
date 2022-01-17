@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useIntl } from 'react-intl';
 import IntlMessages from "../../../util/IntlMessages";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Image from "next/image";
 
 import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons"
 // import Swiper core and required modules
@@ -63,7 +63,9 @@ const Default = ({ state = [] }) => {
                             <div className="item">
                                 <Link href={val.link}>
                                     <a>
-                                        <LazyLoadImage src={`${IMG_URL + val.image}`} style={{ maxHeight: "500px", width: "100%" }} />
+                                        <Image
+                                            layout='fill'
+                                            src={`${IMG_URL + val.image}`} style={{ maxHeight: "500px", width: "100%" }} />
                                     </a>
                                 </Link>
                             </div>

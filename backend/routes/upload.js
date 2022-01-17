@@ -13,11 +13,11 @@ const uploadImage = async (req, res, next) => {
     try {
         if (req.body[0]) {
             // to declare some path to store your converted image 
-            const path = '../admin/public/images/uploads/staff/' + Date.now() + '.png'
+            const path = '../website/public/images/uploads/staff/' + Date.now() + '.png'
 
             const imgdata = req.body[0].thumbUrl;
             if (!imgdata) {
-                return res.send("../admin/public");
+                return res.send("../website/public");
             }
 
             // to convert base64 format into random filename 
@@ -27,7 +27,7 @@ const uploadImage = async (req, res, next) => {
 
             return res.send(path);
         } else {
-            return res.send("../admin/public");
+            return res.send("../website/public");
         }
 
     } catch (e) {
@@ -59,7 +59,7 @@ router.post("/deletestaffavatar", passport.authenticate('jwt', { session: false 
     const rolesControl = req.user.role;
     if (rolesControl['staff/id']) {
         try {
-            fs.unlinkSync("../admin/public" + req.body.path)
+            fs.unlinkSync("../website/public" + req.body.path)
         } catch (e) {
             console.log("not image")
         }
@@ -80,11 +80,11 @@ const uploadImageCustomer = async (req, res, next) => {
     try {
         if (req.body[0]) {
             // to declare some path to store your converted image 
-            const path = '../admin/public/images/uploads/customers/' + Date.now() + '.png'
+            const path = '../website/public/images/uploads/customers/' + Date.now() + '.png'
 
             const imgdata = req.body[0].thumbUrl;
             if (!imgdata) {
-                return res.send("../admin/public");
+                return res.send("../website/public");
             }
 
             // to convert base64 format into random filename 
@@ -94,7 +94,7 @@ const uploadImageCustomer = async (req, res, next) => {
 
             return res.send(path);
         } else {
-            return res.send("../admin/public");
+            return res.send("../website/public");
         }
 
     } catch (e) {
@@ -127,7 +127,7 @@ router.post("/deletecustomersavatar", passport.authenticate('jwt', { session: fa
     const rolesControl = req.user.role;
     if (rolesControl['customers/id']) {
         try {
-            fs.unlinkSync("../admin/public" + req.body.path)
+            fs.unlinkSync("../website/public" + req.body.path)
         } catch (e) {
             console.log("not image")
         }
@@ -143,7 +143,7 @@ router.post("/deletecustomersavatar", passport.authenticate('jwt', { session: fa
 
 const storageProduct = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '../admin/public/images/uploads/products');
+        cb(null, '../website/public/images/uploads/products');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -186,7 +186,7 @@ router.post("/deleteproductimage", passport.authenticate('jwt', { session: false
     const rolesControl = req.user.role;
     if (rolesControl['productimages/id']) {
         try {
-            fs.unlinkSync("../admin/public" + req.body.path)
+            fs.unlinkSync("../website/public" + req.body.path)
         } catch (e) {
             console.log("not image")
         }
@@ -205,7 +205,7 @@ router.post("/deleteproductimage", passport.authenticate('jwt', { session: false
 
 const storageCargo = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '../admin/public/images/uploads/cargoes');
+        cb(null, '../website/public/images/uploads/cargoes');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -248,7 +248,7 @@ router.post("/deletecargoimage", passport.authenticate('jwt', { session: false }
     const rolesControl = req.user.role;
     if (rolesControl['cargoes/id']) {
         try {
-            fs.unlinkSync("../admin/public" + req.body.path)
+            fs.unlinkSync("../website/public" + req.body.path)
         } catch (e) {
             console.log("not image")
         }
@@ -270,7 +270,7 @@ router.post("/deletecargoimage", passport.authenticate('jwt', { session: false }
 
 const storageOrderstatus = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '../admin/public/images/uploads/orderstatus');
+        cb(null, '../website/public/images/uploads/orderstatus');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -312,7 +312,7 @@ router.post("/deleteorderstatusimage", passport.authenticate('jwt', { session: f
     const rolesControl = req.user.role;
     if (rolesControl['orderstatus/id']) {
         try {
-            fs.unlinkSync("../admin/public" + req.body.path)
+            fs.unlinkSync("../website/public" + req.body.path)
         } catch (e) {
             console.log("not image")
         }
@@ -332,7 +332,7 @@ router.post("/deleteorderstatusimage", passport.authenticate('jwt', { session: f
 
 const storagePaymentmethods = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '../admin/public/images/uploads/paymentmethods');
+        cb(null, '../website/public/images/uploads/paymentmethods');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -374,7 +374,7 @@ router.post("/deletepaymentmethodsimage", passport.authenticate('jwt', { session
     const rolesControl = req.user.role;
     if (rolesControl['paymentmethods/id']) {
         try {
-            fs.unlinkSync("../admin/public" + req.body.path)
+            fs.unlinkSync("../website/public" + req.body.path)
         } catch (e) {
             console.log("not image")
         }
@@ -393,7 +393,7 @@ router.post("/deletepaymentmethodsimage", passport.authenticate('jwt', { session
 
 const storageBrands = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '../admin/public/images/uploads/brands');
+        cb(null, '../website/public/images/uploads/brands');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -434,7 +434,7 @@ router.post("/deletebrandsimage", passport.authenticate('jwt', { session: false 
     const rolesControl = req.user.role;
     if (rolesControl['brands/id']) {
         try {
-            fs.unlinkSync("../admin/public" + req.body.path)
+            fs.unlinkSync("../website/public" + req.body.path)
         } catch (e) {
             console.log("not image")
         }
@@ -464,7 +464,7 @@ router.post("/deletebrandsimage", passport.authenticate('jwt', { session: false 
 
 const storagehomeslider = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '../admin/public/images/uploads/homeslider');
+        cb(null, '../website/public/images/uploads/homeslider');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -505,7 +505,7 @@ router.post("/deletehomesliderimage", passport.authenticate('jwt', { session: fa
     const rolesControl = req.user.role;
     if (rolesControl['homeslider/id']) {
         try {
-            fs.unlinkSync("../admin/public" + req.body.path)
+            fs.unlinkSync("../website/public" + req.body.path)
         } catch (e) {
             console.log("not image")
         }
@@ -530,7 +530,7 @@ router.post("/deletehomesliderimage", passport.authenticate('jwt', { session: fa
 
 const storageLogo = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '../admin/public/images/uploads/logo');
+        cb(null, '../website/public/images/uploads/logo');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -572,7 +572,7 @@ router.post("/deletelogoimage", passport.authenticate('jwt', { session: false })
     const rolesControl = req.user.role;
     if (rolesControl['superadmin']) {
         try {
-            fs.unlinkSync("../admin/public" + req.body.path)
+            fs.unlinkSync("../website/public" + req.body.path)
         } catch (e) {
             console.log("not image")
         }

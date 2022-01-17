@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import Price from "../Price"
 import { Button } from "antd"
 import { SwapRightOutlined } from "@ant-design/icons"
-import { API_URL } from "../../../../config"
-import { LazyLoadImage } from "react-lazy-load-image-component"
+import { API_URL, IMG_URL } from "../../../../config"
+import Image from "next/image"
 
 const Default = ({ data = null, className }) => {
 
@@ -28,10 +28,11 @@ const Default = ({ data = null, className }) => {
                     <div className="w-full">
                         <div className="w-full relative">
 
-                            <LazyLoadImage
+                            <Image
+                                layout='fill'
                                 className="w-full bg-cover bg-center rounded-t-lg "
                                 src="/images/transparent.png"
-                                style={{ backgroundImage: `url(${data.allImages[0] ? API_URL + data.allImages[0].image : "/images/nofoto.jpg"})` }}
+                                style={{ backgroundImage: `url(${data.allImages[0] ? IMG_URL + data.allImages[0].image : "/images/nofoto.jpg"})` }}
                             />
 
                             <span className={`${func.getDiscount(data) ? "visible" : "invisible"} absolute z-10 top-0 mt-2 text-xs float-right py-1 px-2 bg-red-500 text-white`}>

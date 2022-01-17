@@ -6,7 +6,7 @@ import Price from "../Price"
 import { Button } from "antd"
 import { SwapRightOutlined } from "@ant-design/icons"
 import { API_URL } from "../../../../config"
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Image from "next/image";
 
 const Default = ({ data = null, className }) => {
 
@@ -28,7 +28,9 @@ const Default = ({ data = null, className }) => {
                     <div className="w-full float-left">
                         <div className="w-5/12 float-left relative ">
 
-                            <LazyLoadImage
+                            <Image
+                                layout='fill'
+
                                 className="w-full bg-cover bg-center  rounded-l-lg "
                                 src="/images/transparent.png"
                                 style={{ backgroundImage: `url(${data.allImages[0] ? API_URL + data.allImages[0].image : "/images/nofoto.jpg"})` }}
