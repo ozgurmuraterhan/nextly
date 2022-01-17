@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useIntl } from 'react-intl';
 import IntlMessages from "../../../util/IntlMessages";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Image from "next/image";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons"
 // import Swiper core and required modules
@@ -65,9 +65,7 @@ const Default = ({ state = [] }) => {
                                             <div className="text">
                                                 {val.title}
                                             </div>
-                                            <Image
-                                                layout='fill'
-                                                src={`${IMG_URL + val.image}`} className="w-full h-full" />
+                                            <LazyLoadImage src={`${IMG_URL + val.image}`} className="w-full h-full" />
                                         </div>
 
                                     </a>
@@ -95,9 +93,7 @@ const Default = ({ state = [] }) => {
                                             <div className="text">
                                                 {val.title}
                                             </div>
-                                            <Image
-                                                layout='fill'
-                                                src={`${IMG_URL + val.image}`} />
+                                            <LazyLoadImage src={`${IMG_URL + val.image}`} />
                                         </div>
 
                                     </a>

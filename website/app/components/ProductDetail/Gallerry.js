@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useIntl } from 'react-intl';
 import IntlMessages from "../../../util/IntlMessages";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Image from "next/image";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import ReactImageZoom from 'react-image-zoom';
 
 // import Swiper core and required modules
