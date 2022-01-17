@@ -54,8 +54,8 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                             </div>
 
 
-                            <div className="home-seccound-box-arrow-left absolute top-36 -left-10 text-5xl z-50 "><LeftOutlined /></div>
-                            <div className="home-seccound-box-arrow-right absolute top-36  -right-10 text-5xl z-50 "><RightOutlined /></div>
+                            <div className="home-seccound-box-arrow-left absolute top-30 -left-10 text-5xl z-50 "><LeftOutlined /></div>
+                            <div className="home-seccound-box-arrow-right absolute top-30  -right-10 text-5xl z-50 "><RightOutlined /></div>
 
                             <Swiper
                                 slidesPerView={1}
