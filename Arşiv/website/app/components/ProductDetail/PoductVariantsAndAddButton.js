@@ -1,0 +1,364 @@
+import { useEffect, useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { Row, Col, Divider, Radio, message, Form, Button } from "antd"
+import { ShoppingCartOutlined, LoadingOutlined } from "@ant-design/icons"
+import { getBasket_r, updateBasket_r } from "../../../redux/actions"
+import Price from "../Price"
+
+
+import router from "next/router"
+import axios from "axios";
+import func from "../../../util/helpers/func"
+
+import { API_URL } from "../../../../config"
+
+
+const Page = ({ data = {} }) => {
+    const { isAuthenticated, user } = useSelector(({ login }) => login);
+    const { basket } = useSelector(({ basket }) => basket);
+    const [state, seTstate] = useState(data)
+    const [loadingButton, seTloadingButton] = useState(true)
+    const [disabledVariant, seTdisabledVariant] = useState(true)
+    const [priceAdd, seTpriceAdd] = useState({ before_price: 0, price: 0, qty: 1 })
+
+    const [form] = Form.useForm();
+
+    const dispatch = useDispatch()
+    const seo = router.query.seo
+
+
+
+    const getBasket = (id) => {
+        dispatch(getBasket_r(id))
+    }
+
+    useEffect(() => {
+        getBasket(user.id)
+    }, [])
+
+    const addBasket = (res) => {
+
+        if (basket.length < 1) {
+
+            const post = {
+                created_user: {
+                    name: user.name,
+                    id: user.id
+                },
+                customer_id: user.id,
+                products: [
+                    {
+                        product_id: state._id,
+                        seo: state.seo,
+                        selectedVariants: res,
+                        qty: 1,
+                    }
+                ],
+                total_price: priceAdd.price,
+                discount_price: priceAdd.before_price,
+
+            }
+
+            if (isAuthenticated) {
+
+
+                axios.post(`${API_URL}/basket/add`, post).then((res) => {
+                    getBasket(user.id)
+                    seTloadingButton(true)
+                    form.resetFields()
+                    message.success({ content: 'Product Added!', duration: 3 });
+
+                })
+                    .catch(err => {
+                        message.error({ content: "Some Error, Please Try Again", duration: 3 });
+                    })
+
+            } else {
+
+                seTloadingButton(true)
+                form.resetFields()
+                message.success({ content: 'Product Added!', duration: 3 });
+                dispatch(updateBasket_r([post]))
+
+            }
+
+        } else {
+
+            const productsDataArray = basket[0].products
+            const productsData = []
+
+            if (state.type) {
+                const variantControl = productsDataArray.find(x => (x.product_id._id == state._id || x.product_id == state._id) && JSON.stringify(x.selectedVariants) == JSON.stringify(res))
+                const variantControlNot = productsDataArray.filter(x => JSON.stringify(x.selectedVariants) != JSON.stringify(res))
+                if (variantControl == undefined) {
+                    productsData.push(
+                        ...productsDataArray,
+                        {
+                            product_id: state._id,
+                            selectedVariants: res,
+                            seo: state.seo,
+                            qty: 1,
+                        })
+
+                } else {
+
+                    productsData.push(
+                        ...variantControlNot,
+                        {
+                            product_id: state._id,
+                            selectedVariants: res,
+                            seo: state.seo,
+                            qty: variantControl.qty + 1,
+                        })
+
+                }
+
+            } else {
+
+                const variantControlId = productsDataArray.find(x => x.product_id._id == state._id || x.product_id == state._id)
+                const variantControlIdNot = productsDataArray.filter(x => JSON.stringify(x.selectedVariants) != JSON.stringify(res) && x.product_id != state._id)
+
+
+
+                if (variantControlId == undefined) {
+                    productsData.push(
+                        ...productsDataArray,
+                        {
+                            product_id: state._id,
+                            selectedVariants: undefined,
+                            seo: state.seo,
+                            qty: 1,
+                        })
+
+                } else {
+
+                    productsData.push(
+                        ...variantControlIdNot,
+                        {
+                            product_id: state._id,
+                            selectedVariants: undefined,
+                            seo: state.seo,
+                            qty: variantControlId.qty + 1,
+                        })
+
+                }
+
+            }
+            const post = {
+                created_user: {
+                    name: user.name,
+                    id: user.id
+                },
+                customer_id: user.id,
+                products: productsData.sort((a, b) => (a.seo + JSON.stringify(a.selectedVariants)).length - (b.seo + JSON.stringify(b.selectedVariants)).length),
+
+            }
+            if (isAuthenticated) {
+
+                axios.post(`${API_URL}/basket/${basket[0]._id}`, post).then((res) => {
+                    getBasket(user.id)
+                    seTloadingButton(true)
+                    form.resetFields()
+                    message.success({ content: 'Product Added!', duration: 3 });
+
+                })
+                    .catch(err => {
+                        message.error({ content: "Some Error, Please Try Again", duration: 3 });
+                        console.log(err)
+                    })
+            } else {
+                seTloadingButton(true)
+                form.resetFields()
+                message.success({ content: 'Product Added!', duration: 3 });
+                dispatch(updateBasket_r([post]))
+
+            }
+
+        }
+    }
+
+    const onFinishFailed = (errorInfo) => {
+        console.log(errorInfo)
+    };
+    const getVariantPrice = (data) => {
+        if (data.length > 0) {
+            const newData = data.sort((a, b) => { return a.price - b.price })
+            return <span> <Price data={newData[0].price} />  -  <Price data={newData[data.length - 1].price} />   </span>
+        }
+    }
+
+    return (
+
+        <div className="px-10">
+            <h2 className="font-semibold mb-10 mt-5">{state.title}</h2>
+            <div className="my-4 w-full">
+                {state.type ?
+                    <>
+                        {disabledVariant ?
+                            <h1 className=" text-brand-color font-semibold text-2xl">
+
+                                {priceAdd.price != 0 ? <Price data={priceAdd.price} /> : getVariantPrice(state.variant_products)}
+
+                                {priceAdd.before_price != 0 && priceAdd.before_price > priceAdd.price ?
+                                    <span className="line-through ml-3 text-sm text-black" >
+                                        <Price data={priceAdd.before_price} />
+                                    </span>
+
+                                    : ""}
+                            </h1>
+                            : <h2 className="text-red-500">This is variant not shipping :(</h2>}
+
+                    </> :
+                    <h1 className="text-brand-color font-semibold text-2xl">
+
+                        {disabledVariant ?
+                            <>
+                                <Price data={state.price} />
+
+                                {state.before_price != 0 ?
+                                    <span className="line-through ml-3 text-sm text-black" >
+                                        <Price data={state.before_price} />
+                                    </span>
+
+                                    : ""}
+                            </> : ""}
+                    </h1>
+                }
+                <div className="h-5">
+
+                </div>
+            </div>
+            <div>
+                <Form
+                    form={form}
+                    name="add"
+                    onFinishFailed={onFinishFailed}
+                    scrollToFirstError
+                    layout="vertical"
+                    className="w-full "
+                >
+
+                    {state.type ?
+                        <>
+                            {state.variants.map((x, i) =>
+                                <div key={x.name}>
+                                    <Form.Item
+                                        name={x.name}
+                                        label={
+                                            form.getFieldValue(x.name) ?
+                                                <span>
+                                                    {x.name} :
+                                                    <span className="text-gray-500">  {form.getFieldValue(x.name)}  </span>
+                                                </span>
+                                                :
+                                                <span>
+                                                    {x.name} :
+                                                    <span className="text-gray-500"> Please Select</span>
+                                                </span>
+                                        }
+                                        labelAlign="left"
+                                        className="mb-0 pb-0 mt-5 "
+                                        rules={[{ required: true, message: "Please Select", whitespace: true }]}
+                                    >
+                                        <Radio.Group
+                                            name={x.name}
+                                            optionType="button"
+                                            buttonStyle="outline"
+                                            className="pl-2 "
+                                            required
+                                            onChange={y => {
+                                                const data = state
+                                                data.selectedVariants = { ...data.selectedVariants, [y.target.name]: y.target.value }
+                                                const priceMath = func.filter_array_in_obj(data.variant_products, data.selectedVariants)
+
+                                                if (priceMath.length == 1) {
+
+                                                    if (priceMath[0].qty == "0") {
+                                                        seTdisabledVariant(false)
+                                                    } else if (priceMath[0].visible) {
+                                                        seTdisabledVariant(true)
+                                                    } else {
+                                                        seTdisabledVariant(false)
+                                                    }
+
+                                                }
+
+                                                seTpriceAdd({
+                                                    qty: priceAdd.qty,
+                                                    price: priceMath[0].price * priceAdd.qty,
+                                                    before_price: priceMath[0].before_price * priceAdd.qty
+                                                })
+                                            }}
+                                        >
+
+                                            {x.value.map(z => {
+
+                                                return <Radio.Button value={z}>{z}</Radio.Button>
+
+                                            })}
+
+
+                                        </Radio.Group>
+
+                                    </Form.Item>
+                                </div>
+
+                            )}
+                        </>
+                        : ""}
+
+
+
+                    {/* <label>Adet: <br /></label>
+                            <div>
+                                <Input type="number" onChange={x => {
+
+                                    seTpriceAdd({
+                                        qty: x.target.value,
+                                        price: state.price * x.target.value,
+                                        before_price: state.before_price * x.target.value
+                                    })
+
+                                }}
+                                    value={priceAdd.qty}
+                                />
+                            </div> */}
+                    <Divider />
+
+                    <Button type="primary"
+                        className="  w-full border-brand-color bg-brand-color text-2xl h-auto"
+                        disabled={!disabledVariant}
+                        onClick={() => {
+                            form.validateFields().then(res => {
+                                seTloadingButton(false)
+                                if (loadingButton) {
+                                    addBasket(res)
+                                }
+                            }).catch(err => console.log("err", err))
+                        }}>
+
+                        Add Cart
+                        {loadingButton ?
+                            <ShoppingCartOutlined />
+                            :
+                            <LoadingOutlined className="animate-spin h-5 w-5 mr-3  " />
+
+                        }
+                    </Button>
+
+                </Form>
+                <Divider />
+
+                <h3>{state.description_short}</h3>
+
+
+            </div>
+        </div >
+
+    )
+
+}
+
+
+
+export default Page
