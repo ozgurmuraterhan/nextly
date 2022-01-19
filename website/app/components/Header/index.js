@@ -9,7 +9,6 @@ import { useIntl } from 'react-intl';
 
 import router from "next/router"
 import Link from "next/link";
-import Router from "next/router";
 import LoginForm from "./LoginForm"
 import RegisterForm from "./RegisterForm"
 import IntlMessages from "../../../util/IntlMessages";

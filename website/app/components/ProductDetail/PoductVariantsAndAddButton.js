@@ -24,7 +24,7 @@ const Page = ({ data = {} }) => {
     const [form] = Form.useForm();
 
     const dispatch = useDispatch()
-    const seo = router.query.seo
+    // const seo = router.query.seo
 
 
 

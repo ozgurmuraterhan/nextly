@@ -1,30 +1,21 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import HTMLRenderer from 'react-html-renderer'
-import { Row, Col, Divider, Radio, Input, Form, Button } from "antd"
-import { ShoppingCartOutlined } from "@ant-design/icons"
 import { getBasket_r } from "../../redux/actions"
-import { wrapper } from "../../redux/store"
 import Head from "../../app/core/Head"
-import router from "next/router"
 import axios from "axios";
 import ProductGallerry from "../../app/components/ProductDetail/Gallerry"
 import PoductVariantsAndAddButton from "../../app/components/ProductDetail/PoductVariantsAndAddButton"
-import func from "../../util/helpers/func"
 
-import { API_URL, PRICE_VERSION } from "../../../config"
+import { API_URL } from "../../../config"
 
 
-const Page = ({ resData = {} }) => {
+const Page = ({ resData = {}, seo = "" }) => {
     const { isAuthenticated, user } = useSelector(({ login }) => login);
-
 
     const [state, seTstate] = useState(resData[0])
 
-    const [form] = Form.useForm();
-
     const dispatch = useDispatch()
-    const seo = router.query.seo
 
 
     const getBasket = (id) => {
@@ -51,7 +42,7 @@ const Page = ({ resData = {} }) => {
                     <ProductGallerry images={state.allImages} />
                 </div>
                 <div className=" col-span-12 lg:col-span-6">
-                    <PoductVariantsAndAddButton data={state} />
+                    <PoductVariantsAndAddButton data={state} seo={seo} />
                 </div>
             </div>
 
@@ -76,7 +67,8 @@ export const getServerSideProps = async ({ req, query }) => {
     const response = await axios.get(`${API_URL}/productspublic/${query.seo}`)
     return {
         props: {
-            resData: response.data
+            resData: response.data,
+            seo: query.seo
         }
     }
 }

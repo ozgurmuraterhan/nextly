@@ -15,8 +15,6 @@ import { filterProducts_r } from "../../redux/actions";
 const Page = () => {
     const { filterProducts } = useSelector(({ filterProducts }) => filterProducts);
 
-    const [state, seTstate] = useState({ brands: [], count: 1 })
-
     const { isAuthenticated, user } = useSelector(({ login }) => login);
 
 
