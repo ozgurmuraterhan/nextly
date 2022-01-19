@@ -24,17 +24,14 @@ import { API_URL } from "../../../../config";
 
 
 
-const Default = () => {
+const Page = () => {
 
-    const dispatch = useDispatch();
-    const { collapsed, settings, errorFetch } = useSelector(({ settings }) => settings);
     const { categories } = useSelector(({ categories }) => categories);
     const categoriesData = func.getCategoriesTreeOptions(categories, true)
 
-
     return (
         <Menu mode="horizontal" className=" block" >
-            {categoriesData.map((val, i) => (
+            {categoriesData && categoriesData.map((val, i) => (
                 <React.Fragment key={val.title + val._id}>
                     {val.children ?
                         <Menu.SubMenu className="border-0 " key={val.title + val._id} title={val.title}>
@@ -44,6 +41,7 @@ const Default = () => {
                                         {val2.children ?
                                             <Menu.SubMenu className=" " key={val2.title} title={val2.title}>
                                                 {
+
                                                     val2?.children.map(val3 => (
                                                         <Menu.Item key={val3.title + val3._id} className="h-25">
                                                             <Link href={"/search?categories=" + val3._id}>
@@ -80,5 +78,5 @@ const Default = () => {
 
 
 
-export default Default;
+export default Page;
 

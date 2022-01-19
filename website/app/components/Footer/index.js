@@ -41,7 +41,7 @@ const Default = ({ footerMenu }) => {
                     {footerMenu && footerMenu.map(val => (
                         <li key={val.title} className="mt-2 text-left">
                             {!val.children ?
-                                <Link href={val.link ? val.link : val.seo}>
+                                <Link href={val.link ? val.link : "/content/" + val.seo}>
                                     <a className="text-white text-2xl">{val.title}</a>
                                 </Link>
                                 :
@@ -53,7 +53,7 @@ const Default = ({ footerMenu }) => {
                                         {val?.children.map(val2 => (
                                             <li key={val2.title} className=" my-1 sm:my-4  ">
                                                 {!val2.children ?
-                                                    <Link href={val2.link ? val2.link : val2.seo}>
+                                                    <Link href={val2.link ? val2.link : "/content/" + val2.seo}>
                                                         <a className="text-white">- {val2.title}</a>
                                                     </Link>
                                                     :
@@ -64,7 +64,7 @@ const Default = ({ footerMenu }) => {
                                                         <ul key={val2.title}>
                                                             {val2?.children.map(val3 => (
                                                                 <li key={val3.title} >
-                                                                    <Link href={val3.link ? val3.link : val3.seo}>
+                                                                    <Link href={val3.link ? val3.link : "/content/" + val3.seo}>
                                                                         <a className="text-white ">-- {val3.title}</a>
                                                                     </Link>
                                                                 </li>
