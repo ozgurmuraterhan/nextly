@@ -44,7 +44,6 @@ const AppLayout = ({ children }) => {
 
     const { topmenu } = useSelector(({ topmenu }) => topmenu);
 
-    const [isLoaded, seTisLoaded] = useState(false)
 
     const loginControl = async () => {
         if (!isAuthenticated) {
@@ -61,9 +60,6 @@ const AppLayout = ({ children }) => {
     const fetchError = () => {
         if (errorFetch) {
             message.error(errorFetch)
-            seTisLoaded(false)
-        } else {
-            seTisLoaded(true)
         }
     }
 
@@ -74,7 +70,7 @@ const AppLayout = ({ children }) => {
     }, [isAuthenticated])
 
 
-    return !isLoaded ? <CircularProgress /> : (
+    return (
         <>
             <Layout >
 
