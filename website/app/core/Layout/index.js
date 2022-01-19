@@ -69,15 +69,14 @@ const AppLayout = ({ children }) => {
 
 
     useEffect(() => {
-        fetchError()
         loginControl()
+        fetchError()
     }, [isAuthenticated])
 
 
-    return !isLoaded ? <CircularProgress /> : (
+    return (
         <>
             <Layout >
-
                 <div className="border-b-2">
                     <div className=" container-custom   ">
                         <HeaderTopMenu socialmedia={func.getCategoriesTree(topmenu, "614b8cc75c153bab76bdf681")} topmenu={func.getCategoriesTree(topmenu)} />
@@ -88,7 +87,6 @@ const AppLayout = ({ children }) => {
                 <Content>
                     {children}
                 </Content>
-
                 <Footer footerMenu={func.getCategoriesTree(topmenu, "6154a5a279053f941d1b786c")} />
             </Layout>
         </>

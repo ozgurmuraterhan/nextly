@@ -31,11 +31,6 @@ const Default = () => {
     const { categories } = useSelector(({ categories }) => categories);
     const categoriesData = func.getCategoriesTreeOptions(categories, true)
 
-    useEffect(() => {
-
-    }, [])
-
-
 
     return (
         <Menu mode="horizontal" className=" block" >
