@@ -74,10 +74,29 @@ const Sidebar = () => {
                         <span><IntlMessages id="layout.sidebar.dashboard" /></span></a></Link>
                 </Menu.Item>
 
+                {role?.ordersview ?
+                    <Menu.Item key="orders" icon={<DollarOutlined />}>
+                        <Link href="/orders/list"><a>
+                            <span> <IntlMessages id="layout.sidebar.orders" /> </span></a></Link>
+                    </Menu.Item>
+                    : ""}
+
                 {role?.productsview ?
                     <Menu.Item key="products" icon={<CheckSquareOutlined />}>
                         <Link href="/products/list"><a>
                             <span><IntlMessages id="layout.sidebar.products" /></span></a></Link>
+                    </Menu.Item>
+                    : ""}
+                {role?.variantsview ?
+                    <Menu.Item key="variants" icon={<DeleteRowOutlined />}>
+                        <Link href="/variants/list"><a>
+                            <span> <IntlMessages id="layout.sidebar.variants" />  </span></a></Link>
+                    </Menu.Item>
+                    : ""}
+                {role?.categoriesview ?
+                    <Menu.Item key="categories" icon={<OrderedListOutlined />}>
+                        <Link href="/categories/list"><a>
+                            <span><IntlMessages id="layout.sidebar.categories" /> </span></a></Link>
                     </Menu.Item>
                     : ""}
                 {role?.brandsview ?
@@ -87,36 +106,14 @@ const Sidebar = () => {
                     </Menu.Item>
                     : ""}
 
-                {role?.categoriesview ?
-                    <Menu.Item key="categories" icon={<OrderedListOutlined />}>
-                        <Link href="/categories/list"><a>
-                            <span><IntlMessages id="layout.sidebar.categories" /> </span></a></Link>
-                    </Menu.Item>
-                    : ""}
-                {role?.customersview ?
-                    <Menu.Item key="customers" icon={<UsergroupAddOutlined />}>
-                        <Link href="/customers/list"><a>
-                            <span><IntlMessages id="layout.sidebar.customers" /> </span></a></Link>
-                    </Menu.Item>
-                    : ""}
-                {role?.ordersview ?
-                    <Menu.Item key="orders" icon={<DollarOutlined />}>
-                        <Link href="/orders/list"><a>
-                            <span> <IntlMessages id="layout.sidebar.orders" /> </span></a></Link>
-                    </Menu.Item>
-                    : ""}
+
                 {role?.cargoesview ?
                     <Menu.Item key="cargoes" icon={<CodeSandboxOutlined />}>
                         <Link href="/cargoes/list"><a>
                             <span> <IntlMessages id="layout.sidebar.cargoes" /> </span></a></Link>
                     </Menu.Item>
                     : ""}
-                {role?.variantsview ?
-                    <Menu.Item key="variants" icon={<DeleteRowOutlined />}>
-                        <Link href="/variants/list"><a>
-                            <span> <IntlMessages id="layout.sidebar.variants" />  </span></a></Link>
-                    </Menu.Item>
-                    : ""}
+
                 {role?.orderstatusview ?
                     <Menu.Item key="orderstatus" icon={<PartitionOutlined />}>
                         <Link href="/orderstatus/list"><a>
@@ -129,17 +126,22 @@ const Sidebar = () => {
                             <span> <IntlMessages id="layout.sidebar.paymentMethods" /> </span></a></Link>
                     </Menu.Item>
                     : ""}
+                {role?.homesliderview ?
+                    <Menu.Item key="homeslider" icon={<FileImageOutlined />}>
+                        <Link href="/homeslider/list"><a>
+                            <span> <IntlMessages id="layout.sidebar.homeSlider" /> </span></a></Link>
+                    </Menu.Item>
+                    : ""}
                 {role?.topmenuview ?
                     <Menu.Item key="topmenu" icon={<FileDoneOutlined />}>
                         <Link href="/topmenu/list"><a>
                             <span> <IntlMessages id="layout.sidebar.topMenuContent" /> </span></a></Link>
                     </Menu.Item>
                     : ""}
-
-                {role?.homesliderview ?
-                    <Menu.Item key="homeslider" icon={<FileImageOutlined />}>
-                        <Link href="/homeslider/list"><a>
-                            <span> <IntlMessages id="layout.sidebar.homeSlider" /> </span></a></Link>
+                {role?.customersview ?
+                    <Menu.Item key="customers" icon={<UsergroupAddOutlined />}>
+                        <Link href="/customers/list"><a>
+                            <span><IntlMessages id="layout.sidebar.customers" /> </span></a></Link>
                     </Menu.Item>
                     : ""}
                 {role?.staffview ?
