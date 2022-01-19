@@ -74,7 +74,7 @@ const AppLayout = ({ children }) => {
     }, [isAuthenticated])
 
 
-    return (
+    return !isLoaded ? <CircularProgress /> : (
         <>
             <Layout >
                 <div className="border-b-2">
@@ -87,6 +87,7 @@ const AppLayout = ({ children }) => {
                 <Content>
                     {children}
                 </Content>
+
                 <Footer footerMenu={func.getCategoriesTree(topmenu, "6154a5a279053f941d1b786c")} />
             </Layout>
         </>
