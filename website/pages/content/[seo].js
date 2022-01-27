@@ -48,14 +48,13 @@ const Page = ({ data = {} }) => {
                 </div>
                 <div className=" lg:col-span-9 sm:order-2 sm:col-span-12 ">
 
-                    <div className="text-2xl font-semibold col-span-12 text-brand-color  mb-5  " >     {content && content.title} </div>
+                    <div className="text-2xl font-semibold col-span-12 text-brand-color  mb-5 h-  " >     {content && content.title} </div>
                     <HTMLRenderer
                         html={content && content.description}
-                    // components={{
-                    //   h1: props => <Heading color="red" {...props} />,
-                    //   h2: Subheading,
-                    //   a: Link,
-                    // }}
+                        components={{
+                            p: props => <p style={{ minHeight: "25px" }} {...props} />,
+                            pre: props => <pre style={{ backgroundColor: "#fbfbfb", padding: "20px" }} {...props} />,
+                        }}
                     />
 
                 </div>

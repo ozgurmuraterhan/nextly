@@ -63,12 +63,12 @@ const Default = ({ getData = [] }) => {
       width: 360,
       render: (text, record) => (
         <span className="link ant-dropdown-link">
-          {role["categoriesdelete"] ?
+          {role["productsdelete"] ?
             <Popconfirm placement="left" title={intl.messages["app.pages.common.sureToDelete"]} onConfirm={() => deleteData(record._id)}>
               <a><DeleteOutlined style={{ fontSize: "150%", marginLeft: "15px" }} /> </a>
             </Popconfirm>
             : ""}
-          {role["categories/id"] ?
+          {role["products/id"] ?
             <Link href={"/products/" + record._id}><a> <EditOutlined style={{ fontSize: "150%", marginLeft: "15px" }} /></a></Link>
             : ""}
         </span>
@@ -102,7 +102,7 @@ const Default = ({ getData = [] }) => {
   return (
 
     <div>
-      {role["categories/add"] ?
+      {role["products/add"] ?
         <Link href="/products/add">
           <Button type="primary" className="float-right addbtn" icon={<AppstoreAddOutlined />}>
             <IntlMessages id="app.pages.common.create" />
