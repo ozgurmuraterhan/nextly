@@ -74,8 +74,9 @@ const AppLayout = ({ children }) => {
     }, [isAuthenticated])
 
 
-    return !isLoaded ? <CircularProgress /> : (
+    return (
         <>
+            <CircularProgress className={!isLoaded ? "visible" : "hidden"} />
             <Layout >
                 <div className="border-b-2">
                     <div className=" container-custom   ">
