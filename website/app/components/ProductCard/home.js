@@ -35,7 +35,7 @@ const Default = ({ data = null, className }) => {
                             />
 
                             <span className={`${func.getDiscount(data) ? "visible" : "invisible"} absolute z-10 top-0 mt-2 text-xs float-right py-1 px-2 bg-red-500 text-white`}>
-                                {settings.price_type ? "%" + func.getDiscount(data) : func.getDiscount(data) + "%"} discount
+                                {settings.price_type ? "%" + Number(func.getDiscount(data)).toFixed(0) : Number(func.getDiscount(data)).toFixed(0) + "%"} discount
                             </span>
                             <ul className="product-links">
                                 {/* <li><a href="#" data-tip="Add to Wishlist"><HeartOutlined /></a></li> 

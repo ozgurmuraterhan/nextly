@@ -46,13 +46,13 @@ const AppLayout = ({ children }) => {
 
     const [isLoaded, seTisLoaded] = useState(false)
 
-    const loginControl = async () => {
+    const loginControl = () => {
         if (!isAuthenticated) {
-            AuthService.isAuthenticated().then(async auth => {
+            AuthService.isAuthenticated().then(auth => {
                 if (auth.isAuthenticated) {
-                    await dispatch(getBasket_r(auth.user.id))
-                    await dispatch(login_r(auth.user));
-                    await dispatch(isAuthenticated_r(true));
+                    dispatch(getBasket_r(auth.user.id))
+                    dispatch(login_r(auth.user));
+                    dispatch(isAuthenticated_r(true));
                 }
             })
         }

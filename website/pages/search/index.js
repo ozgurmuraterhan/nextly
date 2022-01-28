@@ -34,7 +34,7 @@ const Page = () => {
 
         callUrltoRedux()
 
-    }, [router.router.asPath])
+    }, [router.router?.asPath])
 
 
     return (
