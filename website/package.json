@@ -6,7 +6,7 @@
     "watch:less": "watch 'npm run goless && npm run dev'  ./public/less",
     "build": "next build",
     "start": "next start",
-    "goless": "lessc -js public/less/var.less public/css/ant-custom.css"
+    "goless": "lessc -js public/less/var.less public/css/ant-custom.css  -x"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
