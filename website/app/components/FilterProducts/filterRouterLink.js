@@ -1,7 +1,4 @@
-import { useSelector } from "react-redux"
 import router from "next/router"
-import { useEffect } from "react"
-
 
 const filterRouteLinkGenerate = (filterProducts) => {
 

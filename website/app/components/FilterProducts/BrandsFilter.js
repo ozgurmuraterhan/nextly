@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { Checkbox, Input, Tag } from "antd"
-import router from "next/router"
+import { Checkbox, Input } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 import filterRouteLinkGenerate from "./filterRouterLink";
 
@@ -30,7 +29,6 @@ const Page = () => {
     }, [])
 
     function onChange(checkedValues) {
-
         dispatch(filterProducts_r({ ...filterProducts, brands: checkedValues, skip: 0 }))
         filterRouteLinkGenerate({ ...filterProducts, brands: checkedValues, skip: 0 })
     }
@@ -38,7 +36,6 @@ const Page = () => {
     const onChangeSearch = (e) => {
         const filterData = state.allData.filter(val => val.label.toLowerCase().search(e.target.value.toLowerCase()) !== -1)
         seTstate({ ...state, brands: filterData })
-
     }
 
 
@@ -48,13 +45,11 @@ const Page = () => {
                 onChange={onChangeSearch}
                 suffix={<SearchOutlined />}
             />
-
             <div className="BrandsFilter rounded-bottom" >
                 <Checkbox.Group
                     options={state.brands}
                     value={[...filterProducts.brands]}
                     onChange={onChange}
-
                 />
             </div>
 

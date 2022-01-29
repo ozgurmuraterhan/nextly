@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {
-    PaymentElement,
-    useStripe,
-    useElements
-} from "@stripe/react-stripe-js";
+import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { Checkbox, Button, Form, Input } from "antd"
 import router from "next/router"
 import { useDispatch, useSelector } from "react-redux";
 import { getBasket_r, updateBasket_r } from "../../../redux/actions"
 import axios from "axios"
-import { WEBSITE_URL, API_URL } from "../../../../config"
+import { API_URL } from "../../../../config"
 
 
 export default function CheckoutForm({ contract }) {
@@ -18,7 +14,6 @@ export default function CheckoutForm({ contract }) {
     const dispatch = useDispatch()
     const { basket } = useSelector((state) => state.basket);
     const { user, isAuthenticated } = useSelector((state) => state.login);
-    const [state, seTstate] = useState("")
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isChecked, seTisChecked] = useState(false);
@@ -55,7 +50,6 @@ export default function CheckoutForm({ contract }) {
     }, [stripe, user]);
 
     const handleSubmit = async (data) => {
-
 
         basket[0].receiver_name = data.name
         basket[0].receiver_email = data.email

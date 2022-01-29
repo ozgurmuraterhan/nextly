@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { Row, Col, Divider, Radio, message, Form, Button } from "antd"
-import { ShoppingCartOutlined, LoadingOutlined } from "@ant-design/icons"
-import { getBasket_r, updateBasket_r } from "../../../redux/actions"
+import { Divider, Radio, Form } from "antd"
+import { getBasket_r } from "../../../redux/actions"
 import Price from "../Price"
+import AddProductButton from "./AddProductButton"
 
-
-import router from "next/router"
-import axios from "axios";
 import func from "../../../util/helpers/func"
-
-import { API_URL } from "../../../../config"
-
 
 const Page = ({ data = {} }) => {
     const { isAuthenticated, user } = useSelector(({ login }) => login);
@@ -26,8 +20,6 @@ const Page = ({ data = {} }) => {
     const dispatch = useDispatch()
     // const seo = router.query.seo
 
-
-
     const getBasket = (id) => {
         dispatch(getBasket_r(id))
     }
@@ -35,147 +27,6 @@ const Page = ({ data = {} }) => {
     useEffect(() => {
         getBasket(user.id)
     }, [])
-
-    const addBasket = (res) => {
-
-        if (basket.length < 1) {
-
-            const post = {
-                created_user: {
-                    name: user.name,
-                    id: user.id
-                },
-                customer_id: user.id,
-                products: [
-                    {
-                        product_id: state._id,
-                        seo: state.seo,
-                        selectedVariants: res,
-                        qty: 1,
-                    }
-                ],
-                total_price: priceAdd.price,
-                discount_price: priceAdd.before_price,
-
-            }
-
-            if (isAuthenticated) {
-
-
-                axios.post(`${API_URL}/basket/add`, post).then((res) => {
-                    getBasket(user.id)
-                    seTloadingButton(true)
-                    form.resetFields()
-                    message.success({ content: 'Product Added!', duration: 3 });
-
-                })
-                    .catch(err => {
-                        message.error({ content: "Some Error, Please Try Again", duration: 3 });
-                    })
-
-            } else {
-
-                seTloadingButton(true)
-                form.resetFields()
-                message.success({ content: 'Product Added!', duration: 3 });
-                dispatch(updateBasket_r([post]))
-
-            }
-
-        } else {
-
-            const productsDataArray = basket[0].products
-            const productsData = []
-
-            if (state.type) {
-                const variantControl = productsDataArray.find(x => (x.product_id._id == state._id || x.product_id == state._id) && JSON.stringify(x.selectedVariants) == JSON.stringify(res))
-                const variantControlNot = productsDataArray.filter(x => JSON.stringify(x.selectedVariants) != JSON.stringify(res))
-                if (variantControl == undefined) {
-                    productsData.push(
-                        ...productsDataArray,
-                        {
-                            product_id: state._id,
-                            selectedVariants: res,
-                            seo: state.seo,
-                            qty: 1,
-                        })
-
-                } else {
-
-                    productsData.push(
-                        ...variantControlNot,
-                        {
-                            product_id: state._id,
-                            selectedVariants: res,
-                            seo: state.seo,
-                            qty: variantControl.qty + 1,
-                        })
-
-                }
-
-            } else {
-
-                const variantControlId = productsDataArray.find(x => x.product_id._id == state._id || x.product_id == state._id)
-                const variantControlIdNot = productsDataArray.filter(x => JSON.stringify(x.selectedVariants) != JSON.stringify(res) && x.product_id != state._id)
-
-
-
-                if (variantControlId == undefined) {
-                    productsData.push(
-                        ...productsDataArray,
-                        {
-                            product_id: state._id,
-                            selectedVariants: undefined,
-                            seo: state.seo,
-                            qty: 1,
-                        })
-
-                } else {
-
-                    productsData.push(
-                        ...variantControlIdNot,
-                        {
-                            product_id: state._id,
-                            selectedVariants: undefined,
-                            seo: state.seo,
-                            qty: variantControlId.qty + 1,
-                        })
-
-                }
-
-            }
-            const post = {
-                created_user: {
-                    name: user.name,
-                    id: user.id
-                },
-                customer_id: user.id,
-                products: productsData.sort((a, b) => (a.seo + JSON.stringify(a.selectedVariants)).length - (b.seo + JSON.stringify(b.selectedVariants)).length),
-
-            }
-            if (isAuthenticated) {
-
-                axios.post(`${API_URL}/basket/${basket[0]._id}`, post).then((res) => {
-                    getBasket(user.id)
-                    seTloadingButton(true)
-                    form.resetFields()
-                    message.success({ content: 'Product Added!', duration: 3 });
-
-                })
-                    .catch(err => {
-                        message.error({ content: "Some Error, Please Try Again", duration: 3 });
-                        console.log(err)
-                    })
-            } else {
-                seTloadingButton(true)
-                form.resetFields()
-                message.success({ content: 'Product Added!', duration: 3 });
-                dispatch(updateBasket_r([post]))
-
-            }
-
-        }
-    }
 
     const onFinishFailed = (errorInfo) => {
         console.log(errorInfo)
@@ -324,27 +175,19 @@ const Page = ({ data = {} }) => {
                                 />
                             </div> */}
                     <Divider />
+                    <AddProductButton
+                        disabledVariant={disabledVariant}
+                        form={form}
+                        seTloadingButton={seTloadingButton}
+                        loadingButton={loadingButton}
+                        basket={basket}
+                        isAuthenticated={isAuthenticated}
+                        user={user}
+                        state={state}
+                        priceAdd={priceAdd}
+                        getBasket={getBasket}
+                    />
 
-                    <Button type="primary"
-                        className="  w-full border-brand-color bg-brand-color text-2xl h-auto"
-                        disabled={!disabledVariant}
-                        onClick={() => {
-                            form.validateFields().then(res => {
-                                seTloadingButton(false)
-                                if (loadingButton) {
-                                    addBasket(res)
-                                }
-                            }).catch(err => console.log("err", err))
-                        }}>
-
-                        Add Cart
-                        {loadingButton ?
-                            <ShoppingCartOutlined />
-                            :
-                            <LoadingOutlined className="animate-spin h-5 w-5 mr-3  " />
-
-                        }
-                    </Button>
 
                 </Form>
                 <Divider />

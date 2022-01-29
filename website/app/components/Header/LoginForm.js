@@ -1,21 +1,13 @@
-
-
-import { useState, useEffect } from "react";
-
-import { Input, Drawer, Modal, Form, Button, message, Select, Divider } from "antd"
-import { useIntl } from 'react-intl';
+import { Input, Form, Button } from "antd"
 import Link from "next/link"
 import IntlMessages from "../../../util/IntlMessages";
 
 
 const Default = ({ onSubmitLogin, handleCancelLogin }) => {
 
-    const intl = useIntl();
     const [form] = Form.useForm();
 
     return (
-
-
         <div className="mb-5">
             <Form
                 onFinish={onSubmitLogin}

@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Button, Checkbox, Form, Input, message, Row, Col, Typography, Select, Divider, Drawer } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Form, Input, message, Select, Drawer } from "antd";
 import { useIntl } from 'react-intl';
 
 import AddressSelect from "../Basket/AddressSelect"
 import { useDispatch, useSelector } from "react-redux";
-import { API_URL, languageData } from "../../../../config"
+import { API_URL } from "../../../../config"
 
 import AuthService from "../../../util/services/authservice";
 import axios from "axios";
@@ -37,8 +37,6 @@ const Defaut = () => {
       seTstate(data);
       seTfields(Object.entries(data.address).map(([name, value]) => ({ name, value })));
       seTaddress(data.address)
-
-
     });
   }
   useEffect(() => {

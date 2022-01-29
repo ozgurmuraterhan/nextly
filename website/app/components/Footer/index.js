@@ -1,30 +1,11 @@
-
-import { useState, useEffect } from "react";
-
-import AuthService from "../../../util/services/authservice";
-import { useDispatch, useSelector } from "react-redux";
-import { login_r, isAuthenticated_r, settings_r, logout_r } from "../../../redux/actions";
-import { Input, Drawer, Modal, Form, Button, message, Divider } from "antd"
-import axios from "axios"
-import func from "../../../util/helpers/func"
+import { useSelector } from "react-redux";
+import { Divider } from "antd"
 import Link from "next/link";
-
-import IntlMessages from "../../../util/IntlMessages";
-
-import {
-    UserOutlined,
-    ShoppingCartOutlined,
-    LoginOutlined,
-    LogoutOutlined,
-
-} from '@ant-design/icons';
 import { IMG_URL } from "../../../../config";
 
 const Default = ({ footerMenu }) => {
 
-
     const { settings } = useSelector(({ settings }) => settings);
-
 
     return (
         <div className="bg-black py-10">

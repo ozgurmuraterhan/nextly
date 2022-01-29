@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react"
 import Link from 'next/link';
 
-import { Select, message, Image, Table, Popconfirm, Button, Tooltip, Radio } from "antd";
-import { EditOutlined, DeleteOutlined, AppstoreAddOutlined } from '@ant-design/icons';
+import { Select, Table, Tooltip, Radio } from "antd";
 import { useIntl } from 'react-intl';
 import axios from "axios"
 import { API_URL } from "../../../../config"
 import moment from "moment"
 import Price from "../Price"
+
 const Defaut = () => {
     const intl = useIntl();
-
     const [data, seTdata] = useState([]);
     const [orderStatus, seTorderStatus] = useState([]);
 

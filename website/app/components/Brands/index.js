@@ -1,27 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Pagination, History } from 'swiper';
 import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons"
-
+import { useSelector } from "react-redux";
+import Link from "next/link";
+import { IMG_URL } from "../../../../config";
 
 SwiperCore.use([Navigation, Pagination, History]);
-
 import "swiper/css";
 import "swiper/css/pagination"
 import "swiper/css/navigation"
 
-
-
-import { useDispatch, useSelector } from "react-redux";
-import Link from "next/link";
-import { API_URL, IMG_URL } from "../../../../config";
-
-
-
-
 const Default = () => {
 
-    const dispatch = useDispatch();
     const { brands } = useSelector(({ brands }) => brands);
 
     return (

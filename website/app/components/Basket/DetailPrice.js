@@ -1,34 +1,25 @@
-
 import axios from "axios";
 import { useState, useEffect } from "react";
 import router from "next/router"
-import { Table, Popconfirm, Select, Divider, message, Button } from "antd"
-
+import { Select, Divider, message, Button } from "antd"
 import Price from "../Price"
 import { CheckSquareOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from "../../../../config";
 import func from "../../../util/helpers/func"
 import { getBasket_r, updateBasket_r } from "../../../redux/actions"
-import { useIntl } from 'react-intl';
 
 const Default = () => {
-    const intl = useIntl();
 
     const { basket } = useSelector((state) => state.basket);
     const { isAuthenticated, user } = useSelector(({ login }) => login);
-    const [basketProducts, seTbasketProducts] = useState(false)
-    const [state, seTstate] = useState([])
     const [cargoes, seTcargoes] = useState([])
-    const [disableButton, seTdisableButton] = useState(false)
     const [selectedCargo, seTselectedCargo] = useState({ cargo_price_discount: 0, cargo_price: 0, selectedCargo: 0 })
-
-    const [isLoaded, seTisLoaded] = useState(false)
     const [allPrice, seTallPrice] = useState({ total: 0, discount: 0, cargo_price: 0, cargo_price_discount: 0 })
     const dispatch = useDispatch();
 
     const getBasketProducts = (data = [], products = []) => {
-        const BasketAllProducts = []
+
         let basketTotalPrice = 0
         let basketTotalDiscountPrice = 0
         const errorArray = []
@@ -81,16 +72,12 @@ const Default = () => {
     const getProducts = async () => {
         if (basket.length > 0) {
             const arrayId = []
-            seTbasketProducts(basket[0].products)
-
             basket[0].products.map(x => {
                 arrayId.push(x.product_id)
             })
-
             await axios.post(`${API_URL}/basket/allproducts`, { _id: arrayId }).then(res => {
                 getBasketProducts(res.data, basket[0].products)
             })
-            seTdisableButton(true)
         }
     }
 
@@ -168,15 +155,8 @@ const Default = () => {
                         basketTotalDiscountPrice = basketTotalDiscountPrice + (x.qty * resData.before_price)
                     }
                 }
-
-
             })
-
         })
-
-
-
-
 
         let control = false
         control = errorArray.find(x => x == true)
@@ -200,21 +180,15 @@ const Default = () => {
 
 
             if (isAuthenticated) {
-
                 axios.post(`${API_URL}/basket/${basket[0]._id}`, post).then(async (res) => {
-
                     message.success({ content: 'Next Stage :)', duration: 3 });
                     await dispatch(getBasket_r(user.id))
-                    seTisLoaded(false)
-
                 })
                     .catch(err => {
                         message.error({ content: "Some Error, Please Try Again", duration: 3 });
                         console.log(err)
-
                     })
             } else {
-
                 message.success({ content: 'Next Stage :)', duration: 3 });
                 dispatch(updateBasket_r([post]))
                 getProducts()
@@ -236,40 +210,29 @@ const Default = () => {
     const changeCargo = (newValue) => {
 
         const cargo = cargoes.find(x => x._id == newValue)
-
-
         const post = {
             created_user: {
                 name: user.name,
                 id: user.id
             },
             customer_id: user.id,
-
             products: basket[0].products,
             total_price: allPrice.total,
-
             cargo_price: cargo.price,
             cargo_price_discount: cargo.before_price,
             cargoes_id: newValue,
             total_discount: allPrice.discount,
-
         }
 
-
         if (isAuthenticated) {
-
             axios.post(`${API_URL}/basket/${basket[0]._id}`, post).then(async (res) => {
-
                 message.success({ content: 'Cargo Update!', duration: 3 });
                 await dispatch(getBasket_r(user.id))
-                seTisLoaded(false)
-
                 seTselectedCargo({
                     cargo_price: cargo.price,
                     cargo_price_discount: cargo.before_price,
                     selectedCargo: newValue
                 })
-
             })
                 .catch(err => {
                     message.error({ content: "Some Error, Please Try Again", duration: 3 });
@@ -277,7 +240,6 @@ const Default = () => {
 
                 })
         } else {
-
             message.success({ content: 'Cargo Update!', duration: 3 });
             dispatch(updateBasket_r([post]))
             seTselectedCargo({
@@ -286,11 +248,7 @@ const Default = () => {
                 selectedCargo: newValue
             })
             getProducts()
-
         }
-
-
-
     }
 
     useEffect(() => {

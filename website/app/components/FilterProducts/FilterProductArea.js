@@ -1,34 +1,24 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { EyeOutlined, HeartOutlined, SwapRightOutlined } from "@ant-design/icons"
-import { Checkbox, Input, Tag, TreeSelect, Tree, Search, Card, Button } from "antd"
-import router from "next/router"
-import Link from "next/link"
 import Price from "../Price"
 import ProductCard from "../ProductCard"
-import func from "../../../util/helpers/func"
 import filterRouteLinkGenerate from "./filterRouterLink";
 import axios from "axios"
 import { filterProducts_r } from "../../../redux/actions";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CircularProgress from "../../components/CircularProgress"
-
 import { API_URL } from "../../../../config"
 
 
 const Page = () => {
 
     const { filterProducts } = useSelector(({ filterProducts }) => filterProducts);
-    const { settings } = useSelector(({ settings }) => settings);
-
     const [products, seTproducts] = useState([])
     const [hasMore, seThasMore] = useState(true)
     const dispatch = useDispatch();
 
-
     const getProducts = () => {
         axios.post(`${API_URL}/productspublic`, filterProducts).then((res) => {
-
             if (res.data.length > 0) {
                 // seTproducts([...products, ...res.data])
                 if (filterProducts.skip == 0) {
@@ -44,8 +34,6 @@ const Page = () => {
             if (res.data.length == 0 && filterProducts.skip == 0) {
                 seTproducts([])
             }
-
-
 
         })
             .catch(err => console.log(err))

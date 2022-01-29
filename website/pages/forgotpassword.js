@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Button, Checkbox, Form, Input, message, Row, Col, Typography } from "antd";
+import React, { useEffect } from "react";
+import { Button, Form, Input, message } from "antd";
 import { API_URL } from '../../config';
 import IntlMessages from "../util/IntlMessages";
 
@@ -7,13 +7,9 @@ import Router from 'next/router';
 import axios from "axios"
 
 const SignInPage = () => {
-  useEffect(() => {
-  }, []);
 
 
   const onSubmit = (Data) => {
-
-
     axios.post(`${API_URL}/users/forgotpasswordcustomer`, Data).then(res => {
       if (res.data == "email not in db") {
         message.error("email not in db")

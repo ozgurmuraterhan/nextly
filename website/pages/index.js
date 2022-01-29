@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import Brands from "../app/components/Brands"
-import HomeSlider from "../app/components/HomeSlider";
-import HomeFirstBox from "../app/components/HomeFirstBox";
-import HomeSeccoundBoxs from "../app/components/HomeSeccoundBoxs";
-import HomeOfferList from "../app/components/HomeOfferList";
-import HomeProductsFirst from "../app/components/HomeProductsFirst";
+import HomeSlider from "../app/components/Home/HomeSlider";
+import HomeFirstBox from "../app/components/Home/HomeFirstBox";
+import HomeSeccoundBoxs from "../app/components/Home/HomeSeccoundBoxs";
+import HomeOfferList from "../app/components/Home/HomeOfferList";
+import HomeProductsFirst from "../app/components/Home/HomeProductsFirst";
 import func from "../util/helpers/func"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux";

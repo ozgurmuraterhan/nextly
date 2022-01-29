@@ -1,7 +1,5 @@
-import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import router from "next/router"
-import { Tag, Select } from "antd"
+import { Tag } from "antd"
 import { filterProducts_r } from "../../../redux/actions"
 import filterRouteLinkGenerate from "./filterRouterLink";
 

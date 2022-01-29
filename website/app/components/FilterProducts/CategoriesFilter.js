@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { SearchOutlined } from "@ant-design/icons"
-import { Checkbox, Input, Tag, TreeSelect, Tree, Search } from "antd"
-import router from "next/router"
+import { Input, Tree } from "antd"
 import func from "../../../util/helpers/func"
 import filterRouteLinkGenerate from "./filterRouterLink";
-
 import { filterProducts_r } from "../../../redux/actions";
-
 
 const Page = () => {
     const { categories } = useSelector(({ categories }) => categories);

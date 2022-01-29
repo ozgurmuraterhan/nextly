@@ -1,41 +1,17 @@
-import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-import { useIntl } from 'react-intl';
-import IntlMessages from "../../../util/IntlMessages";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import { LeftOutlined, RightOutlined } from "@ant-design/icons"
 import ProductCardHome from "../ProductCard/home"
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Thumbs, Autoplay } from 'swiper';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Thumbs, Autoplay]);
-
 import "swiper/css";
 import "swiper/css/navigation"
 import "swiper/css/thumbs"
 
 
-import { Input, Layout, message, Drawer, Modal, Form, Button, Menu } from 'antd';
-import CircularProgress from "../../components/CircularProgress";
-import {
-    UserOutlined,
-    ShoppingCartOutlined,
-    LoginOutlined,
-    LogoutOutlined,
-
-} from '@ant-design/icons';
-
-import { useDispatch, useSelector } from "react-redux";
-import { login_r, isAuthenticated_r, settings_r, logout_r } from "../../../redux/actions";
-
-import { useRouter } from "next/router";
-import Link from "next/link";
-import axios from "axios"
-import func from "../../../util/helpers/func"
-import { API_URL, IMG_URL } from "../../../../config";
 
 
 const Default = ({ state = [], title = { title: "", description: "" } }) => {
@@ -55,7 +31,7 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
 
 
                             <div className="home-seccound-box-arrow-left absolute top-30 -left-10 text-5xl z-50 "><LeftOutlined /></div>
-                            <div className="home-seccound-box-arrow-right absolute top-30  -right-10 text-5xl z-50 "><RightOutlined /></div>
+                            <div className="home-seccound-box-arrow-right absolute top-30  right-0 text-5xl z-50 "><RightOutlined /></div>
 
                             <Swiper
                                 slidesPerView={1}

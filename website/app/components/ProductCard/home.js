@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link"
 import func from "../../../util/helpers/func"
 import { useSelector } from "react-redux";
 import Price from "../Price"
 import { Button } from "antd"
-import { SwapRightOutlined } from "@ant-design/icons"
 import { API_URL } from "../../../../config"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -23,7 +22,7 @@ const Default = ({ data = null, className }) => {
         <div
             className={className}
             key={data._id} >
-            <div className=" relative float-left h-full ">
+            <div className=" relative float-left h-full cursor-pointer ">
                 <Link href={"/product/" + data.seo}>
                     <div className="w-full float-left">
                         <div className="w-5/12 float-left relative ">

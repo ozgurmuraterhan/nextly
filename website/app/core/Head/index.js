@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head"
-
 import { useSelector } from "react-redux";
 import { IMG_URL } from "../../../../config";
-
-
-
 
 const Default = ({ title = "", description = "", keywords = "", image = "", author = "" }) => {
 

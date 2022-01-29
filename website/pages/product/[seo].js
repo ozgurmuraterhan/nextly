@@ -5,7 +5,7 @@ import { getBasket_r } from "../../redux/actions"
 import Head from "../../app/core/Head"
 import axios from "axios";
 import ProductGallerry from "../../app/components/ProductDetail/Gallerry"
-import PoductVariantsAndAddButton from "../../app/components/ProductDetail/PoductVariantsAndAddButton"
+import PoductVariants from "../../app/components/ProductDetail/PoductVariants"
 
 import { API_URL } from "../../../config"
 
@@ -42,7 +42,7 @@ const Page = ({ resData = {}, seo = "" }) => {
                     <ProductGallerry images={state.allImages} />
                 </div>
                 <div className=" col-span-12 lg:col-span-6">
-                    <PoductVariantsAndAddButton data={state} seo={seo} />
+                    <PoductVariants data={state} seo={seo} />
                 </div>
             </div>
 

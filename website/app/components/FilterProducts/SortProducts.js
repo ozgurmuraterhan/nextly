@@ -1,17 +1,12 @@
-import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import router from "next/router"
-import { Tag, Select } from "antd"
+import { Select } from "antd"
 import { SortAscendingOutlined, SortDescendingOutlined } from "@ant-design/icons"
 import { filterProducts_r } from "../../../redux/actions"
 import filterRouteLinkGenerate from "./filterRouterLink";
 
 const Page = () => {
     const { filterProducts } = useSelector(({ filterProducts }) => filterProducts);
-    const { brands } = useSelector(({ brands }) => brands);
-    const { categories } = useSelector(({ categories }) => categories);
     const dispatch = useDispatch()
-
 
     const sortItem = (data) => {
         const newData = JSON.parse(data)

@@ -1,107 +1,56 @@
 
 import { useState, useEffect } from "react";
-
 import AuthService from "../../../util/services/authservice";
 import { useDispatch, useSelector } from "react-redux";
-import { login_r, isAuthenticated_r, settings_r, logout_r } from "../../../redux/actions";
-import { Input, Drawer, Modal, Form, Button, message, Select, Divider } from "antd"
-import { useIntl } from 'react-intl';
-
+import { login_r, isAuthenticated_r, logout_r } from "../../../redux/actions";
+import { Input, Modal, Form, message } from "antd"
 import router from "next/router"
 import Link from "next/link";
 import LoginForm from "./LoginForm"
 import RegisterForm from "./RegisterForm"
-import IntlMessages from "../../../util/IntlMessages";
-
-import {
-    UserOutlined,
-    ShoppingCartOutlined,
-    LoginOutlined,
-    LogoutOutlined,
-    UserAddOutlined
-
-} from '@ant-design/icons';
+import { UserOutlined, ShoppingCartOutlined, LoginOutlined, LogoutOutlined, UserAddOutlined } from '@ant-design/icons';
 import { API_URL, IMG_URL } from "../../../../config";
 import axios from "axios";
 
 const Default = () => {
-
-    const intl = useIntl();
     const [form] = Form.useForm();
-
-    const { collapsed, settings, errorFetch } = useSelector(({ settings }) => settings);
+    const { settings } = useSelector(({ settings }) => settings);
     const { basket } = useSelector((state) => state.basket);
-
-    const { isAuthenticated, user } = useSelector(({ login }) => login);
-
+    const { isAuthenticated } = useSelector(({ login }) => login);
     const [openModalLogin, seTopenModalLogin] = useState(false)
     const [confirmLoadingLogin, seTconfirmLoadingLogin] = useState(false);
-
-
     const [openModalSignup, seTopenModalSignup] = useState(false)
     const [confirmLoadingSignup, seTconfirmLoadingSignup] = useState(false);
 
     const dispatch = useDispatch();
 
-    const showModalLogin = () => {
-        seTopenModalLogin(true);
-    };
-
-    const handleOkLogin = () => {
-        seTconfirmLoadingLogin(true)
-    };
-
-    const handleCancelLogin = () => {
-        seTopenModalLogin(false);
-    };
-
-
-    const showModalSignup = () => {
-        seTopenModalSignup(true);
-    };
-
-    const handleOkSignup = () => {
-        seTconfirmLoadingSignup(true)
-    };
-
-    const handleCancelSignup = () => {
-        seTopenModalSignup(false);
-    };
-
     const onSubmitSignup = (Data) => {
-
         axios.post(`${API_URL}/users/register`, Data).then(res => {
-
             if (res.data.error) {
                 message.error(res.data.messagge)
             } else {
                 form.resetFields();
                 message.success(res.data.messagge)
                 onSubmitLogin(Data)
-
             }
         })
             .catch(err => console.log("err", err))
     }
 
     const onSubmitLogin = (Data) => {
-
         AuthService.login(Data).then((data) => {
-
             const { isAuthenticated, user } = data;
-
             if (isAuthenticated) {
                 dispatch(login_r(user));
                 dispatch(isAuthenticated_r(true));
                 message.success("Login Successfully");
-                handleCancelLogin()
+                seTopenModalLogin(false)
                 seTopenModalSignup(false);
             } else {
                 message.error("Login not Successfully");
             }
         });
     };
-
 
     useEffect(() => {
 
@@ -140,7 +89,6 @@ const Default = () => {
                             await AuthService.logout()
                             await dispatch(logout_r());
                             router.push("/")
-
                         }}>
                             <LogoutOutlined />
                             <span className="hidden md:inline  "> Logout </span>
@@ -148,10 +96,10 @@ const Default = () => {
                     </>
                     :
                     <>
-                        <a className="p-2 float-left" onClick={showModalLogin}>
+                        <a className="p-2 float-left" onClick={() => seTopenModalLogin(true)}>
                             <LoginOutlined />   <span className="hidden md:inline ">Login</span>
                         </a>
-                        <a className="p-2 float-left" onClick={showModalSignup}>
+                        <a className="p-2 float-left" onClick={() => seTopenModalSignup(true)}>
                             <UserAddOutlined />   <span className="hidden md:inline ">Sign Up</span>
 
                         </a>
@@ -181,21 +129,21 @@ const Default = () => {
             <Modal
                 title="Login"
                 visible={openModalLogin}
-                onOk={handleOkLogin}
+                onOk={() => seTconfirmLoadingLogin(true)}
                 confirmLoading={confirmLoadingLogin}
-                onCancel={handleCancelLogin}
+                onCancel={() => seTopenModalLogin(false)}
                 footer={null}
 
             >
-                <LoginForm onSubmitLogin={onSubmitLogin} handleCancelLogin={handleCancelLogin} />
+                <LoginForm onSubmitLogin={onSubmitLogin} handleCancelLogin={() => seTopenModalLogin(false)} />
             </Modal>
 
             <Modal
                 title="Signup"
                 visible={openModalSignup}
-                onOk={handleOkSignup}
+                onOk={() => seTconfirmLoadingSignup(true)}
                 confirmLoading={confirmLoadingSignup}
-                onCancel={handleCancelSignup}
+                onCancel={() => seTopenModalSignup(false)}
                 footer={null}
 
             >

@@ -1,23 +1,13 @@
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-import { useIntl } from 'react-intl';
-import IntlMessages from "../../../util/IntlMessages";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import ReactImageZoom from 'react-image-zoom';
-
 // import Swiper core and required modules
-import SwiperCore, {
-    Navigation, Thumbs, Autoplay
-} from 'swiper';
+import SwiperCore, { Navigation, Thumbs, Autoplay } from 'swiper';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Thumbs, Autoplay]);
-
 import "swiper/css";
 import "swiper/css/navigation"
 import "swiper/css/thumbs"
-
 
 import { API_URL, IMG_URL } from "../../../../config";
 

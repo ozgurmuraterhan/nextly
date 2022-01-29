@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ProductCard from "../../components/ProductCard/"
 
 const Default = ({ state = [], title = { title: "", description: "" } }) => {
-
-
-
     return (
         <div className="bg-gray-50 w-full ">
             <div className=" container-custom py-5 grid grid-cols-12" >

@@ -1,25 +1,9 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Button, Checkbox, Form, Input, message, Row, Col, Typography, Select, Divider, Drawer } from "antd";
+import React, { useEffect } from "react";
 import Profile from "../../app/components/Profile"
 import ProfileLeftMenu from "../../app/components/Profile/LeftMenu"
-import { useIntl } from 'react-intl';
-import Link from "next/link"
 import Head from "../../app/core/Head"
 
-import { useDispatch, useSelector } from "react-redux";
-
-
-import Router from 'next/router';
-
-import axios from "axios";
-
 const Default = () => {
-
-  useEffect(() => {
-
-  }, []);
-
-
 
   return (
     <>
@@ -36,8 +20,6 @@ const Default = () => {
           <Profile />
         </div>
       </div>
-
-
     </>
   );
 }

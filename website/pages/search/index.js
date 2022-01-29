@@ -15,9 +15,6 @@ import { filterProducts_r } from "../../redux/actions";
 const Page = () => {
     const { filterProducts } = useSelector(({ filterProducts }) => filterProducts);
 
-    const { isAuthenticated, user } = useSelector(({ login }) => login);
-
-
     const dispatch = useDispatch()
 
     const callUrltoRedux = async () => {
@@ -31,9 +28,7 @@ const Page = () => {
     }
 
     useEffect(() => {
-
         callUrltoRedux()
-
     }, [router.router?.asPath])
 
 

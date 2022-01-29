@@ -1,18 +1,8 @@
 
-import axios from "axios";
-import { useState, useEffect } from "react";
-import Link from "next/link"
-import { Table, Popconfirm, message, Button, Divider, Input, Select, Checkbox, Row, Col, Form, Drawer } from "antd"
-
-
 const Default = ({ Data, seTfields, seTnewAddress, newAddress, onChanheShppingAddress, selectedShippingAddress, onChanheBillingAddress, selectedBillingAddress }) => {
-
-
 
     return (
         <>
-
-
             <div className=" mb-5 mt-2">
                 <span
                     className="float-right font-xs p-2 cursor-pointer -mb-10 z-10 relative"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link"
 import func from "../../../util/helpers/func"
 import { useSelector } from "react-redux";
@@ -23,7 +23,7 @@ const Default = ({ data = null, className }) => {
         <div
             className={className}
             key={data._id} >
-            <div className="  relative  ">
+            <div className="  relative cursor-pointer ">
                 <Link href={"/product/" + data.seo}>
                     <div className="w-full">
                         <div className="w-full relative">

@@ -1,8 +1,6 @@
-
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Link from "next/link"
-import { Table, Popconfirm, message, InputNumber } from "antd"
+import { Table, Popconfirm, message } from "antd"
 import Price from "../Price"
 import { DeleteOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from "react-redux";
@@ -16,8 +14,6 @@ const Default = () => {
 
     const { basket } = useSelector((state) => state.basket);
     const { isAuthenticated, user } = useSelector(({ login }) => login);
-
-    const [basketProducts, seTbasketProducts] = useState(false)
     const [state, seTstate] = useState([])
     const [isLoaded, seTisLoaded] = useState(false)
     const dispatch = useDispatch();
@@ -26,9 +22,7 @@ const Default = () => {
         const BasketAllProducts = []
 
         products.map((x, i) => {
-
             const array = data.find(y => y._id == x.product_id)
-
             if (array) {
                 const resData = array
                 const errorArray = []
@@ -94,12 +88,9 @@ const Default = () => {
     const getProducts = async () => {
         if (basket.length > 0) {
             const arrayId = []
-            seTbasketProducts(basket[0].products)
-
             basket[0].products.map(x => {
                 arrayId.push(x.product_id)
             })
-
             await axios.post(`${API_URL}/basket/allproducts`, { _id: arrayId }).then(res => {
                 getBasketProducts(res.data, basket[0].products)
             })
@@ -115,13 +106,10 @@ const Default = () => {
         seTisLoaded(true)
         const productsDataArray = basket[0].products
         const productsData = []
-
         const variantControlNot = productsDataArray.filter(x => x.product_id != dataRecord._id || JSON.stringify(x.selectedVariants) != JSON.stringify(dataRecord.selectedVariants))
-
         productsData.push(
             ...variantControlNot
         )
-
         const post = {
             created_user: {
                 name: user.name,
@@ -129,28 +117,22 @@ const Default = () => {
             },
             customer_id: user.id,
             products: productsData,
-
         }
 
         if (isAuthenticated) {
-
             axios.post(`${API_URL}/basket/${basket[0]._id}`, post).then(async (res) => {
-
                 message.success({ content: 'Product Delete!', duration: 3 });
                 await dispatch(getBasket_r(user.id))
                 seTisLoaded(false)
-
             })
                 .catch(err => {
                     message.error({ content: "Some Error, Please Try Again", duration: 3 });
                     console.log(err)
                 })
         } else {
-
             message.success({ content: 'Product Delete!', duration: 3 });
             dispatch(updateBasket_r([post]))
             getProducts()
-
         }
     }
 
@@ -160,11 +142,8 @@ const Default = () => {
 
         const productsDataArray = basket[0].products
         const productsData = []
-
         const variantControl = productsDataArray.find(x => x.product_id == dataRecord._id && JSON.stringify(x.selectedVariants) == JSON.stringify(dataRecord.selectedVariants))
         const variantControlNot = productsDataArray.filter(x => x.product_id != dataRecord._id || JSON.stringify(x.selectedVariants) != JSON.stringify(dataRecord.selectedVariants))
-
-
         productsData.push(
             ...variantControlNot,
             {
@@ -173,8 +152,6 @@ const Default = () => {
                 qty: variantControl.qty + 1,
                 seo: dataRecord.seo
             })
-
-
         const post = {
             created_user: {
                 name: user.name,
@@ -182,30 +159,22 @@ const Default = () => {
             },
             customer_id: user.id,
             products: productsData,
-
         }
 
         if (isAuthenticated) {
-
             axios.post(`${API_URL}/basket/${basket[0]._id}`, post).then(async (res) => {
-
                 message.success({ content: 'Product Update!', duration: 3 });
                 await dispatch(getBasket_r(user.id))
                 seTisLoaded(false)
-
             })
                 .catch(err => {
                     message.error({ content: "Some Error, Please Try Again", duration: 3 });
                     console.log(err)
-
                 })
         } else {
-
             message.success({ content: 'Product Update!', duration: 3 });
             dispatch(updateBasket_r([post]))
             getProducts()
-
-
         }
     }
 
@@ -213,14 +182,10 @@ const Default = () => {
     const notPlusProduct = (dataRecord) => {
 
         seTisLoaded(true)
-
         const productsDataArray = basket[0].products
         const productsData = []
-
         const variantControl = productsDataArray.find(x => x.product_id == dataRecord._id && JSON.stringify(x.selectedVariants) == JSON.stringify(dataRecord.selectedVariants))
         const variantControlNot = productsDataArray.filter(x => x.product_id != dataRecord._id || JSON.stringify(x.selectedVariants) != JSON.stringify(dataRecord.selectedVariants))
-
-
         productsData.push(
             ...variantControlNot,
             {
@@ -229,8 +194,6 @@ const Default = () => {
                 qty: variantControl.qty > 1 ? variantControl.qty - 1 : variantControl.qty,
                 seo: dataRecord.seo
             })
-
-
         const post = {
             created_user: {
                 name: user.name,
@@ -238,19 +201,13 @@ const Default = () => {
             },
             customer_id: user.id,
             products: productsData,
-
         }
 
-
         if (isAuthenticated) {
-
             axios.post(`${API_URL}/basket/${basket[0]._id}`, post).then(async (res) => {
-
                 message.success({ content: 'Product Update!', duration: 3 });
                 await dispatch(getBasket_r(user.id))
                 seTisLoaded(false)
-
-
             })
                 .catch(err => {
                     message.error({ content: "Some Error, Please Try Again", duration: 3 });
@@ -258,7 +215,6 @@ const Default = () => {
 
                 })
         } else {
-
             message.success({ content: 'Product Update!', duration: 3 });
             dispatch(updateBasket_r([post]))
             getProducts()
@@ -388,7 +344,7 @@ const Default = () => {
 
                 pagination={false}
                 dataSource={[...state]}
-                rowKey="_id + title"
+                rowKey="_id"
             />
         </>
     )

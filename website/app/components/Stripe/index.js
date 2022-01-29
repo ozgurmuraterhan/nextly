@@ -21,19 +21,13 @@ export default function Default({ basket, public_key, contract }) {
             basket[0].products.map(x => {
                 arrayId.push(x.product_id)
             })
-
             axios.post(API_URL + "/payment/stripe", { ids: arrayId, items: basket[0].products, cargoes_id: basket[0].cargoes_id, allBasket: basket })
                 .then((res) => setClientSecret(res.data.clientSecret));
         }
     }
 
-
-
-
     useEffect(() => {
-
         getProductAmounth()
-
     }, [basket[0]]);
 
     const appearance = {

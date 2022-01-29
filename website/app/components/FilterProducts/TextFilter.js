@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { SortAscendingOutlined, SortDescendingOutlined, SearchOutlined } from "@ant-design/icons"
-import { Form, Input, Tag, TreeSelect, Tree, Button, InputNumber } from "antd"
-import router from "next/router"
-import func from "../../../util/helpers/func"
+import { SearchOutlined } from "@ant-design/icons"
+import { Form, Input, Button } from "antd"
 import filterRouteLinkGenerate from "./filterRouterLink";
-
 import { filterProducts_r } from "../../../redux/actions";
 
 
@@ -14,16 +11,12 @@ const Page = () => {
     const [state, seTstate] = useState(filterProducts)
     const dispatch = useDispatch();
 
-
-
     useEffect(() => {
-
         seTstate(filterProducts)
     }, [filterProducts])
 
 
     const onChange = () => {
-
         dispatch(filterProducts_r({ ...filterProducts, text: state.text, skip: 0 }))
         filterRouteLinkGenerate({ ...filterProducts, text: state.text, skip: 0 })
     }

@@ -1,14 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Button, Checkbox, Form, Input, message, Row, Col, Typography, Select, Divider, Drawer } from "antd";
-import { login_r, isAuthenticated_r } from "../../../redux/actions/Login";
-import { isAuthenticated } from "../../../redux/actions";
+import React, { useEffect, useState } from "react";
+import { Button, Form, Input, message, Select, Divider } from "antd";
 import { useIntl } from 'react-intl';
-
-
 import { useDispatch, useSelector } from "react-redux";
-
-import { API_URL, languageData } from "../../../../config"
-
+import { API_URL } from "../../../../config"
 import AuthService from "../../../util/services/authservice";
 import axios from "axios";
 

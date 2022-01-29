@@ -1,26 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Button, Checkbox, Form, Input, message, Row, Col, Typography, Select, Divider, Drawer } from "antd";
 import Address from "../../app/components/Profile/Address"
 import ProfileLeftMenu from "../../app/components/Profile/LeftMenu"
-
-import { useIntl } from 'react-intl';
-import Link from "next/link"
-
-import { useDispatch, useSelector } from "react-redux";
 import Head from "../../app/core/Head"
 
-
-import Router from 'next/router';
-
-import axios from "axios";
-
 const Default = () => {
-
-  useEffect(() => {
-
-  }, []);
-
-
 
   return (
     <>

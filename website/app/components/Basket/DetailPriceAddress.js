@@ -2,29 +2,21 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import router from "next/router"
-import { Table, Popconfirm, Button, Divider, message } from "antd"
-
+import { Button, Divider, message } from "antd"
 import Price from "../Price"
 import { CheckSquareOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from "../../../../config";
 import func from "../../../util/helpers/func"
-import { getBasket_r, updateBasket_r } from "../../../redux/actions"
-import { useIntl } from 'react-intl';
+import { getBasket_r } from "../../../redux/actions"
 
 const Default = () => {
-    const intl = useIntl();
 
     const { basket } = useSelector((state) => state.basket);
-    const { isAuthenticated, user } = useSelector(({ login }) => login);
-    const [basketProducts, seTbasketProducts] = useState(false)
-    const [state, seTstate] = useState([])
-    const [cargoes, seTcargoes] = useState([])
+    const { user } = useSelector(({ login }) => login);
     const [billingAddress, seTbillingAddress] = useState({})
     const [shippingAddress, seTshippingAddress] = useState({})
     const [selectedCargo, seTselectedCargo] = useState({ cargo_price_discount: 0, cargo_price: 0, selectedCargo: 0 })
-
-    const [isLoaded, seTisLoaded] = useState(false)
     const [allPrice, seTallPrice] = useState({ total: 0, discount: 0, cargo_price: 0, cargo_price_discount: 0 })
     const dispatch = useDispatch();
 
@@ -68,8 +60,6 @@ const Default = () => {
                     basketTotalDiscountPrice = basketTotalDiscountPrice + (x.qty * resData.before_price)
                 }
             }
-
-
         })
         seTallPrice({
             total: basketTotalPrice,
@@ -81,16 +71,12 @@ const Default = () => {
     const getProducts = async () => {
         if (basket.length > 0) {
             const arrayId = []
-            seTbasketProducts(basket[0].products)
-
             basket[0].products.map(x => {
                 arrayId.push(x.product_id)
             })
-
             await axios.post(`${API_URL}/basket/allproducts`, { _id: arrayId }).then(res => {
                 getBasketProducts(res.data, basket[0].products)
             })
-
             seTbillingAddress(basket[0].billing_address)
             seTshippingAddress(basket[0].shipping_address)
         }
@@ -100,8 +86,8 @@ const Default = () => {
     const getCargoes = async () => {
 
         await axios.get(`${API_URL}/cargoespublic`).then(res => {
-            seTcargoes(res.data)
             if (basket.length > 0) {
+
                 if (basket[0].cargoes_id) {
                     seTselectedCargo({
                         cargo_price: basket[0].cargo_price,
@@ -120,6 +106,79 @@ const Default = () => {
         })
     }
 
+    const onSubmit = async () => {
+
+        const errorArray = []
+        const arrayId = []
+
+        basket[0].products.map(x => {
+            arrayId.push(x.product_id)
+        })
+
+        await axios.post(`${API_URL}/basket/allproducts`, { _id: arrayId }).then(res => {
+            const data = res.data
+            const products = basket[0].products
+            let basketTotalPrice = 0
+            let basketTotalDiscountPrice = 0
+
+            products.map((x, i) => {
+
+                const array = data.find(y => y._id == x.product_id)
+
+                if (array) {
+                    const resData = array
+                    if (x.selectedVariants !== undefined) {
+
+                        const priceMath = func.filter_array_in_obj(resData.variant_products, x.selectedVariants)
+
+                        if (priceMath[0].visible === false) {
+                            errorArray.push(true)
+                        } else if (Number(priceMath[0].qty) < Number(x.qty)) {
+                            errorArray.push(true)
+                        } else {
+                            errorArray.push(false)
+                        }
+
+                        basketTotalPrice = basketTotalPrice + (x.qty * priceMath[0].price)
+                        basketTotalDiscountPrice = basketTotalDiscountPrice + (x.qty * priceMath[0].before_price)
+
+                    } else {
+
+                        if (resData.isActive === false) {
+                            errorArray.push(true)
+                        } else if (Number(resData.qty) < Number(x.qty)) {
+                            errorArray.push(true)
+                        } else {
+                            errorArray.push(false)
+                        }
+
+                        basketTotalPrice = basketTotalPrice + (x.qty * resData.price)
+                        basketTotalDiscountPrice = basketTotalDiscountPrice + (x.qty * resData.before_price)
+                    }
+                }
+
+
+            })
+
+        })
+
+
+
+        let control = false
+        control = errorArray.find(x => x == true)
+        if (control === undefined) {
+
+            router.push("/basket/payment")
+
+        } else {
+            dispatch(getBasket_r(user.id))
+            message
+                .loading('Action in progress..', 0.5)
+                .then(() => message.error('Please Control Your Basket', 2.5));
+            router.push("/basket")
+
+        }
+    }
 
     useEffect(() => {
         getCargoes()
@@ -130,7 +189,13 @@ const Default = () => {
 
     return (
         <div className="h-full relative">
+            <div className=" h-20">
 
+                <Button disabled={billingAddress && shippingAddress ? false : true} className="bg-black w-full h-auto absolute top-0 cursor-pointer hover:text-white hover:bg-brand-color transition-all text-xl text-white p-5" onClick={onSubmit}>
+                    Save and Continue
+                    <CheckSquareOutlined className="float-right text-3xl" />
+                </Button>
+            </div>
 
             <div className="text-lg p-3 -mt-2 bg-gray-50 font-semibold">
                 Shipping Address Summary
@@ -219,9 +284,13 @@ const Default = () => {
                 <span className="float-right font-semibold text-brand-color">
                     <Price data={allPrice.total + selectedCargo.cargo_price} />
                 </span>
-
             </div>
-
+            <div className=" h-20">
+                <Button disabled={billingAddress && shippingAddress ? false : true} className="bg-black w-full h-auto absolute bottom-0 cursor-pointer hover:text-white hover:bg-brand-color transition-all text-xl text-white p-5" onClick={onSubmit}>
+                    Save and Continue
+                    <CheckSquareOutlined className="float-right text-3xl" />
+                </Button>
+            </div>
         </div>
     )
 }

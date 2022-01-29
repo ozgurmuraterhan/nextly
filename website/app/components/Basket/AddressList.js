@@ -1,14 +1,11 @@
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Link from "next/link"
-import { Table, Popconfirm, message, Button, Divider, Input, Select, Checkbox, Row, Col, Form, Drawer } from "antd"
+import { message, Button, Input, Select, Checkbox, Form, Drawer } from "antd"
 import AddressSelect from "./AddressSelect"
-import { DeleteOutlined } from "@ant-design/icons"
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from "../../../../config";
-import func from "../../../util/helpers/func"
-import { getBasket_r, updateBasket_r, login_r } from "../../../redux/actions"
+import { getBasket_r, updateBasket_r } from "../../../redux/actions"
 import { useIntl } from 'react-intl';
 import AuthService from "../../../util/services/authservice";
 
@@ -41,10 +38,6 @@ const Default = () => {
     const dispatch = useDispatch();
     const [value, setValue] = useState(1);
 
-    const onChange = e => {
-        console.log('radio checked', e.target.value);
-        setValue(e.target.value);
-    };
 
     const getCity = () => {
 
@@ -102,11 +95,7 @@ const Default = () => {
                     seTnewAddress({ open: false, id: null })
                 }).catch(err => console.log("err", err))
 
-
-
             } else {
-
-
 
                 message.success({ content: 'Next Stage :)', duration: 3 });
                 seTnewAddress({ open: false, id: null })
@@ -158,7 +147,6 @@ const Default = () => {
             if (JSON.stringify(basket[0].billing_address) != JSON.stringify(basket[0].shipping_address)) {
                 seTbillingAdressSame(false)
             }
-
         }
     }
 
@@ -174,15 +162,12 @@ const Default = () => {
             seTselectedShippingAddress(data)
             seTselectedBillingAddress(data)
 
-
-
             const post = {
                 created_user: {
                     name: user.name,
                     id: user.id
                 },
                 customer_id: user.id,
-
                 products: basket[0].products,
                 cargoes_id: basket[0].cargoes_id,
                 total_price: basket[0].total_price,
@@ -195,9 +180,7 @@ const Default = () => {
             }
 
             if (isAuthenticated) {
-
                 axios.post(`${API_URL}/basket/${basket[0]._id}`, post).then(async (res) => {
-
                     message.success({ content: 'Shipping and Billing Address Selected', duration: 3 });
                     await dispatch(getBasket_r(user.id))
 
@@ -205,10 +188,8 @@ const Default = () => {
                     .catch(err => {
                         message.error({ content: "Some Error, Please Try Again", duration: 3 });
                         console.log(err)
-
                     })
             } else {
-
                 message.success({ content: 'Next Stage :)', duration: 3 });
                 dispatch(updateBasket_r([post]))
 
@@ -224,7 +205,6 @@ const Default = () => {
                     id: user.id
                 },
                 customer_id: user.id,
-
                 products: basket[0].products,
                 cargoes_id: basket[0].cargoes_id,
                 total_price: basket[0].total_price,
@@ -234,25 +214,18 @@ const Default = () => {
                 shipping_address: JSON.parse(data),
             }
 
-
             if (isAuthenticated) {
-
                 axios.post(`${API_URL}/basket/${basket[0]._id}`, post).then(async (res) => {
-
                     message.success({ content: 'Shipping Address Selected', duration: 3 });
                     await dispatch(getBasket_r(user.id))
-
                 })
                     .catch(err => {
                         message.error({ content: "Some Error, Please Try Again", duration: 3 });
                         console.log(err)
-
                     })
             } else {
-
                 message.success({ content: 'Next Stage :)', duration: 3 });
                 dispatch(updateBasket_r([post]))
-
             }
             seTselectedShippingAddress(data)
         }
@@ -268,7 +241,6 @@ const Default = () => {
                 id: user.id
             },
             customer_id: user.id,
-
             products: basket[0].products,
             cargoes_id: basket[0].cargoes_id,
             total_price: basket[0].total_price,
@@ -277,13 +249,10 @@ const Default = () => {
             cargo_price_discount: basket[0].cargo_price_discount,
             shipping_address: JSON.parse(selectedShippingAddress),
             billing_address: JSON.parse(data),
-
         }
 
         if (isAuthenticated) {
-
             axios.post(`${API_URL}/basket/${basket[0]._id}`, post).then(async (res) => {
-
                 message.success({ content: 'Billing  Address Selected', duration: 3 });
                 await dispatch(getBasket_r(user.id))
 
@@ -291,13 +260,10 @@ const Default = () => {
                 .catch(err => {
                     message.error({ content: "Some Error, Please Try Again", duration: 3 });
                     console.log(err)
-
                 })
         } else {
-
             message.success({ content: 'Next Stage :)', duration: 3 });
             dispatch(updateBasket_r([post]))
-
         }
 
     }

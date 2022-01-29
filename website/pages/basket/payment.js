@@ -1,22 +1,14 @@
 import { useEffect, useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { Row, Col, Divider, Radio, Input, Form, Button } from "antd"
-import { ShoppingCartOutlined } from "@ant-design/icons"
-import router from "next/router"
+import { useSelector } from "react-redux"
 import axios from "axios";
-import BasketList from "../../app/components/Basket/BasketList"
-import BasketDetailPricePay from "../../app/components/Basket/BasketDetailPricePay"
-import func from "../../util/helpers/func"
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
+import DetailPricePay from "../../app/components/Basket/DetailPricePay"
 import StripeComponent from "../../app/components/Stripe";
 import { API_URL } from "../../../config"
 import Head from "../../app/core/Head"
 
 
-const Page = ({ data = {} }) => {
-    const { basket } = useSelector(({ basket }) => basket);
-    const [selectPayment, seTselectPayment] = useState(1)
+const Page = () => {
+    const { basket } = useSelector((state) => state.basket);
     const [public_key, seTpublic_key] = useState("")
     const [contract, seTcontract] = useState("")
 
@@ -36,27 +28,15 @@ const Page = ({ data = {} }) => {
             <Head
                 title="Payments"
             />
-            <div className=" col-span-12 lg:col-span-9 shadow-lg m-4 grid-cols-2 my-8 gap-9 order-2 lg:order-1">
+            <div className="col-span-12 lg:col-span-9 shadow-lg m-4 grid-cols-2 my-8 gap-9 py-5 bg-white order-2 lg:order-1">
                 <StripeComponent basket={basket} public_key={public_key} contract={contract} />
             </div>
             <div className=" col-span-12 lg:col-span-3 shadow-lg m-4 grid-cols-2 my-8 gap-9 order-1 lg:order-2">
-                <BasketDetailPricePay />
+                <DetailPricePay />
             </div>
         </div>
     )
 
 }
 
-
-Page.getInitialProps = async ({ req, query }) => {
-    const getData = await axios.get(API_URL + "/productspublic/" + query.seo);
-    if (getData.data.length > 0) {
-        const geTdataManipulate = getData.data[0]
-        return { data: geTdataManipulate }
-
-    } else {
-        return { data: {} }
-
-    }
-}
 export default Page
