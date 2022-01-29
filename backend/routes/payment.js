@@ -150,7 +150,6 @@ const updateProductQtyNormal = (id, qty) => {
 
 const updateProductQtyVariant = (id, variants, qty) => {
 
-    console.log("id, variants, qty", id, variants, qty)
     Products.updateOne(
         {
             $and: [
