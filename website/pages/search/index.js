@@ -42,7 +42,7 @@ const Page = () => {
             <Head
                 title="Search"
             />
-            <div className=" sm:col-span-2 col-span-12   p-2  shadow-sm border-top ">
+            <div className=" sm:col-span-2 col-span-12 p-2 shadow-sm border-top ">
                 <TextFilter />
                 <CategoriesFilter />
                 <PriceFilter />

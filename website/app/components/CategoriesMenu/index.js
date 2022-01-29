@@ -32,14 +32,14 @@ const Page = () => {
     return (
         <Menu mode="horizontal" className=" block" >
             {categoriesData && categoriesData?.map((val, i) => (
-                <React.Fragment key={val.title + val._id}>
+                <React.Fragment className="font-bold" key={val.title + val._id}>
                     {val.children ?
-                        <Menu.SubMenu className="border-0 " key={val.title + val._id} title={val.title}>
+                        <Menu.SubMenu className="border-0 uppercase !font-semibold " key={val.title + val._id} title={val.title}>
                             {
                                 val?.children.map(val2 => (
                                     <React.Fragment key={val2.title + val2._id}>
                                         {val2.children ?
-                                            <Menu.SubMenu className=" " key={val2.title} title={val2.title}>
+                                            <Menu.SubMenu className=" font-bold" key={val2.title} title={val2.title}>
                                                 {
                                                     val2?.children.map(val3 => (
                                                         <Menu.Item key={val3.title + val3._id} className="h-25">

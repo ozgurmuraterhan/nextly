@@ -78,7 +78,7 @@ const AppLayout = ({ children }) => {
         <>
             <CircularProgress className={!isLoaded ? "visible" : "hidden"} />
             <Layout >
-                <div className="border-b-2">
+                <div className="border-b bg-white">
                     <div className=" container-custom   ">
                         <HeaderTopMenu socialmedia={func.getCategoriesTree(topmenu, "614b8cc75c153bab76bdf681")} topmenu={func.getCategoriesTree(topmenu)} />
                         <Header />

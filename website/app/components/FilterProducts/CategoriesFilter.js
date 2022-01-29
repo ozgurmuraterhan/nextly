@@ -42,10 +42,11 @@ const Page = () => {
                 suffix={<SearchOutlined />}
             />
 
-            <div className="CategoriesFilter rounded-bottom" >
+            <div className="CategoriesFilter rounded-bottom bg-transparent" >
                 <Tree
                     expandedKeys={func.selectCategoriesFilterData(state.allData)}
                     multiple
+                    className="bg-transparent"
                     selectedKeys={filterProducts.categories}
                     onSelect={onChange}
                     treeData={state.categories}

@@ -71,7 +71,7 @@ const Default = ({ getData = [] }) => {
       if (res.data.length > 0) {
         const data = res.data
         if (id) {
-          seTdata(data.filter(x => x.product_id._id == id));
+          seTdata(data.filter(x => x.product_id?._id == id));
         } else {
           seTdata(data);
         }
