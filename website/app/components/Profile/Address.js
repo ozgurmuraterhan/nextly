@@ -31,13 +31,15 @@ const Defaut = () => {
   const [mahalleOption, seTmahalleOption] = useState([]);
 
   function getDataFc() {
-    axios.get(`${API_URL}/customers/${user.id}`).then((res) => {
-      const data = res.data
-      data["password"] = ""
-      seTstate(data);
-      seTfields(Object.entries(data.address).map(([name, value]) => ({ name, value })));
-      seTaddress(data.address)
-    });
+    if (user.id) {
+      axios.get(`${API_URL}/customers/${user.id}`).then((res) => {
+        const data = res.data
+        data["password"] = ""
+        seTstate(data);
+        seTfields(Object.entries(data.address).map(([name, value]) => ({ name, value })));
+        seTaddress(data.address)
+      });
+    }
   }
   useEffect(() => {
     getDataFc()

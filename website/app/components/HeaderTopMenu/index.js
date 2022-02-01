@@ -1,14 +1,22 @@
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 
 const Default = ({ topmenu, socialmedia }) => {
 
+    const [stateTopmenu, seTstateTopmenu] = useState([])
+    const [stateSocialmedia, seTstateSocialmedia] = useState([])
+    useEffect(() => {
+        seTstateTopmenu(topmenu)
+        seTstateSocialmedia(socialmedia)
+    }, []);
+
 
     return (<div className="float-left w-full">
         <ul className="topmenu float-left">
-            {topmenu && topmenu.map(val => (
-                <li key={val.title} className={`${val.isActive ? "visible" : "invisible"}`}>
+            {stateTopmenu && stateTopmenu.map(val => (
+                <li key={val.title} className={`${val.isActive ? "visible" : "!hidden"}`}>
                     {!val.children ?
                         <Link href={val.link ? val.link : "/content/" + val.seo}>
                             <a>{val.title}</a>
@@ -51,7 +59,7 @@ const Default = ({ topmenu, socialmedia }) => {
         </ul>
 
         <ul className="topmenu float-right hidden md:block">
-            {socialmedia && socialmedia.map(val => (
+            {stateSocialmedia && stateSocialmedia.map(val => (
                 <li key={val.title}>
 
                     {!val.children ?

@@ -15,54 +15,56 @@ const Page = () => {
         seTstate(filterProducts)
     }, [filterProducts])
 
-    const onChange = () => {
-        dispatch(filterProducts_r({ ...filterProducts, minPrice: state.minPrice, maxPrice: state.maxPrice, skip: 0 }))
-        filterRouteLinkGenerate({ ...filterProducts, minPrice: state.minPrice, maxPrice: state.maxPrice, skip: 0 })
+    const onChange = (Data) => {
+        if (Data) {
+            seTstate({
+                minPrice: Data.minPrice,
+                maxPrice: Data.maxPrice
+            })
+            dispatch(filterProducts_r({ ...filterProducts, minPrice: Data.minPrice, maxPrice: Data.maxPrice, skip: 0 }))
+            filterRouteLinkGenerate({ ...filterProducts, minPrice: Data.minPrice, maxPrice: Data.maxPrice, skip: 0 })
+        }
     }
 
+    const InputsPrices = () => (
+        <Input.Group compact className="w-full" >
+            <Form.Item
+                name="minPrice"
+                style={{ width: "42%" }}
+            >
+                <InputNumber
+                    placeholder="Minimum"
+                    min={0}
+                    className="w-full"
+                />
+            </Form.Item>
+            <Form.Item
+                name="maxPrice"
+                style={{ width: "42%" }}
+            >
+                <InputNumber
+                    min={0}
+                    placeholder="Maximum"
+                    className="w-full"
+
+                />
+            </Form.Item>
+            <Button
+                style={{ width: "16%" }}
+                onClick={() => onChange()}
+                type="primary" htmlType="submit" className="m-0 p-1" >
+                <SearchOutlined />
+            </Button>
+        </Input.Group>
+    )
 
     return (
         <>
-            <div className="float-left   my-3">
+            <div className="float-left w-full   my-3">
                 <h6 className="mt-4 ">Price </h6>
-                <Form onFinish={onChange} >
-                    <Input.Group compact>
-                        <InputNumber
-                            style={{ width: "42%" }}
-                            placeholder="Minimum"
-                            label="minPrice"
-                            min={0}
-                            value={state.minPrice}
-
-                            onChange={(val) => seTstate({
-                                ...state,
-                                minPrice: val
-                            })}
-                            className=" px-0 ms-1"
-
-                        />
-
-                        <InputNumber
-                            style={{ width: "42%" }}
-                            label="maxPrice"
-                            min={0}
-                            placeholder="Maximum"
-                            value={state.maxPrice}
-
-                            onChange={(val) => seTstate({
-                                ...state,
-                                maxPrice: val
-                            })}
-                            className=" px-0"
-                        />
-
-                        <Button
-                            style={{ width: "16%" }}
-                            onClick={() => onChange()}
-                            type="primary" htmlType="submit" className="m-0 p-1" >
-                            <SearchOutlined />
-                        </Button>
-                    </Input.Group>
+                <Form onFinish={onChange}
+                    fields={Object.entries(state).map(([name, value]) => ({ name, value }))} >
+                    <InputsPrices className="w-full" />
                 </Form>
             </div>
 

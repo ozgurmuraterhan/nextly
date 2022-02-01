@@ -3,7 +3,17 @@ import Orders from "../../app/components/Profile/Orders"
 import ProfileLeftMenu from "../../app/components/Profile/LeftMenu"
 import Head from "../../app/core/Head"
 
+import { useSelector } from "react-redux"
+import Router from "next/router"
 const Default = () => {
+
+  const { isAuthenticated } = useSelector((state) => state.login);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      Router.push("/")
+    }
+  }, []);
 
   return (
     <>

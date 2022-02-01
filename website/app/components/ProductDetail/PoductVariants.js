@@ -4,8 +4,9 @@ import { Divider, Radio, Form } from "antd"
 import { getBasket_r } from "../../../redux/actions"
 import Price from "../Price"
 import AddProductButton from "./AddProductButton"
-
 import func from "../../../util/helpers/func"
+
+
 
 const Page = ({ data = {} }) => {
     const { isAuthenticated, user } = useSelector(({ login }) => login);
@@ -41,7 +42,8 @@ const Page = ({ data = {} }) => {
     return (
 
         <div className="px-10">
-            <h2 className="font-semibold mb-10 mt-5">{state.title}</h2>
+            <h2 className="font-semibold   mt-5">{state.title}</h2>
+            <h3 className="text-gray-500" >{state.description_short}</h3>
             <div className="my-4 w-full">
                 {state.type ?
                     <>
@@ -75,9 +77,7 @@ const Page = ({ data = {} }) => {
                             </> : ""}
                     </h1>
                 }
-                <div className="h-5">
 
-                </div>
             </div>
             <div>
                 <Form
@@ -192,7 +192,6 @@ const Page = ({ data = {} }) => {
                 </Form>
                 <Divider />
 
-                <h3>{state.description_short}</h3>
 
 
             </div>

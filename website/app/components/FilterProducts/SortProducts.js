@@ -17,9 +17,11 @@ const Page = () => {
     return (
 
         <div className="w-full">
+
             <Select
-                style={{ width: '100%' }}
-                placeholder="Select Sort"
+                className="w-full text-center md:text-left text-base bg-white !rounded-3xl"
+                placeholder="  Sort"
+                defaultValue={"  Sort"}
                 onChange={(newValue) => {
                     sortItem(newValue);
                 }}

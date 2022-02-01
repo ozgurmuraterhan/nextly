@@ -5,7 +5,8 @@ import { login_r, isAuthenticated_r, settings_r, logout_r } from "../redux/actio
 import { isAuthenticated } from "../redux/actions";
 import { useIntl } from 'react-intl';
 import IntlMessages from "../util/IntlMessages";
-
+import axios from "axios"
+import { API_URL } from "../../config";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,27 +22,25 @@ import AuthService from "../util/services/authservice";
 const SignInPage = () => {
 
   const intl = useIntl();
+  const [form] = Form.useForm();
+
   const dispatch = useDispatch();
-  const loginab = useSelector(({ login }) => login);
+  const { isAuthenticated } = useSelector((state) => state.login);
   const { locale } = useSelector(({ settings }) => settings);
 
-  if (loginab.isAuthenticated == true) {
-    return Router.push("/")
-  }
 
   useEffect(() => {
 
-    if (loginab.isAuthenticated == true) {
+    if (isAuthenticated) {
       return Router.push("/")
     }
 
-  }, [loginab]);
+  }, [isAuthenticated]);
 
 
   const onSubmitSignup = (Data) => {
 
     axios.post(`${API_URL}/users/register`, Data).then(res => {
-
       if (res.data.error) {
         message.error(res.data.messagge)
       } else {
