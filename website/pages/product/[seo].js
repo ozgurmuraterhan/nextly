@@ -37,7 +37,7 @@ const Page = ({ resData = {}, seo = "" }) => {
                 keywords={state.keys}
                 image={state.allImages.length > 0 ? state.allImages[0].image : ""}
             />
-            <div className=" shadow-2xl  p-0 lg:p-4 grid grid-cols-12 my-0 lg:my-8  ">
+            <div className=" shadow-2xl bg-white  p-0 lg:p-4 grid grid-cols-12 my-0 lg:my-8  ">
                 <div className=" col-span-12 lg:col-span-6 border rounded-lg pb-3 ">
                     <ProductGallerry images={state.allImages} />
                 </div>

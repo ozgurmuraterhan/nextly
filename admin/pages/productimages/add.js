@@ -16,7 +16,7 @@ const Default = ({ getProducts = [] }) => {
 
   const { id } = router.query
 
-  const [state, seTstate] = useState({ product_id: null })
+  const [state, seTstate] = useState({ product_id: null, arrayImage: [{ order: 1 }, { order: 2 }, { order: 3 }, { order: 4 }, { order: 5 }] })
   const [displaySave, seTdisplaySave] = useState(true)
   const fields = Object.entries(state).map(([name, value]) => ({ name, value }))
 
@@ -25,6 +25,28 @@ const Default = ({ getProducts = [] }) => {
   const { user } = useSelector(({ login }) => login);
   const [form] = Form.useForm();
 
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 8 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 16 },
+    },
+  };
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 16,
+        offset: 8,
+      },
+    },
+  };
 
 
   const getDataProducts = () => {
@@ -52,59 +74,39 @@ const Default = ({ getProducts = [] }) => {
     getDataProducts()
     seTstate({ ...state, product_id: id })
 
-    console.log(id)
   }, []);
-
-  const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 8 },
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 16 },
-    },
-  };
-  const tailFormItemLayout = {
-    wrapperCol: {
-      xs: {
-        span: 24,
-        offset: 0,
-      },
-      sm: {
-        span: 16,
-        offset: 8,
-      },
-    },
-  };
 
   const onSubmit = async (Data) => {
 
-    Data["created_user"] = { name: user.name, id: user.id }
+    Data.arrayImage.map(async value => {
 
-    if (Data.image != undefined) {
-      const formData = new FormData()
-      formData.append("image", Data.image.file.originFileObj)
+      value["created_user"] = { name: user.name, id: user.id }
+      value["product_id"] = Data.product_id
 
-      const dataImage = await axios.post(`${API_URL}/upload/uploadproductimage`, formData, { headers: { "Content-Type": "multipart/form-data" } })
-      Data["image"] = dataImage.data.path.replace("../admin/public/", "/")
-    } else {
-      Data["image"] = ""
-    }
+      if (value.image != undefined) {
+        const formData = new FormData()
+        formData.append("image", value.image.file.originFileObj)
 
-    axios
-      .post(`${API_URL}/productimages/add`, Data)
-      .then((res) => {
-        if (res.data.variant == "error") {
-          message.error(intl.messages["app.pages.productimages.notAdded"] + res.data.messagge);
-        } else {
-          message.success(intl.messages["app.pages.productimages.added"]);
+        const dataImage = await axios.post(`${API_URL}/upload/uploadproductimage`, formData, { headers: { "Content-Type": "multipart/form-data" } })
+        value["image"] = dataImage.data.path.replace("../admin/public/", "/")
 
-          router.push("/productimages/list?id=" + id);
 
-        }
-      })
-      .catch((err) => console.log(err));
+        axios
+          .post(`${API_URL}/productimages/add`, value)
+          .then((res) => {
+            if (res.data.variant == "error") {
+              message.error(intl.messages["app.pages.productimages.notAdded"] + res.data.messagge);
+            } else {
+              message.success(intl.messages["app.pages.productimages.added"]);
+
+              router.push("/productimages/list?id=" + id);
+
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    })
+
 
   };
 
@@ -119,13 +121,13 @@ const Default = ({ getProducts = [] }) => {
     <div>
       <Card className="card" title={intl.messages["app.pages.productimages.add"]}>
         <Form
-          {...formItemLayout}
           form={form}
           name="add"
           onFinishFailed={onFinishFailed}
           onFinish={onSubmit}
           fields={fields}
           scrollToFirstError
+          {...formItemLayout}
         >
           <Form.Item
             name="product_id"
@@ -147,59 +149,84 @@ const Default = ({ getProducts = [] }) => {
 
 
           </Form.Item>
-          <Form.Item
-            name="order"
-            label={intl.messages["app.pages.common.order"]}
-            initialValue={0}
-            rules={[
-              {
-                required: true,
-                message: intl.messages["app.pages.common.pleaseFill"],
-              },
-            ]}
+          <Form.List
+            name="arrayImage"
           >
-            <InputNumber style={{ width: 200 }} />
-          </Form.Item>
+            {(fields, { add, remove }) => (
+              <>
+                {fields.map((field, i) => (
+                  <div className="grid grid-cols-12 ">
 
-          <Form.Item
-            name="title"
-            label={intl.messages["app.pages.common.title"]}
+                    <div className="col-span-3"></div>
+                    <Form.Item
+                      label={intl.messages["app.pages.common.order"]}
+                      initialValue={1 + i}
+                      className="col-span-3"
+                      name={[field.name, 'order']}
+                      rules={[
+                        {
+                          required: true,
+                          message: intl.messages["app.pages.common.pleaseFill"],
+                        },
+                      ]}
+                    >
+                      <InputNumber style={{ width: 200 }} />
+                    </Form.Item>
 
-          >
-            <Input />
-          </Form.Item>
+                    <Form.Item
+                      name={[field.name, 'title']}
+                      label={intl.messages["app.pages.common.title"]}
+                      className="col-span-3"
 
-          <Form.Item
-            name="image"
-            label={intl.messages["app.pages.common.image"]}
+                    >
+                      <Input />
+                    </Form.Item>
 
+                    <Form.Item
+                      name={[field.name, 'image']}
+                      label={intl.messages["app.pages.common.image"]}
+                      className="col-span-3"
 
-          >
-            <Upload maxCount={1}
-              beforeUpload={(file) => {
-                const isJPG = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/gif';
-                if (!isJPG) {
-                  message.error(intl.messages["app.pages.common.onlyImage"]);
-                  seTdisplaySave(false)
-                  return false;
-                } else {
-                  seTdisplaySave(true)
+                    >
+                      <Upload maxCount={1}
+                        beforeUpload={(file) => {
+                          const isJPG = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/gif';
+                          if (!isJPG) {
+                            message.error(intl.messages["app.pages.common.onlyImage"]);
+                            seTdisplaySave(false)
+                            return false;
+                          } else {
+                            seTdisplaySave(true)
 
-                  return true;
-                }
-              }}
+                            return true;
+                          }
+                        }}
 
-              showUploadList={{
+                        showUploadList={{
 
-                removeIcon: <DeleteOutlined onClick={e => seTdisplaySave(true)} />,
-              }}
-            >
-              <Button icon={<UploadOutlined />}><IntlMessages id="app.pages.common.selectFile" /> </Button>
-            </Upload>
-          </Form.Item>
+                          removeIcon: <DeleteOutlined onClick={e => seTdisplaySave(true)} />,
+                        }}
+                      >
+                        <Button icon={<UploadOutlined />}><IntlMessages id="app.pages.common.selectFile" /> </Button>
+                      </Upload>
+                    </Form.Item>
+
+                  </div>
+
+                ))}
+
+                <Form.Item className="float-right" >
+                  <Button className="float-right" type="dashed" onClick={() => { add() }} icon={<PlusOutlined />}>
+                    <IntlMessages id="app.pages.common.addItem" />
+                  </Button>
+                </Form.Item>
+              </>
+
+            )}
+          </Form.List>
 
           <Divider />
-          <Form.Item {...tailFormItemLayout}>
+          <Form.Item className="float-right" >
             <Button type="primary" htmlType="submit" disabled={!displaySave}>
               <IntlMessages id="app.pages.common.save" />
             </Button>
