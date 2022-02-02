@@ -12,7 +12,7 @@ const roleTitle = "topmenu";
 // get all items
 router.route("/:id").get((req, res, next) => {
     if (req.params.id == "not") {
-        Topmenu.find().sort({ order: 1 })
+        Topmenu.find({}, { title: 1, order: 1, seo: 1, categories_id: 1, _id: 1, isActive: 1 }).sort({ order: 1 })
             .then((data) => {
                 res.json(data);
             })
@@ -23,7 +23,7 @@ router.route("/:id").get((req, res, next) => {
                 })
             );
     } else {
-        Topmenu.find({ isActive: req.params.id }).sort({ order: 1 })
+        Topmenu.find({ seo: req.params.id }, {}).sort({ order: 1 })
             .then((data) => {
                 res.json(data);
             })

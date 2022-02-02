@@ -6,7 +6,7 @@ const roleTitle = "brands";
 
 // get all items
 router.route("/").get((req, res, next) => {
-    Brands.find({ isActive: true }).sort({ order: 1 })
+    Brands.find({ isActive: true }, { title: 1, image: 1, order: 1, _id: 1 }).sort({ order: 1 })
         .then((data) => {
             res.json(data);
         })

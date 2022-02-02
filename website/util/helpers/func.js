@@ -147,7 +147,7 @@ export default {
         if (option) {
 
             const firstdata = clean(nest(data))
-            const Optiondata = firstdata.map(function (obj) {
+            const Optiondata = firstdata?.map(function (obj) {
 
                 if (obj.children != undefined) {
                     let children = []

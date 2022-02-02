@@ -15,7 +15,7 @@ const Page = () => {
 
     return (
         <>
-            {categoriesData.length > 0 ?
+            {categoriesData?.length > 0 ?
                 <Menu mode="horizontal" className=" block" >
                     {categoriesData?.map((val, i) => (
                         <React.Fragment key={val.title + val._id}>

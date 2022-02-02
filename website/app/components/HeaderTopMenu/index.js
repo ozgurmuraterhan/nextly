@@ -7,6 +7,7 @@ const Default = ({ topmenu, socialmedia }) => {
 
     const [stateTopmenu, seTstateTopmenu] = useState([])
     const [stateSocialmedia, seTstateSocialmedia] = useState([])
+
     useEffect(() => {
         seTstateTopmenu(topmenu)
         seTstateSocialmedia(socialmedia)

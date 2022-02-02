@@ -6,7 +6,7 @@ const roleTitle = "homeslider";
 
 // get all items
 router.route("/").get((req, res, next) => {
-    Homeslider.find({ isActive: true }).sort({ order: 1 })
+    Homeslider.find({ isActive: true }, { title: 1, description: 1, link: 1, image: 1, _id: 1, categories_id: 1 }).sort({ order: 1 })
         .then((data) => {
             res.json(data);
         })
