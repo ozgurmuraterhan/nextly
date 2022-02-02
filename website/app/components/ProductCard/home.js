@@ -4,7 +4,7 @@ import func from "../../../util/helpers/func"
 import { useSelector } from "react-redux";
 import Price from "../Price"
 import { Button } from "antd"
-import { API_URL } from "../../../../config"
+import { IMG_URL } from "../../../../config"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Default = ({ data = null, className }) => {
@@ -30,7 +30,7 @@ const Default = ({ data = null, className }) => {
                             <LazyLoadImage
                                 className="w-full bg-cover bg-center  rounded-l-lg "
                                 src="/images/transparent.png"
-                                style={{ backgroundImage: `url(${data.allImages[0] ? API_URL + data.allImages[0].image : "/images/nofoto.jpg"})` }}
+                                style={{ backgroundImage: `url(${data.allImages[0] ? IMG_URL + data.allImages[0].image : "/images/nofoto.jpg"})` }}
                             />
 
                             <span className={`${func.getDiscount(data) ? "visible" : "invisible"} absolute z-10 top-0 mt-2 text-xs float-right py-1 px-2 bg-red-500 text-white`}>
