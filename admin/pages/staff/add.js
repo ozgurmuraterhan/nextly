@@ -186,7 +186,7 @@ const Default = () => {
 
     if (fileList.length > 0) {
       const dataImage = await axios.post(API_URL + "/upload/uploadstaffavatar", fileList)
-      Data["image"] = dataImage.data.replace("../admin/public/", "/")
+      Data["image"] = dataImage.data.replace("../website/public/", "/")
     } else {
       Data["image"] = ""
     }

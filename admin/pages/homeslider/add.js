@@ -82,7 +82,7 @@ const Default = ({ getCategories = [] }) => {
 
       const dataImage = await axios.post(`${API_URL}/upload/uploadhomesliderimage`, formData, { headers: { "Content-Type": "multipart/form-data" } })
 
-      Data["image"] = dataImage.data.path.replace("../admin/public/", "/")
+      Data["image"] = dataImage.data.path.replace("../website/public/", "/")
     } else {
       Data["image"] = ""
     }
