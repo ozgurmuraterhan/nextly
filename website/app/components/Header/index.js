@@ -21,6 +21,7 @@ const Default = () => {
     const [confirmLoadingLogin, seTconfirmLoadingLogin] = useState(false);
     const [openModalSignup, seTopenModalSignup] = useState(false)
     const [confirmLoadingSignup, seTconfirmLoadingSignup] = useState(false);
+    const [stateisAuthenticated, seTstateisAuthenticated] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -53,8 +54,10 @@ const Default = () => {
     };
 
     useEffect(() => {
-
-    }, [isAuthenticated])
+        if (isAuthenticated) {
+            seTstateisAuthenticated(isAuthenticated)
+        }
+    }, [isAuthenticated]);
 
 
 
@@ -77,7 +80,7 @@ const Default = () => {
             </div>
             <div className=" mt-5   text-base text-right px-0  ">
 
-                {isAuthenticated ?
+                {stateisAuthenticated ?
                     <>
                         <Link href="/profile">
                             <a className="p-2 float-left">
@@ -88,6 +91,7 @@ const Default = () => {
                         <a className="p-2 float-left" onClick={async () => {
                             await AuthService.logout()
                             await dispatch(logout_r());
+                            seTstateisAuthenticated(false)
                             router.push("/")
                         }}>
                             <LogoutOutlined />

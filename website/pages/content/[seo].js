@@ -26,7 +26,7 @@ const Page = ({ seo }) => {
             .replaceAll("<p>", "<p style='min-height:25px' >")
             .replaceAll("<pre>", "<pre  style='min-height:30px; background-color:#dbdbdb; padding:15px' >")
             .replaceAll("<img ", "<img class='w-full sm:w-auto' ")
-            .replaceAll('<div class="media-wrap image-wrap ', '<div class="media-wrap image-wrap  w-full sm:w-auto" ')
+            .replaceAll('<div class="media-wrap image-wrap ', '<div class="media-wrap image-wrap  w-full sm:w-auto ')
     }
 
     return (
@@ -64,7 +64,7 @@ const Page = ({ seo }) => {
 }
 
 
-export const getServerSideProps = async ({ req, query }) => {
+export const getServerSideProps = ({ req, query }) => {
 
     return {
         props: {

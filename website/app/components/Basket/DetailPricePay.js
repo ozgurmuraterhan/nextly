@@ -70,7 +70,6 @@ const Default = () => {
     const getProducts = async () => {
         if (basket.length > 0) {
             const arrayId = []
-            seTbasketProducts(basket[0].products)
 
             basket[0].products.map(x => {
                 arrayId.push(x.product_id)
