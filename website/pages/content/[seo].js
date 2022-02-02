@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import Link from "next/link"
 import Head from "../../app/core/Head"
@@ -9,9 +9,10 @@ const Page = ({ seo }) => {
     const content = topmenu.find(x => x.seo == seo)
     const leftMenu = topmenu.filter(x => x.categories_id == content.categories_id)
     const leftMenuTitle = topmenu.find(x => x._id == content.categories_id)
+    const [description, seTdescription] = useState("")
 
     useEffect(() => {
-
+        seTdescription(content.description)
     }, [])
 
     const replaceStyle = (dataHtml) => {
@@ -52,7 +53,7 @@ const Page = ({ seo }) => {
                     </div>
                     <div
                         dangerouslySetInnerHTML={{
-                            __html: content.description ? replaceStyle(content.description) : ""
+                            __html: replaceStyle(description)
                         }}></div>
 
                 </div>
