@@ -64,7 +64,7 @@ const Default = ({ images = [] }) => {
                         <div className="item">
                             <div
                                 className="bg-cover bg-center   border-2 ml-2  h-20 w-20"
-                                style={{ backgroundImage: "url(" + API_URL + "/" + val.image + ")" }}
+                                style={{ backgroundImage: "url(" + IMG_URL + "/" + val.image + ")" }}
                             />
                         </div>
                     </SwiperSlide>

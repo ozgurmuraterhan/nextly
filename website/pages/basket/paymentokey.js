@@ -47,7 +47,7 @@ const Page = () => {
                 title="Payments Succeeded"
             />
             <div className="col-span-12 shadow-lg p-10">
-                <div className="grid grid-cols-12">
+                <div className="grid grid-cols-12 bg-white">
                     {state ?
                         <>
                             <div className="text-4xl col-span-12 text-brand-color font-semibold text-center mb-10">Payment Succeeded</div>

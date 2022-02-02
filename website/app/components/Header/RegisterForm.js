@@ -1,4 +1,4 @@
-import { Input, Form, Button, Select, Divider, Option } from "antd"
+import { Input, Form, Button, Select, Divider } from "antd"
 import { useIntl } from 'react-intl';
 
 import IntlMessages from "../../../util/IntlMessages";
@@ -19,7 +19,7 @@ const Default = ({ onSubmitSignup }) => {
     const prefixSelector = (
         <Form.Item name="prefix" noStyle initialValue={"90"}>
             <Select onChange={changePrefix} style={{ width: 70 }}>
-                <Option value="90" >+90</Option>
+                <Select.Option value="90" >+90</Select.Option>
             </Select>
         </Form.Item>
     );

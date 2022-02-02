@@ -31,7 +31,7 @@ const Page = () => {
             <div className="col-span-12 lg:col-span-9 shadow-lg m-4 grid-cols-2 my-8 gap-9 py-5 bg-white order-2 lg:order-1">
                 <StripeComponent basket={basket} public_key={public_key} contract={contract} />
             </div>
-            <div className=" col-span-12 lg:col-span-3 shadow-lg m-4 grid-cols-2 my-8 gap-9 order-1 lg:order-2">
+            <div className=" col-span-12 lg:col-span-3 shadow-lg m-4 grid-cols-2 bg-white my-8 gap-9 order-1 lg:order-2">
                 <DetailPricePay />
             </div>
         </div>

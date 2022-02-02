@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Input, message, Select, Divider, Option } from "antd";
+import { Button, Form, Input, message, Select, Divider } from "antd";
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from "../../../../config"
@@ -77,7 +77,7 @@ const Defaut = () => {
     const prefixSelector = (
         <Form.Item name="prefix" noStyle initialValue={"90"}>
             <Select onChange={changePrefix} style={{ width: 70 }}>
-                <Option value="90" >+90</Option>
+                <Select.Option value="90" >+90</Select.Option>
             </Select>
         </Form.Item>
     );

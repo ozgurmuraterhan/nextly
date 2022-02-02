@@ -79,6 +79,7 @@ const Page = ({ data = {} }) => {
                 }
 
             </div>
+            <Divider />
             <div>
                 <Form
                     form={form}
@@ -97,12 +98,12 @@ const Page = ({ data = {} }) => {
                                         name={x.name}
                                         label={
                                             form.getFieldValue(x.name) ?
-                                                <span>
+                                                <span className="font-normal">
                                                     {x.name} :
-                                                    <span className="text-gray-500">  {form.getFieldValue(x.name)}  </span>
+                                                    <span className="font-semibold">  {form.getFieldValue(x.name)}  </span>
                                                 </span>
                                                 :
-                                                <span>
+                                                <span className="font-normal">
                                                     {x.name} :
                                                     <span className="text-gray-500"> Please Select</span>
                                                 </span>
@@ -115,7 +116,7 @@ const Page = ({ data = {} }) => {
                                             name={x.name}
                                             optionType="button"
                                             buttonStyle="outline"
-                                            className="pl-2 "
+                                            className="pl-2 mt-2 mb-1 "
                                             required
                                             onChange={y => {
                                                 const data = state

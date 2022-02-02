@@ -27,7 +27,6 @@ const Default = ({ data = null, className }) => {
                 <Link href={"/product/" + data.seo}>
                     <div className="w-full">
                         <div className="w-full relative">
-
                             <LazyLoadImage
                                 className="w-full bg-cover bg-center rounded-t-lg "
                                 src="/images/transparent.png"

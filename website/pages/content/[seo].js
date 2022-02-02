@@ -31,7 +31,7 @@ const Page = ({ seo }) => {
                 description={content.description_short}
                 keywords={content.description_short}
             />
-            <div className="grid shadow-lg p-4 grid-cols-12 my-8 sm:gap-9">
+            <div className="grid shadow-lg p-4 grid-cols-12 my-8 sm:gap-9 bg-white">
                 <div className=" lg:col-span-3  col-span-12 sm:order-2 order-2 ">
                     <div className="text-xl font-semibold col-span-12 text-brand-color  mb-5  " >
                         {leftMenuTitle && leftMenuTitle.title}
@@ -47,7 +47,7 @@ const Page = ({ seo }) => {
 
                 <div className=" lg:col-span-9 sm:order-2 order-1  col-span-12 ">
 
-                    <div className="text-2xl font-semibold col-span-12 text-brand-color  mb-5 h-  " >
+                    <div className="text-2xl font-semibold col-span-12 text-brand-color  mb-5   " >
                         {content && content.title}
                     </div>
                     <div

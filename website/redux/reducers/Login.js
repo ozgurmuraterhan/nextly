@@ -2,6 +2,7 @@ import { SET_ISAUTHENTICATED, SET_LOGIN, SET_LOGOUT } from "../../constants/Acti
 
 const INIT_STATE = {
   user: {
+    name: "",
     address: [],
     role: {
       "blabla": false,

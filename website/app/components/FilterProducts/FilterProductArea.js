@@ -75,7 +75,7 @@ const Page = () => {
                     {products && products.map(data => (
                         <ProductCard
                             data={data}
-                            className=" xl:col-span-3 lg:col-span-4 rounded-lg col-span-6 m-2 md:m-5 bg-white  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl pb-8"
+                            className=" xl:col-span-3 lg:col-span-4 rounded-lg col-span-6 m-2 md:m-3 bg-white  group hover:scale-105 transition-all  shadow-xl hover:shadow-2xl pb-8"
                         />
                     ))}
 

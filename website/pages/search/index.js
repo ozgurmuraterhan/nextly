@@ -34,52 +34,53 @@ const Page = () => {
 
 
     return (
-        <div className="container-custom grid grid-cols-12 h-full my-2 py-2">
-            <Head
-                title="Search"
-            />
+        <div className="container-custom  ">
+            <div className="grid grid-cols-12 h-full my-2 py-2  bg-white">
+                <Head
+                    title="Search"
+                />
 
-            <div className={`md:col-span-2 col-span-12 p-2 shadow-sm border-top md:relative md:top-auto md:right-auto md:left-auto md:bottom-auto md:visible md:block
+                <div className={`md:col-span-2 col-span-12 p-2 shadow-sm border-top md:relative md:top-auto md:right-auto md:left-auto md:bottom-auto md:visible md:block
             ${openFilter ? " fixed overflow-scroll top-0 left-0 right-0 bottom-0 w-screen h-screen bg-white z-20 " : "invisible hidden"} `}>
-                <div className="float-right  md:hidden block"
-                    onClick={() => seTopenFilter(false)}
-                >
-                    <CloseCircleOutlined />
-                </div>
-                <TextFilter />
-                <CategoriesFilter />
-                <PriceFilter />
-                <BrandsFilter />
-
-                <div className="float-right w-full p-2  md:hidden block text-center bg-black text-white mt-10"
-                    onClick={() => seTopenFilter(false)}
-                >
-                    Filter Done
-                </div>
-            </div>
-
-
-            <div className=" md:col-span-10  col-span-12  ">
-
-                <div className="w-6/12 float-left">
-                    <button className="items-center w-full  bg-white border rounded-sm p-0.3 text-base block md:hidden"
-                        onClick={() => seTopenFilter(true)}
+                    <div className="float-right  md:hidden block"
+                        onClick={() => seTopenFilter(false)}
                     >
-                        Open Filter <FilterOutlined />
-                    </button>
+                        <CloseCircleOutlined />
+                    </div>
+                    <TextFilter />
+                    <CategoriesFilter />
+                    <PriceFilter />
+                    <BrandsFilter />
+
+                    <div className="float-right w-full p-2 cursor-pointer  md:hidden block text-center bg-black text-white mt-10"
+                        onClick={() => seTopenFilter(false)}
+                    >
+                        Filter Done
+                    </div>
                 </div>
-                <div className="w-6/12 md:w-2/12 float-right">
-                    <SortProducts />
+
+
+                <div className=" md:col-span-10  col-span-12  ">
+
+                    <div className="w-6/12 float-left">
+                        <button className="items-center w-full  bg-white border rounded-sm p-0.3 text-base block md:hidden"
+                            onClick={() => seTopenFilter(true)}
+                        >
+                            Open Filter <FilterOutlined />
+                        </button>
+                    </div>
+                    <div className="w-6/12 md:w-2/12 pr-5 float-right">
+                        <SortProducts />
+                    </div>
+                    <div className="w-full float-left   pb-0">
+                        <FilterSelectedTop />
+                    </div>
+                    <div className="w-full mt-3 float-left">
+                        <FilterProductArea />
+                    </div>
                 </div>
-                <div className="w-full float-left p-5 pb-0">
-                    <FilterSelectedTop />
-                </div>
-                <div className="w-full mt-3 float-left">
-                    <FilterProductArea />
-                </div>
+
             </div>
-
-
         </div >
     )
 
