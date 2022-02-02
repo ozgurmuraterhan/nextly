@@ -9,11 +9,11 @@ const Page = ({ seo }) => {
     const content = topmenu.find(x => x.seo == seo)
     const leftMenu = topmenu.filter(x => x.categories_id == content.categories_id)
     const leftMenuTitle = topmenu.find(x => x._id == content.categories_id)
-    const [description, seTdescription] = useState("<div> </div>")
 
-    useEffect(() => {
-        seTdescription(content.description)
-    }, [])
+
+    function createMarkup() {
+        return { __html: replaceStyle(content.description) };
+    }
 
     const replaceStyle = (dataHtml) => {
         return dataHtml
@@ -45,17 +45,11 @@ const Page = ({ seo }) => {
                         </Link>
                     )}
                 </div>
-
                 <div className=" lg:col-span-9 sm:order-2 order-1  col-span-12 ">
-
                     <div className="text-2xl font-semibold col-span-12 text-brand-color  mb-5   " >
                         {content && content.title}
                     </div>
-                    <div
-                        dangerouslySetInnerHTML={{
-                            __html: replaceStyle(description)
-                        }}></div>
-
+                    <div dangerouslySetInnerHTML={createMarkup()} />
                 </div>
             </div>
 
