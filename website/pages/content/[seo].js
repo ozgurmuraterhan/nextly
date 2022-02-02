@@ -6,15 +6,23 @@ import { API_URL } from "../../../config"
 import axios from "axios"
 
 const Page = ({ seo, resData }) => {
-
     const { topmenu } = useSelector((state) => state.topmenu);
+
     const content = topmenu.find(x => x.seo == seo)
     const leftMenu = topmenu.filter(x => x.categories_id == content.categories_id)
     const leftMenuTitle = topmenu.find(x => x._id == content.categories_id)
 
+    const [contentDescription, seTcontentDescription] = useState("<p></p>")
+
     function createMarkup() {
-        return { __html: replaceStyle(resData.description) };
+        return { __html: contentDescription };
     }
+
+
+    useEffect(() => {
+        seTcontentDescription(replaceStyle(resData.description))
+    }, []);
+
 
     const replaceStyle = (dataHtml) => {
         return dataHtml
@@ -26,6 +34,7 @@ const Page = ({ seo, resData }) => {
 
     return (
         <div className="container-custom h-full ">
+
             <Head
                 title={content.title}
                 description={content.description_short}
@@ -61,6 +70,7 @@ const Page = ({ seo, resData }) => {
 export const getServerSideProps = async ({ req, query }) => {
 
     const res = await axios.get(`${API_URL}/topmenupublic/${query.seo}`)
+
 
     return {
         props: {
