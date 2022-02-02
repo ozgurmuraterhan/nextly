@@ -12,7 +12,7 @@ const Page = ({ seo }) => {
 
 
     function createMarkup() {
-        return { __html: replaceStyle(content.description) };
+        return { __html: replaceStyle('<div class="homepsage">This is the homepage data</div>') };
     }
 
     const replaceStyle = (dataHtml) => {
