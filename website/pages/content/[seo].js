@@ -20,8 +20,9 @@ const Page = ({ seo, resData }) => {
 
 
     useEffect(() => {
+        console.log("contentDescription", contentDescription)
         seTcontentDescription(replaceStyle(resData.description))
-    }, []);
+    }, [resData.description]);
 
 
     const replaceStyle = (dataHtml) => {
