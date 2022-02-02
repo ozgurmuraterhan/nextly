@@ -10,11 +10,16 @@ const Page = ({ seo }) => {
     const leftMenu = topmenu.filter(x => x.categories_id == content.categories_id)
     const leftMenuTitle = topmenu.find(x => x._id == content.categories_id)
 
-    const [contentDescription, seTcontentDescription] = useState(replaceStyle(content.description))
+    const [contentDescription, seTcontentDescription] = useState("<p></p>")
 
     function createMarkup() {
         return { __html: contentDescription };
     }
+
+    useEffect(() => {
+        seTcontentDescription(replaceStyle(content.description))
+    }, []);
+
 
     const replaceStyle = (dataHtml) => {
         return dataHtml
@@ -26,7 +31,6 @@ const Page = ({ seo }) => {
 
     return (
         <div className="container-custom h-full ">
-
 
             <Head
                 title={content.title}
