@@ -52,7 +52,7 @@ const Page = ({ seo }) => {
                     </div>
                     <div
                         dangerouslySetInnerHTML={{
-                            __html: replaceStyle(content.description)
+                            __html: content.description ? replaceStyle(content.description) : ""
                         }}></div>
 
                 </div>
