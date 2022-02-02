@@ -4,12 +4,12 @@ import Link from "next/link"
 import Head from "../../app/core/Head"
 
 const Page = ({ seo }) => {
-    const { topmenu } = useSelector(({ topmenu }) => topmenu);
+    const { topmenu } = useSelector((state) => state.topmenu);
 
     const content = topmenu.find(x => x.seo == seo)
     const leftMenu = topmenu.filter(x => x.categories_id == content.categories_id)
     const leftMenuTitle = topmenu.find(x => x._id == content.categories_id)
-    const [description, seTdescription] = useState("")
+    const [description, seTdescription] = useState("<div> </div>")
 
     useEffect(() => {
         seTdescription(content.description)
