@@ -10,9 +10,10 @@ const Page = ({ seo }) => {
     const leftMenu = topmenu.filter(x => x.categories_id == content.categories_id)
     const leftMenuTitle = topmenu.find(x => x._id == content.categories_id)
 
+    const [contentDescription, seTcontentDescription] = useState(replaceStyle(content.description))
 
     function createMarkup() {
-        return { __html: '<div class="homepsage">This is the homepage data</div>' };
+        return { __html: contentDescription };
     }
 
     const replaceStyle = (dataHtml) => {
