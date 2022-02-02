@@ -102,7 +102,7 @@ app.use("/payment", paymentPublicRouter);
 app.use("/paymentmethodspublic", paymentMethodsPublicRouter);
 
 
-app.use(express.static(path.join(__dirname, '../admin/public')));
+app.use(express.static(path.join(__dirname, '../website/public')));
 //  initialize uppy
 // const uppyOptions = {
 //    providerOptions: {

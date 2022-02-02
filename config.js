@@ -3,7 +3,7 @@ module.exports = {
     /// for server
     API_URL: "https://backend.nextly.shop",
     WEBSITE_URL: "https://nextly.shop",
-    IMG_URL: "https://nextly.shop",
+    IMG_URL: "https://backend.nextly.shop",
 
 
     //for Locale

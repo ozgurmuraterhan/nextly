@@ -452,13 +452,6 @@ router.post("/deletebrandsimage", passport.authenticate('jwt', { session: false 
 
 
 
-
-
-
-
-
-
-
 //homeslider image manage
 
 
