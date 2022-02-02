@@ -79,7 +79,6 @@ const Page = ({ data = {} }) => {
                 }
 
             </div>
-            <Divider />
             <div>
                 <Form
                     form={form}
@@ -92,6 +91,8 @@ const Page = ({ data = {} }) => {
 
                     {state.type ?
                         <>
+                            <Divider />
+
                             {state.variants.map((x, i) =>
                                 <div key={x.name}>
                                     <Form.Item

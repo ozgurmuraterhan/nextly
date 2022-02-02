@@ -10,8 +10,8 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                     <h6>{title.description}</h6>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-5   col-span-12 float-left">
-                    {state && state.map(data => (
-                        <div>
+                    {state && state.map((data, i) => (
+                        <div key={i}>
                             <ProductCard
                                 data={data}
                                 className="ounded-lg rounded-lg  m-5 bg-white  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl pb-8"

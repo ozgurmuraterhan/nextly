@@ -38,11 +38,15 @@ const Default = ({ state = [] }) => {
                     {state.map(val =>
                         <SwiperSlide key={val._id}>
                             <div className="item">
-                                <Link href={val.link}>
+
+
+                                <Link href={val.link + "/"}>
                                     <a>
                                         <LazyLoadImage src={`${IMG_URL + val.image}`} style={{ maxHeight: "500px", width: "100%" }} />
                                     </a>
                                 </Link>
+
+
                             </div>
                         </SwiperSlide>
                     )}

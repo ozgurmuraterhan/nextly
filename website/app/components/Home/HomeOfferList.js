@@ -26,9 +26,8 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                 {state.map(val =>
                     <div key={val._id}>
 
-                        <Link href={val.link} >
+                        <Link href={val.link + "/"} >
                             <a className="itemzoom mb-3">
-
                                 <LazyLoadImage src={`${IMG_URL + val.image}`} className="w-full" />
                                 <div className="w-full text-center mt-3">{val.title}</div>
                                 <div className="w-full text-center my-2 h-5"> {val.description} </div>
