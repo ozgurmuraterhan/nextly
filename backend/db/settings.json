@@ -1,61 +1,59 @@
 [
   {
     "_id": "6146744a961af300ba7e9721",
-    "company": "company",
-    "taxnumber": "taxnumber",
-    "taxcenter": "textcenter",
+    "company": "Nextly Inc.",
+    "taxnumber": "459672303",
+    "taxcenter": "California",
     "address": [
       {
         "name": "Company Address",
-        "value": "Atatürk mah. Devrim cad. no: 52/25 Cumhuriyet / İstanbul",
-        "_id": "6146744a961af300ba7e9722"
+        "value": "CA, United States"
       },
       {
         "name": "Store Address",
-        "value": "İnönü Mah. Hürriyet Mah. no: 31/82  Eminönü / İstanbul",
-        "_id": "6155c4cf9fe7c9dde815c630"
+        "value": "NY, United States"
       }
     ],
-    "title": "title",
-    "description": "description",
-    "keywords": "keywords",
-    "website": "website",
+    "title": "NextLY - eCommerce",
+    "description": "NextLY is e-commerce system, this is developed best javascript technologies.  Backend: node.js, express.js, Frontend: Next.js, React.js UI: Ant design, Tailwindcss db: Mongodb.",
+    "keywords": "Next.js e-commerce, mern + next.js ecommerce",
+    "website": "https://nextly.shop",
     "company_user": [
       {
-        "name": "company user",
-        "mail": "company user mail",
-        "phone": "company user phone",
+        "name": "Murat Erhan",
+        "mail": "murat.erhan.38@gmail.com",
+        "phone": "+90 (554) 255 36 56",
         "_id": "6146744a961af300ba7e9723"
       }
     ],
     "email": [
       {
         "name": "Support Mail",
-        "value": "support@company.com",
+        "value": "support@nextly.shop",
         "_id": "614689c5e5a1bf0a12997e48"
       },
       {
         "name": "Contact Mail",
-        "value": "info@company.com",
+        "value": "info@nextly.shop",
         "_id": "6155c4cf9fe7c9dde815c62e"
       }
     ],
     "phone": [
       {
         "name": "Contact Phone",
-        "value": "+90 (554) 255 36 56",
+        "value": "+1 (554) 255 36 56",
         "_id": "6146744a961af300ba7e9725"
       },
       {
         "name": "Support Phone",
-        "value": "+90 (555) 233 45 42",
+        "value": "+90 (554) 255 36 56",
         "_id": "6155c4cf9fe7c9dde815c632"
       }
     ],
     "anydata": [
       {
-        "name": "anydata name",
-        "value": "anydata value",
+        "name": "name",
+        "value": "value",
         "_id": "6146744a961af300ba7e9726"
       }
     ],
