@@ -126,10 +126,6 @@ const UsersSchema = new mongoose.Schema({
     address:
         [
             {
-                _id: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    required: true,
-                },
                 type: {
                     type: Boolean,
                     default: true,

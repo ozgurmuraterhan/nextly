@@ -1,0 +1,66 @@
+[
+  {
+    "_id": "6146744a961af300ba7e9721",
+    "company": "company",
+    "taxnumber": "taxnumber",
+    "taxcenter": "textcenter",
+    "address": [
+      {
+        "name": "Company Address",
+        "value": "Atatürk mah. Devrim cad. no: 52/25 Cumhuriyet / İstanbul",
+        "_id": "6146744a961af300ba7e9722"
+      },
+      {
+        "name": "Store Address",
+        "value": "İnönü Mah. Hürriyet Mah. no: 31/82  Eminönü / İstanbul",
+        "_id": "6155c4cf9fe7c9dde815c630"
+      }
+    ],
+    "title": "title",
+    "description": "description",
+    "keywords": "keywords",
+    "website": "website",
+    "company_user": [
+      {
+        "name": "company user",
+        "mail": "company user mail",
+        "phone": "company user phone",
+        "_id": "6146744a961af300ba7e9723"
+      }
+    ],
+    "email": [
+      {
+        "name": "Support Mail",
+        "value": "support@company.com",
+        "_id": "614689c5e5a1bf0a12997e48"
+      },
+      {
+        "name": "Contact Mail",
+        "value": "info@company.com",
+        "_id": "6155c4cf9fe7c9dde815c62e"
+      }
+    ],
+    "phone": [
+      {
+        "name": "Contact Phone",
+        "value": "+90 (554) 255 36 56",
+        "_id": "6146744a961af300ba7e9725"
+      },
+      {
+        "name": "Support Phone",
+        "value": "+90 (555) 233 45 42",
+        "_id": "6155c4cf9fe7c9dde815c632"
+      }
+    ],
+    "anydata": [
+      {
+        "name": "anydata name",
+        "value": "anydata value",
+        "_id": "6146744a961af300ba7e9726"
+      }
+    ],
+    "image": "/images/uploads/logo/1632204326831.png",
+    "price_icon": "$",
+    "price_type": true
+  }
+]

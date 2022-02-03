@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "6130d1d4728019432f23a33f",
+    "title": "Fedx",
+    "link": "https://www.fedex.com/",
+    "image": "/images/uploads/cargoes/1643463872995.png",
+    "created_user": {
+      "name": "Super Admin",
+      "id": "5f65e046fda80175a294c73c"
+    },
+    "order": 2,
+    "price": 20,
+    "before_price": 50,
+    "isActive": true
+  }
+]

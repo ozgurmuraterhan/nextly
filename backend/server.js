@@ -35,6 +35,12 @@ connection.once("open", () => {
    console.log("connection MongoDB");
 });
 
+//instalition db import
+const installDB = require("./routes/installdb.js");
+app.use("/installdb", installDB)
+//instalition
+
+//Private Root import
 const turkeyRouter = require("./routes/turkey");
 const userRouter = require("./routes/users");
 const uploadRouter = require("./routes/upload");
@@ -55,7 +61,7 @@ const topmenuRouter = require("./routes/topmenu");
 const settingsRouter = require("./routes/settings");
 const basketRouter = require("./routes/basket");
 
-//public Root
+//Public Root import
 const settingsPublicRouter = require("./routes/settingspublic");
 const topmenuPublicRouter = require("./routes/topmenupublic");
 const categoriesPublicRouter = require("./routes/categoriespublic");
@@ -69,6 +75,7 @@ const paymentMethodsPublicRouter = require("./routes/paymentmethodspublic");
 
 
 
+//Private Root
 app.use("/cargoes", cargoesRouter);
 app.use("/homeslider", homeSliderRouter);
 app.use("/orders", ordersRouter);
@@ -103,39 +110,6 @@ app.use("/paymentmethodspublic", paymentMethodsPublicRouter);
 
 
 app.use(express.static(path.join(__dirname, '../website/public')));
-//  initialize uppy
-// const uppyOptions = {
-//    providerOptions: {
-//       drive: {
-//          key: 'your google key',
-//          secret: 'your google secret',
-//       },
-//       instagram: {
-//          key: 'your instagram key',
-
-//          secret: 'your instagram secret',
-//       },
-//       dropbox: {
-//          key: 'your dropbox key',
-//          secret: 'your dropbox secret',
-//       },
-//       box: {
-//          key: 'your box key',
-//          secret: 'your box secret',
-//       },
-//       // you can also add options for additional providers here
-//    },
-//    server: {
-//       host: 'localhost:3020',
-//       protocol: 'http',
-//    },
-//    filePath: './output',
-//    secret: 'some-secret',
-//    debug: true,
-// }
-
-// app.use(companion.app(uppyOptions))
-// companion.socket(app.listen(3020), uppyOptions)
 
 app.listen(port, () => {
    console.log("sever is runnin port: " + port);
