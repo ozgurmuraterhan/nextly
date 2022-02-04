@@ -46,8 +46,8 @@ const Page = () => {
             <Head
                 title="Payments Succeeded"
             />
-            <div className="col-span-12 shadow-lg p-10">
-                <div className="grid grid-cols-12 bg-white">
+            <div className="col-span-12 shadow-lg my-5">
+                <div className="grid grid-cols-12 p-2 sm:p-10 bg-white">
                     {state ?
                         <>
                             <div className="text-4xl col-span-12 text-brand-color font-semibold text-center mb-10">Payment Succeeded</div>
@@ -63,27 +63,33 @@ const Page = () => {
                                 <div className="font-bold mt-5">Billing Address</div>
                                 <div>{state.billing_address}</div>
                             </div>
-                            <div className="col-span-6 ">
+                            <div className="col-span-12 sm:col-span-6 mt-10 sm:mt-0 ">
                                 <div className="font-bold">Products</div>
                                 <table className="w-full ">
                                     <tr className="bg-gray-50">
                                         <td className="font-semibold">Title</td>
-                                        <td className="font-semibold">Variant</td>
+                                        <td className="font-semibold hidden sm:block">Variant</td>
                                         <td className="font-semibold">Qty</td>
                                         <td className="font-semibold">  Price</td>
                                     </tr>
                                     {state.products && state.products.map(x =>
-                                        <tr className="h-16 border-b">
-                                            <td><Link href={"/product/" + x.seo}>{x.title}</Link></td>
-                                            <td>{getVariant(x.selectedVariants)}</td>
+                                        <tr className="h-16 border-b ">
+                                            <td className="border-b font-semibold">
+
+                                                <Link href={"/" + x.seo}>{x.title}</Link>
+                                                <span className="block sm:hidden mt-3">
+                                                    {getVariant(x.selectedVariants)}
+                                                </span>
+                                            </td>
+                                            <td className="hidden sm:block pt-3">{getVariant(x.selectedVariants)}</td>
                                             <td>{x.qty}</td>
                                             <td><Price data={x.price * x.qty} /></td>
 
                                         </tr>
                                     )}
                                     <tr>
-                                        <td> </td>
-                                        <td> </td>
+                                        <td className="hidden sm:block"> </td>
+                                        <td className="hidden sm:block"> </td>
                                         <td className="font-semibold"><br />
                                             Cargo Price:<br />
                                             Total Price:</td>
@@ -97,7 +103,13 @@ const Page = () => {
                                 </table>
                             </div>
 
+
+
+
+
                         </>
+
+
                         : ""}
                 </div>
 
