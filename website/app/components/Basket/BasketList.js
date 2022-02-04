@@ -82,7 +82,7 @@ const Default = () => {
         })
 
 
-        seTstate(BasketAllProducts.sort((a, b) => (a.price + JSON.stringify(a.selectedVariants)).length - (b.price + JSON.stringify(b.selectedVariants)).length))
+        seTstate(BasketAllProducts.sort((a, b) => (a.price + a.seo + JSON.stringify(a.selectedVariants)).length - (b.price + b.seo + JSON.stringify(b.selectedVariants)).length))
 
     }
 
