@@ -39,6 +39,7 @@ const SignInPage = () => {
 
 
   const onSubmitSignup = (Data) => {
+    Data["username"] = Data.username.lowerCase()
 
     axios.post(`${API_URL}/users/register`, Data).then(res => {
       if (res.data.error) {
@@ -58,6 +59,7 @@ const SignInPage = () => {
   }
 
   const onSubmitLogin = (Data) => {
+    Data["username"] = Data.username.lowerCase()
 
     AuthService.login(Data).then((data) => {
 

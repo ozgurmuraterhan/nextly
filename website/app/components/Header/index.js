@@ -26,6 +26,9 @@ const Default = () => {
     const dispatch = useDispatch();
 
     const onSubmitSignup = (Data) => {
+
+        Data["username"] = Data.username.lowerCase()
+
         axios.post(`${API_URL}/users/register`, Data).then(res => {
             if (res.data.error) {
                 message.error(res.data.messagge)
@@ -39,6 +42,8 @@ const Default = () => {
     }
 
     const onSubmitLogin = (Data) => {
+
+        Data["username"] = Data.username.lowerCase()
         AuthService.login(Data).then((data) => {
             const { isAuthenticated, user } = data;
             if (isAuthenticated) {
