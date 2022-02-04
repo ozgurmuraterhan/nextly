@@ -43,12 +43,6 @@ const Page = () => {
         getProducts()
     }, [filterProducts])
 
-    const getVariantPrice = (data) => {
-        if (data.length > 0) {
-            const newData = data.sort((a, b) => { return a.price - b.price })
-            return <span> <Price data={newData[0].price} />  -  <Price data={newData[data.length - 1].price} />   </span>
-        }
-    }
 
     const fetchMoreData = () => {
         dispatch(filterProducts_r({
@@ -64,13 +58,13 @@ const Page = () => {
     }
     return (
         <>
-            <div className="container " >
+            <div className="container  " >
                 <InfiniteScroll
                     dataLength={products.length}
                     next={fetchMoreData}
                     hasMore={hasMore}
                     loader={<div className="col-span-12  "><CircularProgress /></div>}
-                    className="grid grid-cols-12"
+                    className="grid grid-cols-12 pb-16"
                 >
                     {products && products.map(data => (
                         <ProductCard
