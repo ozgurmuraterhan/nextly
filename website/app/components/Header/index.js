@@ -27,7 +27,7 @@ const Default = () => {
 
     const onSubmitSignup = (Data) => {
 
-        Data["username"] = Data.username.lowerCase()
+        Data["username"] = Data.username.toLowerCase()
 
         axios.post(`${API_URL}/users/register`, Data).then(res => {
             if (res.data.error) {
@@ -43,7 +43,7 @@ const Default = () => {
 
     const onSubmitLogin = (Data) => {
 
-        Data["username"] = Data.username.lowerCase()
+        Data["username"] = Data.username.toLowerCase()
         AuthService.login(Data).then((data) => {
             const { isAuthenticated, user } = data;
             if (isAuthenticated) {
