@@ -42,7 +42,7 @@ const Page = ({ seo, resData }) => {
             />
             <div className="grid shadow-lg p-4 grid-cols-12 my-8 sm:gap-9 bg-white">
                 <div className=" lg:col-span-3  col-span-12 sm:order-2 order-2 ">
-                    <div className="text-xl font-semibold col-span-12 text-brand-color  mb-5  " >
+                    <div className="text-xl font-semibold col-span-12 text-brand-color  mb-5 mt-5 sm:mt-0  " >
                         {leftMenuTitle && leftMenuTitle.title}
                     </div>
                     {leftMenu && leftMenu?.map((x, i) =>

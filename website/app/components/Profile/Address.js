@@ -156,7 +156,6 @@ const Defaut = () => {
 
       <Drawer
         title="Address"
-        width="500"
         placement="right"
         onClose={() => { seTnewAddress({ ...newAddress, open: !newAddress.open }) }}
         visible={newAddress.open}
@@ -176,7 +175,7 @@ const Defaut = () => {
             rules={[{ required: true, message: 'Missing Area' }]}
 
           >
-            <Input />
+            <Input autocomplete="chrome-off" />
           </Form.Item>
 
           <Form.Item
@@ -190,6 +189,7 @@ const Defaut = () => {
               defaultValue={true}
               options={[{ label: "Billing Address", value: true }, { label: "Shipping Address", value: false }]}
               placeholder="Select Address Type"
+              autoComplete="none"
 
             />
           </Form.Item>
@@ -206,6 +206,7 @@ const Defaut = () => {
             <Select
               showSearch
               options={countryOption}
+              autoComplete="none"
               placeholder="Search to Country"
               optionFilterProp="children"
               filterOption={(input, option) =>
@@ -246,6 +247,7 @@ const Defaut = () => {
           >
             <Select
               showSearch
+              autoComplete="none"
               options={cityOption}
               placeholder={intl.messages["app.pages.customers.addressCity"]}
               optionFilterProp="children"
@@ -283,6 +285,7 @@ const Defaut = () => {
             {selectedO.selectedCountry == "Turkey" ?
               <Select
                 showSearch
+                autoComplete="none"
                 options={ilceOption.option}
                 name="town_id"
                 placeholder={intl.messages["app.pages.customers.addressTown"]}
@@ -304,7 +307,7 @@ const Defaut = () => {
                 }}
               />
               :
-              <Input placeholder={intl.messages["app.pages.customers.addressTown"]} />
+              <Input placeholder={intl.messages["app.pages.customers.addressTown"]} autocomplete="chrome-off" />
             }
           </Form.Item>
 
@@ -318,6 +321,7 @@ const Defaut = () => {
             {selectedO.selectedCountry == "Turkey" ?
               <Select
                 showSearch
+                autoComplete="none"
                 options={semtOption.option}
                 placeholder={intl.messages["app.pages.customers.addressDistrict"]}
                 name="district_id"
@@ -339,7 +343,7 @@ const Defaut = () => {
                 }}
               />
               :
-              <Input placeholder={intl.messages["app.pages.customers.addressDistrict"]} />
+              <Input placeholder={intl.messages["app.pages.customers.addressDistrict"]} autocomplete="chrome-off" />
             }
           </Form.Item>
 
@@ -355,6 +359,7 @@ const Defaut = () => {
             {selectedO.selectedCountry == "Turkey" ?
               <Select
                 showSearch
+                autoComplete="none"
                 options={mahalleOption.option}
                 placeholder={intl.messages["app.pages.customers.addressNeighbour"]}
                 name="village_id"
@@ -370,7 +375,7 @@ const Defaut = () => {
 
               />
               :
-              <Input placeholder={intl.messages["app.pages.customers.addressNeighbour"]} />
+              <Input placeholder={intl.messages["app.pages.customers.addressNeighbour"]} autocomplete="chrome-off" />
             }
           </Form.Item>
           <Form.Item
@@ -381,7 +386,7 @@ const Defaut = () => {
             rules={[{ required: true, message: 'Missing Area' }]}
 
           >
-            <Input.TextArea rows={3} placeholder={intl.messages["app.pages.customers.addressFull"]} />
+            <Input.TextArea rows={3} placeholder={intl.messages["app.pages.customers.addressFull"]} autocomplete="chrome-off" />
           </Form.Item>
           <Button htmlType="submit" className="w-full p-3 h-auto">
             Save

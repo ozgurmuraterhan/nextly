@@ -246,37 +246,75 @@ const Default = () => {
                             record.error.map(x => {
                                 errorArray.push(<div className="text-xs ">  {x} </div>)
                             })
-                            return <span className="link">
-                                {text}
-                                <div className="text-red-500">{errorArray}</div>
-                            </span>
-                        },
-                    },
-                    {
-                        title: "",
-                        dataIndex: 'variants',
-                        key: 'variants',
-                        render: (text, record) => {
+
                             const variants = []
 
                             for (const property in record.selectedVariants) {
-                                variants.push(<div className="text-xs ">  {property}: {record.selectedVariants[property]}  </div>)
+                                variants.push(<div className="text-xs "> <span className="font-semibold"> {property}</span>: {record.selectedVariants[property]}  </div>)
                             }
-                            return variants.length > 0 ? <> {variants}</> : <> </>
+
+                            return <span className="link">
+
+                                <div className="float-left mb-5 w-full">
+                                    <span className="float-right text-right sm:hidden ">
+                                        <Popconfirm placement="left" title="Are You Sure?" onConfirm={() => {
+                                            deleteProduct(record)
+                                        }}>
+                                            <a><DeleteOutlined style={{ fontSize: "150%", marginLeft: "15px" }} /> </a>
+                                        </Popconfirm>
+                                    </span>
+                                    <div className="text-red-500 float-left">{errorArray}</div>
+                                    <span className="font-semibold">{text}</span>
+                                    {variants.length > 0 ? <> {variants}</> : <> </>}
+                                </div>
+                                <div className=" float-left sm:hidden flex flex-row h-10  my-2 rounded w-24 relative bg-transparent border-gray-200 border  ">
+                                    <button data-action="decrement"
+                                        className=" bg-white text-gray-700 hover:text-black hover:bg-brand-color  h-full w-20 rounded-l cursor-pointer outline-none"
+                                        onClick={val => {
+                                            notPlusProduct(record)
+                                        }}
+                                    >
+                                        <span className="m-auto text-2xl font-thin">−</span>
+                                    </button>
+                                    <input type="number" className="outline-none  hiddenArrowInputNumber focus:outline-none text-center w-full bg-white font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  "
+                                        name="custom-input-number"
+                                        value={record.qty}>
+                                    </input>
+                                    <button
+                                        data-action="increment"
+                                        className="bg-white text-gray-700 hover:text-black hover:bg-brand-color h-full w-20 rounded-r cursor-pointer"
+                                        onClick={val => {
+                                            plusProduct(record)
+                                        }}
+                                    >
+                                        <span className="m-auto text-2xl font-thin">+</span>
+                                    </button>
+                                </div>
+
+                                <div className="text-center float-right sm:hidden  ">
+                                    <span className=" text-md line-through">  {record.total_discount != 0 ? <Price data={record.total_discount} /> : ""}</span>
+                                    <div className=" text-lg text-brand-color">
+                                        <Price data={record.total_price} />
+                                    </div>
+
+                                </div>
+                            </span>
                         },
                     },
 
+
                     {
                         title: "Price",
-                        dataIndex: 'total_price',
-                        key: 'total_price',
+                        dataIndex: 'price',
+                        key: 'price',
+                        className: "hidden sm:table-cell ",
                         render: (text, record) => (
-                            <div className="text-center">
+                            <div className="text-center  ">
 
                                 <span className=" text-md line-through">
                                     {record.before_price != 0 ? <Price data={record.before_price} /> : ""}
                                 </span>
-                                <div className=" text-lg ">
+                                <div className=" text-sm ">
                                     <Price data={record.price} />
                                 </div>
                             </div>
@@ -287,6 +325,7 @@ const Default = () => {
                         title: "Qty",
                         dataIndex: "action",
                         key: "action",
+                        className: "hidden sm:table-cell ",
                         render: (text, record) => (
                             <>
                                 <div className="flex flex-row h-10  rounded w-24 relative bg-transparent border-gray-200 border mt-1">
@@ -298,7 +337,7 @@ const Default = () => {
                                     >
                                         <span className="m-auto text-2xl font-thin">−</span>
                                     </button>
-                                    <input type="number" className="outline-none  hiddenArrowInputNumber focus:outline-none text-center w-full bg-white font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+                                    <input type="number" className="outline-none  hiddenArrowInputNumber focus:outline-none text-center w-full bg-white font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  "
                                         name="custom-input-number"
                                         value={record.qty}>
                                     </input>
@@ -320,6 +359,7 @@ const Default = () => {
                         title: "Total Price",
                         dataIndex: 'total_price',
                         key: 'total_price',
+                        className: "hidden sm:table-cell ",
                         render: (text, record) => (
                             <div className="text-center">
                                 <span className=" text-md line-through">  {record.total_discount != 0 ? <Price data={record.total_discount} /> : ""}</span>
@@ -335,6 +375,7 @@ const Default = () => {
                         title: "Delete",
                         dataIndex: "action",
                         key: "action",
+                        className: "hidden sm:table-cell ",
                         render: (text, record) => (
 
                             <Popconfirm placement="left" title="Are You Sure?" onConfirm={() => {

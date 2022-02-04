@@ -14,11 +14,11 @@ const Default = ({ data }) => {
         <>
             {settings.price_type ?
                 <>
-                    {settings.price_icon} {(data).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                    {settings.price_icon}{(data).toLocaleString(undefined, { minimumFractionDigits: 2 })}
                 </>
                 :
                 <>
-                    {(data).toLocaleString(undefined, { minimumFractionDigits: 2 })} {settings.price_icon}
+                    {(data).toLocaleString(undefined, { minimumFractionDigits: 2 })}{settings.price_icon}
                 </>
             }
 

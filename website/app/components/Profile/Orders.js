@@ -18,6 +18,7 @@ const Defaut = () => {
             title: intl.messages["app.pages.orders.orderNumber"],
             dataIndex: 'ordernumber',
             key: 'ordernumber',
+            className: "hidden sm:table-cell ",
         },
         {
             title: intl.messages["app.pages.orders.totalPrice"],
@@ -121,18 +122,18 @@ const Defaut = () => {
                         <div className="m-0 w-full ">
                             <div className="text-xl col-span-12   font-semibold text-center mb-10">Order Number:{record.ordernumber} </div>
                             <div className="grid grid-cols-12 " >
-                                <div className="col-span-4">
+                                <div className="col-span-12 sm:col-span-6">
                                     <div className="font-bold">Receiver</div>
                                     <div>{record.receiver_name}</div>
                                     <div>{record.receiver_email}</div>
                                     <div>{record.receiver_phone}</div>
                                 </div>
-                                <div className="col-span-4">
+                                <div className=" col-span-12 sm:col-span-4">
 
                                     <div className="font-bold mt-5">Shipping Address</div>
                                     <div>{record.shipping_address}</div>
                                 </div>
-                                <div className="col-span-4">
+                                <div className="col-span-12 sm:col-span-4">
 
                                     <div className="font-bold mt-5">Billing Address</div>
                                     <div>{record.billing_address}</div>
@@ -143,26 +144,32 @@ const Defaut = () => {
 
                             <div className="text-xl col-span-12 mt-24   font-semibold text-center mb-10">Products</div>
 
-                            <table className="w-full bg-black-100 bg-gray-100 !text-center py-5  !rounded-xl ">
+                            <table className="w-full bg-black-100 -ml-4  bg-gray-100 !text-center py-5  !rounded-xl ">
 
                                 <tr className="font-semibold">
                                     <td className=" border-b pb-5">Title</td>
-                                    <td className="  border-b pb-5">Variant</td>
+                                    <td className="  border-b pb-5 hidden sm:block">Variant</td>
                                     <td className="  border-b pb-5">Qty</td>
                                     <td className="  border-b pb-5">Price</td>
                                 </tr>
                                 {record.products.map(x =>
                                     <tr className="h-20 !border-b !border-black hover:bg-gray-50 ">
-                                        <td className="border-b"><Link href={"/" + x.seo}>{x.title}</Link></td>
-                                        <td className="border-b">{getVariant(x.selectedVariants)}</td>
+                                        <td className="border-b font-semibold">
+
+                                            <Link href={"/" + x.seo}>{x.title}</Link>
+                                            <span className="block sm:hidden mt-3">
+                                                {getVariant(x.selectedVariants)}
+                                            </span>
+                                        </td>
+                                        <td className="border-b hidden sm:block" >{getVariant(x.selectedVariants)}</td>
                                         <td className="border-b">{x.qty}</td>
                                         <td className="border-b"><Price data={x.price * x.qty} /></td>
 
                                     </tr>
                                 )}
                                 <tr>
-                                    <td> </td>
-                                    <td> </td>
+                                    <td className="hidden sm:block"> </td>
+                                    <td className="hidden sm:block"> </td>
                                     <td className="font-semibold"><br />
                                         Cargo Price:<br />
                                         Total Price:</td>

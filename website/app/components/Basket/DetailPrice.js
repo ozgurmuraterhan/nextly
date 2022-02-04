@@ -266,6 +266,13 @@ const Default = () => {
 
     return (
         <div className="h-full relative">
+            <div className="h-20">
+                <Button disabled={basket[0]?.products.length > 0 ? false : true} className="bg-black w-full h-auto absolute top-0 cursor-pointer hover:text-white hover:bg-brand-color transition-all text-xl text-white p-5" onClick={onSubmit}>
+                    Confirm Basket
+                    <CheckSquareOutlined className="float-right text-3xl" />
+                </Button>
+
+            </div>
             <div className="text-lg p-3 bg-gray-50 font-semibold">
                 Cargo Summary
             </div>
