@@ -209,7 +209,13 @@ const Default = () => {
 
     const changeCargo = (newValue) => {
 
+        console.log("newValue", newValue)
+        console.log("cargoes", cargoes)
+
         const cargo = cargoes.find(x => x._id == newValue)
+        console.log("cargo", cargo)
+
+
         const post = {
             created_user: {
                 name: user.name,

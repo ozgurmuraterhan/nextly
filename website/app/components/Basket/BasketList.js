@@ -81,7 +81,8 @@ const Default = () => {
 
         })
 
-        seTstate(BasketAllProducts.sort((a, b) => (a.seo + JSON.stringify(a.selectedVariants)).length - (b.seo + JSON.stringify(b.selectedVariants)).length))
+
+        seTstate(BasketAllProducts.sort((a, b) => (a.price + JSON.stringify(a.selectedVariants)).length - (b.price + JSON.stringify(b.selectedVariants)).length))
 
     }
 
@@ -175,7 +176,10 @@ const Default = () => {
             message.success({ content: 'Product Update!', duration: 3 });
             dispatch(updateBasket_r([post]))
             getProducts()
+            seTisLoaded(false)
+
         }
+
     }
 
 
@@ -186,6 +190,7 @@ const Default = () => {
         const productsData = []
         const variantControl = productsDataArray.find(x => x.product_id == dataRecord._id && JSON.stringify(x.selectedVariants) == JSON.stringify(dataRecord.selectedVariants))
         const variantControlNot = productsDataArray.filter(x => x.product_id != dataRecord._id || JSON.stringify(x.selectedVariants) != JSON.stringify(dataRecord.selectedVariants))
+
         productsData.push(
             ...variantControlNot,
             {
@@ -193,7 +198,9 @@ const Default = () => {
                 selectedVariants: dataRecord.selectedVariants,
                 qty: variantControl.qty > 1 ? variantControl.qty - 1 : variantControl.qty,
                 seo: dataRecord.seo
-            })
+            }
+        )
+
         const post = {
             created_user: {
                 name: user.name,
@@ -218,7 +225,7 @@ const Default = () => {
             message.success({ content: 'Product Update!', duration: 3 });
             dispatch(updateBasket_r([post]))
             getProducts()
-
+            seTisLoaded(false)
         }
     }
 
@@ -332,7 +339,6 @@ const Default = () => {
 
                             <Popconfirm placement="left" title="Are You Sure?" onConfirm={() => {
                                 deleteProduct(record)
-
                             }}>
                                 <a><DeleteOutlined style={{ fontSize: "150%", marginLeft: "15px" }} /> </a>
                             </Popconfirm>
@@ -344,7 +350,6 @@ const Default = () => {
 
                 pagination={false}
                 dataSource={[...state]}
-                rowKey="_id"
             />
         </>
     )
