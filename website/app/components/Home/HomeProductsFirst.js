@@ -14,7 +14,7 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                         <div key={i}>
                             <ProductCard
                                 data={data}
-                                className="ounded-lg rounded-lg  m-5 bg-white  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl pb-8"
+                                className="ounded-lg rounded-lg m-2 sm:m-5 bg-white  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl pb-8"
 
                             />
                         </div>
