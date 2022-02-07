@@ -1,4 +1,4 @@
-import { CATEGORIES_FETCH } from "../../constants/ActionTypes";
+import { CATEGORIES_FETCH } from "../types";
 
 
 const initialSettings = {

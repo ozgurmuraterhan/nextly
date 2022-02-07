@@ -1,4 +1,4 @@
-import { BASKET_FETCH } from "../../constants/ActionTypes";
+import { BASKET_FETCH } from "../types";
 
 
 const initialSettings = {

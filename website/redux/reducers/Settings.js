@@ -1,4 +1,4 @@
-import { CHANGE_COLLAPSED, SWITCH_LANGUAGE, GET_SETTINGS, GET_ALL_FETCH_FAIL } from "../../constants/ActionTypes";
+import { CHANGE_COLLAPSED, SWITCH_LANGUAGE, GET_SETTINGS, GET_ALL_FETCH_FAIL } from "../types";
 import { defaultLanguage } from "../../../config"
 
 

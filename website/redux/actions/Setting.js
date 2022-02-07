@@ -1,4 +1,4 @@
-import { SWITCH_LANGUAGE, CHANGE_COLLAPSED, GET_SETTINGS, GET_ALL_FETCH_FAIL } from "../../constants/ActionTypes";
+import { SWITCH_LANGUAGE, CHANGE_COLLAPSED, GET_SETTINGS, GET_ALL_FETCH_FAIL } from "../types";
 import axios from "axios"
 import { API_URL } from '../../../config';
 

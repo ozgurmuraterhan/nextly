@@ -1,4 +1,4 @@
-import { BRANDS_FETCH } from "../../constants/ActionTypes";
+import { BRANDS_FETCH } from "../types";
 
 
 const initialSettings = {

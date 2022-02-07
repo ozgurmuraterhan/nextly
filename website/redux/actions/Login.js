@@ -1,4 +1,4 @@
-import { SET_LOGIN, SET_ISAUTHENTICATED, SET_LOGOUT } from "../../constants/ActionTypes";
+import { SET_LOGIN, SET_ISAUTHENTICATED, SET_LOGOUT } from "../types";
 
 
 export const login_r = (data) => {

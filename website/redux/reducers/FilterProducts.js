@@ -1,4 +1,4 @@
-import { FILTER_PRODUCTS, FILTER_RESET } from "../../constants/ActionTypes";
+import { FILTER_PRODUCTS, FILTER_RESET } from "../types";
 
 
 const initialSettings = {

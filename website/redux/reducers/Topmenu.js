@@ -1,4 +1,4 @@
-import { TOPMENU_FETCH } from "../../constants/ActionTypes";
+import { TOPMENU_FETCH } from "../types";
 
 
 const initialSettings = {
