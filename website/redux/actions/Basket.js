@@ -1,4 +1,4 @@
-import { BASKET_FETCH, GET_ALL_FETCH_FAIL } from "../../constants/ActionTypes";
+import { BASKET_FETCH, GET_ALL_FETCH_FAIL } from "../types"
 import axios from "axios"
 import { API_URL } from '../../../config';
 
