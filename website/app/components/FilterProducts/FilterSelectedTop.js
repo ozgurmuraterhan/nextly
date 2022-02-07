@@ -36,10 +36,8 @@ const Page = () => {
         filterRouteLinkGenerate({ ...filterProducts, text: "", skip: 0 })
     }
 
-
-
     return (
-        <div >
+        <div className="p-5" >
 
             {filterProducts.text != "" ?
                 <span key="text" style={{ display: 'inline-block' }}>
