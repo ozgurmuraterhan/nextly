@@ -1,15 +1,9 @@
-module.exports = {
 
-    /// for server
+const jsonConfig = {
+
     API_URL: "https://backend.nextly.shop",
     WEBSITE_URL: "https://nextly.shop",
     IMG_URL: "https://nextly.shop",
-
-
-    //for Locale
-    // API_URL: "http://localhost:5000",
-    // WEBSITE_URL: "http://localhost:3000",
-    // IMG_URL: "http://localhost:3000",
 
     maillerConfig: {
         // host: 'smtp.gmail.com',
@@ -46,3 +40,12 @@ module.exports = {
         icon: 'us'
     }
 }
+
+if (process.env.NODE_ENV == 'development') {
+    jsonConfig.API_URL = "http://localhost:5000"
+    jsonConfig.WEBSITE_URL = "http://localhost:3000"
+    jsonConfig.IMG_URL = "http://localhost:3000"
+}
+
+
+module.exports = jsonConfig

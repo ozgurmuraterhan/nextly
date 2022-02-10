@@ -104,34 +104,26 @@ export default {
 
     },
     selectCategoriesFilterData: (datas) => {
-        const data = []
-        datas.map(val => {
-            data.push(val._id)
-            val.children?.map(val2 => {
-                if (val2.children) {
-                    data.push(val2._id)
-                    val2.children?.map(val3 => {
-                        if (val3.children) {
-                            data.push(val3._id)
-                            val3.children?.map(val4 => {
-                                if (val4.children) {
-                                    data.push(val4._id)
-                                }
-                            })
-                        }
-                    })
-                }
-            })
-        })
-        return data
+
+        if (datas.length > 0) {
+            const data = Object.entries(datas).map(([x, y]) => y._id)
+            return data
+        }
     },
 
-    getCategoriesTreeOptions: (data, option = false, parrent = null) => {
+    getCategoriesTreeOptions: (data, option = false) => {
 
-        const nest = (items, _id = parrent, link = 'categories_id') => {
+        const nest = (items, _id = null, link = 'categories_id') => {
+
             return items
                 .filter(item => item[link] === _id)
-                .map(item => ({ ...item, children: nest(items, item._id) }))
+                .map(item => ({
+                    ...item,
+                    value: item._id,
+                    key: item._id,
+                    children: nest(items, item._id),
+                    disabled: nest(items, item._id).length > 0 && option === true ? true : false
+                }))
         }
 
         const clean = (obj) => {
@@ -144,212 +136,13 @@ export default {
                 );
             return Object.keys(obj).length ? obj : undefined;
         }
-        if (option) {
 
-            const firstdata = clean(nest(data))
-            const Optiondata = firstdata?.map(function (obj) {
-
-                if (obj.children != undefined) {
-                    let children = []
-                    obj.children.map(obj2 => {
-
-                        if (obj2.children != undefined) {
-                            let children2 = []
-
-                            obj2.children.map(obj3 => {
-
-                                if (obj3.children != undefined) {
-                                    let children3 = []
-
-                                    obj3.children.map(obj4 => {
-                                        children3.push({ value: obj4['_id'] ? obj4['_id'] : obj4['id'], key: obj4['_id'], ...obj4 })
-                                    })
-                                    obj3['children'] = children3
-                                    if (obj3['children']) {
-                                        obj3['disabled'] = true
-                                    }
-                                }
-
-                                children2.push({ value: obj3['_id'] ? obj3['_id'] : obj3['id'], key: obj3['_id'], ...obj3 })
-
-                            })
-                            obj2['children'] = children2
-                            if (obj2['children']) {
-                                obj2['disabled'] = true
-                            }
-                        }
-                        children.push({ value: obj2['_id'] ? obj2['_id'] : obj2['id'], key: obj2['_id'], ...obj2 })
-
-                    })
-                    obj['children'] = children
-                }
-
-                obj['value'] = obj['_id'] ? obj['_id'] : obj['id']; // Assign new key 
-                obj['key'] = obj['_id']
-                if (obj['children']) {
-                    obj['disabled'] = true
-                }
-                return obj;
-            });
-
-            return Optiondata
-
-        } else {
-
-            const firstdata = clean(nest(data))
-            const Optiondata = firstdata.map(function (obj) {
-
-                if (obj.children != undefined) {
-                    let children = []
-                    obj.children.map(obj2 => {
-
-                        if (obj2.children != undefined) {
-                            let children2 = []
-
-                            obj2.children.map(obj3 => {
-
-                                if (obj3.children != undefined) {
-                                    let children3 = []
-
-                                    obj3.children.map(obj4 => {
-                                        children3.push({ value: obj4['_id'] ? obj4['_id'] : obj4['id'], key: obj4['title'], ...obj4 })
-                                    })
-                                    obj3['children'] = children3
-                                }
-
-                                children2.push({ value: obj3['_id'] ? obj3['_id'] : obj3['id'], key: obj3['title'], ...obj3 })
-
-                            })
-                            obj2['children'] = children2
-                        }
-                        children.push({ value: obj2['_id'] ? obj2['_id'] : obj2['id'], key: obj2['title'], ...obj2 })
-
-                    })
-                    obj['children'] = children
-                }
-
-                obj['value'] = obj['_id'] ? obj['_id'] : obj['id']; // Assign new key 
-                obj['key'] = obj['title']
-
-                return obj;
-            });
-
-            return Optiondata
-
-
-        }
-
-
+        const firstdata = clean(nest(data))
+        return firstdata
 
     },
-    getCategoriesTreeLabels: (data, option = false, parrent = null) => {
-
-        const nest = (items, _id = parrent, link = 'categories_id') => {
-            return items
-                .filter(item => item[link] === _id)
-                .map(item => ({ ...item, children: nest(items, item._id) }))
-        }
-
-        const clean = (obj) => {
-            if (Object(obj) !== obj) return obj; // primitives are kept
-            obj = Array.isArray(obj)
-                ? obj.map(clean).filter(v => v !== undefined)
-                : Object.fromEntries(
-                    Object.entries(obj).map(([k, v]) => [k, clean(v)])
-                        .filter(([_, v]) => v !== undefined)
-                );
-            return Object.keys(obj).length ? obj : undefined;
-        }
-        if (option) {
-
-            const firstdata = clean(nest(data))
-            const Optiondata = firstdata.map(function (obj) {
-
-                if (obj.children != undefined) {
-                    let children = []
-                    obj.children.map(obj2 => {
-
-                        if (obj2.children != undefined) {
-                            let children2 = []
-
-                            obj2.children.map(obj3 => {
-
-                                if (obj3.children != undefined) {
-                                    let children3 = []
-
-                                    obj3.children.map(obj4 => {
-                                        children3.push({ value: obj4['_id'] ? obj4['_id'] : obj4['id'], ...obj4 })
-                                    })
-                                    obj3['children'] = children3
-                                }
-
-                                children2.push({ value: obj3['_id'] ? obj3['_id'] : obj3['id'], ...obj3 })
-
-                            })
-                            obj2['children'] = children2
-                        }
-                        children.push({ value: obj2['_id'] ? obj2['_id'] : obj2['id'], ...obj2 })
-
-                    })
-                    obj['children'] = children
-                }
-
-                obj['value'] = obj['_id'] ? obj['_id'] : obj['id']; // Assign new key 
-                if (obj['children']) {
-                    obj['disabled'] = true
-                }
-                return obj;
-            });
-
-            return Optiondata
-
-        } else {
-
-            const firstdata = clean(nest(data))
-
-            const Optiondata = firstdata.map(function (obj) {
-
-                if (obj.children != undefined) {
-                    let children = []
-                    obj.children.map(obj2 => {
-
-                        if (obj2.children != undefined) {
-                            let children2 = []
-
-                            obj2.children.map(obj3 => {
-
-                                if (obj3.children != undefined) {
-                                    let children3 = []
-
-                                    obj3.children.map(obj4 => {
-                                        children3.push({ value: obj4['_id'] ? obj4['_id'] : obj4['id'], ...obj4 })
-                                    })
-                                    obj3['children'] = children3
-                                }
-
-                                children2.push({ value: obj3['_id'] ? obj3['_id'] : obj3['id'], ...obj3 })
-
-                            })
-                            obj2['children'] = children2
-                        }
-                        children.push({ value: obj2['_id'] ? obj2['_id'] : obj2['id'], ...obj2 })
-
-                    })
-                    obj['children'] = children
-                }
-
-                obj['value'] = obj['_id'] ? obj['_id'] : obj['id']; // Assign new key 
-                return obj;
-            });
-
-            return Optiondata
 
 
-        }
-
-
-
-    },
 
     replaceSeoUrl: (textString) => {
 

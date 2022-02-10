@@ -36,9 +36,16 @@ export default {
     getCategoriesTreeOptions: (data, option = false) => {
 
         const nest = (items, _id = null, link = 'categories_id') => {
+
             return items
                 .filter(item => item[link] === _id)
-                .map(item => ({ ...item, children: nest(items, item._id) }))
+                .map(item => ({
+                    ...item,
+                    value: item._id,
+                    key: item._id,
+                    children: nest(items, item._id),
+                    disabled: nest(items, item._id).length > 0 && option === true ? true : false
+                }))
         }
 
         const clean = (obj) => {
@@ -51,99 +58,10 @@ export default {
                 );
             return Object.keys(obj).length ? obj : undefined;
         }
-        if (option) {
-
-            const firstdata = clean(nest(data))
-            const Optiondata = firstdata.map(function (obj) {
-
-                if (obj.children != undefined) {
-                    let children = []
-                    obj.children.map(obj2 => {
-
-                        if (obj2.children != undefined) {
-                            let children2 = []
-
-                            obj2.children.map(obj3 => {
-
-                                if (obj3.children != undefined) {
-                                    let children3 = []
-
-                                    obj3.children.map(obj4 => {
-                                        children3.push({ value: obj4['_id'] ? obj4['_id'] : obj4['id'], ...obj4 })
-                                    })
-                                    obj3['children'] = children3
-                                    if (obj3['children']) {
-                                        obj3['disabled'] = true
-                                    }
-                                }
-
-                                children2.push({ value: obj3['_id'] ? obj3['_id'] : obj3['id'], ...obj3 })
-
-                            })
-                            obj2['children'] = children2
-                            if (obj2['children']) {
-                                obj2['disabled'] = true
-                            }
-                        }
-                        children.push({ value: obj2['_id'] ? obj2['_id'] : obj2['id'], ...obj2 })
-
-                    })
-                    obj['children'] = children
-                }
-
-                obj['value'] = obj['_id'] ? obj['_id'] : obj['id']; // Assign new key 
-                if (obj['children']) {
-                    obj['disabled'] = true
-                }
-                return obj;
-            });
-
-            return Optiondata
-
-        } else {
-
-            const firstdata = clean(nest(data))
-            const Optiondata = firstdata.map(function (obj) {
-
-                if (obj.children != undefined) {
-                    let children = []
-                    obj.children.map(obj2 => {
-
-                        if (obj2.children != undefined) {
-                            let children2 = []
-
-                            obj2.children.map(obj3 => {
-
-                                if (obj3.children != undefined) {
-                                    let children3 = []
-
-                                    obj3.children.map(obj4 => {
-                                        children3.push({ value: obj4['_id'] ? obj4['_id'] : obj4['id'], ...obj4 })
-                                    })
-                                    obj3['children'] = children3
-                                }
-
-                                children2.push({ value: obj3['_id'] ? obj3['_id'] : obj3['id'], ...obj3 })
-
-                            })
-                            obj2['children'] = children2
-                        }
-                        children.push({ value: obj2['_id'] ? obj2['_id'] : obj2['id'], ...obj2 })
-
-                    })
-                    obj['children'] = children
-                }
-
-                obj['value'] = obj['_id'] ? obj['_id'] : obj['id']; // Assign new key 
-                return obj;
-            });
-
-            return Optiondata
 
 
-        }
-
-
+        const firstdata = clean(nest(data))
+        return firstdata
 
     },
 
