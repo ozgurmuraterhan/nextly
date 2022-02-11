@@ -8,11 +8,25 @@ const title = "Products";
 
 // get all items
 
+router.route("/all").get((req, res, next) => {
+   Products.find({ isActive: true })
+      .then((data) => {
+         res.json(data);
+      })
+      .catch((err) =>
+         res.json({
+            messagge: "Error: " + err,
+            variant: "error",
+         })
+      );
+})
+
 router.route("/:seo").get((req, res, next) => {
    Products.aggregate([
       {
          $match: {
-            seo: req.params.seo
+            seo: req.params.seo,
+            isActive: true
 
          }
 

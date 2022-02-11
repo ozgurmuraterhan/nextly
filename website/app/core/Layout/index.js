@@ -55,7 +55,11 @@ const AppLayout = ({ children }) => {
     }, [isAuthenticated])
 
 
-    return (
+    const isUnRestrictedRoute = (pathname) => {
+        return pathname === '/sitemap.xml'
+    }
+
+    return isUnRestrictedRoute(router.pathname) ? children : (
         <>
             <CircularProgress className={!isLoaded ? "visible" : "hidden"} />
             <Layout >
