@@ -60,7 +60,7 @@ export const getServerSideProps = async ({ res }) => {
       .map((url) => {
         return `
                 <url>
-                  <loc>${url?.link.replaceAll(" ", "") !== "" ? WEBSITE_URL + escapeHtml(url.link) : WEBSITE_URL + "/" + url.seo}</loc>
+                  <loc>${url.link !== "" ? WEBSITE_URL + escapeHtml(url.link) : WEBSITE_URL + "/" + url.seo}</loc>
                   <lastmod>${new Date().toISOString()}</lastmod>
                   <changefreq>monthly</changefreq>
                   <priority>0.9</priority>
