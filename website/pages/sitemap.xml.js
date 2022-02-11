@@ -22,9 +22,8 @@ export const getServerSideProps = async ({ res }) => {
       "'": '&#039;'
     };
 
-    const replaceCaracter = text.replace(/[&<>"']/g, function (m) { return map[m]; });
 
-    if (replaceCaracter.includes("http")) {
+    if (text.includes("http")) {
       return text.replace(/[&<>"']/g, function (m) { return map[m]; });
     } else {
       return WEBSITE_URL + text.replace(/[&<>"']/g, function (m) { return map[m]; });
