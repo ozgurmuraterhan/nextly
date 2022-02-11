@@ -23,11 +23,9 @@ export const getServerSideProps = async ({ res }) => {
     };
 
 
-    if (text.includes("http")) {
-      return text.replace(/[&<>"']/g, function (m) { return map[m]; });
-    } else {
-      return WEBSITE_URL + text.replace(/[&<>"']/g, function (m) { return map[m]; });
-    }
+
+    return WEBSITE_URL + text.replace(/[&<>"']/g, function (m) { return map[m]; });
+
 
 
   }
@@ -65,14 +63,16 @@ export const getServerSideProps = async ({ res }) => {
 
       ${resDataTopmenu.data
       .map((url) => {
-        return `
+        if (!url.link.includes("http")) {
+          return `
                 <url>
-                  <loc>${url.link !== "" ? escapeHtml(url.link) : WEBSITE_URL + "/" + url.seo}</loc>
+                  <loc>${url.link !== "" ? escapeHtml(url.link) : WEBSITE_URL + "/content/" + url.seo}</loc>
                   <lastmod>${new Date().toISOString()}</lastmod>
                   <changefreq>monthly</changefreq>
                   <priority>0.9</priority>
                 </url >
               `;
+        }
       })
       .join("")}
 
@@ -80,7 +80,7 @@ export const getServerSideProps = async ({ res }) => {
       .map((url) => {
         return `
                 <url>
-                  <loc>${WEBSITE_URL}/${url.seo}</loc>
+                  <loc>${WEBSITE_URL}/product/${url.seo}</loc>
                   <lastmod>${new Date().toISOString()}</lastmod>
                   <changefreq>monthly</changefreq>
                   <priority>1</priority>
