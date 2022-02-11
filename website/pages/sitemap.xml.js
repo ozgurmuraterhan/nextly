@@ -12,7 +12,7 @@ export const getServerSideProps = async ({ res }) => {
   const resDataProducts = await axios.get(`${API_URL}/productspublic/all`)
   const resDataTopmenu = await axios.get(`${API_URL}/topmenupublic/not`)
 
-  console.log("resDataTopmenu", resDataTopmenu)
+
   function escapeHtml(text) {
     var map = {
       '&': '&amp;',
@@ -22,7 +22,15 @@ export const getServerSideProps = async ({ res }) => {
       "'": '&#039;'
     };
 
-    return text.replace(/[&<>"']/g, function (m) { return map[m]; });
+    const replaceCaracter = text.replace(/[&<>"']/g, function (m) { return map[m]; });
+
+    if (replaceCaracter.includes("http")) {
+      return text.replace(/[&<>"']/g, function (m) { return map[m]; });
+    } else {
+      return WEBSITE_URL + text.replace(/[&<>"']/g, function (m) { return map[m]; });
+    }
+
+
   }
   const baseUrl = WEBSITE_URL;
 
@@ -60,7 +68,7 @@ export const getServerSideProps = async ({ res }) => {
       .map((url) => {
         return `
                 <url>
-                  <loc>${url.link !== "" ? WEBSITE_URL + escapeHtml(url.link) : WEBSITE_URL + "/" + url.seo}</loc>
+                  <loc>${url.link !== "" ? escapeHtml(url.link) : WEBSITE_URL + "/" + url.seo}</loc>
                   <lastmod>${new Date().toISOString()}</lastmod>
                   <changefreq>monthly</changefreq>
                   <priority>0.9</priority>
