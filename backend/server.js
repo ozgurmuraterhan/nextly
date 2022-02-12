@@ -1,12 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const path = require("path")
-const compression = require('compression');
-const companion = require('@uppy/companion')
-const mongoSanitize = require('express-mongo-sanitize');
+const path = require("path");
+const compression = require("compression");
+const mongoSanitize = require("express-mongo-sanitize");
 
 require("dotenv").config();
 
@@ -19,25 +17,25 @@ app.use(compression());
 app.use(cookieParser());
 app.use(cors({ origin: true, credentials: true }));
 
-app.use(express.json({ limit: '1gb', parameterLimit: 50000 }));
+app.use(express.json({ limit: "1gb", parameterLimit: 50000 }));
 app.use(express.urlencoded({ limit: "1gb", extended: true, parameterLimit: 50000 }));
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
-   useNewUrlParser: true,
-   useCreateIndex: true,
-   useUnifiedTopology: true,
-   useFindAndModify: false,
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useUnifiedTopology: true,
+	useFindAndModify: false,
 });
 
 const connection = mongoose.connection;
 connection.once("open", () => {
-   console.log("connection MongoDB");
+	console.log("connection MongoDB");
 });
 
 //instalition db import
 const installDB = require("./routes/installdb.js");
-app.use("/installdb", installDB)
+app.use("/installdb", installDB);
 //instalition
 
 //Private Root import
@@ -109,10 +107,10 @@ app.use("/payment", paymentPublicRouter);
 app.use("/paymentmethodspublic", paymentMethodsPublicRouter);
 
 
-app.use(express.static(path.join(__dirname, '../website/public')));
+app.use(express.static(path.join(__dirname, "../website/public")));
 
 app.listen(port, () => {
-   console.log("sever is runnin port: " + port);
+	console.log("sever is runnin port: " + port);
 });
 
 

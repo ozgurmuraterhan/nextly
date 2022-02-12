@@ -2,45 +2,45 @@ import { FILTER_PRODUCTS, FILTER_RESET } from "../types";
 
 
 const initialSettings = {
-  filterProducts: {
-    brands: [],
-    categories: [],
-    text: "",
-    variants: [],
-    minPrice: null,
-    maxPrice: null,
-    sort: "",
-    limit: 12,
-    skip: 0
-  }
+	filterProducts: {
+		brands: [],
+		categories: [],
+		text: "",
+		variants: [],
+		minPrice: null,
+		maxPrice: null,
+		sort: "",
+		limit: 12,
+		skip: 0
+	}
 };
 
 const brands = (state = initialSettings, action) => {
-  switch (action.type) {
+	switch (action.type) {
 
-    case FILTER_PRODUCTS:
-      return {
-        ...state,
-        filterProducts: action.payload,
+	case FILTER_PRODUCTS:
+		return {
+			...state,
+			filterProducts: action.payload,
 
-      };
-    case FILTER_RESET:
-      return {
-        ...state,
-        filterProducts: {
-          brands: [],
-          categories: [],
-          text: "",
-          variants: [],
-          minPrice: null,
-          maxPrice: null,
-        }
+		};
+	case FILTER_RESET:
+		return {
+			...state,
+			filterProducts: {
+				brands: [],
+				categories: [],
+				text: "",
+				variants: [],
+				minPrice: null,
+				maxPrice: null,
+			}
 
-      };
+		};
 
-    default:
-      return state;
-  }
+	default:
+		return state;
+	}
 };
 
 export default brands;

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": " eslint models/**/**/** --fix && eslint routes/**/**/** --fix && eslint passport.js --fix && eslint server.js --fix"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +33,11 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "eslint": "^8.9.0",
+    "nodemon": "^2.0.7",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-unused-imports": "^2.0.0"
   }
 }
