@@ -672,7 +672,7 @@ const Default = ({ getData = [] }) => {
           <Divider />
 
           <Table
-            pagination={{ pageSize: 250 }}
+            pagination={false}
             columns={[
               {
                 title: intl.messages["app.pages.common.title"],

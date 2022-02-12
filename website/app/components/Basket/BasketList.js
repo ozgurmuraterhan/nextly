@@ -232,7 +232,7 @@ const Default = () => {
 		<>
 
 			<Table
-				pagination={{ pageSize: 250 }}
+				pagination={false}
 				loading={isLoaded}
 				columns={[
 					{
@@ -386,7 +386,6 @@ const Default = () => {
 					},
 
 				]}
-
 				dataSource={[...state]}
 			/>
 		</>
