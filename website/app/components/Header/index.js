@@ -3,163 +3,162 @@ import { useState, useEffect } from "react";
 import AuthService from "../../../util/services/authservice";
 import { useDispatch, useSelector } from "react-redux";
 import { login_r, isAuthenticated_r, logout_r } from "../../../redux/actions";
-import { Input, Modal, Form, message } from "antd"
-import router from "next/router"
+import { Input, Modal, Form, message } from "antd";
+import router from "next/router";
 import Link from "next/link";
-import LoginForm from "./LoginForm"
-import RegisterForm from "./RegisterForm"
-import { UserOutlined, ShoppingCartOutlined, LoginOutlined, LogoutOutlined, UserAddOutlined } from '@ant-design/icons';
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+import { UserOutlined, ShoppingCartOutlined, LoginOutlined, LogoutOutlined, UserAddOutlined } from "@ant-design/icons";
 import { API_URL, IMG_URL } from "../../../../config";
 import axios from "axios";
 
 const Default = () => {
-    const [form] = Form.useForm();
-    const { settings } = useSelector(({ settings }) => settings);
-    const { basket } = useSelector((state) => state.basket);
-    const { isAuthenticated } = useSelector(({ login }) => login);
-    const [openModalLogin, seTopenModalLogin] = useState(false)
-    const [confirmLoadingLogin, seTconfirmLoadingLogin] = useState(false);
-    const [openModalSignup, seTopenModalSignup] = useState(false)
-    const [confirmLoadingSignup, seTconfirmLoadingSignup] = useState(false);
-    const [stateisAuthenticated, seTstateisAuthenticated] = useState(false);
+	const [form] = Form.useForm();
+	const { settings } = useSelector(({ settings }) => settings);
+	const { basket } = useSelector((state) => state.basket);
+	const { isAuthenticated } = useSelector(({ login }) => login);
+	const [openModalLogin, seTopenModalLogin] = useState(false);
+	const [confirmLoadingLogin, seTconfirmLoadingLogin] = useState(false);
+	const [openModalSignup, seTopenModalSignup] = useState(false);
+	const [confirmLoadingSignup, seTconfirmLoadingSignup] = useState(false);
+	const [stateisAuthenticated, seTstateisAuthenticated] = useState(false);
 
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-    const onSubmitSignup = (Data) => {
+	const onSubmitSignup = (Data) => {
 
-        Data["username"] = Data.username.toLowerCase()
+		Data["username"] = Data.username.toLowerCase();
 
-        axios.post(`${API_URL}/users/register`, Data).then(res => {
-            if (res.data.error) {
-                message.error(res.data.messagge)
-            } else {
-                form.resetFields();
-                message.success(res.data.messagge)
-                onSubmitLogin(Data)
-            }
-        })
-            .catch(err => console.log("err", err))
-    }
+		axios.post(`${API_URL}/users/register`, Data).then(res => {
+			if (res.data.error) {
+				message.error(res.data.messagge);
+			} else {
+				form.resetFields();
+				message.success(res.data.messagge);
+				onSubmitLogin(Data);
+			}
+		})
+			.catch(err => console.log("err", err));
+	};
 
-    const onSubmitLogin = (Data) => {
+	const onSubmitLogin = (Data) => {
 
-        Data["username"] = Data.username.toLowerCase()
-        AuthService.login(Data).then((data) => {
-            const { isAuthenticated, user } = data;
-            if (isAuthenticated) {
-                dispatch(login_r(user));
-                dispatch(isAuthenticated_r(true));
-                message.success("Login Successfully");
-                seTopenModalLogin(false)
-                seTopenModalSignup(false);
-            } else {
-                message.error("Login not Successfully");
-            }
-        });
-    };
+		Data["username"] = Data.username.toLowerCase();
+		AuthService.login(Data).then((data) => {
+			const { isAuthenticated, user } = data;
+			if (isAuthenticated) {
+				dispatch(login_r(user));
+				dispatch(isAuthenticated_r(true));
+				message.success("Login Successfully");
+				seTopenModalLogin(false);
+				seTopenModalSignup(false);
+			} else {
+				message.error("Login not Successfully");
+			}
+		});
+	};
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            seTstateisAuthenticated(isAuthenticated)
-        }
-    }, [isAuthenticated]);
+	useEffect(() => {
+		if (isAuthenticated) {
+			seTstateisAuthenticated(isAuthenticated);
+		}
+	}, [isAuthenticated]);
 
 
 
-    return (
-        <div className="w-full flex justify-between mb-3 ">
-            <div className=" w-3/12 mr-3 md:w-2/12 md:mr-0  mt-4 md:mt-2 lg:mt-3" >
-                <a href="/" >
-                    <img src={`${IMG_URL + settings.image}`} className=" w-full sm:w-10/12 sm:mt-0 mt-3  " />
-                </a>
-            </div>
-            <div className=" flex-auto  w-3/12 mr-3 md:w-auto md:mr-0    mt-6  px-0 sm:px-12">
-                <Input.Search
-                    size="middle"
-                    placeholder="Search..."
-                    enterButton
-                    className="sm:px-10"
-                    onSearch={(val) => {
-                        router.push("/search?&text=" + val)
-                    }} />
-            </div>
-            <div className=" mt-5   text-base text-right px-0  ">
+	return (
+		<div className="w-full flex justify-between mb-3 ">
+			<div className=" w-3/12 mr-3 md:w-2/12 md:mr-0  mt-4 md:mt-2 lg:mt-3" >
+				<a href="/" >
+					<img src={`${IMG_URL + settings.image}`} className=" w-full sm:w-10/12 sm:mt-0 mt-3  " />
+				</a>
+			</div>
+			<div className=" flex-auto  w-3/12 mr-3 md:w-auto md:mr-0    mt-6  px-0 sm:px-12">
+				<Input.Search
+					size="middle"
+					placeholder="Search..."
+					enterButton
+					className="sm:px-10"
+					onSearch={(val) => {
+						router.push("/search?&text=" + val);
+					}} />
+			</div>
+			<div className=" mt-5   text-base text-right px-0  ">
 
-                {stateisAuthenticated ?
-                    <>
-                        <Link href="/profile">
-                            <a className="p-2 float-left">
-                                <UserOutlined />
-                                <span className="hidden md:inline "> Profile</span>
-                            </a>
-                        </Link>
-                        <a className="p-2 float-left" onClick={async () => {
-                            await AuthService.logout()
-                            await dispatch(logout_r());
-                            seTstateisAuthenticated(false)
-                            router.push("/")
-                        }}>
-                            <LogoutOutlined />
-                            <span className="hidden md:inline  "> Logout </span>
-                        </a>
-                    </>
-                    :
-                    <>
-                        <a className="p-2 float-left" onClick={() => seTopenModalLogin(true)}>
-                            <LoginOutlined />   <span className="hidden md:inline ">Login</span>
-                        </a>
-                        <a className="p-2 float-left" onClick={() => seTopenModalSignup(true)}>
-                            <UserAddOutlined />   <span className="hidden md:inline ">Sign Up</span>
+				{stateisAuthenticated ?
+					<>
+						<Link href="/profile">
+							<a className="p-2 float-left">
+								<UserOutlined />
+								<span className="hidden md:inline "> Profile</span>
+							</a>
+						</Link>
+						<a className="p-2 float-left" onClick={async () => {
+							await AuthService.logout();
+							await dispatch(logout_r());
+							seTstateisAuthenticated(false);
+							router.push("/");
+						}}>
+							<LogoutOutlined />
+							<span className="hidden md:inline  "> Logout </span>
+						</a>
+					</>
+					:
+					<>
+						<a className="p-2 float-left" onClick={() => seTopenModalLogin(true)}>
+							<LoginOutlined />   <span className="hidden md:inline ">Login</span>
+						</a>
+						<a className="p-2 float-left" onClick={() => seTopenModalSignup(true)}>
+							<UserAddOutlined />   <span className="hidden md:inline ">Sign Up</span>
 
-                        </a>
-                    </>
-                }
-                <Link href="/basket">
-                    <a className="p-2 float-left"  >
-                        {basket.length > 0 ?
-                            <div className="relative float-left w-0 h-full pt-0.5 pl-0.5 -mr-0.5">
-                                {basket[0].products.length > 0 ?
-                                    <>
-                                        <div className="  rounded-full  bg-black  absolute w-1 animate-ping h-1 -ml-1 mt-2" />
-                                        <div className=" rounded-full  bg-black absolute w-1 h-1 -ml-1 mt-2  opacity-50" />
-                                    </>
-                                    : ""}
-                            </div>
-                            : ""}
+						</a>
+					</>
+				}
+				<Link href="/basket">
+					<a className="p-2 float-left"  >
+						{basket.length > 0 ?
+							<div className="relative float-left w-0 h-full pt-0.5 pl-0.5 -mr-0.5">
+								{basket[0].products.length > 0 ?
+									<>
+										<div className="  rounded-full  bg-black  absolute w-1 animate-ping h-1 -ml-1 mt-2" />
+										<div className=" rounded-full  bg-black absolute w-1 h-1 -ml-1 mt-2  opacity-50" />
+									</>
+									: ""}
+							</div>
+							: ""}
 
-                        <ShoppingCartOutlined />
+						<ShoppingCartOutlined />
 
-                        <span className="hidden md:inline "> Basket</span>
+						<span className="hidden md:inline "> Basket</span>
 
-                    </a>
-                </Link>
-            </div >
+					</a>
+				</Link>
+			</div >
 
-            <Modal
-                title="Login"
-                visible={openModalLogin}
-                onOk={() => seTconfirmLoadingLogin(true)}
-                confirmLoading={confirmLoadingLogin}
-                onCancel={() => seTopenModalLogin(false)}
-                footer={null}
+			<Modal
+				title="Login"
+				visible={openModalLogin}
+				onOk={() => seTconfirmLoadingLogin(true)}
+				confirmLoading={confirmLoadingLogin}
+				onCancel={() => seTopenModalLogin(false)}
+				footer={null}
 
-            >
-                <LoginForm onSubmitLogin={onSubmitLogin} handleCancelLogin={() => seTopenModalLogin(false)} />
-            </Modal>
+			>
+				<LoginForm onSubmitLogin={onSubmitLogin} handleCancelLogin={() => seTopenModalLogin(false)} />
+			</Modal>
 
-            <Modal
-                title="Signup"
-                visible={openModalSignup}
-                onOk={() => seTconfirmLoadingSignup(true)}
-                confirmLoading={confirmLoadingSignup}
-                onCancel={() => seTopenModalSignup(false)}
-                footer={null}
-
-            >
-                <RegisterForm onSubmitSignup={onSubmitSignup} />
-            </Modal>
-        </div >
-    )
-}
+			<Modal
+				title="Signup"
+				visible={openModalSignup}
+				onOk={() => seTconfirmLoadingSignup(true)}
+				confirmLoading={confirmLoadingSignup}
+				onCancel={() => seTopenModalSignup(false)}
+				footer={null}
+			>
+				<RegisterForm onSubmitSignup={onSubmitSignup} />
+			</Modal>
+		</div >
+	);
+};
 
 export default Default;
