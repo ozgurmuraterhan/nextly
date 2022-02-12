@@ -6,7 +6,8 @@
     "watch:less": "watch 'npm run goless && npm run dev'  ./public/less",
     "build": "next build",
     "start": "next start",
-    "goless": "lessc -js public/less/var.less public/css/ant-custom.css  -x"
+    "goless": "lessc -js public/less/var.less public/css/ant-custom.css  -x",
+    "eslint": " eslint pages/**/**/** --fix && eslint app/**/**/** --fix"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
@@ -41,6 +42,11 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^6.2.1",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "less": "^3.13.1",
     "less-watch-compiler": "^1.16.3"
   }
