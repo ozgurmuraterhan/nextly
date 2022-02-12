@@ -13,7 +13,7 @@ module.exports = {
 		"no-mixed-spaces-and-tabs": 0,
 		"indent": [
 			"error",
-			"tab"
+			3
 		],
 		"linebreak-style": [
 			"error",

@@ -25,7 +25,7 @@ module.exports = {
 		"react/react-in-jsx-scope": "off",
 		"indent": [
 			"error",
-			"tab"
+			3
 		],
 		"linebreak-style": [
 			"error",

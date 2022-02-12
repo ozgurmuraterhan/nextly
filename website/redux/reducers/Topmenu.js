@@ -2,21 +2,21 @@ import { TOPMENU_FETCH } from "../types";
 
 
 const initialSettings = {
-	topmenu: []
+   topmenu: []
 };
 
 const topmenu = (state = initialSettings, action) => {
-	switch (action.type) {
+   switch (action.type) {
 
-	case TOPMENU_FETCH:
-		return {
-			...state,
-			topmenu: action.payload,
-		};
+   case TOPMENU_FETCH:
+      return {
+         ...state,
+         topmenu: action.payload,
+      };
 
-	default:
-		return state;
-	}
+   default:
+      return state;
+   }
 };
 
 export default topmenu;

@@ -8,13 +8,13 @@ import Basket from "./Basket";
 import Topmenu from "./Topmenu";
 
 const reducers = combineReducers({
-	settings: Settings,
-	login: Login,
-	brands: Brands,
-	filterProducts: FilterProducts,
-	categories: Categories,
-	basket: Basket,
-	topmenu: Topmenu
+   settings: Settings,
+   login: Login,
+   brands: Brands,
+   filterProducts: FilterProducts,
+   categories: Categories,
+   basket: Basket,
+   topmenu: Topmenu
 
 });
 

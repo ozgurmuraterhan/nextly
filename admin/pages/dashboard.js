@@ -9,40 +9,40 @@ import { UserOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 
 const Orders = dynamic(() => import("./orders/list"), {
-	loading: () => <CircularProgress />,
+   loading: () => <CircularProgress />,
 });
 
 const Counts = dynamic(() => import("../app/components/Dashboard/counts"), {
-	loading: () => <CircularProgress />,
+   loading: () => <CircularProgress />,
 });
 
 const CrmDashboard = () => {
 
-	const { user } = useSelector(({ login }) => login);
-	useEffect(() => {
-	}, []);
+   const { user } = useSelector(({ login }) => login);
+   useEffect(() => {
+   }, []);
 
 
-	return (
-		<React.Fragment>
-			<Head>
-				<title>Dashboard</title>
-			</Head>
-			<div className="dashboardProfile">
-				<Avatar size={180} src={IMG_URL + user.image} icon={<UserOutlined />} className="border   mt-5 mb-3" />
-				<h4 >{user.name}</h4>
-				<Clock />
-			</div>
-			<div className="  mb-5 grid grid-cols-12">
-				<Counts />
-				<Divider />
-				<div className=" mt-5 col-span-12">
-					<Orders />
-				</div>
-			</div>
+   return (
+      <React.Fragment>
+         <Head>
+            <title>Dashboard</title>
+         </Head>
+         <div className="dashboardProfile">
+            <Avatar size={180} src={IMG_URL + user.image} icon={<UserOutlined />} className="border   mt-5 mb-3" />
+            <h4 >{user.name}</h4>
+            <Clock />
+         </div>
+         <div className="  mb-5 grid grid-cols-12">
+            <Counts />
+            <Divider />
+            <div className=" mt-5 col-span-12">
+               <Orders />
+            </div>
+         </div>
 
-		</React.Fragment>
-	);
+      </React.Fragment>
+   );
 };
 
 export default CrmDashboard;

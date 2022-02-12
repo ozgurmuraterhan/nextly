@@ -1,42 +1,42 @@
 import { SET_ISAUTHENTICATED, SET_LOGIN, SET_LOGOUT } from "../types";
 
 const INIT_STATE = {
-  user: {
-    role: {
-      "blabla": false,
-    }
-  },
-  isAuthenticated: false,
+   user: {
+      role: {
+         "blabla": false,
+      }
+   },
+   isAuthenticated: false,
 };
 
 const States = (state = INIT_STATE, action) => {
-  switch (action.type) {
+   switch (action.type) {
 
-    case SET_ISAUTHENTICATED: {
+   case SET_ISAUTHENTICATED: {
       return {
-        ...state,
-        isAuthenticated: action.payload
+         ...state,
+         isAuthenticated: action.payload
 
       };
-    }
-    case SET_LOGIN: {
+   }
+   case SET_LOGIN: {
       return {
-        ...state,
-        user: action.payload
+         ...state,
+         user: action.payload
 
       };
-    }
-    case SET_LOGOUT: {
+   }
+   case SET_LOGOUT: {
       return {
-        ...state,
-        user: { role: { view: "try" } },
-        isAuthenticated: false
+         ...state,
+         user: { role: { view: "try" } },
+         isAuthenticated: false
 
       };
-    }
-    default:
+   }
+   default:
       return state;
-  }
-}
-export default States
+   }
+};
+export default States;
 

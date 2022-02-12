@@ -19,64 +19,64 @@ const { Content } = Layout;
 
 
 const AppLayout = ({ children }) => {
-	const router = useRouter();
-	const dispatch = useDispatch();
-	const { errorFetch } = useSelector(({ settings }) => settings);
-	const { isAuthenticated } = useSelector(({ login }) => login);
-	const { topmenu } = useSelector(({ topmenu }) => topmenu);
-	const [isLoaded, seTisLoaded] = useState(false);
+   const router = useRouter();
+   const dispatch = useDispatch();
+   const { errorFetch } = useSelector(({ settings }) => settings);
+   const { isAuthenticated } = useSelector(({ login }) => login);
+   const { topmenu } = useSelector(({ topmenu }) => topmenu);
+   const [isLoaded, seTisLoaded] = useState(false);
 
-	const loginControl = () => {
-		if (!isAuthenticated) {
-			AuthService.isAuthenticated().then(auth => {
-				if (auth.isAuthenticated) {
-					dispatch(getBasket_r(auth.user.id));
-					dispatch(login_r(auth.user));
-					dispatch(isAuthenticated_r(true));
-				}
-			});
-		}
-	};
-
-
-	const fetchError = () => {
-		if (errorFetch) {
-			message.error(errorFetch);
-			seTisLoaded(false);
-		} else {
-			seTisLoaded(true);
-		}
-	};
+   const loginControl = () => {
+      if (!isAuthenticated) {
+         AuthService.isAuthenticated().then(auth => {
+            if (auth.isAuthenticated) {
+               dispatch(getBasket_r(auth.user.id));
+               dispatch(login_r(auth.user));
+               dispatch(isAuthenticated_r(true));
+            }
+         });
+      }
+   };
 
 
-	useEffect(() => {
-		loginControl();
-		fetchError();
-	}, [isAuthenticated]);
+   const fetchError = () => {
+      if (errorFetch) {
+         message.error(errorFetch);
+         seTisLoaded(false);
+      } else {
+         seTisLoaded(true);
+      }
+   };
 
 
-	const isUnRestrictedRoute = (pathname) => {
-		return pathname === "/sitemap.xml";
-	};
+   useEffect(() => {
+      loginControl();
+      fetchError();
+   }, [isAuthenticated]);
 
-	return isUnRestrictedRoute(router.pathname) ? children : (
-		<>
-			<CircularProgress className={!isLoaded ? "visible" : "hidden"} />
-			<Layout >
-				<div className="border-b bg-white">
-					<div className=" container-custom   ">
-						<HeaderTopMenu socialmedia={func.getCategoriesTree(topmenu, "614b8cc75c153bab76bdf681")} topmenu={func.getCategoriesTree(topmenu)} />
-						<Header />
-						<CategoriesMenu />
-					</div>
-				</div>
-				<Content>
-					{children}
-				</Content>
-				<Footer footerMenu={func.getCategoriesTree(topmenu, "6154a5a279053f941d1b786c")} />
-			</Layout>
-		</>
-	);
+
+   const isUnRestrictedRoute = (pathname) => {
+      return pathname === "/sitemap.xml";
+   };
+
+   return isUnRestrictedRoute(router.pathname) ? children : (
+      <>
+         <CircularProgress className={!isLoaded ? "visible" : "hidden"} />
+         <Layout >
+            <div className="border-b bg-white">
+               <div className=" container-custom   ">
+                  <HeaderTopMenu socialmedia={func.getCategoriesTree(topmenu, "614b8cc75c153bab76bdf681")} topmenu={func.getCategoriesTree(topmenu)} />
+                  <Header />
+                  <CategoriesMenu />
+               </div>
+            </div>
+            <Content>
+               {children}
+            </Content>
+            <Footer footerMenu={func.getCategoriesTree(topmenu, "6154a5a279053f941d1b786c")} />
+         </Layout>
+      </>
+   );
 };
 
 export default AppLayout;

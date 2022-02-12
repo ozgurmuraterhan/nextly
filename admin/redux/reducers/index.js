@@ -4,8 +4,8 @@ import Login from "./Login";
 
 
 const reducers = combineReducers({
-  settings: Settings,
-  login: Login
+   settings: Settings,
+   login: Login
 
 });
 

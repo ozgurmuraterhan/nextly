@@ -14,20 +14,20 @@ import AppLayout from "../app/core/Layout";
 
 const Page = ({ Component, pageProps, store }) => {
 
-	return (
-		<React.Fragment>
-			<Head>
-				<title> Admin Dashboard</title>
-			</Head>
-			<Provider store={store}>
-				<LocaleProvider>
-					<AppLayout>
-						<Component {...pageProps} />
-					</AppLayout>
-				</LocaleProvider>
-			</Provider>
-		</React.Fragment>
-	);
+   return (
+      <React.Fragment>
+         <Head>
+            <title> Admin Dashboard</title>
+         </Head>
+         <Provider store={store}>
+            <LocaleProvider>
+               <AppLayout>
+                  <Component {...pageProps} />
+               </AppLayout>
+            </LocaleProvider>
+         </Provider>
+      </React.Fragment>
+   );
 };
 
 export default withRedux(initStore)(Page);

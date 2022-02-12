@@ -20,41 +20,41 @@ const Default = ({ state = [] }) => {
 
 
 
-	useEffect(() => {
-	}, []);
+   useEffect(() => {
+   }, []);
 
 
-	return (
-		<div className="position-relative float-left homeSliderReslative"  >
-			<div className="position-absolute w-full  ">
-				<Swiper style={{ "--swiper-navigation-color": "#000", "--swiper-pagination-color": "#000" }}
-					spaceBetween={0}
-					navigation={true}
-					autoplay={{
-						"delay": 15000,
-						"disableOnInteraction": false
-					}}
-					className="w-full">
-					{state.map(val =>
-						<SwiperSlide key={val._id}>
-							<div className="item">
+   return (
+      <div className="position-relative float-left homeSliderReslative"  >
+         <div className="position-absolute w-full  ">
+            <Swiper style={{ "--swiper-navigation-color": "#000", "--swiper-pagination-color": "#000" }}
+               spaceBetween={0}
+               navigation={true}
+               autoplay={{
+                  "delay": 15000,
+                  "disableOnInteraction": false
+               }}
+               className="w-full">
+               {state.map(val =>
+                  <SwiperSlide key={val._id}>
+                     <div className="item">
 
 
-								<Link href={val.link + "/"}>
-									<a>
-										<LazyLoadImage src={`${IMG_URL + val.image}`} style={{ maxHeight: "500px", width: "100%" }} />
-									</a>
-								</Link>
+                        <Link href={val.link + "/"}>
+                           <a>
+                              <LazyLoadImage src={`${IMG_URL + val.image}`} style={{ maxHeight: "500px", width: "100%" }} />
+                           </a>
+                        </Link>
 
 
-							</div>
-						</SwiperSlide>
-					)}
-				</Swiper>
-			</div>
-			<div style={{ clear: "both" }} />
-		</div>
-	);
+                     </div>
+                  </SwiperSlide>
+               )}
+            </Swiper>
+         </div>
+         <div style={{ clear: "both" }} />
+      </div>
+   );
 };
 
 export default Default;
