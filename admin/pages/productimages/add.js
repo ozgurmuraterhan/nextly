@@ -96,7 +96,7 @@ const Default = ({ getProducts = [] }) => {
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
-        value["image"] = dataImage.data.path.replace("../website/public/", "/");
+        value["image"] = dataImage.data.path.replace("../admin/public/", "/");
 
         axios
           .post(`${API_URL}/productimages/add`, value)
@@ -104,7 +104,7 @@ const Default = ({ getProducts = [] }) => {
             if (res.data.variant == "error") {
               message.error(
                 intl.messages["app.pages.productimages.notAdded"] +
-                  res.data.messagge
+                res.data.messagge
               );
             } else {
               message.success(intl.messages["app.pages.productimages.added"]);

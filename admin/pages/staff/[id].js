@@ -247,7 +247,7 @@ const Default = () => {
           API_URL + "/upload/uploadstaffavatar",
           fileList
         );
-        Data["image"] = dataImage.data.replace("../website/public/", "/");
+        Data["image"] = dataImage.data.replace("../admin/public/", "/");
       } else if (state.image) {
         Data["image"] = state.image;
       }

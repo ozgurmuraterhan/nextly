@@ -149,7 +149,7 @@ const Default = () => {
   const [form] = Form.useForm();
 
   // componentDidMount = useEffect
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const formItemLayout = {
     labelCol: {
@@ -189,7 +189,7 @@ const Default = () => {
         API_URL + "/upload/uploadstaffavatar",
         fileList
       );
-      Data["image"] = dataImage.data.replace("../website/public/", "/");
+      Data["image"] = dataImage.data.replace("../admin/public/", "/");
     } else {
       Data["image"] = "";
     }

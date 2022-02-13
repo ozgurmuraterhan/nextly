@@ -75,7 +75,7 @@ const Default = ({ getData = [] }) => {
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      Data["image"] = dataImage.data.path.replace("../website/public/", "/");
+      Data["image"] = dataImage.data.path.replace("../admin/public/", "/");
     }
 
     axios
@@ -84,7 +84,7 @@ const Default = ({ getData = [] }) => {
         if (res.data.variant == "error") {
           message.error(
             intl.messages["app.pages.paymentMethods.notUpdated"] +
-              res.data.messagge
+            res.data.messagge
           );
         } else {
           message.success(intl.messages["app.pages.paymentMethods.updated"]);

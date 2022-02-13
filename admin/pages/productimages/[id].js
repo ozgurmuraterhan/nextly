@@ -93,7 +93,7 @@ const Default = ({ getProducts = [], getData = [] }) => {
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      Data["image"] = dataImage.data.path.replace("../website/public/", "/");
+      Data["image"] = dataImage.data.path.replace("../admin/public/", "/");
     }
 
     //Data["image"] = state.image
@@ -104,7 +104,7 @@ const Default = ({ getProducts = [], getData = [] }) => {
         if (res.data.variant == "error") {
           message.error(
             intl.messages["app.pages.productimages.notUpdated"] +
-              res.data.messagge
+            res.data.messagge
           );
         } else {
           message.success(intl.messages["app.pages.productimages.updated"]);

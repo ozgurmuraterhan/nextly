@@ -81,7 +81,7 @@ const Default = () => {
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      Data["image"] = dataImage.data.path.replace("../website/public/", "/");
+      Data["image"] = dataImage.data.path.replace("../admin/public/", "/");
     }
 
     axios
@@ -466,7 +466,7 @@ const Default = () => {
                                   required: true,
                                   message:
                                     intl.messages[
-                                      "app.pages.common.pleaseFill"
+                                    "app.pages.common.pleaseFill"
                                     ],
                                 },
                               ]}
@@ -486,7 +486,7 @@ const Default = () => {
                                   required: true,
                                   message:
                                     intl.messages[
-                                      "app.pages.common.pleaseFill"
+                                    "app.pages.common.pleaseFill"
                                     ],
                                 },
                               ]}
@@ -567,7 +567,7 @@ const Default = () => {
                                   required: true,
                                   message:
                                     intl.messages[
-                                      "app.pages.common.pleaseFill"
+                                    "app.pages.common.pleaseFill"
                                     ],
                                 },
                               ]}
@@ -587,7 +587,7 @@ const Default = () => {
                                   required: true,
                                   message:
                                     intl.messages[
-                                      "app.pages.common.pleaseFill"
+                                    "app.pages.common.pleaseFill"
                                     ],
                                 },
                               ]}
@@ -670,7 +670,7 @@ const Default = () => {
                                   required: true,
                                   message:
                                     intl.messages[
-                                      "app.pages.common.pleaseFill"
+                                    "app.pages.common.pleaseFill"
                                     ],
                                 },
                               ]}
@@ -690,7 +690,7 @@ const Default = () => {
                                   required: true,
                                   message:
                                     intl.messages[
-                                      "app.pages.common.pleaseFill"
+                                    "app.pages.common.pleaseFill"
                                     ],
                                 },
                               ]}

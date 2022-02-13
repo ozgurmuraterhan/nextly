@@ -27,7 +27,7 @@ const Default = () => {
   const [form] = Form.useForm();
 
   // componentDidMount = useEffect
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const formItemLayout = {
     labelCol: {
@@ -65,7 +65,7 @@ const Default = () => {
         { headers: { "Content-Type": "multipart/form-data" } }
       );
 
-      Data["image"] = dataImage.data.path.replace("../website/public/", "/");
+      Data["image"] = dataImage.data.path.replace("../admin/public/", "/");
     } else {
       Data["image"] = "";
     }
