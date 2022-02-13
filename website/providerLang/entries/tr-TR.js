@@ -3,9 +3,9 @@ import enMessages from "../locales/tr_TR.json";
 
 const TrLang = {
   messages: {
-    ...enMessages
+    ...enMessages,
   },
   antd: antdTr,
-  locale: 'tr-TR',
+  locale: "tr-TR",
 };
 export default TrLang;

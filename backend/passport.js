@@ -5,45 +5,45 @@ const Users = require("./models/users.model");
 require("dotenv").config();
 
 const cookieExtractor = (req) => {
-	let token = null;
-	if (req && req.cookies) {
-		token = req.cookies["access_token"];
-	}
+  let token = null;
+  if (req && req.cookies) {
+    token = req.cookies["access_token"];
+  }
 
-	return token;
+  return token;
 };
 
 // Authorization
 passport.use(
-	new JwtStrategy(
-		{
-			jwtFromRequest: cookieExtractor,
-			secretOrKey: process.env.PASPORTJS_KEY
-		},
-		(payload, done) => {
-			Users.findById({ _id: payload.sub }, (err, user) => {
-				if (err) return done(err, false);
+  new JwtStrategy(
+    {
+      jwtFromRequest: cookieExtractor,
+      secretOrKey: process.env.PASPORTJS_KEY,
+    },
+    (payload, done) => {
+      Users.findById({ _id: payload.sub }, (err, user) => {
+        if (err) return done(err, false);
 
-				if (user) {
-					return done(null, user);
-				} else {
-					return done(null, false);
-				}
-			});
-		}
-	)
+        if (user) {
+          return done(null, user);
+        } else {
+          return done(null, false);
+        }
+      });
+    }
+  )
 );
 
 // Authentication password local strategy using username and password
 passport.use(
-	new LocalStrategy((username, password, done) => {
-		Users.findOne({ username }, (err, user) => {
-			//something went wrong databese error
-			if (err) return done(err);
+  new LocalStrategy((username, password, done) => {
+    Users.findOne({ username }, (err, user) => {
+      //something went wrong databese error
+      if (err) return done(err);
 
-			//if no user error exits
-			if (!user) return done(null, false);
-			user.comparePassword(password, done);
-		});
-	})
+      //if no user error exits
+      if (!user) return done(null, false);
+      user.comparePassword(password, done);
+    });
+  })
 );

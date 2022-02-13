@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "eslint": " eslint models/**/**/**/*.js --fix && eslint routes/**/**/**/*.js --fix && eslint passport.js --fix && eslint server.js --fix"
+    "eslint": " eslint models/**/**/**/*.js --fix && eslint routes/**/**/**/*.js --fix && eslint passport.js --fix && eslint server.js --fix",
+    "prettier": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -34,10 +35,11 @@
   },
   "devDependencies": {
     "eslint": "^8.9.0",
-    "nodemon": "^2.0.7",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-unused-imports": "^2.0.0"
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.5.1"
   }
 }

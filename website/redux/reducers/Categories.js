@@ -1,23 +1,20 @@
 import { CATEGORIES_FETCH } from "../types";
 
-
 const initialSettings = {
-   categories: []
+  categories: [],
 };
 
 const categories = (state = initialSettings, action) => {
-   switch (action.type) {
-
-   case CATEGORIES_FETCH:
+  switch (action.type) {
+    case CATEGORIES_FETCH:
       return {
-         ...state,
-         categories: action.payload,
-
+        ...state,
+        categories: action.payload,
       };
 
-   default:
+    default:
       return state;
-   }
+  }
 };
 
 export default categories;

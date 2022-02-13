@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "goless": "lessc -js public/less/var.less public/css/ant-custom.css  -x",
-    "eslint": " eslint pages/**/**/**/*.js --fix && eslint app/**/**/**/*.js --fix && eslint redux/**/**/**/*.js --fix && eslint util/**/**/**/*.js --fix"
+    "eslint": " eslint pages/**/**/**/*.js --fix && eslint app/**/**/**/*.js --fix && eslint redux/**/**/**/*.js --fix && eslint util/**/**/**/*.js --fix",
+    "prettier":"prettier --write ."
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
@@ -48,6 +49,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "less": "^3.13.1",
-    "less-watch-compiler": "^1.16.3"
+    "less-watch-compiler": "^1.16.3",
+    "prettier": "^2.5.1"
   }
 }

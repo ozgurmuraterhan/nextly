@@ -7,56 +7,67 @@ import filterRouteLinkGenerate from "./filterRouterLink";
 import { filterProducts_r } from "../../../redux/actions";
 
 const Page = () => {
-   const { categories } = useSelector(({ categories }) => categories);
-   const { filterProducts } = useSelector(({ filterProducts }) => filterProducts);
+  const { categories } = useSelector(({ categories }) => categories);
+  const { filterProducts } = useSelector(
+    ({ filterProducts }) => filterProducts
+  );
 
+  const [state, seTstate] = useState({ categories: [], allData: [] });
 
+  const dispatch = useDispatch();
 
-   const [state, seTstate] = useState({ categories: [], allData: [] });
+  const getcategories = () => {
+    const dataManipulate = func.getCategoriesTreeOptions(categories, true);
+    seTstate({ ...state, categories: dataManipulate, allData: dataManipulate });
+  };
 
-   const dispatch = useDispatch();
+  useEffect(() => {
+    getcategories();
+  }, []);
 
-   const getcategories = () => {
-      const dataManipulate = func.getCategoriesTreeOptions(categories, true);
-      seTstate({ ...state, categories: dataManipulate, allData: dataManipulate });
-   };
+  const onChangeSearch = (e) => {
+    const filterData = func.search_array_object_tree(
+      e.target.value,
+      state.allData
+    );
+    seTstate({ ...state, categories: filterData, skip: 0 });
+  };
 
-   useEffect(() => {
-      getcategories();
-   }, []);
+  const onChange = (checkedValues) => {
+    dispatch(
+      filterProducts_r({
+        ...filterProducts,
+        categories: checkedValues,
+        skip: 0,
+      })
+    );
+    filterRouteLinkGenerate({
+      ...filterProducts,
+      categories: checkedValues,
+      skip: 0,
+    });
+  };
 
-   const onChangeSearch = (e) => {
-      const filterData = func.search_array_object_tree(e.target.value, state.allData);
-      seTstate({ ...state, categories: filterData, skip: 0 });
-   };
+  return (
+    <>
+      <Input
+        placeholder="Categories..."
+        onChange={onChangeSearch}
+        suffix={<SearchOutlined />}
+      />
 
-   const onChange = (checkedValues) => {
-      dispatch(filterProducts_r({ ...filterProducts, categories: checkedValues, skip: 0 }));
-      filterRouteLinkGenerate({ ...filterProducts, categories: checkedValues, skip: 0 });
-   };
-
-   return (
-      <>
-         <Input
-            placeholder="Categories..."
-            onChange={onChangeSearch}
-            suffix={<SearchOutlined />}
-         />
-
-         <div className="CategoriesFilter rounded-bottom bg-transparent" >
-            <Tree
-               expandedKeys={func.selectCategoriesFilterData(state.allData)}
-               multiple
-               className="bg-transparent"
-               selectedKeys={filterProducts.categories}
-               onSelect={onChange}
-               treeData={state.categories}
-            />
-         </div>
-
-      </>
-   );
-
+      <div className="CategoriesFilter rounded-bottom bg-transparent">
+        <Tree
+          expandedKeys={func.selectCategoriesFilterData(state.allData)}
+          multiple
+          className="bg-transparent"
+          selectedKeys={filterProducts.categories}
+          onSelect={onChange}
+          treeData={state.categories}
+        />
+      </div>
+    </>
+  );
 };
 
 export default Page;

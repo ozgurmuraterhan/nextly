@@ -6,7 +6,6 @@ export const SET_LOGOUT = "SET_LOGOUT";
 
 export const CHANGE_COLLAPSED = "CHANGE_COLLAPSED";
 
-
 // Customize const
 
 export const GET_SETTINGS = "GET_SETTINGS";
@@ -19,17 +18,13 @@ export const BRANDS_FETCH = "BRANDS_FETCH";
 //Categories
 export const CATEGORIES_FETCH = "CATEGORIES_FETCH";
 
-
 //filter Products
 export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
 export const FILTER_RESET = "FILTER_RESET";
 
-
 //Basket
 
 export const BASKET_FETCH = "BASKET_FETCH";
-
-
 
 //Topmenu
 export const TOPMENU_FETCH = "TOPMENU_FETCH";

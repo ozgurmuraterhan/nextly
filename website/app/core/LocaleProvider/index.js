@@ -3,18 +3,20 @@ import { IntlProvider } from "react-intl";
 import { useSelector } from "react-redux";
 import AppLocale from "../../../providerLang";
 
-
 const LocaleProvider = (props) => {
-   const { locale } = useSelector(({ settings }) => settings);
-   const currentAppLocale = AppLocale[locale.locale];
+  const { locale } = useSelector(({ settings }) => settings);
+  const currentAppLocale = AppLocale[locale.locale];
 
-   return (
-      <ConfigProvider locale={currentAppLocale.antd}>
-         <IntlProvider
-            locale={currentAppLocale.locale}
-            messages={currentAppLocale.messages}>{props.children}</IntlProvider>
-      </ConfigProvider>
-   );
+  return (
+    <ConfigProvider locale={currentAppLocale.antd}>
+      <IntlProvider
+        locale={currentAppLocale.locale}
+        messages={currentAppLocale.messages}
+      >
+        {props.children}
+      </IntlProvider>
+    </ConfigProvider>
+  );
 };
 
 export default LocaleProvider;

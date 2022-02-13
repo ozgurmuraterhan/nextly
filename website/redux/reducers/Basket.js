@@ -1,31 +1,29 @@
 import { BASKET_FETCH } from "../types";
 
-
 const initialSettings = {
-   basket: [{
+  basket: [
+    {
       created_user: {
-         name: "",
-         id: ""
+        name: "",
+        id: "",
       },
       customer_id: "",
       products: [],
-
-   }]
+    },
+  ],
 };
 
 const basket = (state = initialSettings, action) => {
-   switch (action.type) {
-
-   case BASKET_FETCH:
+  switch (action.type) {
+    case BASKET_FETCH:
       return {
-         ...state,
-         basket: action.payload,
-
+        ...state,
+        basket: action.payload,
       };
 
-   default:
+    default:
       return state;
-   }
+  }
 };
 
 export default basket;

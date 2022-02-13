@@ -1,8 +1,7 @@
 import Dashboard from "./dashboard";
 
 const homePage = () => {
-
-   return <Dashboard />;
+  return <Dashboard />;
 };
 
 export default homePage;

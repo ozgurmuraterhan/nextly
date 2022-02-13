@@ -11,26 +11,27 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-
 app.use(mongoSanitize());
 app.use(compression());
 app.use(cookieParser());
 app.use(cors({ origin: true, credentials: true }));
 
 app.use(express.json({ limit: "1gb", parameterLimit: 50000 }));
-app.use(express.urlencoded({ limit: "1gb", extended: true, parameterLimit: 50000 }));
+app.use(
+  express.urlencoded({ limit: "1gb", extended: true, parameterLimit: 50000 })
+);
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
-	useNewUrlParser: true,
-	useCreateIndex: true,
-	useUnifiedTopology: true,
-	useFindAndModify: false,
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 const connection = mongoose.connection;
 connection.once("open", () => {
-	console.log("connection MongoDB");
+  console.log("connection MongoDB");
 });
 
 //instalition db import
@@ -71,8 +72,6 @@ const customerPublicRouter = require("./routes/customerspublic");
 const paymentPublicRouter = require("./routes/payment");
 const paymentMethodsPublicRouter = require("./routes/paymentmethodspublic");
 
-
-
 //Private Root
 app.use("/cargoes", cargoesRouter);
 app.use("/homeslider", homeSliderRouter);
@@ -106,13 +105,8 @@ app.use("/customerspublic", customerPublicRouter);
 app.use("/payment", paymentPublicRouter);
 app.use("/paymentmethodspublic", paymentMethodsPublicRouter);
 
-
 app.use(express.static(path.join(__dirname, "../website/public")));
 
 app.listen(port, () => {
-	console.log("sever is runnin port: " + port);
+  console.log("sever is runnin port: " + port);
 });
-
-
-
-

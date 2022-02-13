@@ -1,16 +1,16 @@
 module.exports = {
-  mode: 'jit',
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './app/**/*.{js,ts,jsx,tsx}'],
+  mode: "jit",
+  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./app/**/*.{js,ts,jsx,tsx}"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       spacing: {
-        "0.1": "1px"
+        0.1: "1px",
       },
       backgroundImage: {
-        "mobile-app": "url(images/image.png)"
+        "mobile-app": "url(images/image.png)",
       },
-      colors: theme => ({
+      colors: (theme) => ({
         "brand-color": "#4c3398",
       }),
     },
@@ -19,4 +19,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+};

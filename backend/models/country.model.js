@@ -1,45 +1,48 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const CountrySchema = new Schema({
-   code2: {
+const CountrySchema = new Schema(
+  {
+    code2: {
       type: String,
       required: true,
-      unique: true
-   },
-   code3: {
+      unique: true,
+    },
+    code3: {
       type: String,
       required: true,
-      unique: true
-   },
-   name: {
+      unique: true,
+    },
+    name: {
       type: String,
-   },
-   capital: {
+    },
+    capital: {
       type: String,
-   },
-   region: {
+    },
+    region: {
       type: String,
-   },
-   subregion: {
+    },
+    subregion: {
       type: String,
-   },
-   states: [{
-      code: {
-         type: String,
+    },
+    states: [
+      {
+        code: {
+          type: String,
+        },
+        name: {
+          type: String,
+        },
+        subdivision: {
+          type: String,
+        },
       },
-      name: {
-         type: String,
-      },
-      subdivision: {
-         type: String
-      },
-   }],
-},
-{
-   collection: "country",
-   timestamps: true,
-}
+    ],
+  },
+  {
+    collection: "country",
+    timestamps: true,
+  }
 );
 
 const Country = mongoose.model("country", CountrySchema);

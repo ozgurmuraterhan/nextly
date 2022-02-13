@@ -10,17 +10,11 @@
     "variants": [
       {
         "name": "Color",
-        "value": [
-          "Blue",
-          "Yellow"
-        ]
+        "value": ["Blue", "Yellow"]
       },
       {
         "name": "Lengt",
-        "value": [
-          "Tall",
-          "Sort"
-        ]
+        "value": ["Tall", "Sort"]
       }
     ],
     "variant_products": [
@@ -152,17 +146,11 @@
     "variants": [
       {
         "name": "Size",
-        "value": [
-          "L",
-          "XL"
-        ]
+        "value": ["L", "XL"]
       },
       {
         "name": "RAM",
-        "value": [
-          "32",
-          "128"
-        ]
+        "value": ["32", "128"]
       }
     ],
     "variant_products": [
@@ -217,19 +205,11 @@
     "variants": [
       {
         "name": "Color",
-        "value": [
-          "Blue",
-          "Yellow",
-          "Red"
-        ]
+        "value": ["Blue", "Yellow", "Red"]
       },
       {
         "name": "Hard Disk",
-        "value": [
-          "256 GB",
-          "1 TB",
-          "2 TB"
-        ]
+        "value": ["256 GB", "1 TB", "2 TB"]
       }
     ],
     "variant_products": [
@@ -338,10 +318,7 @@
     "variants": [
       {
         "name": "RAM",
-        "value": [
-          "32",
-          "128"
-        ]
+        "value": ["32", "128"]
       }
     ],
     "variant_products": [
@@ -382,10 +359,7 @@
     "variants": [
       {
         "name": "qweqwe",
-        "value": [
-          "sss",
-          "aaaa"
-        ]
+        "value": ["sss", "aaaa"]
       }
     ],
     "variant_products": [
@@ -596,10 +570,7 @@
     "variants": [
       {
         "name": "Color",
-        "value": [
-          "Yellow",
-          "Red"
-        ]
+        "value": ["Yellow", "Red"]
       }
     ],
     "variant_products": [
