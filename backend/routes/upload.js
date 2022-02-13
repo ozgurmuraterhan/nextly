@@ -10,11 +10,11 @@ const uploadImage = async (req, res, next) => {
     if (req.body[0]) {
       // to declare some path to store your converted image
       const path =
-        "../website/public/images/uploads/staff/" + Date.now() + ".png";
+        "../admin/public/images/uploads/staff/" + Date.now() + ".png";
 
       const imgdata = req.body[0].thumbUrl;
       if (!imgdata) {
-        return res.send("../website/public");
+        return res.send("../admin/public");
       }
 
       // to convert base64 format into random filename
@@ -24,7 +24,7 @@ const uploadImage = async (req, res, next) => {
 
       return res.send(path);
     } else {
-      return res.send("../website/public");
+      return res.send("../admin/public");
     }
   } catch (e) {
     next(e);
@@ -59,7 +59,7 @@ router.post(
     const rolesControl = req.user.role;
     if (rolesControl["staff/id"]) {
       try {
-        fs.unlinkSync("../website/public" + req.body.path);
+        fs.unlinkSync("../admin/public" + req.body.path);
       } catch (e) {
         console.log("not image");
       }
@@ -79,11 +79,11 @@ const uploadImageCustomer = async (req, res, next) => {
     if (req.body[0]) {
       // to declare some path to store your converted image
       const path =
-        "../website/public/images/uploads/customers/" + Date.now() + ".png";
+        "../admin/public/images/uploads/customers/" + Date.now() + ".png";
 
       const imgdata = req.body[0].thumbUrl;
       if (!imgdata) {
-        return res.send("../website/public");
+        return res.send("../admin/public");
       }
 
       // to convert base64 format into random filename
@@ -93,7 +93,7 @@ const uploadImageCustomer = async (req, res, next) => {
 
       return res.send(path);
     } else {
-      return res.send("../website/public");
+      return res.send("../admin/public");
     }
   } catch (e) {
     next(e);
@@ -128,7 +128,7 @@ router.post(
     const rolesControl = req.user.role;
     if (rolesControl["customers/id"]) {
       try {
-        fs.unlinkSync("../website/public" + req.body.path);
+        fs.unlinkSync("../admin/public" + req.body.path);
       } catch (e) {
         console.log("not image");
       }
@@ -145,7 +145,7 @@ router.post(
 
 const storageProduct = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../website/public/images/uploads/products");
+    cb(null, "../admin/public/images/uploads/products");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -204,7 +204,7 @@ router.post(
     const rolesControl = req.user.role;
     if (rolesControl["productimages/id"]) {
       try {
-        fs.unlinkSync("../website/public" + req.body.path);
+        fs.unlinkSync("../admin/public" + req.body.path);
       } catch (e) {
         console.log("not image");
       }
@@ -223,7 +223,7 @@ router.post(
 
 const storageCargo = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../website/public/images/uploads/cargoes");
+    cb(null, "../admin/public/images/uploads/cargoes");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -283,7 +283,7 @@ router.post(
     const rolesControl = req.user.role;
     if (rolesControl["cargoes/id"]) {
       try {
-        fs.unlinkSync("../website/public" + req.body.path);
+        fs.unlinkSync("../admin/public" + req.body.path);
       } catch (e) {
         console.log("not image");
       }
@@ -302,7 +302,7 @@ router.post(
 
 const storageOrderstatus = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../website/public/images/uploads/orderstatus");
+    cb(null, "../admin/public/images/uploads/orderstatus");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -362,7 +362,7 @@ router.post(
     const rolesControl = req.user.role;
     if (rolesControl["orderstatus/id"]) {
       try {
-        fs.unlinkSync("../website/public" + req.body.path);
+        fs.unlinkSync("../admin/public" + req.body.path);
       } catch (e) {
         console.log("not image");
       }
@@ -381,7 +381,7 @@ router.post(
 
 const storagePaymentmethods = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../website/public/images/uploads/paymentmethods");
+    cb(null, "../admin/public/images/uploads/paymentmethods");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -441,7 +441,7 @@ router.post(
     const rolesControl = req.user.role;
     if (rolesControl["paymentmethods/id"]) {
       try {
-        fs.unlinkSync("../website/public" + req.body.path);
+        fs.unlinkSync("../admin/public" + req.body.path);
       } catch (e) {
         console.log("not image");
       }
@@ -460,7 +460,7 @@ router.post(
 
 const storageBrands = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../website/public/images/uploads/brands");
+    cb(null, "../admin/public/images/uploads/brands");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -520,7 +520,7 @@ router.post(
     const rolesControl = req.user.role;
     if (rolesControl["brands/id"]) {
       try {
-        fs.unlinkSync("../website/public" + req.body.path);
+        fs.unlinkSync("../admin/public" + req.body.path);
       } catch (e) {
         console.log("not image");
       }
@@ -539,7 +539,7 @@ router.post(
 
 const storagehomeslider = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../website/public/images/uploads/homeslider");
+    cb(null, "../admin/public/images/uploads/homeslider");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -598,7 +598,7 @@ router.post(
     const rolesControl = req.user.role;
     if (rolesControl["homeslider/id"]) {
       try {
-        fs.unlinkSync("../website/public" + req.body.path);
+        fs.unlinkSync("../admin/public" + req.body.path);
       } catch (e) {
         console.log("not image");
       }
@@ -617,7 +617,7 @@ router.post(
 
 const storageLogo = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../website/public/images/uploads/logo");
+    cb(null, "../admin/public/images/uploads/logo");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -677,7 +677,7 @@ router.post(
     const rolesControl = req.user.role;
     if (rolesControl["superadmin"]) {
       try {
-        fs.unlinkSync("../website/public" + req.body.path);
+        fs.unlinkSync("../admin/public" + req.body.path);
       } catch (e) {
         console.log("not image");
       }
