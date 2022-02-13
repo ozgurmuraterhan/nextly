@@ -105,7 +105,7 @@ app.use("/customerspublic", customerPublicRouter);
 app.use("/payment", paymentPublicRouter);
 app.use("/paymentmethodspublic", paymentMethodsPublicRouter);
 
-app.use(express.static(path.join(__dirname, "../website/public")));
+app.use(express.static(path.join(__dirname, "../admin/public")));
 
 app.listen(port, () => {
   console.log("sever is runnin port: " + port);
