@@ -1,5 +1,5 @@
 {
-  "name": "MuratErhan-nextly-eCommerce-website",
+  "name": "Nextly-eCommerce-website",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
@@ -8,7 +8,7 @@
     "start": "next start",
     "goless": "lessc -js public/less/var.less public/css/ant-custom.css  -x",
     "eslint": " eslint pages/**/**/**/*.js --fix && eslint app/**/**/**/*.js --fix && eslint redux/**/**/**/*.js --fix && eslint util/**/**/**/*.js --fix",
-    "prettier":"prettier --write ."
+    "prettier": "prettier --write ."
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.4",

@@ -3,7 +3,7 @@ import { API_URL, WEBSITE_URL } from "../../config";
 
 import fs from "fs";
 
-const Sitemap = () => {};
+const Sitemap = () => { };
 
 export const getServerSideProps = async ({ res }) => {
   const resDataProducts = await axios.get(`${API_URL}/productspublic/all`);
@@ -58,27 +58,26 @@ export const getServerSideProps = async ({ res }) => {
       .join("")}
 
       ${resDataTopmenu.data
-        .map((url) => {
-          if (!url.link.includes("http")) {
-            return `
+      .map((url) => {
+        if (!url.link.includes("http")) {
+          return `
                 <url>
-                  <loc>${
-                    url.link !== ""
-                      ? escapeHtml(url.link)
-                      : WEBSITE_URL + "/content/" + url.seo
-                  }</loc>
+                  <loc>${url.link !== ""
+              ? escapeHtml(url.link)
+              : WEBSITE_URL + "/content/" + url.seo
+            }</loc>
                   <lastmod>${new Date().toISOString()}</lastmod>
                   <changefreq>monthly</changefreq>
                   <priority>0.9</priority>
                 </url >
               `;
-          }
-        })
-        .join("")}
+        }
+      })
+      .join("")}
 
       ${resDataProducts.data
-        .map((url) => {
-          return `
+      .map((url) => {
+        return `
                 <url>
                   <loc>${WEBSITE_URL}/product/${url.seo}</loc>
                   <lastmod>${new Date().toISOString()}</lastmod>
@@ -86,8 +85,8 @@ export const getServerSideProps = async ({ res }) => {
                   <priority>1</priority>
                 </url>
               `;
-        })
-        .join("")}
+      })
+      .join("")}
     </urlset>
   `;
 
