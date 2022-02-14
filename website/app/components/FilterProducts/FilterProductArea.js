@@ -34,6 +34,7 @@ const Page = () => {
 
         if (res.data.length == 0 && filterProducts.skip == 0) {
           seTproducts([]);
+          seThasMore(false);
         }
       })
       .catch((err) => console.log(err));

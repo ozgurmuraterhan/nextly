@@ -13,7 +13,7 @@ import AuthService from "../../../util/services/authservice";
 import axios from "axios";
 import func from "../../../util/helpers/func";
 import CategoriesMenu from "../../components/CategoriesMenu";
-import HeaderTopMenu from "../../components/HeaderTopMenu";
+import TopMenu from "../../components/TopMenu";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 
@@ -67,7 +67,7 @@ const AppLayout = ({ children }) => {
       <Layout>
         <div className="border-b bg-white">
           <div className=" container-custom   ">
-            <HeaderTopMenu
+            <TopMenu
               socialmedia={func.getCategoriesTree(
                 topmenu,
                 "614b8cc75c153bab76bdf681"

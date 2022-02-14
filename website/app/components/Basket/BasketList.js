@@ -17,13 +17,13 @@ const Default = () => {
 
   const getBasketProducts = (data = [], products = []) => {
     const BasketAllProducts = [];
-
     products.map((x) => {
       const array = data.find((y) => y._id == x.product_id);
       if (array) {
         const resData = array;
         const errorArray = [];
         if (x.selectedVariants !== undefined) {
+
           const priceMath = func.filter_array_in_obj(
             resData.variant_products,
             x.selectedVariants
@@ -83,6 +83,30 @@ const Default = () => {
     );
   };
 
+  const basketProductUpdate = (post, messageStr = "Product Update!") => {
+    if (isAuthenticated) {
+      axios
+        .post(`${API_URL}/basket/${basket[0]._id}`, post)
+        .then(async () => {
+          message.success({ content: messageStr, duration: 3 });
+          await dispatch(getBasket_r(user.id));
+          seTisLoaded(false);
+        })
+        .catch((err) => {
+          message.error({
+            content: "Some Error, Please Try Again",
+            duration: 3,
+          });
+          console.log(err);
+        });
+    } else {
+      message.success({ content: messageStr, duration: 3 });
+      dispatch(updateBasket_r([post]));
+      getProducts();
+      seTisLoaded(false);
+    }
+  }
+
   const getProducts = async () => {
     if (basket.length > 0) {
       const arrayId = [];
@@ -109,7 +133,7 @@ const Default = () => {
       (x) =>
         x.product_id != dataRecord._id ||
         JSON.stringify(x.selectedVariants) !=
-          JSON.stringify(dataRecord.selectedVariants)
+        JSON.stringify(dataRecord.selectedVariants)
     );
     productsData.push(...variantControlNot);
     const post = {
@@ -121,26 +145,7 @@ const Default = () => {
       products: productsData,
     };
 
-    if (isAuthenticated) {
-      axios
-        .post(`${API_URL}/basket/${basket[0]._id}`, post)
-        .then(async () => {
-          message.success({ content: "Product Delete!", duration: 3 });
-          await dispatch(getBasket_r(user.id));
-          seTisLoaded(false);
-        })
-        .catch((err) => {
-          message.error({
-            content: "Some Error, Please Try Again",
-            duration: 3,
-          });
-          console.log(err);
-        });
-    } else {
-      message.success({ content: "Product Delete!", duration: 3 });
-      dispatch(updateBasket_r([post]));
-      getProducts();
-    }
+    basketProductUpdate(post, "Delete Product!")
   };
 
   const plusProduct = (dataRecord) => {
@@ -152,13 +157,13 @@ const Default = () => {
       (x) =>
         x.product_id == dataRecord._id &&
         JSON.stringify(x.selectedVariants) ==
-          JSON.stringify(dataRecord.selectedVariants)
+        JSON.stringify(dataRecord.selectedVariants)
     );
     const variantControlNot = productsDataArray.filter(
       (x) =>
         x.product_id != dataRecord._id ||
         JSON.stringify(x.selectedVariants) !=
-          JSON.stringify(dataRecord.selectedVariants)
+        JSON.stringify(dataRecord.selectedVariants)
     );
     productsData.push(...variantControlNot, {
       product_id: dataRecord._id,
@@ -175,27 +180,7 @@ const Default = () => {
       products: productsData,
     };
 
-    if (isAuthenticated) {
-      axios
-        .post(`${API_URL}/basket/${basket[0]._id}`, post)
-        .then(async () => {
-          message.success({ content: "Product Update!", duration: 3 });
-          await dispatch(getBasket_r(user.id));
-          seTisLoaded(false);
-        })
-        .catch((err) => {
-          message.error({
-            content: "Some Error, Please Try Again",
-            duration: 3,
-          });
-          console.log(err);
-        });
-    } else {
-      message.success({ content: "Product Update!", duration: 3 });
-      dispatch(updateBasket_r([post]));
-      getProducts();
-      seTisLoaded(false);
-    }
+    basketProductUpdate(post)
   };
 
   const notPlusProduct = (dataRecord) => {
@@ -206,13 +191,13 @@ const Default = () => {
       (x) =>
         x.product_id == dataRecord._id &&
         JSON.stringify(x.selectedVariants) ==
-          JSON.stringify(dataRecord.selectedVariants)
+        JSON.stringify(dataRecord.selectedVariants)
     );
     const variantControlNot = productsDataArray.filter(
       (x) =>
         x.product_id != dataRecord._id ||
         JSON.stringify(x.selectedVariants) !=
-          JSON.stringify(dataRecord.selectedVariants)
+        JSON.stringify(dataRecord.selectedVariants)
     );
 
     productsData.push(...variantControlNot, {
@@ -231,27 +216,7 @@ const Default = () => {
       products: productsData,
     };
 
-    if (isAuthenticated) {
-      axios
-        .post(`${API_URL}/basket/${basket[0]._id}`, post)
-        .then(async () => {
-          message.success({ content: "Product Update!", duration: 3 });
-          await dispatch(getBasket_r(user.id));
-          seTisLoaded(false);
-        })
-        .catch((err) => {
-          message.error({
-            content: "Some Error, Please Try Again",
-            duration: 3,
-          });
-          console.log(err);
-        });
-    } else {
-      message.success({ content: "Product Update!", duration: 3 });
-      dispatch(updateBasket_r([post]));
-      getProducts();
-      seTisLoaded(false);
-    }
+    basketProductUpdate(post)
   };
 
   return (

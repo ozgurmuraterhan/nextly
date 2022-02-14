@@ -7,6 +7,7 @@ import filterRouteLinkGenerate from "./filterRouterLink";
 import { filterProducts_r } from "../../../redux/actions";
 
 const Page = () => {
+
   const { categories } = useSelector(({ categories }) => categories);
   const { filterProducts } = useSelector(
     ({ filterProducts }) => filterProducts

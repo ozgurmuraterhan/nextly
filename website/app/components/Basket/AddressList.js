@@ -35,6 +35,47 @@ const Default = () => {
 
   const dispatch = useDispatch();
 
+  const updateAddress = async (newAddresArr) => {
+    if (isAuthenticated) {
+      await axios
+        .post(`${API_URL}/customerspublic/address`, newAddresArr)
+        .then(() => {
+          setTimeout(() => {
+            getAddress();
+            seTnewAddress({ open: false, id: null });
+          }, 500);
+        })
+        .catch((err) => console.log("err", err));
+    } else {
+      message.success({ content: "Next Stage :)", duration: 3 });
+      seTnewAddress({ open: false, id: null });
+      seTaddress(newAddresArr);
+    }
+  }
+
+  const updateBasket = async (post) => {
+    if (isAuthenticated) {
+      axios.post(`${API_URL}/basket/${basket[0]._id}`, post)
+        .then(async () => {
+          message.success({
+            content: "Address Selected",
+            duration: 3,
+          });
+          await dispatch(getBasket_r(user.id));
+        })
+        .catch((err) => {
+          message.error({
+            content: "Some Error, Please Try Again",
+            duration: 3,
+          });
+          console.log(err);
+        });
+    } else {
+      message.success({ content: "Next Stage :)", duration: 3 });
+      dispatch(updateBasket_r([post]));
+    }
+  }
+
   const getCity = () => {
     axios.get(`${API_URL}/turkey`).then((getData) => {
       const dataManipulate = [];
@@ -79,40 +120,14 @@ const Default = () => {
       newAddresArr.push(Data);
       newAddresArr.reverse();
 
-      if (isAuthenticated) {
-        await axios
-          .post(`${API_URL}/customerspublic/address`, newAddresArr)
-          .then(() => {
-            getAddress();
-            seTnewAddress({ open: false, id: null });
-          })
-          .catch((err) => console.log("err", err));
-      } else {
-        message.success({ content: "Next Stage :)", duration: 3 });
-        seTnewAddress({ open: false, id: null });
-        seTaddress(newAddresArr);
-      }
+      updateAddress(newAddresArr)
+
     } else {
       const newAddresArr = address;
       newAddresArr.push(Data);
       newAddresArr.reverse();
 
-      if (isAuthenticated) {
-        axios
-          .post(`${API_URL}/customerspublic/address`, newAddresArr)
-          .then(() => {
-            setTimeout(() => {
-              getAddress();
-              seTnewAddress({ open: false, id: null });
-            }, 500);
-          })
-          .catch((err) => console.log("err", err));
-      } else {
-        message.success({ content: "Next Stage :)", duration: 3 });
-        seTnewAddress({ open: false, id: null });
-
-        seTaddress(newAddresArr);
-      }
+      updateAddress(newAddresArr)
     }
   };
 
@@ -122,19 +137,22 @@ const Default = () => {
 
   const getSelectedAddress = () => {
     if (basket.length > 0) {
+
       if (basket[0].shipping_address) {
         seTselectedShippingAddress(JSON.stringify(basket[0].shipping_address));
       }
+
       if (basket[0].billing_address) {
         seTselectedBillingAddress(JSON.stringify(basket[0].billing_address));
       }
 
-      if (
-        JSON.stringify(basket[0].billing_address) !=
-        JSON.stringify(basket[0].shipping_address)
-      ) {
+      const stringifBillingAddres = JSON.stringify(basket[0].billing_address)
+      const stringifShippingAddres = JSON.stringify(basket[0].shipping_address)
+
+      if (stringifBillingAddres != stringifShippingAddres) {
         seTbillingAdressSame(false);
       }
+
     }
   };
 
@@ -145,11 +163,12 @@ const Default = () => {
   }, [basket[0]]);
 
   const onChanheShppingAddress = (data) => {
+
     if (billingAdressSame) {
       seTselectedShippingAddress(data);
       seTselectedBillingAddress(data);
 
-      const post = {
+      const newBasketPost = {
         created_user: {
           name: user.name,
           id: user.id,
@@ -165,29 +184,11 @@ const Default = () => {
         billing_address: JSON.parse(data),
       };
 
-      if (isAuthenticated) {
-        axios
-          .post(`${API_URL}/basket/${basket[0]._id}`, post)
-          .then(async () => {
-            message.success({
-              content: "Shipping and Billing Address Selected",
-              duration: 3,
-            });
-            await dispatch(getBasket_r(user.id));
-          })
-          .catch((err) => {
-            message.error({
-              content: "Some Error, Please Try Again",
-              duration: 3,
-            });
-            console.log(err);
-          });
-      } else {
-        message.success({ content: "Next Stage :)", duration: 3 });
-        dispatch(updateBasket_r([post]));
-      }
+      updateBasket(newBasketPost)
+
     } else {
-      const post = {
+      seTselectedShippingAddress(data);
+      const newBasketPost = {
         created_user: {
           name: user.name,
           id: user.id,
@@ -202,35 +203,15 @@ const Default = () => {
         shipping_address: JSON.parse(data),
       };
 
-      if (isAuthenticated) {
-        axios
-          .post(`${API_URL}/basket/${basket[0]._id}`, post)
-          .then(async () => {
-            message.success({
-              content: "Shipping Address Selected",
-              duration: 3,
-            });
-            await dispatch(getBasket_r(user.id));
-          })
-          .catch((err) => {
-            message.error({
-              content: "Some Error, Please Try Again",
-              duration: 3,
-            });
-            console.log(err);
-          });
-      } else {
-        message.success({ content: "Next Stage :)", duration: 3 });
-        dispatch(updateBasket_r([post]));
-      }
-      seTselectedShippingAddress(data);
+      updateBasket(newBasketPost)
+
     }
   };
 
   const onChanheBillingAddress = (data) => {
     seTselectedBillingAddress(data);
 
-    const post = {
+    const newBasketPost = {
       created_user: {
         name: user.name,
         id: user.id,
@@ -245,28 +226,7 @@ const Default = () => {
       shipping_address: JSON.parse(selectedShippingAddress),
       billing_address: JSON.parse(data),
     };
-
-    if (isAuthenticated) {
-      axios
-        .post(`${API_URL}/basket/${basket[0]._id}`, post)
-        .then(async () => {
-          message.success({
-            content: "Billing  Address Selected",
-            duration: 3,
-          });
-          await dispatch(getBasket_r(user.id));
-        })
-        .catch((err) => {
-          message.error({
-            content: "Some Error, Please Try Again",
-            duration: 3,
-          });
-          console.log(err);
-        });
-    } else {
-      message.success({ content: "Next Stage :)", duration: 3 });
-      dispatch(updateBasket_r([post]));
-    }
+    updateBasket(newBasketPost)
   };
   return (
     <>
