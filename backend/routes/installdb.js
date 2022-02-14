@@ -1,56 +1,68 @@
 const router = require("express").Router();
 
-let Users = require("../models/users.model");
-let usersData = require("../db/users.json");
+
 
 let Settings = require("../models/settings.model");
-let settingsData = require("../db/settings.json");
+let settingsData = require("../db/nextly.settings.json");
+
+let Users = require("../models/users.model");
+let usersData = require("../db/nextly.users.json");
 
 let Variants = require("../models/variants.model");
-let variantsData = require("../db/variants.json");
+let variantsData = require("../db/nextly.variants.json");
 
 let Turkey = require("../models/turkey.model");
-let turkeyData = require("../db/turkey.json");
+let turkeyData = require("../db/nextly.turkey.json");
 
 let Topmenu = require("../models/topmenu.model");
-let topmenuData = require("../db/topmenu.json");
+let topmenuData = require("../db/nextly.topmenu.json");
 
 let Productimages = require("../models/productimages.model");
-let productimagesData = require("../db/productimages.json");
+let productimagesData = require("../db/nextly.productimages.json");
 
 let Products = require("../models/products.model");
-let productsData = require("../db/products.json");
+let productsData = require("../db/nextly.products.json");
 
 let Paymentmethods = require("../models/paymentmethods.model");
-let paymentmethodsData = require("../db/paymentmethods.json");
+let paymentmethodsData = require("../db/nextly.paymentmethods.json");
 
 let Orderstatus = require("../models/orderstatus.model");
-let orderstatusData = require("../db/orderstatus.json");
+let orderstatusData = require("../db/nextly.orderstatus.json");
 
 let Orders = require("../models/orders.model");
-let ordersData = require("../db/orders.json");
+let ordersData = require("../db/nextly.orders.json");
 
 let Homeslider = require("../models/homeslider.model");
-let homesliderData = require("../db/homeslider.json");
+let homesliderData = require("../db/nextly.homeslider.json");
 
 let Country = require("../models/country.model");
-let countryData = require("../db/country.json");
+let countryData = require("../db/nextly.country.json");
 
 let Categories = require("../models/categories.model");
-let categoriesData = require("../db/categories.json");
+let categoriesData = require("../db/nextly.categories.json");
 
 let Cargoes = require("../models/cargoes.model");
-let cargoesData = require("../db/cargoes.json");
+let cargoesData = require("../db/nextly.cargoes.json");
 
 let Brands = require("../models/brands.model");
-let brandsData = require("../db/brands.json");
+let brandsData = require("../db/nextly.brands.json");
 
 router.route("/").get((req, res) => {
+
+
+
+
+
   Settings.find().then((val) => {
     if (val.length > 0) {
       console.log("have Settings  ");
     } else {
-      Settings.insertMany(settingsData, function (err) {
+      const strReplace = JSON.stringify(settingsData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+      Settings.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -64,7 +76,13 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Users  ");
     } else {
-      Users.insertMany(usersData, function (err) {
+
+      const strReplace = JSON.stringify(usersData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+      Users.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -78,7 +96,14 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Variants  ");
     } else {
-      Variants.insertMany(variantsData, function (err) {
+
+      const strReplace = JSON.stringify(variantsData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+      Variants.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -92,7 +117,14 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Turkey  ");
     } else {
-      Turkey.insertMany(turkeyData, function (err) {
+
+      const strReplace = JSON.stringify(turkeyData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+      Turkey.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -106,7 +138,14 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Topmenu  ");
     } else {
-      Topmenu.insertMany(topmenuData, function (err) {
+
+      const strReplace = JSON.stringify(topmenuData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+      Topmenu.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -120,7 +159,15 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Products  ");
     } else {
-      Products.insertMany(productsData, function (err) {
+
+      const strReplace = JSON.stringify(productsData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+
+      Products.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -134,7 +181,14 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Productimages  ");
     } else {
-      Productimages.insertMany(productimagesData, function (err) {
+
+      const strReplace = JSON.stringify(productimagesData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+      Productimages.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -148,7 +202,14 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Paymentmethods  ");
     } else {
-      Paymentmethods.insertMany(paymentmethodsData, function (err) {
+
+      const strReplace = JSON.stringify(paymentmethodsData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+      Paymentmethods.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -162,7 +223,14 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Orderstatus  ");
     } else {
-      Orderstatus.insertMany(orderstatusData, function (err) {
+
+      const strReplace = JSON.stringify(orderstatusData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+      Orderstatus.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -176,7 +244,14 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Orders  ");
     } else {
-      Orders.insertMany(ordersData, function (err) {
+
+      const strReplace = JSON.stringify(ordersData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+      Orders.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -190,7 +265,14 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Homeslider  ");
     } else {
-      Homeslider.insertMany(homesliderData, function (err) {
+
+      const strReplace = JSON.stringify(homesliderData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+      Homeslider.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -204,7 +286,14 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Country  ");
     } else {
-      Country.insertMany(countryData, function (err) {
+
+      const strReplace = JSON.stringify(countryData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+      Country.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -218,7 +307,15 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Categories  ");
     } else {
-      Categories.insertMany(categoriesData, function (err) {
+
+      const strReplace = JSON.stringify(categoriesData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+
+      Categories.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -232,7 +329,14 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Cargoes  ");
     } else {
-      Cargoes.insertMany(cargoesData, function (err) {
+
+      const strReplace = JSON.stringify(cargoesData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+      Cargoes.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
@@ -246,7 +350,14 @@ router.route("/").get((req, res) => {
     if (val.length > 0) {
       console.log("have Brands  ");
     } else {
-      Brands.insertMany(brandsData, function (err) {
+
+      const strReplace = JSON.stringify(brandsData)
+        .replaceAll(/\\"/g, "")
+        .replaceAll("ObjectId(", "")
+        .replaceAll(')"', '"')
+
+
+      Brands.insertMany(JSON.parse(strReplace), function (err) {
         if (err) {
           console.log(err);
         } else {
