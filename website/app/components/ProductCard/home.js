@@ -29,28 +29,27 @@ const Default = ({ data = null, className }) => {
         <Link href={"/product/" + data.seo}>
           <div className="w-full float-left">
             <div className="w-5/12 float-left relative ">
-              <LazyLoadImage
-                className="w-full bg-cover bg-center  rounded-l-lg "
-                src="/images/transparent.png"
-                style={{
-                  backgroundImage: `url(${
-                    data.allImages[0]
-                      ? IMG_URL + data.allImages[0].image
-                      : "/images/nofoto.jpg"
-                  })`,
-                }}
-              />
-
               <span
-                className={`${
-                  func.getDiscount(data) ? "visible" : "invisible"
-                } absolute z-10 top-0 mt-2 text-xs float-right py-1 px-2 bg-red-500 text-white`}
+                className={`${func.getDiscount(data) ? "visible" : "invisible"
+                  } absolute z-10 top-0 mt-2 text-xs float-left py-1 px-2 bg-red-500 text-white`}
               >
                 {settings.price_type
                   ? "%" + Number(func.getDiscount(data)).toFixed(0)
                   : Number(func.getDiscount(data)).toFixed(0) + "%"}{" "}
                 discount
               </span>
+              <LazyLoadImage
+                className="w-full bg-cover bg-center  rounded-l-lg "
+                src="/images/transparent.png"
+                style={{
+                  backgroundImage: `url(${data.allImages[0]
+                      ? IMG_URL + data.allImages[0].image
+                      : "/images/nofoto.jpg"
+                    })`,
+                }}
+              />
+
+
               <ul className="product-links">
                 {/* <li><a href="#" data-tip="Add to Wishlist"><HeartOutlined /></a></li> 
                                               <li><a href="#" data-tip="Quick View"><EyeOutlined /></a></li>
