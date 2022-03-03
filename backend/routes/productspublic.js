@@ -102,45 +102,45 @@ router.route("/").post((req, res) => {
   const brandsMongo =
     req.body.brands.length > 0
       ? {
-          $or: functionReplaceObjectID("brands_id", req.body.brands),
-        }
+        $or: functionReplaceObjectID("brands_id", req.body.brands),
+      }
       : {};
 
   const skipMongo =
     req.body.skip != 0
       ? {
-          $skip: req.body.skip,
-        }
+        $skip: req.body.skip,
+      }
       : { $skip: 0 };
 
   const limitMongo =
     req.body.limit != 0
       ? {
-          $limit: req.body.limit,
-        }
-      : { $limit: 50 };
+        $limit: req.body.limit,
+      }
+      : { $limit: 0 };
 
   const sortMongo =
     typeof req.body.sort === "object"
       ? {
-          $sort: req.body.sort,
-        }
+        $sort: req.body.sort,
+      }
       : { $sort: { updatedAt: -1 } };
 
   const categoriesMongo =
     req.body.categories.length > 0
       ? {
-          $or: functionReplaceObjectID("categories_id", req.body.categories),
-        }
+        $or: functionReplaceObjectID("categories_id", req.body.categories),
+      }
       : {};
 
   const textMongo =
     req.body.text != ""
       ? {
-          $text: {
-            $search: `${req.body.text}`,
-          },
-        }
+        $text: {
+          $search: `${req.body.text}`,
+        },
+      }
       : {};
 
   const mongoPost = [

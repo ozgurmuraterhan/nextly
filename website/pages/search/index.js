@@ -22,13 +22,13 @@ const Page = () => {
 
   const callUrltoRedux = async () => {
     const urlToRedux = {};
-    for (const [key, value] of Object.entries(router.query)) {
+    for await (const [key, value] of Object.entries(router.query)) {
       const arr = '["' + value.replaceAll(",", '","') + '"]';
       urlToRedux[key] = JSON.parse(arr);
     }
 
     await dispatch(
-      filterProducts_r({ ...filterProducts, ...urlToRedux, skip: 0 })
+      filterProducts_r({ ...filterProducts, ...urlToRedux, skip: 0, limit: 12 })
     );
   };
 
@@ -43,10 +43,9 @@ const Page = () => {
 
         <div
           className={`md:col-span-2 col-span-12 p-2 shadow-sm border-top md:relative md:top-auto md:right-auto md:left-auto md:bottom-auto md:visible md:block
-            ${
-              openFilter
-                ? " fixed overflow-scroll top-0 left-0 right-0 bottom-0 w-screen h-screen bg-white z-20 "
-                : "invisible hidden"
+            ${openFilter
+              ? " fixed overflow-scroll top-0 left-0 right-0 bottom-0 w-screen h-screen bg-white z-20 "
+              : "invisible hidden"
             } `}
         >
           <div

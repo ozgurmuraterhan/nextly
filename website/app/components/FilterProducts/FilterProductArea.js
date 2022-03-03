@@ -13,7 +13,7 @@ const Page = () => {
     ({ filterProducts }) => filterProducts
   );
   const [products, seTproducts] = useState([]);
-  const [hasMore, seThasMore] = useState(true);
+  const [hasMore, seThasMore] = useState(null);
   const dispatch = useDispatch();
 
   const getProducts = () => {
@@ -22,20 +22,28 @@ const Page = () => {
       .then((res) => {
         if (res.data.length > 0) {
           // seTproducts([...products, ...res.data])
+
           if (filterProducts.skip == 0) {
             seTproducts(res.data);
+            if (res.data.length == 12) {
+              seThasMore(true);
+            } else {
+              seThasMore(false);
+            }
+
           } else {
             seTproducts([...products, ...res.data]);
-          }
-          seThasMore(true);
-        } else {
-          seThasMore(false);
-        }
+            seThasMore(false);
 
+          }
+
+        }
         if (res.data.length == 0 && filterProducts.skip == 0) {
           seTproducts([]);
           seThasMore(false);
         }
+
+
       })
       .catch((err) => console.log(err));
   };

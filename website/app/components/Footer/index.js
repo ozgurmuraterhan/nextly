@@ -26,9 +26,9 @@ const Default = ({ footerMenu }) => {
                   </Link>
                 ) : (
                   <>
-                    <Link href="#" className="text-white">
-                      <a className="text-white text-3xl">{val.title}</a>
-                    </Link>
+
+                    <a className="text-white text-3xl">{val.title}</a>
+
                     <ul key={val.title}>
                       {val?.children.map((val2) => (
                         <li key={val2.title} className=" my-1 sm:my-4  ">
@@ -78,28 +78,28 @@ const Default = ({ footerMenu }) => {
           <div className=" text-white  grid grid-cols-2 md:flex items-center flex-row justify-around   md:grid-cols-3 lg:grid-cols-6">
             {settings.address
               ? settings.address.map((val) => (
-                  <div key={val.name}>
-                    <h5 className="text-xl text-white mt-2">{val.name}</h5>
-                    <div className="mb-2">{val.value}</div>
-                  </div>
-                ))
+                <div key={val.name}>
+                  <h5 className="text-xl text-white mt-2">{val.name}</h5>
+                  <div className="mb-2">{val.value}</div>
+                </div>
+              ))
               : ""}
 
             {settings.phone
               ? settings.phone.map((val) => (
-                  <div key={val.name}>
-                    <h5 className="text-xl text-white mt-2">{val.name}</h5>
-                    <div className="mb-2  text-white">{val.value}</div>
-                  </div>
-                ))
+                <div key={val.name}>
+                  <h5 className="text-xl text-white mt-2">{val.name}</h5>
+                  <div className="mb-2  text-white">{val.value}</div>
+                </div>
+              ))
               : ""}
             {settings.email
               ? settings.email.map((val) => (
-                  <div key={val.name}>
-                    <h5 className="text-xl text-white mt-2">{val.name}</h5>
-                    <div className="mb-2  text-white">{val.value}</div>
-                  </div>
-                ))
+                <div key={val.name}>
+                  <h5 className="text-xl text-white mt-2">{val.name}</h5>
+                  <div className="mb-2  text-white">{val.value}</div>
+                </div>
+              ))
               : ""}
           </div>
         </div>
