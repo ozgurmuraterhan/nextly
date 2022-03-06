@@ -1,14 +1,16 @@
 import Brands from "../app/components/Brands";
 import HomeSlider from "../app/components/Home/HomeSlider";
-import HomeFirstBox from "../app/components/Home/HomeFirstBox";
-import HomeSeccoundBoxs from "../app/components/Home/HomeSeccoundBoxs";
-import HomeOfferList from "../app/components/Home/HomeOfferList";
-import HomeProductsFirst from "../app/components/Home/HomeProductsFirst";
 import func from "../util/helpers/func";
 import axios from "axios";
 import Head from "../app/core/Head";
 import { wrapper } from "../redux/store";
 import { API_URL } from "../../config";
+
+import dynamic from 'next/dynamic'
+const HomeFirstBox = dynamic(() => import("../app/components/Home/HomeFirstBox"))
+const HomeSeccoundBoxs = dynamic(() => import("../app/components/Home/HomeSeccoundBoxs"))
+const HomeOfferList = dynamic(() => import("../app/components/Home/HomeOfferList"))
+const HomeProductsFirst = dynamic(() => import("../app/components/Home/HomeProductsFirst"))
 
 const homePage = ({
   resData = [],

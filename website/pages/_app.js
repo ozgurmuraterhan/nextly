@@ -12,6 +12,7 @@ import {
   settings_r,
 } from "../redux/actions";
 
+
 const HomeApp = (props) => {
   const { Component, pageProps } = props;
   return (

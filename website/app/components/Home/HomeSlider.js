@@ -47,7 +47,7 @@ const Default = ({ state = [] }) => {
                       height="500"
                       width="1680"
                       style={{ maxHeight: "500px", width: "100%" }}
-                      alt={val.title + " "}
+                      alt={val.title + "."}
                     />
                   </a>
                 </Link>
