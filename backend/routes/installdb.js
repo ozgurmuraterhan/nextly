@@ -3,49 +3,49 @@ const router = require("express").Router();
 
 
 let Settings = require("../models/settings.model");
-let settingsData = require("../db/nextly.settings.json");
+let settingsData = require("../db.json/nextly.settings.json");
 
 let Users = require("../models/users.model");
-let usersData = require("../db/nextly.users.json");
+let usersData = require("../db.json/nextly.users.json");
 
 let Variants = require("../models/variants.model");
-let variantsData = require("../db/nextly.variants.json");
+let variantsData = require("../db.json/nextly.variants.json");
 
 let Turkey = require("../models/turkey.model");
-let turkeyData = require("../db/nextly.turkey.json");
+let turkeyData = require("../db.json/nextly.turkey.json");
 
 let Topmenu = require("../models/topmenu.model");
-let topmenuData = require("../db/nextly.topmenu.json");
+let topmenuData = require("../db.json/nextly.topmenu.json");
 
 let Productimages = require("../models/productimages.model");
-let productimagesData = require("../db/nextly.productimages.json");
+let productimagesData = require("../db.json/nextly.productimages.json");
 
 let Products = require("../models/products.model");
-let productsData = require("../db/nextly.products.json");
+let productsData = require("../db.json/nextly.products.json");
 
 let Paymentmethods = require("../models/paymentmethods.model");
-let paymentmethodsData = require("../db/nextly.paymentmethods.json");
+let paymentmethodsData = require("../db.json/nextly.paymentmethods.json");
 
 let Orderstatus = require("../models/orderstatus.model");
-let orderstatusData = require("../db/nextly.orderstatus.json");
+let orderstatusData = require("../db.json/nextly.orderstatus.json");
 
 let Orders = require("../models/orders.model");
-let ordersData = require("../db/nextly.orders.json");
+let ordersData = require("../db.json/nextly.orders.json");
 
 let Homeslider = require("../models/homeslider.model");
-let homesliderData = require("../db/nextly.homeslider.json");
+let homesliderData = require("../db.json/nextly.homeslider.json");
 
 let Country = require("../models/country.model");
-let countryData = require("../db/nextly.country.json");
+let countryData = require("../db.json/nextly.country.json");
 
 let Categories = require("../models/categories.model");
-let categoriesData = require("../db/nextly.categories.json");
+let categoriesData = require("../db.json/nextly.categories.json");
 
 let Cargoes = require("../models/cargoes.model");
-let cargoesData = require("../db/nextly.cargoes.json");
+let cargoesData = require("../db.json/nextly.cargoes.json");
 
 let Brands = require("../models/brands.model");
-let brandsData = require("../db/nextly.brands.json");
+let brandsData = require("../db.json/nextly.brands.json");
 
 router.route("/").get((req, res) => {
 

@@ -6,88 +6,6 @@ const fs = require("fs");
 const passport = require("passport");
 
 
-
-//Logo image manage
-
-const storageLogo = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "../admin/public/images/uploads/logo");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-
-const fileFilterLogo = (req, file, cb) => {
-  const allowedFileTypes = [
-    "image/jpeg",
-    "image/jpg",
-    "image/png",
-    "image/gif",
-    "image/GIF",
-  ];
-  if (allowedFileTypes.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-let uploadimagelogo = multer({
-  storage: storageLogo,
-  fileFilter: fileFilterLogo,
-});
-
-router.post(
-  "/uploadlogoimage",
-  passport.authenticate("jwt", { session: false }),
-  uploadimagelogo.single("image"),
-  (req, res) => {
-    const rolesControl = req.user.role;
-
-    if (rolesControl["superadmin"]) {
-      if (req.file)
-        return res.json({
-          msg: "image successfully uploaded",
-          path: req.file.path,
-        });
-      res.send("Image upload failed");
-    } else {
-      res.status(403).json({
-        message: {
-          messagge: "You are not authorized, go away!",
-          variant: "error",
-        },
-      });
-    }
-  }
-);
-
-router.post(
-  "/deletelogoimage",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const rolesControl = req.user.role;
-    if (rolesControl["superadmin"]) {
-      try {
-        fs.unlinkSync("../admin/public" + req.body.path);
-      } catch (e) {
-        console.log("not image");
-      }
-    } else {
-      res.status(403).json({
-        message: {
-          messagge: "You are not authorized, go away!",
-          variant: "error",
-        },
-      });
-    }
-  }
-);
-
-
-
-
 const uploadImage = async (req, res, next) => {
   try {
     if (req.body[0]) {
@@ -698,5 +616,82 @@ router.post(
 
 
 
+//Logo image manage
+
+const storageLogo = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../admin/public/images/uploads/logo");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const fileFilterLogo = (req, file, cb) => {
+  const allowedFileTypes = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/gif",
+    "image/GIF",
+  ];
+  if (allowedFileTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+let uploadimagelogo = multer({
+  storage: storageLogo,
+  fileFilter: fileFilterLogo,
+});
+
+router.post(
+  "/uploadlogoimage",
+  passport.authenticate("jwt", { session: false }),
+  uploadimagelogo.single("image"),
+  (req, res) => {
+    const rolesControl = req.user.role;
+
+    if (rolesControl["superadmin"]) {
+      if (req.file)
+        return res.json({
+          msg: "image successfully uploaded",
+          path: req.file.path,
+        });
+      res.send("Image upload failed");
+    } else {
+      res.status(403).json({
+        message: {
+          messagge: "You are not authorized, go away!",
+          variant: "error",
+        },
+      });
+    }
+  }
+);
+
+router.post(
+  "/deletelogoimage",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const rolesControl = req.user.role;
+    if (rolesControl["superadmin"]) {
+      try {
+        fs.unlinkSync("../admin/public" + req.body.path);
+      } catch (e) {
+        console.log("not image");
+      }
+    } else {
+      res.status(403).json({
+        message: {
+          messagge: "You are not authorized, go away!",
+          variant: "error",
+        },
+      });
+    }
+  }
+);
 
 module.exports = router;
