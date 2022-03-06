@@ -1,7 +1,7 @@
 import { wrapper } from "../redux/store";
 
-import "../public/global.scss";
 import "../public/loader.css";
+import "../public/global.scss";
 
 import LocaleProvider from "../app/core/LocaleProvider";
 import AppLayout from "../app/core/Layout";
