@@ -66,7 +66,7 @@ const Page = ({ data = {} }) => {
                 )}
 
                 {priceAdd.before_price != 0 &&
-                priceAdd.before_price > priceAdd.price ? (
+                  priceAdd.before_price > priceAdd.price ? (
                   <span className="line-through ml-3 text-sm text-black">
                     <Price data={priceAdd.before_price} />
                   </span>
@@ -75,7 +75,7 @@ const Page = ({ data = {} }) => {
                 )}
               </h1>
             ) : (
-              <h2 className="text-red-500">This is variant not shipping :(</h2>
+              <h2 className="text-red-500">This is variant not shipping.</h2>
             )}
           </>
         ) : (

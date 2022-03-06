@@ -15,9 +15,8 @@ const Default = ({ data = null, className }) => {
       });
       return (
         <span>
-          {" "}
-          <Price data={newData[0].price} /> -{" "}
-          <Price data={newData[data.length - 1].price} />{" "}
+          <Price data={newData[0].price} /> -
+          <Price data={newData[data.length - 1].price} />
         </span>
       );
     }
@@ -40,47 +39,46 @@ const Default = ({ data = null, className }) => {
               </span>
               <LazyLoadImage
                 className="w-full bg-cover bg-center  rounded-l-lg "
-                src="/images/transparent.png"
-                style={{
-                  backgroundImage: `url(${data.allImages[0]
-                      ? IMG_URL + data.allImages[0].image
-                      : "/images/nofoto.jpg"
-                    })`,
-                }}
+                src={data.allImages[0]
+                  ? IMG_URL + data.allImages[0].image
+                  : "/images/nofoto.jpg"
+                }
+                width="143"
+                height="143"
+                alt={data.title}
+
               />
 
 
               <ul className="product-links">
                 {/* <li><a href="#" data-tip="Add to Wishlist"><HeartOutlined /></a></li> 
-                                              <li><a href="#" data-tip="Quick View"><EyeOutlined /></a></li>
-                                            */}
+                  <li><a href="#" data-tip="Quick View"><EyeOutlined /></a></li>
+                */}
               </ul>
             </div>
             <div className=" text-center  float-left w-7/12">
               {/* <ul className="rating">
-                                                <li className="fas fa-star"></li>
-                                                <li className="fas fa-star"></li>
-                                                <li className="fas fa-star"></li>
-                                                <li className="far fa-star"></li>
-                                                <li className="far fa-star"></li>
-                                            </ul> 
-                                        */}
+                      <li className="fas fa-star"></li>
+                      <li className="fas fa-star"></li>
+                      <li className="fas fa-star"></li>
+                      <li className="far fa-star"></li>
+                      <li className="far fa-star"></li>
+                  </ul> 
+              */}
               <div className=" text-center text-md  relative  ">
-                <h3 className="w-full text-center float-left h-11 font-semibold  overflow-hidden px-1 mt-2 mb-3  ">
-                  {" "}
+                <h3 className="w-full text-center float-left h-10 font-semibold  overflow-hidden px-1 mt-2    ">
                   {data.title}
                 </h3>
-
-                {data.type ? (
-                  getVariantPrice(data.variant_products)
-                ) : (
-                  <Price data={data.price} />
-                )}
-
+                <span className="font-semibold">
+                  {data.type ? (
+                    getVariantPrice(data.variant_products)
+                  ) : (
+                    <Price data={data.price} />
+                  )}
+                </span>
                 <span className=" line-through  text-xs  w-full float-left ">
                   {!data.type ? (
                     <>
-                      {" "}
                       {data.before_price != 0 ? (
                         <Price data={data.before_price} />
                       ) : (

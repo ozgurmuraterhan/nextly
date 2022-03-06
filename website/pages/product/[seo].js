@@ -35,10 +35,10 @@ const Page = ({ resData = {}, seo = "" }) => {
         image={state.allImages.length > 0 ? state.allImages[0].image : ""}
       />
       <div className=" shadow-2xl bg-white  p-0 lg:p-4 grid grid-cols-12 my-0 lg:my-8  ">
-        <div className=" col-span-12 lg:col-span-6 border rounded-lg pb-3 ">
+        <div className=" col-span-12 lg:col-span-5  rounded-lg  ">
           <ProductGallerry images={state.allImages} />
         </div>
-        <div className=" col-span-12 lg:col-span-6">
+        <div className=" col-span-12 lg:col-span-7">
           <PoductVariants data={state} seo={seo} />
         </div>
       </div>
@@ -46,11 +46,11 @@ const Page = ({ resData = {}, seo = "" }) => {
       <div className="w-full mt-5 mb-10 p-10 shadow-2xl bg-white h-full min-h-10  ">
         <HTMLRenderer
           html={state.description}
-          // components={{
-          //   h1: props => <Heading color="red" {...props} />,
-          //   h2: Subheading,
-          //   a: Link,
-          // }}
+        // components={{
+        //   h1: props => <Heading color="red" {...props} />,
+        //   h2: Subheading,
+        //   a: Link,
+        // }}
         />
       </div>
     </div>

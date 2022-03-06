@@ -15,7 +15,7 @@ const Default = ({ images = [] }) => {
   const state = images;
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   return (
     <div className="w-full">
@@ -36,13 +36,7 @@ const Default = ({ images = [] }) => {
         {state.map((val) => (
           <SwiperSlide key={val.image}>
             <div className="item">
-              <div
-                className="  bg-contain bg-no-repeat bg-center w-full"
-                style={{
-                  height: "400px",
-                  backgroundImage: "url(" + IMG_URL + val.image + ")",
-                }}
-              />
+              <img src={IMG_URL + val.image} width="500" height="500" alt=" " className="w-full h-full" />
             </div>
           </SwiperSlide>
         ))}
@@ -67,7 +61,7 @@ const Default = ({ images = [] }) => {
           <SwiperSlide key={i}>
             <div className="item">
               <div
-                className="bg-cover bg-center   border-2 ml-2  h-20 w-20"
+                className="bg-cover bg-center  border-2 ml-2  h-20 w-20"
                 style={{
                   backgroundImage: "url(" + IMG_URL + "/" + val.image + ")",
                 }}

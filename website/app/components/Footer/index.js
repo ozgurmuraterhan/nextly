@@ -13,7 +13,7 @@ const Default = ({ footerMenu }) => {
           <img src={`${IMG_URL + settings.image}`} className="invert w-32 " />
           <h4 className="text-white text-lg mt-2">{settings.company}</h4>
           <p>{settings.description}</p>
-          <img className="mt-5 w-auto" src="/images/stripepayfooter.png" />
+          <img className="mt-5 w-full" src="/images/stripepayfooter.png" width="305" height="97" alt="stripe payment" />
         </div>
 
         <ul className=" grid grid-cols-2 md:grid-cols-4 col-span-12  sm:col-span-9 ml-0 sm:ml-20 order-1 md:order-5  ">

@@ -25,7 +25,10 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
               <a className="itemzoom mb-3">
                 <LazyLoadImage
                   src={`${IMG_URL + val.image}`}
-                  className="w-full"
+                  className="w-full h-full"
+                  height="168"
+                  width="288"
+                  alt={val.title + " "}
                 />
                 <div className="w-full text-center mt-3">{val.title}</div>
                 <div className="w-full text-center my-2 h-5">

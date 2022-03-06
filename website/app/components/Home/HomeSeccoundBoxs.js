@@ -22,24 +22,18 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                 <h6>{title.description}</h6>
               </div>
 
-              <div className="home-seccound-box-arrow-left absolute top-30 -left-10 text-5xl z-50 ">
-                <LeftOutlined />
-              </div>
-              <div className="home-seccound-box-arrow-right absolute top-30  right-0 text-5xl z-50 ">
-                <RightOutlined />
-              </div>
 
               <Swiper
                 slidesPerView={1}
                 spaceBetween={10}
-                pagination={false}
-                navigation={{
-                  prevEl: ".home-seccound-box-arrow-left",
-                  nextEl: ".home-seccound-box-arrow-right",
+                style={{
+                  "--swiper-navigation-color": "#000",
+                  "--swiper-pagination-color": "#000",
                 }}
+
                 autoplay={{
-                  delay: 3500,
-                  disableOnInteraction: false,
+                  delay: 3000,
+                  disableOnInteraction: true,
                 }}
                 breakpoints={{
                   340: {
@@ -55,6 +49,10 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                     spaceBetween: 0,
                   },
                   1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 0,
+                  },
+                  1224: {
                     slidesPerView: 4,
                     spaceBetween: 0,
                   },

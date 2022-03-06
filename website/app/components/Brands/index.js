@@ -22,6 +22,8 @@ const Default = () => {
         <div className="top-brands-arrow-right">
           <DoubleRightOutlined />
         </div>
+
+
         <Swiper
           slidesPerView={1}
           spaceBetween={10}
@@ -54,7 +56,7 @@ const Default = () => {
               <div className="item">
                 <Link href={`/search?brands=${val._id}`}>
                   <a>
-                    <img src={`${IMG_URL + val.image}`} />
+                    <img src={`${IMG_URL + val.image}`} width="66" height="66" />
                     <span> {val.title}</span>
                   </a>
                 </Link>
