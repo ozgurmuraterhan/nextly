@@ -15,7 +15,7 @@ app.use(mongoSanitize());
 app.use(compression());
 app.use(cookieParser());
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors());
 
 app.use(express.json({ limit: "1gb", parameterLimit: 50000 }));
 app.use(
