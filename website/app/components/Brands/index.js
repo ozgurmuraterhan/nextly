@@ -56,7 +56,7 @@ const Default = () => {
               <div className="item">
                 <Link href={`/search?brands=${val._id}`}>
                   <a>
-                    <img src={`${IMG_URL + val.image}`} width="66" height="66" />
+                    <img src={`${IMG_URL + val.image}`} width="66" height="66" alt={val.title} />
                     <span> {val.title}</span>
                   </a>
                 </Link>
