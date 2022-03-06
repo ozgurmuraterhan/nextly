@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import router from "next/router";
-import Head from "../../app/core/Head";
 import { CloseCircleOutlined, FilterOutlined } from "@ant-design/icons";
-import FilterSelectedTop from "../../app/components/FilterProducts/FilterSelectedTop";
-import BrandsFilter from "../../app/components/FilterProducts/BrandsFilter";
-import CategoriesFilter from "../../app/components/FilterProducts/CategoriesFilter";
-import PriceFilter from "../../app/components/FilterProducts/PriceFilter";
-import FilterProductArea from "../../app/components/FilterProducts/FilterProductArea";
-import TextFilter from "../../app/components/FilterProducts/TextFilter";
-import SortProducts from "../../app/components/FilterProducts/SortProducts";
 import { filterProducts_r } from "../../redux/actions";
+
+import dynamic from 'next/dynamic'
+
+const Head = dynamic(() => import("../../app/core/Head"));
+const FilterSelectedTop = dynamic(() => import("../../app/components/FilterProducts/FilterSelectedTop"));
+const BrandsFilter = dynamic(() => import("../../app/components/FilterProducts/BrandsFilter"));
+const CategoriesFilter = dynamic(() => import("../../app/components/FilterProducts/CategoriesFilter"));
+const PriceFilter = dynamic(() => import("../../app/components/FilterProducts/PriceFilter"));
+const FilterProductArea = dynamic(() => import("../../app/components/FilterProducts/FilterProductArea"));
+const TextFilter = dynamic(() => import("../../app/components/FilterProducts/TextFilter"));
+const SortProducts = dynamic(() => import("../../app/components/FilterProducts/SortProducts"));
 
 const Page = () => {
   const { filterProducts } = useSelector(

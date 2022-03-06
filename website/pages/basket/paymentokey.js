@@ -3,11 +3,12 @@ import { useSelector } from "react-redux";
 import router from "next/router";
 import Link from "next/link";
 import axios from "axios";
-import Price from "../../app/components/Price";
-
-import Head from "../../app/core/Head";
-
 import { API_URL } from "../../../config";
+
+import dynamic from 'next/dynamic'
+
+const Head = dynamic(() => import("../../app/core/Head"));
+const Price = dynamic(() => import("../../app/components/Price"));
 
 const Page = () => {
   const { basket } = useSelector((state) => state.basket);

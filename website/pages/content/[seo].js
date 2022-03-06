@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
-import Head from "../../app/core/Head";
 import { API_URL } from "../../../config";
 import axios from "axios";
+import dynamic from 'next/dynamic'
 
+const Head = dynamic(() => import("../../app/core/Head"));
 const Page = ({ seo, resData }) => {
   const { topmenu } = useSelector((state) => state.topmenu);
 

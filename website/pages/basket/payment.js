@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import DetailPricePay from "../../app/components/Basket/DetailPricePay";
-import StripeComponent from "../../app/components/Stripe";
 import { API_URL } from "../../../config";
-import Head from "../../app/core/Head";
+
+
+import dynamic from 'next/dynamic'
+
+const Head = dynamic(() => import("../../app/core/Head"));
+const DetailPricePay = dynamic(() => import("../../app/components/Basket/DetailPricePay"));
+const StripeComponent = dynamic(() => import("../../app/components/Stripe"));
 
 const Page = () => {
   const { basket } = useSelector((state) => state.basket);

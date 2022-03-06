@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons"
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Thumbs, Autoplay } from "swiper";
 

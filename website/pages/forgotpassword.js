@@ -1,11 +1,13 @@
 import { Button, Form, Input, message } from "antd";
 import { API_URL } from "../../config";
-import IntlMessages from "../util/IntlMessages";
-
 import Router from "next/router";
 import axios from "axios";
 
+import dynamic from 'next/dynamic'
+const IntlMessages = dynamic(() => import("../util/IntlMessages"));
+
 const SignInPage = () => {
+
   const onSubmit = (Data) => {
     axios
       .post(`${API_URL}/users/forgotpasswordcustomer`, Data)

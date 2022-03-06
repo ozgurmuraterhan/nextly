@@ -2,12 +2,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import HTMLRenderer from "react-html-renderer";
 import { getBasket_r } from "../../redux/actions";
-import Head from "../../app/core/Head";
 import axios from "axios";
-import ProductGallerry from "../../app/components/ProductDetail/Gallerry";
-import PoductVariants from "../../app/components/ProductDetail/PoductVariants";
-
 import { API_URL } from "../../../config";
+
+
+import dynamic from 'next/dynamic'
+
+const Head = dynamic(() => import("../../app/core/Head"));
+const ProductGallerry = dynamic(() => import("../../app/components/ProductDetail/Gallerry"));
+const PoductVariants = dynamic(() => import("../../app/components/ProductDetail/PoductVariants"));
 
 const Page = ({ resData = {}, seo = "" }) => {
   const { user } = useSelector(({ login }) => login);

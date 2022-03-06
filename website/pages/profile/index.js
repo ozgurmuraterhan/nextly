@@ -1,10 +1,15 @@
 import { useEffect } from "react";
-import Profile from "../../app/components/Profile";
-import ProfileLeftMenu from "../../app/components/Profile/LeftMenu";
-import Head from "../../app/core/Head";
-
 import { useSelector } from "react-redux";
 import Router from "next/router";
+
+
+import dynamic from 'next/dynamic'
+
+const Head = dynamic(() => import("../../app/core/Head"));
+const Profile = dynamic(() => import("../../app/components/Profile"));
+const ProfileLeftMenu = dynamic(() => import("../../app/components/Profile/LeftMenu"));
+
+
 const Default = () => {
   const { isAuthenticated } = useSelector((state) => state.login);
 

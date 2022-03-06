@@ -1,22 +1,25 @@
-import Brands from "../app/components/Brands";
-import HomeSlider from "../app/components/Home/HomeSlider";
 import func from "../util/helpers/func";
 import axios from "axios";
-import Head from "../app/core/Head";
 import { wrapper } from "../redux/store";
 import { API_URL } from "../../config";
 
 import dynamic from 'next/dynamic'
+
 const HomeFirstBox = dynamic(() => import("../app/components/Home/HomeFirstBox"))
 const HomeSeccoundBoxs = dynamic(() => import("../app/components/Home/HomeSeccoundBoxs"))
 const HomeOfferList = dynamic(() => import("../app/components/Home/HomeOfferList"))
 const HomeProductsFirst = dynamic(() => import("../app/components/Home/HomeProductsFirst"))
+const Brands = dynamic(() => import("../app/components/Brands"))
+const HomeSlider = dynamic(() => import("../app/components/Home/HomeSlider"))
+const Head = dynamic(() => import("../app/core/Head"))
 
 const homePage = ({
   resData = [],
   resProductFirst = [],
   resProductSeccond = [],
 }) => {
+
+
   const homeSlider = func.getCategoriesTree(
     resData,
     "61535837020a748d51968ecc"

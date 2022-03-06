@@ -1,6 +1,10 @@
-import BasketList from "../../app/components/Basket/BasketList";
-import DetailPrice from "../../app/components/Basket/DetailPrice";
-import Head from "../../app/core/Head";
+
+
+import dynamic from 'next/dynamic'
+
+const Head = dynamic(() => import("../../app/core/Head"));
+const BasketList = dynamic(() => import("../../app/components/Basket/BasketList"));
+const DetailPrice = dynamic(() => import("../../app/components/Basket/DetailPrice"));
 
 const Page = () => {
   return (

@@ -7,15 +7,17 @@ import {
   isAuthenticated_r,
   getBasket_r,
 } from "../../../redux/actions";
-
 import { useRouter } from "next/router";
 import AuthService from "../../../util/services/authservice";
 import axios from "axios";
 import func from "../../../util/helpers/func";
-import CategoriesMenu from "../../components/CategoriesMenu";
-import TopMenu from "../../components/TopMenu";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+
+import dynamic from 'next/dynamic'
+
+const CategoriesMenu = dynamic(() => import("../../components/CategoriesMenu"));
+const TopMenu = dynamic(() => import("../../components/TopMenu"));
+const Footer = dynamic(() => import("../../components/Footer"));
+const Header = dynamic(() => import("../../components/Header"));
 
 
 axios.defaults.withCredentials = true;

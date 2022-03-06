@@ -1,17 +1,16 @@
 import { useEffect } from "react";
 import { Form, message } from "antd";
 import { isAuthenticated_r, login_r } from "../redux/actions";
-
 import axios from "axios";
 import { API_URL } from "../../config";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import Router from "next/router";
-import LoginForm from "../app/components/Header/LoginForm";
-import RegisterForm from "../app/components/Header/RegisterForm";
-
 import AuthService from "../util/services/authservice";
+
+import dynamic from 'next/dynamic'
+
+const LoginForm = dynamic(() => import("../app/components/Header/LoginForm"));
+const RegisterForm = dynamic(() => import("../app/components/Header/RegisterForm"));
 
 const SignInPage = () => {
   const [form] = Form.useForm();
@@ -42,7 +41,7 @@ const SignInPage = () => {
       .catch((err) => console.log("err", err));
   };
 
-  const handleCancelLogin = () => {};
+  const handleCancelLogin = () => { };
 
   const onSubmitLogin = (Data) => {
     Data["username"] = Data.username.toLowerCase();
