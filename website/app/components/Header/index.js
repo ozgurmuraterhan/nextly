@@ -75,7 +75,10 @@ const Default = () => {
         <a href="/">
           <img
             src={`${IMG_URL + settings.image}`}
+            width="169"
+            height="44"
             className=" w-full sm:w-10/12 sm:mt-0 mt-3  "
+            alt="Logo"
           />
         </a>
       </div>

@@ -10,7 +10,7 @@ const Default = ({ footerMenu }) => {
     <div className="bg-black py-10">
       <div className=" container-custom grid grid-cols-12">
         <div className="md:col-span-3 order-12  md:order-1  sm:py-0 py-5 col-span-12 !text-white">
-          <img src={`${IMG_URL + settings.image}`} className="invert w-32 " />
+          <img src={`${IMG_URL + settings.image}`} className="invert w-32 " width="128" height="31" alt="Logo" />
           <h4 className="text-white text-lg mt-2">{settings.company}</h4>
           <p>{settings.description}</p>
           <img className="mt-5 w-full" src="/images/stripepayfooter.png" width="305" height="97" alt="stripe payment" />
