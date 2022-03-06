@@ -1,9 +1,7 @@
 import { wrapper } from "../redux/store";
 
-//import 'bootstrap/dist/css/bootstrap.css';
-
-import "../public/loader.css";
 import "../public/global.scss";
+import "../public/loader.css";
 
 import LocaleProvider from "../app/core/LocaleProvider";
 import AppLayout from "../app/core/Layout";

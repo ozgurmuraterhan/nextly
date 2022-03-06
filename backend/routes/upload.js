@@ -613,6 +613,7 @@ router.post(
   }
 );
 
+
 //Logo image manage
 
 const storageLogo = multer.diskStorage({
@@ -652,7 +653,6 @@ router.post(
     const rolesControl = req.user.role;
 
     if (rolesControl["superadmin"]) {
-      console.log(req.file);
       if (req.file)
         return res.json({
           msg: "image successfully uploaded",
@@ -691,5 +691,6 @@ router.post(
     }
   }
 );
+
 
 module.exports = router;

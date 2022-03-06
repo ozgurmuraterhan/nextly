@@ -70,6 +70,7 @@ const Default = () => {
   };
 
   const onSubmit = async (Data) => {
+
     if (Data.image != undefined && state.image != Data.image) {
       axios.post(`${API_URL}/upload/deletelogoimage`, { path: state.image });
 
