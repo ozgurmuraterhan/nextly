@@ -7,7 +7,6 @@ const passport = require("passport");
 
 
 
-
 //Logo image manage
 
 const storageLogo = multer.diskStorage({
