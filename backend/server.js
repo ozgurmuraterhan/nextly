@@ -14,7 +14,8 @@ const port = process.env.PORT || 5000;
 app.use(mongoSanitize());
 app.use(compression());
 app.use(cookieParser());
-app.use(cors({ origin: true, credentials: true }));
+
+app.use(cors({ origin: `*`, credentials: true }));
 
 app.use(express.json({ limit: "1gb", parameterLimit: 50000 }));
 app.use(
