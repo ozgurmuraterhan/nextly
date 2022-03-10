@@ -21,6 +21,8 @@ const Default = ({ data = null, className }) => {
       );
     }
   };
+  const allImgData = data?.allImages?.sort((a, b) => a.order - b.order)
+  const img = allImgData[0] ? IMG_URL + allImgData[0].image : "/images/nofoto.jpg"
 
   return (
     <div className={className} key={data._id}>
@@ -39,10 +41,7 @@ const Default = ({ data = null, className }) => {
               </span>
               <LazyLoadImage
                 className="w-full bg-cover bg-center  rounded-l-lg "
-                src={data.allImages[0]
-                  ? IMG_URL + data.allImages[0].image
-                  : "/images/nofoto.jpg"
-                }
+                src={img}
                 width="143"
                 height="143"
                 alt={data.title}

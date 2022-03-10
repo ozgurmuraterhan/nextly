@@ -9,6 +9,8 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Default = ({ data = null, className }) => {
   const { settings } = useSelector(({ settings }) => settings);
+
+
   const getVariantPrice = (data) => {
     if (data.length > 0) {
       const newData = data.sort((a, b) => {
@@ -23,6 +25,8 @@ const Default = ({ data = null, className }) => {
       );
     }
   };
+  const allImgData = data?.allImages?.sort((a, b) => a.order - b.order)
+  const img = allImgData[0] ? IMG_URL + allImgData[0].image : "/images/nofoto.jpg"
 
   return (
     <div className={className} key={data._id}>
@@ -42,15 +46,11 @@ const Default = ({ data = null, className }) => {
 
               <LazyLoadImage
                 className="w-full h-full bg-center rounded-t-lg "
-                src={data.allImages[0]
-                  ? IMG_URL + data.allImages[0].image
-                  : "/images/nofoto.jpg"
-                }
+                src={img}
                 width="220"
                 height="220"
                 alt={data.title}
               />
-
 
               <ul className="product-links">
                 {/* <li><a href="#" data-tip="Add to Wishlist"><HeartOutlined /></a></li> 
