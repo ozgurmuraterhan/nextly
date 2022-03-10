@@ -67,7 +67,9 @@ const AppLayout = ({ children }) => {
     children
   ) : (
     <>
-      <CircularProgress className={!isLoaded ? "visible" : "hidden"} />
+
+      {/* <CircularProgress className={!isLoaded ? "visible" : "hidden"} /> */}
+
       <Layout>
         <div className="border-b bg-white">
           <div className=" container-custom   ">
