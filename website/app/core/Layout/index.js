@@ -41,7 +41,7 @@ const AppLayout = ({ children }) => {
           dispatch(login_r(auth.user));
           dispatch(isAuthenticated_r(true));
         }
-      });
+      })
     }
   };
 

@@ -45,7 +45,7 @@ const Default = ({ state = [] }) => {
                       src={`${IMG_URL + val.image}`}
                       height="500"
                       width="1680"
-                      style={{ maxHeight: "500px", width: "100%" }}
+                      style={{ width: "100%" }}
                       alt={val.title + "."}
                     />
                   </a>
