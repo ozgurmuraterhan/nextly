@@ -25,6 +25,7 @@ axios.defaults.withCredentials = true;
 const { Content } = Layout;
 
 const AppLayout = ({ children }) => {
+
   const router = useRouter();
   const dispatch = useDispatch();
   const { errorFetch } = useSelector(({ settings }) => settings);
@@ -81,7 +82,9 @@ const AppLayout = ({ children }) => {
             <CategoriesMenu />
           </div>
         </div>
-        <Content>{children}</Content>
+        <div className="min-h-screen">
+          <Content >{children}</Content>
+        </div>
         <Footer
           footerMenu={func.getCategoriesTree(
             topmenu,
