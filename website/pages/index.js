@@ -5,6 +5,10 @@ import { API_URL } from "../../config";
 
 import dynamic from 'next/dynamic'
 
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+
 const HomeFirstBox = dynamic(() => import("../app/components/Home/HomeFirstBox"))
 const HomeSeccoundBoxs = dynamic(() => import("../app/components/Home/HomeSeccoundBoxs"))
 const HomeOfferList = dynamic(() => import("../app/components/Home/HomeOfferList"))
