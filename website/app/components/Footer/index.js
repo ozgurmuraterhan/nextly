@@ -27,7 +27,7 @@ const Default = ({ footerMenu }) => {
                 ) : (
                   <>
 
-                    <a className="text-white text-3xl">{val.title}</a>
+                    <span className="text-white text-3xl">{val.title}</span>
 
                     <ul key={val.title}>
                       {val?.children.map((val2) => (
