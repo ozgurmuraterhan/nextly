@@ -45,6 +45,7 @@ const Default = ({ state = [] }) => {
                     <Image
                       src={`${IMG_URL + val.image}`}
                       loader={({ src }) => src}
+                      priority
                       height="500"
                       width="1680"
                       style={{ width: "100%" }}

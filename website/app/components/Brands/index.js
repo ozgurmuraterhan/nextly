@@ -58,8 +58,9 @@ const Default = () => {
                     <Image
                       loader={({ src }) => src}
                       src={`${IMG_URL + val.image}`}
-                      width="66"
-                      height="66"
+                      width="68"
+                      height="68"
+                      priority
                       alt={val.title}
                     />
                     <span> {val.title}</span>
