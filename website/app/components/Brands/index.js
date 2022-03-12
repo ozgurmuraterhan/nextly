@@ -6,9 +6,7 @@ import Link from "next/link";
 import { IMG_URL } from "../../../../config";
 
 SwiperCore.use([Navigation, Pagination, History]);
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+
 
 const Default = () => {
   const { brands } = useSelector(({ brands }) => brands);

@@ -6,9 +6,7 @@ import SwiperCore, { Navigation, Thumbs, Autoplay } from "swiper";
 
 // install Swiper modules
 SwiperCore.use([Navigation, Thumbs, Autoplay]);
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+
 
 const Default = ({ state = [], title = { title: "", description: "" } }) => {
   return (

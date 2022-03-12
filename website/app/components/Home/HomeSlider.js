@@ -6,9 +6,7 @@ import SwiperCore, { Navigation, Thumbs, Autoplay } from "swiper";
 
 // install Swiper modules
 SwiperCore.use([Navigation, Thumbs, Autoplay]);
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+
 
 import Link from "next/link";
 import { IMG_URL } from "../../../../config";

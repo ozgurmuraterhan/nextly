@@ -3,6 +3,10 @@ import { wrapper } from "../redux/store";
 import "../public/loader.css";
 import "../public/global.scss";
 
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+
 import LocaleProvider from "../app/core/LocaleProvider";
 import AppLayout from "../app/core/Layout";
 import {

@@ -3,9 +3,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import SwiperCore, { Navigation, Thumbs } from "swiper";
 
 SwiperCore.use([Navigation, Thumbs]);
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+
 
 import Link from "next/link";
 import { IMG_URL } from "../../../../config";
