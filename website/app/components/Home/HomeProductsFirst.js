@@ -2,7 +2,7 @@ import ProductCard from "../../components/ProductCard/";
 
 const Default = ({ state = [], title = { title: "", description: "" } }) => {
   return (
-    <div className="bg-gray-50 w-full ">
+    <div className="bg-gray-50 w-full mt-5 ">
       <div className=" container-custom py-5 grid grid-cols-12">
         <div className=" col-span-12 text-center mb-5 mt-3">
           <h1>{title.title}</h1>

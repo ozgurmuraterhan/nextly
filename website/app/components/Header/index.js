@@ -97,13 +97,13 @@ const Default = () => {
         {stateisAuthenticated ? (
           <>
             <Link href="/profile">
-              <a className="p-2 float-left">
+              <span className="p-2 float-left cursor-pointer">
                 <UserOutlined />
                 <span className="hidden md:inline "> Profile</span>
-              </a>
+              </span>
             </Link>
-            <a
-              className="p-2 float-left"
+            <span
+              className="p-2 float-left cursor-pointer"
               onClick={async () => {
                 await AuthService.logout();
                 await dispatch(logout_r());
@@ -113,23 +113,23 @@ const Default = () => {
             >
               <LogoutOutlined />
               <span className="hidden md:inline  "> Logout </span>
-            </a>
+            </span>
           </>
         ) : (
           <>
-            <a
-              className="p-2 float-left"
+            <span
+              className="p-2 float-left cursor-pointer"
               onClick={() => seTopenModalLogin(true)}
             >
               <LoginOutlined /> <span className="hidden md:inline ">Login</span>
-            </a>
-            <a
-              className="p-2 float-left"
+            </span>
+            <span
+              className="p-2 float-left cursor-pointer"
               onClick={() => seTopenModalSignup(true)}
             >
               <UserAddOutlined />{" "}
               <span className="hidden md:inline ">Sign Up</span>
-            </a>
+            </span>
           </>
         )}
         <Link href="/basket">
