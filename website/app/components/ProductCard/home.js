@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Price from "../Price";
 import { Button } from "antd";
 import { IMG_URL } from "../../../../config";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import Image from "next/image";
 
 const Default = ({ data = null, className }) => {
   const { settings } = useSelector(({ settings }) => settings);
@@ -39,7 +39,8 @@ const Default = ({ data = null, className }) => {
                   : Number(func.getDiscount(data)).toFixed(0) + "%"}{" "}
                 discount
               </span>
-              <LazyLoadImage
+              <Image
+                loader={({ src }) => src}
                 className="w-full bg-cover bg-center  rounded-l-lg "
                 src={img}
                 width="143"

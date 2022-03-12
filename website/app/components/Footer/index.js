@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Divider } from "antd";
 import Link from "next/link";
 import { IMG_URL } from "../../../../config";
-
+import Image from "next/image"
 const Default = ({ footerMenu }) => {
   const { settings } = useSelector(({ settings }) => settings);
 
@@ -10,10 +10,10 @@ const Default = ({ footerMenu }) => {
     <div className="bg-black py-10">
       <div className=" container-custom grid grid-cols-12">
         <div className="md:col-span-3 order-12  md:order-1  sm:py-0 py-5 col-span-12 !text-white">
-          <img src={`${IMG_URL + settings.image}`} className="invert w-32 " width="128" height="31" alt="Logo" />
+          <Image loader={({ src }) => src} src={`${IMG_URL + settings.image}`} className="invert w-32 " width="128" height="31" alt="Logo" />
           <h4 className="text-white text-lg mt-2">{settings.company}</h4>
           <p>{settings.description}</p>
-          <img className="mt-5 w-full" src="/images/stripepayfooter.png" width="305" height="97" alt="stripe payment" />
+          <Image className="mt-5 w-full" src="/images/stripepayfooter.png" width="305" height="97" alt="stripe payment" />
         </div>
 
         <ul className=" grid grid-cols-2 md:grid-cols-4 col-span-12  sm:col-span-9 ml-0 sm:ml-20 order-1 md:order-5  ">

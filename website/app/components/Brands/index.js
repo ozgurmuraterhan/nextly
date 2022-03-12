@@ -3,6 +3,7 @@ import SwiperCore, { Navigation, Pagination, History } from "swiper";
 import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import Image from "next/image"
 import { IMG_URL } from "../../../../config";
 
 SwiperCore.use([Navigation, Pagination, History]);
@@ -54,7 +55,13 @@ const Default = () => {
               <div className="item">
                 <Link href={`/search?brands=${val._id}`}>
                   <a>
-                    <img src={`${IMG_URL + val.image}`} width="66" height="66" alt={val.title} />
+                    <Image
+                      loader={({ src }) => src}
+                      src={`${IMG_URL + val.image}`}
+                      width="66"
+                      height="66"
+                      alt={val.title}
+                    />
                     <span> {val.title}</span>
                   </a>
                 </Link>

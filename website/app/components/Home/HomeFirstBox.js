@@ -1,5 +1,5 @@
 import React from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import Image from "next/image";
 import SwiperCore, { Navigation, Thumbs } from "swiper";
 
 SwiperCore.use([Navigation, Thumbs]);
@@ -27,9 +27,13 @@ const Default = ({ state = [] }) => {
                   <a className="itemzoom">
                     <div className="w-100 position-relative h-100">
                       <div className="text">{val.title}</div>
-                      <LazyLoadImage
+                      <Image
+                        loader={({ src }) => src}
                         src={`${IMG_URL + val.image}`}
                         className="w-full h-full"
+                        width="390"
+                        height="390"
+                        alt={val.title}
                       />
                     </div>
                   </a>
@@ -54,7 +58,7 @@ const Default = ({ state = [] }) => {
                   <a className="itemzoom">
                     <div className="w-100 position-relative h-100">
                       <div className="text">{val.title}</div>
-                      <LazyLoadImage src={`${IMG_URL + val.image}`} width="390" height="390" className="w-full h-full" alt={val.title} />
+                      <Image loader={({ src }) => src} src={`${IMG_URL + val.image}`} width="390" height="390" className="w-full h-full" alt={val.title} />
                     </div>
                   </a>
                 </Link>

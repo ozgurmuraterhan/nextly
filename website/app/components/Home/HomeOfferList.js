@@ -1,4 +1,4 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import Image from "next/image";
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Thumbs, Autoplay } from "swiper";
 
@@ -21,7 +21,8 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
           <div key={val._id}>
             <Link href={val.link + "/"}>
               <a className="itemzoom mb-3">
-                <LazyLoadImage
+                <Image
+                  loader={({ src }) => src}
                   src={`${IMG_URL + val.image}`}
                   className="w-full h-full"
                   height="168"

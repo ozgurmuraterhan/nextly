@@ -5,7 +5,7 @@ import Price from "../Price";
 import { Button } from "antd";
 import { SwapRightOutlined } from "@ant-design/icons";
 import { IMG_URL } from "../../../../config";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import Image from "next/image";
 
 const Default = ({ data = null, className }) => {
   const { settings } = useSelector(({ settings }) => settings);
@@ -44,7 +44,7 @@ const Default = ({ data = null, className }) => {
                 discount
               </span>
 
-              <LazyLoadImage
+              <Image
                 className="w-full h-full bg-center rounded-t-lg "
                 src={img}
                 width="220"

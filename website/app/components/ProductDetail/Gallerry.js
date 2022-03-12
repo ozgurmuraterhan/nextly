@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Thumbs, Autoplay } from "swiper";
-
+import Image from "next/image"
 // install Swiper modules
 SwiperCore.use([Navigation, Thumbs, Autoplay]);
 import "swiper/css";
@@ -36,7 +36,7 @@ const Default = ({ images = [] }) => {
         {state.map((val) => (
           <SwiperSlide key={val.image}>
             <div className="item">
-              <img src={IMG_URL + val.image} width="500" height="500" alt=" " className="w-full h-full" />
+              <Image loader={({ src }) => src} src={IMG_URL + val.image} width="500" height="500" alt=" " className="w-full h-full" />
             </div>
           </SwiperSlide>
         ))}

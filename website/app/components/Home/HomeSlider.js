@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import Image from "next/image"
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Thumbs, Autoplay } from "swiper";
 
@@ -13,7 +14,9 @@ import { IMG_URL } from "../../../../config";
 
 const Default = ({ state = [] }) => {
   useEffect(() => { }, []);
-
+  const myLoader = ({ src, width, quality }) => {
+    return `${src}`
+  }
   return (
     <div className="position-relative float-left homeSliderReslative">
       <div className="position-absolute w-full  ">
@@ -39,8 +42,9 @@ const Default = ({ state = [] }) => {
               <div className="item">
                 <Link href={val.link}>
                   <a>
-                    <LazyLoadImage
+                    <Image
                       src={`${IMG_URL + val.image}`}
+                      loader={({ src }) => src}
                       height="500"
                       width="1680"
                       style={{ width: "100%" }}

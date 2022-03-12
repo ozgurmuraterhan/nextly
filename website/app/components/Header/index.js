@@ -7,6 +7,7 @@ import router from "next/router";
 import Link from "next/link";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import Image from "next/image"
 import {
   UserOutlined,
   ShoppingCartOutlined,
@@ -73,7 +74,8 @@ const Default = () => {
     <div className="w-full flex justify-between mb-3 ">
       <div className=" w-3/12 mr-3 md:w-2/12 md:mr-0  mt-4 md:mt-2 lg:mt-3">
         <a href="/">
-          <img
+          <Image
+            loader={({ src }) => src}
             src={`${IMG_URL + settings.image}`}
             width="169"
             height="44"
