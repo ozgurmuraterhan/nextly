@@ -11,7 +11,7 @@ const Default = ({ topmenu, socialmedia }) => {
   }, []);
 
   return (
-    <div className="float-left w-full">
+    <div className="float-left w-full ">
       <ul className="topmenu float-left">
         {stateTopmenu &&
           stateTopmenu.map((val) => (

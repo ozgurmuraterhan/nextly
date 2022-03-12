@@ -11,7 +11,6 @@ import { useRouter } from "next/router";
 import AuthService from "../../../util/services/authservice";
 import axios from "axios";
 import func from "../../../util/helpers/func";
-
 import dynamic from 'next/dynamic'
 
 const CategoriesMenu = dynamic(() => import("../../components/CategoriesMenu"));
@@ -67,19 +66,23 @@ const AppLayout = ({ children }) => {
     children
   ) : (
     <>
-      <CircularProgress className={!isLoaded ? "visible" : "hidden"} />
+      {/* <CircularProgress className={!isLoaded ? "visible" : "hidden"} /> */}
       <Layout>
         <div className="border-b bg-white">
           <div className=" container-custom   ">
-            <TopMenu
-              socialmedia={func.getCategoriesTree(
-                topmenu,
-                "614b8cc75c153bab76bdf681"
-              )}
-              topmenu={func.getCategoriesTree(topmenu)}
-            />
+            <div className="h-7">
+              <TopMenu
+                socialmedia={func.getCategoriesTree(
+                  topmenu,
+                  "614b8cc75c153bab76bdf681"
+                )}
+                topmenu={func.getCategoriesTree(topmenu)}
+              />
+            </div>
             <Header />
-            <CategoriesMenu />
+            <div className="h-11">
+              <CategoriesMenu />
+            </div>
           </div>
         </div>
         <div className="min-h-screen">
