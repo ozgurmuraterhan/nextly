@@ -4,7 +4,7 @@ import rootReducer from "./reducers/index";
 import { HYDRATE, createWrapper } from "next-redux-wrapper";
 
 const bindMiddleware = (middleware) => {
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV == 'development') {
     const { composeWithDevTools } = require("redux-devtools-extension");
     return composeWithDevTools(applyMiddleware(...middleware));
   }
