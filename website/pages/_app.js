@@ -1,9 +1,8 @@
 import { wrapper } from "../redux/store";
 
 import "../public/loader.css";
-import "../public/css/ant-custom.css";
 import "../public/global.scss";
-
+import "../public/css/ant-custom.css";
 
 
 import LocaleProvider from "../app/core/LocaleProvider";
