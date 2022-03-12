@@ -29,9 +29,9 @@ const Default = ({ data = null, className }) => {
       <div className=" relative float-left h-full cursor-pointer ">
         <Link href={"/product/" + data.seo}>
           <div className="w-full float-left">
-            <div className="w-5/12 float-left relative ">
+            <div className="w-5/12 float-left relative   flex ">
               <span
-                className={`${func.getDiscount(data) ? "visible" : "invisible"
+                className={`${func.getDiscount(data) ? "visible" : "hidden"
                   } absolute z-10 top-0 mt-2 text-xs float-left py-1 px-2 bg-red-500 text-white`}
               >
                 {settings.price_type
@@ -41,7 +41,7 @@ const Default = ({ data = null, className }) => {
               </span>
               <Image
                 loader={({ src }) => src}
-                className="w-full bg-cover bg-center  rounded-l-lg "
+                className="w-full bg-cover bg-center rounded-l-lg block "
                 src={img}
                 width="143"
                 height="143"

@@ -52,7 +52,7 @@ const Default = () => {
         >
           {brands.map((val) => (
             <SwiperSlide key={val.title}>
-              <div className="item">
+              <div className="item text-center">
                 <Link href={`/search?brands=${val._id}`}>
                   <a>
                     <Image
@@ -62,6 +62,7 @@ const Default = () => {
                       height="68"
                       priority
                       alt={val.title}
+                      className="mx-auto"
                     />
                     <span> {val.title}</span>
                   </a>

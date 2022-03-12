@@ -48,7 +48,7 @@ const Default = ({ state = [] }) => {
                       priority
                       height="500"
                       width="1680"
-                      style={{ width: "100%" }}
+                      className="w-full"
                       alt={val.title + "."}
                     />
                   </a>

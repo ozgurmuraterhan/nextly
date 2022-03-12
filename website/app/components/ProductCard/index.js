@@ -33,9 +33,9 @@ const Default = ({ data = null, className }) => {
       <div className="  relative cursor-pointer ">
         <Link href={"/product/" + data.seo}>
           <div className="w-full">
-            <div className="w-full relative">
+            <div className="w-full relative text-center">
               <span
-                className={`${func.getDiscount(data) ? "visible" : "invisible"
+                className={`${func.getDiscount(data) ? "visible" : "hidden"
                   } absolute z-10 top-0 mt-2 text-xs float-right py-1 px-2 bg-red-500 text-white`}
               >
                 {settings.price_type
@@ -45,11 +45,13 @@ const Default = ({ data = null, className }) => {
               </span>
 
               <Image
-                className="w-full h-full bg-center rounded-t-lg "
+                loader={({ src }) => src}
                 src={img}
                 width="220"
                 height="220"
                 alt={data.title}
+                className="!w-full !h-full bg-center rounded-t-lg "
+
               />
 
               <ul className="product-links">
