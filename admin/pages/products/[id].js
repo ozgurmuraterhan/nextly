@@ -538,10 +538,9 @@ const Default = ({ getCategories = [], getData = [] }) => {
                           <div className="float-left" key={j}>
                             <div className="float-left w-full">
                               <h5 className="float-left text-xl pr-2">
-                                {" "}
                                 {j == 0
                                   ? intl.messages["app.pages.common.variants"]
-                                  : ""}{" "}
+                                  : ""}
                               </h5>
                               {field2.display == true ? (
                                 ""
@@ -567,7 +566,7 @@ const Default = ({ getCategories = [], getData = [] }) => {
                                   required: true,
                                   message:
                                     intl.messages[
-                                      "app.pages.common.pleaseFill"
+                                    "app.pages.common.pleaseFill"
                                     ],
                                 },
                               ]}
@@ -640,6 +639,7 @@ const Default = ({ getCategories = [], getData = [] }) => {
                           name="visible"
                           label={intl.messages["app.pages.common.visible"]}
                           className="float-left w-full  mx-0 px-0"
+                          initialValue={true}
                         >
                           <Select
                             className=" !w-1/5"

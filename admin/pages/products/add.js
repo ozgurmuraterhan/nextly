@@ -544,7 +544,7 @@ const Default = ({ getCategories = [] }) => {
                                   required: true,
                                   message:
                                     intl.messages[
-                                      "app.pages.common.pleaseFill"
+                                    "app.pages.common.pleaseFill"
                                     ],
                                 },
                               ]}
@@ -617,10 +617,10 @@ const Default = ({ getCategories = [] }) => {
                           name="visible"
                           label={intl.messages["app.pages.common.visible"]}
                           className="float-left w-full  mx-0 px-0"
+                          initialValue={true}
                         >
                           <Select
                             className=" !w-1/5"
-                            defaultValue={true}
                             options={[
                               {
                                 label:
@@ -695,6 +695,7 @@ const Default = ({ getCategories = [] }) => {
           >
             <Select
               style={{ width: "100%" }}
+
               options={[
                 {
                   label: intl.messages["app.pages.common.beActive"],
