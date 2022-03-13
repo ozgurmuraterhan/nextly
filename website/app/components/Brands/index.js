@@ -34,10 +34,10 @@ const Default = () => {
           }}
           breakpoints={{
             340: {
-              slidesPerView: 3,
+              slidesPerView: 4,
             },
             640: {
-              slidesPerView: 4,
+              slidesPerView: 5,
             },
             768: {
               slidesPerView: 7,
