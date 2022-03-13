@@ -42,7 +42,6 @@ const Page = ({ data = {} }) => {
       });
       return (
         <span>
-          {" "}
           <Price data={newData[0].price} /> -{" "}
           <Price data={newData[data.length - 1].price} />{" "}
         </span>

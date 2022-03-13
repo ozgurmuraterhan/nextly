@@ -12,7 +12,7 @@ import "swiper/css/thumbs";
 import { IMG_URL } from "../../../../config";
 
 const Default = ({ images = [] }) => {
-  const state = images;
+  const state = images.sort((a, b) => a.order - b.order);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   useEffect(() => { }, []);
