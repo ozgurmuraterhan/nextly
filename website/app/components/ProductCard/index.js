@@ -51,7 +51,9 @@ const Default = ({ data = null, className }) => {
                 height="220"
                 alt={data.title}
               />
-
+              <Button className="w-full   font-bold p-0   group-hover:!text-black group-hover:!bg-white  border-0 shadow-none absolute transition-all overflow-hidden -mt-5  z-0 group-hover:-mt-8 rounded-none group-hover:visible   invisible">
+                Details <SwapRightOutlined />
+              </Button>
               <ul className="product-links">
                 {/* <li><a href="#" data-tip="Add to Wishlist"><HeartOutlined /></a></li> 
                   <li><a href="#" data-tip="Quick View"><EyeOutlined /></a></li>
@@ -93,9 +95,6 @@ const Default = ({ data = null, className }) => {
                   )}
                 </span>
               </div>
-              <Button className="w-full border-0 bg-transparent font-bold rounded-lg p-0  shadow-none absolute overflow-hidden -mt-5  z-0 group-hover:mt-0 group-hover:visible group-hover:text-brand-color invisible">
-                Details <SwapRightOutlined />
-              </Button>
             </div>
           </div>
         </Link>
