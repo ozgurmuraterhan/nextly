@@ -32,7 +32,7 @@ const Default = ({ data = null, className }) => {
             <div className="w-5/12 float-left relative ">
               <span
                 className={`${func.getDiscount(data) ? "visible" : "invisible"
-                  } absolute z-10 top-0 mt-2 text-xs float-left py-1 px-2 bg-red-500 text-white`}
+                  } absolute z-10 top-0 mt-2 text-xs float-left py-1 px-2 bg-red-600 text-white`}
               >
                 {settings.price_type
                   ? "%" + Number(func.getDiscount(data)).toFixed(0)
