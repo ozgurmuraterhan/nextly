@@ -29,10 +29,9 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                   width="288"
                   alt={val.title + " "}
                 />
-                <div className="w-full text-center mt-3">{val.title}</div>
-                <div className="w-full text-center my-2 h-5">
-                  {" "}
-                  {val.description}{" "}
+                <div className="w-full text-center mt-3 font-bold">{val.title}</div>
+                <div className="w-full text-center my-2 h-5 font-semibold">
+                  {val.description}
                 </div>
               </a>
             </Link>
