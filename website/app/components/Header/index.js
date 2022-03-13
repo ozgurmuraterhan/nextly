@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import AuthService from "../../../util/services/authservice";
 import { useDispatch, useSelector } from "react-redux";
 import { login_r, isAuthenticated_r, logout_r } from "../../../redux/actions";
-import { Input, Modal, Form, message } from "antd";
+import { Input, Modal, Form, message, Badge } from "antd";
 import router from "next/router";
 import Link from "next/link";
 import LoginForm from "./LoginForm";
@@ -140,13 +140,15 @@ const Default = () => {
           </>
         )}
         <Link href="/basket">
-          <a className="p-2 float-left">
+          <a className="p-2 float-left relative">
             {basket.length > 0 ? (
-              <div className="relative float-left w-0 h-full pt-0.5 pl-0.5 -mr-0.5">
+              <div className=" float-left w-0 h-full pt-0.5 pl-0.5 -mr-0.5">
                 {basket[0].products.length > 0 ? (
                   <>
-                    <div className="  rounded-full  bg-black  absolute w-1 animate-ping h-1 -ml-1 mt-2" />
-                    <div className=" rounded-full  bg-black absolute w-1 h-1 -ml-1 mt-2  opacity-50" />
+                    <div className="  rounded-full    absolute w-1 h-1 right-2 -top-1" >
+                      <Badge size="small" count={basket[0].products.length}>
+                      </Badge>
+                    </div>
                   </>
                 ) : (
                   ""
@@ -157,7 +159,6 @@ const Default = () => {
             )}
 
             <ShoppingCartOutlined />
-
             <span className="hidden md:inline "> Basket</span>
           </a>
         </Link>

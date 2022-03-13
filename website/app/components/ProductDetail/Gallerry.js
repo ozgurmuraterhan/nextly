@@ -31,7 +31,7 @@ const Default = ({ images = [] }) => {
           delay: 15000,
           disableOnInteraction: false,
         }}
-        className="w-full mb-1"
+        className="w-full mb-1 text-center"
       >
         {state.map((val) => (
           <SwiperSlide key={val.image}>

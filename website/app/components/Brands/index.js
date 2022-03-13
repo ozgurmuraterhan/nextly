@@ -42,10 +42,10 @@ const Default = () => {
               slidesPerView: 7,
             },
             1024: {
-              slidesPerView: 10,
+              slidesPerView: 8,
             },
             1224: {
-              slidesPerView: 10,
+              slidesPerView: 8,
             },
           }}
           className="brands-slider"

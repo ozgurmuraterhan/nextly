@@ -1,10 +1,11 @@
 import { useDispatch } from "react-redux";
 import { message, Button } from "antd";
-import { ShoppingCartOutlined, LoadingOutlined } from "@ant-design/icons";
+import { ShoppingCartOutlined, LoadingOutlined, CreditCardOutlined } from "@ant-design/icons";
 import { updateBasket_r } from "../../../redux/actions";
 import axios from "axios";
 import { API_URL } from "../../../../config";
 
+import { useRouter } from "next/router";
 const Page = ({
   form,
   disabledVariant = true,
@@ -19,6 +20,7 @@ const Page = ({
 }) => {
   const dispatch = useDispatch();
   // const seo = router.query.seo
+  const router = useRouter();
 
   const addBasket = (res) => {
     if (basket.length < 1) {
@@ -152,29 +154,59 @@ const Page = ({
   };
 
   return (
-    <Button
-      type="primary"
-      className="  w-full border-brand-color bg-brand-color text-2xl h-auto"
-      disabled={!disabledVariant}
-      onClick={() => {
-        form
-          .validateFields()
-          .then((res) => {
-            seTloadingButton(false);
-            if (loadingButton) {
-              addBasket(res);
-            }
-          })
-          .catch((err) => console.log("err", err));
-      }}
-    >
-      Add Cart
-      {loadingButton ? (
-        <ShoppingCartOutlined />
-      ) : (
-        <LoadingOutlined className="animate-spin h-5 w-5 mr-3  " />
-      )}
-    </Button>
+    <div className=" gap-4 xl:flex lg:grid">
+
+
+      <Button
+        type="primary"
+        className=" xl:w-8/12 w-full border-black bg-black text-2xl h-auto hover:bg-white hover:border-black hover:text-black"
+        disabled={!disabledVariant}
+        onClick={() => {
+          form
+            .validateFields()
+            .then((res) => {
+              seTloadingButton(false);
+              if (loadingButton) {
+                addBasket(res);
+                router.push("/basket")
+              }
+            })
+            .catch((err) => console.log("err", err));
+        }}
+      >
+        Buy Now
+        {loadingButton ? (
+          <CreditCardOutlined />
+        ) : (
+          <LoadingOutlined className="animate-spin h-5 w-5 mr-3  " />
+        )}
+      </Button>
+
+      <Button
+        type="primary"
+        className="  xl:w-4/12 w-full border-brand-color bg-brand-color text-2xl h-auto  hover:bg-white hover:border-brand-color hover:text-brand-color"
+        disabled={!disabledVariant}
+        onClick={() => {
+          form
+            .validateFields()
+            .then((res) => {
+              seTloadingButton(false);
+              if (loadingButton) {
+                addBasket(res);
+              }
+            })
+            .catch((err) => console.log("err", err));
+        }}
+      >
+        Add to Basket
+        {loadingButton ? (
+          <ShoppingCartOutlined />
+        ) : (
+          <LoadingOutlined className="animate-spin h-5 w-5 mr-3  " />
+        )}
+      </Button>
+    </div>
+
   );
 };
 

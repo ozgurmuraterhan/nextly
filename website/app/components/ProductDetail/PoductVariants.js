@@ -51,7 +51,7 @@ const Page = ({ data = {} }) => {
   };
 
   return (
-    <div className="px-10">
+    <div className="lg:pl-10 px-2">
       <h2 className="font-semibold   mt-5">{state.title}</h2>
       <h3 className="text-gray-500">{state.description_short}</h3>
       <div className="my-4 w-full">

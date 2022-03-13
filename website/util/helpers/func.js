@@ -90,10 +90,10 @@ export default {
       obj = Array.isArray(obj)
         ? obj.map(clean).filter((v) => v !== undefined)
         : Object.fromEntries(
-            Object.entries(obj)
-              .map(([k, v]) => [k, clean(v)])
-              .filter(([_, v]) => v !== undefined)
-          );
+          Object.entries(obj)
+            .map(([k, v]) => [k, clean(v)])
+            .filter(([_, v]) => v !== undefined)
+        );
       return Object.keys(obj).length ? obj : undefined;
     };
     return clean(nest(data));
@@ -116,7 +116,9 @@ export default {
           children: nest(items, item._id),
           disabled:
             nest(items, item._id).length > 0 && option === true ? true : false,
-        }));
+        })).sort(function (a, b) {
+          return a.order - b.order;
+        });
     };
 
     const clean = (obj) => {
@@ -124,10 +126,10 @@ export default {
       obj = Array.isArray(obj)
         ? obj.map(clean).filter((v) => v !== undefined)
         : Object.fromEntries(
-            Object.entries(obj)
-              .map(([k, v]) => [k, clean(v)])
-              .filter(([_, v]) => v !== undefined)
-          );
+          Object.entries(obj)
+            .map(([k, v]) => [k, clean(v)])
+            .filter(([_, v]) => v !== undefined)
+        );
       return Object.keys(obj).length ? obj : undefined;
     };
 
