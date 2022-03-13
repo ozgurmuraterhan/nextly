@@ -44,8 +44,15 @@ const Default = ({ data = null, className }) => {
                 discount
               </span>
 
+              <LazyLoadImage
+                className="w-full h-full bg-center rounded-t-lg sm:hidden block"
+                src={img}
+                width="220"
+                height="220"
+                alt={data.title}
+              />
               <img
-                className="w-full h-full bg-center rounded-t-lg "
+                className="w-full h-full bg-center rounded-t-lg sm:block hidden"
                 src={img}
                 width="220"
                 height="220"

@@ -65,7 +65,7 @@ const Default = () => {
                       alt={val.title}
                       className="mx-auto"
                     />
-                    <span className="!-mt-0.5 w-full float-left"> {val.title}</span>
+                    <span className="!mt-0 w-full float-left"> {val.title}</span>
                   </a>
                 </Link>
               </div>
