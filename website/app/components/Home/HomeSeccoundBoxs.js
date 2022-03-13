@@ -30,7 +30,7 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                 }}
 
                 autoplay={{
-                  delay: 300000,
+                  delay: 4000,
                   disableOnInteraction: true,
                 }}
                 breakpoints={{

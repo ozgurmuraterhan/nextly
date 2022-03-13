@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Thumbs, Autoplay } from "swiper";
+import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons"
 
 // install Swiper modules
 SwiperCore.use([Navigation, Thumbs, Autoplay]);
@@ -15,19 +16,24 @@ const Default = ({ state = [] }) => {
   useEffect(() => { }, []);
 
   return (
-    <div className="position-relative float-left homeSliderReslative">
+    <div className=" relative float-left homeSliderReslative">
       <div className="position-absolute w-full  ">
 
-
+        <div className="slider-arrow-left absolute z-40 left-2  top-1/2">
+          <DoubleLeftOutlined />
+        </div>
+        <div className="slider-arrow-right absolute z-40 right-2  top-1/2">
+          <DoubleRightOutlined />
+        </div>
 
         <Swiper
-          style={{
-            "--swiper-navigation-color": "#000",
-            "--swiper-pagination-color": "#000",
-          }}
 
           spaceBetween={0}
-          navigation={true}
+          navigation={{
+            prevEl: ".slider-arrow-left",
+            nextEl: ".slider-arrow-right",
+          }}
+
           autoplay={{
             delay: 15000,
             disableOnInteraction: false,

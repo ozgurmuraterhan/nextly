@@ -27,6 +27,7 @@ const Default = () => {
           slidesPerView={1}
           spaceBetween={10}
           pagination={false}
+
           navigation={{
             prevEl: ".top-brands-arrow-left",
             nextEl: ".top-brands-arrow-right",
