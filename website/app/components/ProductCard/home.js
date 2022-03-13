@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Price from "../Price";
 import { Button } from "antd";
 import { IMG_URL } from "../../../../config";
-import Image from "next/image";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Default = ({ data = null, className }) => {
   const { settings } = useSelector(({ settings }) => settings);
@@ -29,9 +29,9 @@ const Default = ({ data = null, className }) => {
       <div className=" relative float-left h-full cursor-pointer ">
         <Link href={"/product/" + data.seo}>
           <div className="w-full float-left">
-            <div className="w-5/12 float-left relative   flex ">
+            <div className="w-5/12 float-left relative ">
               <span
-                className={`${func.getDiscount(data) ? "visible" : "hidden"
+                className={`${func.getDiscount(data) ? "visible" : "invisible"
                   } absolute z-10 top-0 mt-2 text-xs float-left py-1 px-2 bg-red-500 text-white`}
               >
                 {settings.price_type
@@ -39,9 +39,8 @@ const Default = ({ data = null, className }) => {
                   : Number(func.getDiscount(data)).toFixed(0) + "%"}{" "}
                 discount
               </span>
-              <Image
-                loader={({ src }) => src}
-                className="w-full bg-cover bg-center rounded-l-lg block "
+              <LazyLoadImage
+                className="w-full bg-cover bg-center  rounded-l-lg "
                 src={img}
                 width="143"
                 height="143"

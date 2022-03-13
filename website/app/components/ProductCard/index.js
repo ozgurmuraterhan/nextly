@@ -5,7 +5,7 @@ import Price from "../Price";
 import { Button } from "antd";
 import { SwapRightOutlined } from "@ant-design/icons";
 import { IMG_URL } from "../../../../config";
-import Image from "next/image";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Default = ({ data = null, className }) => {
   const { settings } = useSelector(({ settings }) => settings);
@@ -33,9 +33,9 @@ const Default = ({ data = null, className }) => {
       <div className="  relative cursor-pointer ">
         <Link href={"/product/" + data.seo}>
           <div className="w-full">
-            <div className="w-full relative text-center">
+            <div className="w-full relative">
               <span
-                className={`${func.getDiscount(data) ? "visible" : "hidden"
+                className={`${func.getDiscount(data) ? "visible" : "invisible"
                   } absolute z-10 top-0 mt-2 text-xs float-right py-1 px-2 bg-red-500 text-white`}
               >
                 {settings.price_type
@@ -44,14 +44,12 @@ const Default = ({ data = null, className }) => {
                 discount
               </span>
 
-              <Image
-                loader={({ src }) => src}
+              <LazyLoadImage
+                className="w-full h-full bg-center rounded-t-lg "
                 src={img}
                 width="220"
                 height="220"
                 alt={data.title}
-                className="!w-full !h-full bg-center rounded-t-lg "
-
               />
 
               <ul className="product-links">
