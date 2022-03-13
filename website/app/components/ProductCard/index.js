@@ -36,7 +36,7 @@ const Default = ({ data = null, className }) => {
             <div className="w-full relative">
               <span
                 className={`${func.getDiscount(data) ? "visible" : "invisible"
-                  } absolute z-10 top-0 mt-2 text-xs float-right py-1 px-2 bg-red-800 text-white`}
+                  } absolute z-10 top-0 mt-2 text-xs float-right py-1 px-2 bg-red-600 text-white`}
               >
                 {settings.price_type
                   ? "%" + Number(func.getDiscount(data)).toFixed(0)
@@ -68,7 +68,7 @@ const Default = ({ data = null, className }) => {
                       <li className="far fa-star"></li>
                   </ul> 
               */}
-              <h3 className="w-full text-center font-semibold h-11 overflow-hidden px-1 mt-2 text-brand-color ">
+              <h3 className="w-full text-center font-semibold h-11 overflow-hidden px-1 mt-2 text-black font-bold ">
                 {data.title}
               </h3>
               <div className=" text-center text-md h-12 z-10 relative ">
