@@ -13,8 +13,8 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
   return (
     <div className=" container-custom  ">
       <div className="w-full text-center float-left   mb-5 mt-3">
-        <h2>{title.title}</h2>
-        <h6>{title.description}</h6>
+        <h2>{title.title} </h2>
+        <h3 className="text-lg	">{title.description} </h3>
       </div>
       <div className=" w-full gap-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {state.map((val) => (
