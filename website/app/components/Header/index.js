@@ -16,6 +16,8 @@ import {
 } from "@ant-design/icons";
 import { API_URL, IMG_URL } from "../../../../config";
 import axios from "axios";
+import { checkCookies, removeCookies, setCookies } from 'cookies-next';
+
 
 const Default = () => {
   const [form] = Form.useForm();
@@ -29,6 +31,7 @@ const Default = () => {
   const [stateisAuthenticated, seTstateisAuthenticated] = useState(false);
 
   const dispatch = useDispatch();
+
 
   const onSubmitSignup = (Data) => {
     Data["username"] = Data.username.toLowerCase();
@@ -57,6 +60,7 @@ const Default = () => {
         message.success("Login Successfully");
         seTopenModalLogin(false);
         seTopenModalSignup(false);
+        setCookies('isuser', true);
       } else {
         message.error("Login not Successfully");
       }
@@ -67,6 +71,8 @@ const Default = () => {
     if (isAuthenticated) {
       seTstateisAuthenticated(isAuthenticated);
     }
+
+
   }, [isAuthenticated]);
 
   return (
@@ -108,6 +114,7 @@ const Default = () => {
                 await AuthService.logout();
                 await dispatch(logout_r());
                 seTstateisAuthenticated(false);
+                removeCookies('isuser');
                 router.push("/");
               }}
             >

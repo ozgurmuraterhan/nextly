@@ -14,8 +14,10 @@ import {
 } from "../redux/actions";
 
 
+
 const HomeApp = (props) => {
   const { Component, pageProps } = props;
+
   return (
     <>
       <LocaleProvider>
@@ -33,5 +35,7 @@ HomeApp.getInitialProps = wrapper.getInitialPageProps((store) => async () => {
   await store.dispatch(getCategories_r());
   await store.dispatch(getTopmenu_r());
 });
+
+
 
 export default wrapper.withRedux(HomeApp);

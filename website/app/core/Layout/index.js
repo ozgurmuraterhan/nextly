@@ -12,11 +12,16 @@ import AuthService from "../../../util/services/authservice";
 import axios from "axios";
 import func from "../../../util/helpers/func";
 import dynamic from 'next/dynamic'
+import Cookies from 'js-cookie';
 
 const CategoriesMenu = dynamic(() => import("../../components/CategoriesMenu"));
 const TopMenu = dynamic(() => import("../../components/TopMenu"));
 const Footer = dynamic(() => import("../../components/Footer"));
 const Header = dynamic(() => import("../../components/Header"));
+
+import { checkCookies, removeCookies, setCookies } from 'cookies-next';
+const haveCookie = checkCookies("isuser");
+
 
 
 axios.defaults.withCredentials = true;
@@ -53,9 +58,15 @@ const AppLayout = ({ children }) => {
     }
   };
 
+
+
   useEffect(() => {
-    loginControl();
+    if (haveCookie) {
+      loginControl();
+    }
     fetchError();
+
+
   }, [isAuthenticated]);
 
   const isUnRestrictedRoute = (pathname) => {

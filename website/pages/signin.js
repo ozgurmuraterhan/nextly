@@ -6,6 +6,7 @@ import { API_URL } from "../../config";
 import { useDispatch, useSelector } from "react-redux";
 import Router from "next/router";
 import AuthService from "../util/services/authservice";
+import { checkCookies, removeCookies, setCookies } from 'cookies-next';
 
 import dynamic from 'next/dynamic'
 
@@ -54,6 +55,7 @@ const SignInPage = () => {
         dispatch(isAuthenticated_r(true));
         Router.push("/");
         message.success("Login Successfully");
+        setCookies('isuser', true);
         handleCancelLogin();
       } else {
         message.error("Login not Successfully");
