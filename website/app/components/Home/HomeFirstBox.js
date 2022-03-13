@@ -13,11 +13,11 @@ const Default = ({ state = [] }) => {
     " w-8/12 md:w-4/12",
     " w-4/12 md:w-2/12",
     " w-full md:w-4/12",
-    " w-6/12 md:w-2/12",
-    " w-6/12 md:w-6/12",
+    " w-6/12 md:w-2/12 md:block hidden",
+    " w-6/12 md:w-6/12 md:block hidden",
   ];
   return (
-    <div className=" container-custom my-5 py-5 ">
+    <div className=" container-custom  mb-5 ">
       <div className="row homeFirsBoxs">
         {state.map((val, i) => (
           <React.Fragment key={val._id}>

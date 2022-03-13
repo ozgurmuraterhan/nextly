@@ -11,7 +11,7 @@ import { IMG_URL } from "../../../../config";
 
 const Default = ({ state = [], title = { title: "", description: "" } }) => {
   return (
-    <div className=" container-custom py-5 ">
+    <div className=" container-custom  ">
       <div className="w-full text-center float-left   mb-5 mt-3">
         <h2>{title.title}</h2>
         <h6>{title.description}</h6>

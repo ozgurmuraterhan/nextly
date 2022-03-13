@@ -13,7 +13,7 @@ const Default = () => {
   const { brands } = useSelector(({ brands }) => brands);
 
   return (
-    <div className="container-custom  relative  mt-3 h-28">
+    <div className="container-custom  relative mt-4 h-28">
       <div className="position-absolute container px-xs-0">
         <div className="top-brands-arrow-left">
           <DoubleLeftOutlined />
@@ -33,7 +33,7 @@ const Default = () => {
           }}
           breakpoints={{
             340: {
-              slidesPerView: 4,
+              slidesPerView: 3,
             },
             640: {
               slidesPerView: 4,
@@ -64,7 +64,7 @@ const Default = () => {
                       alt={val.title}
                       className="mx-auto"
                     />
-                    <span> {val.title}</span>
+                    <span className="!-mt-0.5 w-full float-left"> {val.title}</span>
                   </a>
                 </Link>
               </div>
