@@ -40,7 +40,7 @@ const Default = ({ data = null, className }) => {
                 discount
               </span>
               <LazyLoadImage
-                className="w-full bg-cover bg-center  rounded-l-lg "
+                className="w-full bg-cover bg-center  rounded-l-lg group-hover:scale-110 transition-all"
                 src={img}
                 width="143"
                 height="143"

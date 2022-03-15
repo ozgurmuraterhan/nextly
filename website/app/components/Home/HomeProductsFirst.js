@@ -2,8 +2,8 @@ import ProductCard from "../../components/ProductCard/";
 
 const Default = ({ state = [], title = { title: "", description: "" } }) => {
   return (
-    <div className="bg-gray-50 w-full  ">
-      <div className=" container-custom py-5 grid grid-cols-12">
+    <div className="bg-gray-50 w-full ">
+      <div className=" container-custom py-10 grid grid-cols-12">
         <div className=" col-span-12 text-center mb-5 ">
           <h1>{title.title}</h1>
           <h2 className="text-lg	">{title.description}</h2>
@@ -14,7 +14,7 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
               <div key={i}>
                 <ProductCard
                   data={data}
-                  className="ounded-lg rounded-lg m-2 sm:m-3 bg-white  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl pb-0 "
+                  className="ounded-lg rounded-lg m-2 sm:m-3 bg-white  group  overflow-hidden  shadow-sm hover:shadow-xl pb-0 "
                 />
               </div>
             ))}

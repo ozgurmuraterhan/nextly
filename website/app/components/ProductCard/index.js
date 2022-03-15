@@ -18,7 +18,6 @@ const Default = ({ data = null, className }) => {
       });
       return (
         <span>
-          {" "}
           <Price data={newData[0].price} /> -{" "}
           <Price data={newData[data.length - 1].price} />{" "}
         </span>
@@ -44,13 +43,13 @@ const Default = ({ data = null, className }) => {
                 discount
               </span>
               <img
-                className="w-full h-full bg-center rounded-t-lg "
+                className="w-full h-full bg-center rounded-t-lg group-hover:scale-105 transition-all "
                 src={img}
                 width="220"
                 height="220"
                 alt={data.title}
               />
-              <Button className="w-full   font-bold p-0   group-hover:!text-black group-hover:!bg-white  border-0 shadow-none absolute transition-all overflow-hidden -mt-5  z-0 group-hover:-mt-8 rounded-none group-hover:visible   invisible">
+              <Button className="w-full   font-bold p-0   group-hover:!text-black group-hover:!bg-white  border-0 shadow-none absolute transition-all overflow-hidden -mt-5 z-0 group-hover:-mt-6 rounded-none group-hover:visible invisible">
                 Details <SwapRightOutlined />
               </Button>
               <ul className="product-links">
@@ -68,7 +67,7 @@ const Default = ({ data = null, className }) => {
                       <li className="far fa-star"></li>
                   </ul> 
               */}
-              <h3 className="w-full text-center font-semibold h-11 overflow-hidden px-1 mt-2 text-black font-bold ">
+              <h3 className="w-full text-center h-11 overflow-hidden px-1 mt-2 text-black font-bold ">
                 {data.title}
               </h3>
               <div className=" text-center text-md h-12 z-10 relative ">

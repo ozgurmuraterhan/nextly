@@ -17,19 +17,19 @@ const Default = ({ state = [] }) => {
     " w-6/12 md:w-6/12 md:block hidden",
   ];
   return (
-    <div className=" container-custom  mb-5 ">
-      <div className="row homeFirsBoxs">
+    <div className=" container-custom   mb-14 ">
+      <div className="row homeFirsBoxs ">
         {state.map((val, i) => (
           <React.Fragment key={val._id}>
             {i < 6 ? (
-              <div className={" item " + css[i]}>
+              <div className={" item rounded-lg group " + css[i]}>
                 <Link href={val.link}>
-                  <a className="itemzoom">
-                    <div className="w-100 position-relative h-100">
+                  <a className=" rounded-lg">
+                    <div className="w-100 position-relative h-100 overflow-hidden rounded-lg">
                       <div className="text">{val.title}</div>
                       <LazyLoadImage
                         src={`${IMG_URL + val.image}`}
-                        className="w-full h-full"
+                        className="w-full h-full group-hover:scale-105 transition-all rounded-lg"
                       />
                     </div>
                   </a>
@@ -51,10 +51,10 @@ const Default = ({ state = [] }) => {
                 style={{ transform: "scalex(-1)" }}
               >
                 <Link href={val.link}>
-                  <a className="itemzoom">
+                  <a className="itemzoom  rounded-lg">
                     <div className="w-100 position-relative h-100">
                       <div className="text">{val.title}</div>
-                      <LazyLoadImage src={`${IMG_URL + val.image}`} width="390" height="390" className="w-full h-full" alt={val.title} />
+                      <LazyLoadImage src={`${IMG_URL + val.image}`} width="390" height="390" className="w-full h-full rounded-lg" alt={val.title} />
                     </div>
                   </a>
                 </Link>

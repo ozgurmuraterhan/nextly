@@ -61,7 +61,7 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
                     <SwiperSlide key={data._id} className="mb-15">
                       <ProductCardHome
                         data={data}
-                        className=" float-left col-span-4  rounded-lg  m-5 mb-9 hover:bg-white  bg-gray-50  group hover:scale-105 transition-all  shadow-sm hover:shadow-xl  "
+                        className=" float-left col-span-4  rounded-lg  m-5 mb-9 hover:bg-white  bg-gray-50  group overflow-hidden  shadow-sm hover:shadow-xl  "
                       />
                     </SwiperSlide>
                   ))}
