@@ -96,7 +96,7 @@ const AppLayout = ({ children }) => {
             </div>
           </div>
         </div>
-        <div className="min-h-fit ">
+        <div className="  min-h-screen ">
           <Content >{children}</Content>
         </div>
         <Footer

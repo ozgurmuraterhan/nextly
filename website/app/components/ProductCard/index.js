@@ -29,13 +29,13 @@ const Default = ({ data = null, className }) => {
 
   return (
     <div className={className} key={data._id}>
-      <div className="  relative cursor-pointer ">
+      <div className="  relative cursor-pointer  rounded-lg">
         <Link href={"/product/" + data.seo}>
           <div className="w-full">
-            <div className="w-full relative">
+            <div className="w-full relative overflow-hidden   ">
               <span
                 className={`${func.getDiscount(data) ? "visible" : "invisible"
-                  } absolute z-10 top-0 mt-2 text-xs float-right py-1 px-2 bg-red-600 text-white`}
+                  } absolute z-10 top-0 mt-2 text-xs float-right py-1 px-2  bg-red-600 text-white`}
               >
                 {settings.price_type
                   ? "%" + Number(func.getDiscount(data)).toFixed(0)
@@ -49,7 +49,7 @@ const Default = ({ data = null, className }) => {
                 height="220"
                 alt={data.title}
               />
-              <Button className="w-full   font-bold p-0   group-hover:!text-black group-hover:!bg-white  border-0 shadow-none absolute transition-all overflow-hidden -mt-5 z-0 group-hover:-mt-6 rounded-none group-hover:visible invisible">
+              <Button className="w-full   font-bold pb-5   group-hover:!text-black group-hover:!bg-white  border-0 shadow-none absolute transition-all  overflow-hidden -mt-5 z-0 group-hover:-mt-7 rounded-none group-hover:visible invisible">
                 Details <SwapRightOutlined />
               </Button>
               <ul className="product-links">
