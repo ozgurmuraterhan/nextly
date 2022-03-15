@@ -18,13 +18,13 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
       </div>
       <div className=" w-full  rounded-lg gap-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {state.map((val) => (
-          <div key={val._id} className="border rounded-lg ">
-            <Link href={val.link + "/"}>
-              <a className="group mb-3 ">
+          <div key={val._id} className="border rounded-lg overflow-hidden">
+            <Link href={val.link + "/"} >
+              <a className="group mb-3 rounded-lg  ">
                 <Image
                   loader={({ src }) => src}
                   src={`${IMG_URL + val.image}`}
-                  className="w-full h-full group-hover:scale-105 transition-all rounded-t"
+                  className="w-full h-full group-hover:scale-105   transition-all rounded-t"
                   height="168"
                   width="288"
                   alt={val.title + " "}
