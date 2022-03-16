@@ -35,8 +35,8 @@ const Default = ({ images = [] }) => {
          >
             {state.map((val) => (
                <SwiperSlide key={val.image}>
-                  <div className="item">
-                     <img loader={({ src }) => src} src={IMG_URL + val.image} width="500" height="500" alt=" " className="w-full h-full" />
+                  <div className="item -mb-10">
+                     <img src={IMG_URL + val.image} width="500" height="500" alt=" " className="w-full" />
                   </div>
                </SwiperSlide>
             ))}
