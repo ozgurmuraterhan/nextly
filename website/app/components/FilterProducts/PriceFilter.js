@@ -52,7 +52,7 @@ const Page = () => {
         onClick={() => onChange()}
         type="primary"
         htmlType="submit"
-        className="m-0 p-1"
+        className="m-0 p-1 bg-brand-color"
       >
         <SearchOutlined />
       </Button>
@@ -70,7 +70,7 @@ const Page = () => {
             value,
           }))}
         >
-          <InputsPrices className="w-full" />
+          <InputsPrices className="w-full bg-brand-color" />
         </Form>
       </div>
     </>

@@ -6,6 +6,7 @@
 
 @layer base {
   html,
+
   body {
     height: 100%;
     display: block!important;
@@ -28,7 +29,7 @@
   h6 {
     @apply text-lg;
   }
-
+ 
   .container-custom {
     @apply xl:w-9/12 w-full lg:px-5 px-3 mx-auto;
   }

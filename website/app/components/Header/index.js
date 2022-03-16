@@ -93,7 +93,9 @@ const Default = () => {
           size="middle"
           placeholder="Search..."
           enterButton
-          className="sm:px-10"
+          className="sm:px-10 "
+
+
           onSearch={(val) => {
             router.push("/search?&text=" + val);
           }}
@@ -103,13 +105,13 @@ const Default = () => {
         {stateisAuthenticated ? (
           <>
             <Link href="/profile">
-              <span className="p-2 float-left cursor-pointer">
+              <span className="p-2 float-left cursor-pointer hover:text-brand-color">
                 <UserOutlined />
                 <span className="hidden md:inline "> Profile</span>
               </span>
             </Link>
             <span
-              className="p-2 float-left cursor-pointer"
+              className="p-2 float-left cursor-pointer hover:text-brand-color"
               onClick={async () => {
                 await AuthService.logout();
                 await dispatch(logout_r());
@@ -125,13 +127,13 @@ const Default = () => {
         ) : (
           <>
             <span
-              className="p-2 float-left cursor-pointer"
+              className="p-2 float-left cursor-pointer hover:text-brand-color"
               onClick={() => seTopenModalLogin(true)}
             >
               <LoginOutlined /> <span className="hidden md:inline ">Login</span>
             </span>
             <span
-              className="p-2 float-left cursor-pointer"
+              className="p-2 float-left cursor-pointer hover:text-brand-color"
               onClick={() => seTopenModalSignup(true)}
             >
               <UserAddOutlined />{" "}

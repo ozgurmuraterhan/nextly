@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import HTMLRenderer from "react-html-renderer";
 import { getBasket_r } from "../../redux/actions";
 import axios from "axios";
 import { API_URL } from "../../../config";
@@ -25,9 +24,29 @@ const Page = ({ resData = {}, seo = "" }) => {
     }
   };
 
+  function createMarkup() {
+    return { __html: replaceStyle(state.description) };
+  }
+
+
+
+  const replaceStyle = (dataHtml) => {
+    return dataHtml
+      .replaceAll("<p>", "<p style='min-height:25px' >")
+      .replaceAll(
+        "<pre>",
+        "<pre  style='min-height:30px; background-color:#dbdbdb; padding:15px' >"
+      )
+      .replaceAll("<img ", "<img class='w-full sm:w-auto' ")
+      .replaceAll(
+        '<div class="media-wrap image-wrap ',
+        '<div class="media-wrap image-wrap  w-full sm:w-auto '
+      );
+  };
+
   useEffect(() => {
     getBasket();
-  }, []);
+  }, [resData.description]);
 
   return (
     <div className="container-custom h-full ">
@@ -47,14 +66,9 @@ const Page = ({ resData = {}, seo = "" }) => {
       </div>
 
       <div className="w-full mt-5 mb-10 p-10 shadow-2xl bg-white h-full min-h-10  ">
-        <HTMLRenderer
-          html={state.description}
-        // components={{
-        //   h1: props => <Heading color="red" {...props} />,
-        //   h2: Subheading,
-        //   a: Link,
-        // }}
-        />
+
+        <div dangerouslySetInnerHTML={createMarkup()} />
+
       </div>
     </div>
   );

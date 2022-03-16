@@ -45,7 +45,7 @@ const Page = () => {
               style={{ width: "16%" }}
               onClick={() => onChange()}
               type="primary"
-              className="m-0 p-1"
+              className="m-0 p-1 bg-brand-color"
               htmlType="submit"
             >
               <SearchOutlined />
