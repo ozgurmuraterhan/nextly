@@ -1,43 +1,43 @@
 import {
-  CHANGE_COLLAPSED,
-  SWITCH_LANGUAGE,
-  GET_SETTINGS,
-  GET_ALL_FETCH_FAIL,
+   CHANGE_COLLAPSED,
+   SWITCH_LANGUAGE,
+   GET_SETTINGS,
+   GET_ALL_FETCH_FAIL,
 } from "../types";
 import { defaultLanguage } from "../../../config";
 
 const initialSettings = {
-  locale: defaultLanguage,
-  collapsed: false,
-  settings: {},
-  errorFetch: "",
+   locale: defaultLanguage,
+   collapsed: false,
+   settings: {},
+   errorFetch: "",
 };
 
 const settings = (state = initialSettings, action) => {
-  switch (action.type) {
-    case SWITCH_LANGUAGE:
+   switch (action.type) {
+   case SWITCH_LANGUAGE:
       return {
-        ...state,
-        locale: action.payload,
+         ...state,
+         locale: action.payload,
       };
-    case CHANGE_COLLAPSED:
+   case CHANGE_COLLAPSED:
       return {
-        ...state,
-        collapsed: action.payload,
+         ...state,
+         collapsed: action.payload,
       };
-    case GET_SETTINGS:
+   case GET_SETTINGS:
       return {
-        ...state,
-        settings: action.payload,
+         ...state,
+         settings: action.payload,
       };
-    case GET_ALL_FETCH_FAIL:
+   case GET_ALL_FETCH_FAIL:
       return {
-        ...state,
-        errorFetch: action.payload,
+         ...state,
+         errorFetch: action.payload,
       };
-    default:
+   default:
       return state;
-  }
+   }
 };
 
 export default settings;

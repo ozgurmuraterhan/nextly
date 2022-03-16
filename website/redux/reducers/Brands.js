@@ -1,20 +1,20 @@
 import { BRANDS_FETCH } from "../types";
 
 const initialSettings = {
-  brands: [],
+   brands: [],
 };
 
 const brands = (state = initialSettings, action) => {
-  switch (action.type) {
-    case BRANDS_FETCH:
+   switch (action.type) {
+   case BRANDS_FETCH:
       return {
-        ...state,
-        brands: action.payload,
+         ...state,
+         brands: action.payload,
       };
 
-    default:
+   default:
       return state;
-  }
+   }
 };
 
 export default brands;

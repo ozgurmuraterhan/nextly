@@ -14,6 +14,7 @@ const port = process.env.PORT || 5000;
 
 app.disable('x-powered-by')
 app.use(express.static(path.join(__dirname, "../admin/public")));
+
 app.use(helmet())
 
 

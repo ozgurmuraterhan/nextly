@@ -10,45 +10,45 @@ import axios from "axios";
 // This is your test publishable API key.
 
 export default function Default({ basket, public_key, contract }) {
-  const [clientSecret, setClientSecret] = useState("");
-  const stripePromise = loadStripe(public_key);
+   const [clientSecret, setClientSecret] = useState("");
+   const stripePromise = loadStripe(public_key);
 
-  const getProductAmounth = () => {
-    if (basket.length > 0) {
-      const arrayId = [];
-      basket[0].products.map((x) => {
-        arrayId.push(x.product_id);
-      });
-      axios
-        .post(API_URL + "/payment/stripe", {
-          ids: arrayId,
-          items: basket[0].products,
-          cargoes_id: basket[0].cargoes_id,
-          allBasket: basket,
-        })
-        .then((res) => setClientSecret(res.data.clientSecret));
-    }
-  };
+   const getProductAmounth = () => {
+      if (basket.length > 0) {
+         const arrayId = [];
+         basket[0].products.map((x) => {
+            arrayId.push(x.product_id);
+         });
+         axios
+            .post(API_URL + "/payment/stripe", {
+               ids: arrayId,
+               items: basket[0].products,
+               cargoes_id: basket[0].cargoes_id,
+               allBasket: basket,
+            })
+            .then((res) => setClientSecret(res.data.clientSecret));
+      }
+   };
 
-  useEffect(() => {
-    getProductAmounth();
-  }, [basket[0]]);
+   useEffect(() => {
+      getProductAmounth();
+   }, [basket[0]]);
 
-  const appearance = {
-    theme: "stripe",
-  };
-  const options = {
-    clientSecret,
-    appearance,
-  };
+   const appearance = {
+      theme: "stripe",
+   };
+   const options = {
+      clientSecret,
+      appearance,
+   };
 
-  return (
-    <div>
-      {clientSecret && (
-        <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm contract={contract} />
-        </Elements>
-      )}
-    </div>
-  );
+   return (
+      <div>
+         {clientSecret && (
+            <Elements options={options} stripe={stripePromise}>
+               <CheckoutForm contract={contract} />
+            </Elements>
+         )}
+      </div>
+   );
 }
