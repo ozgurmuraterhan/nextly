@@ -5,11 +5,17 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const compression = require("compression");
 const mongoSanitize = require("express-mongo-sanitize");
+const helmet = require('helmet')
 
 require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+app.disable('x-powered-by')
+app.use(express.static(path.join(__dirname, "../admin/public")));
+app.use(helmet())
+
 
 app.use(mongoSanitize());
 app.use(compression());
@@ -24,9 +30,7 @@ app.use(
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
   useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
+
 });
 
 const connection = mongoose.connection;
@@ -105,7 +109,6 @@ app.use("/customerspublic", customerPublicRouter);
 app.use("/payment", paymentPublicRouter);
 app.use("/paymentmethodspublic", paymentMethodsPublicRouter);
 
-app.use(express.static(path.join(__dirname, "../admin/public")));
 
 app.listen(port, () => {
   console.log("sever is runnin port: " + port);
