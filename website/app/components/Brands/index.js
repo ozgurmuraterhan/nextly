@@ -59,8 +59,8 @@ const Default = () => {
                               <Image
                                  loader={({ src }) => src}
                                  src={`${IMG_URL + val.image}`}
-                                 width="140"
-                                 height="140"
+                                 width="70"
+                                 height="70"
                                  priority
                                  alt={val.title}
                                  className="mx-auto"
