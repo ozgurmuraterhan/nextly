@@ -2,12 +2,9 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Thumbs, Autoplay } from "swiper";
-import Image from "next/image";
 // install Swiper modules
+
 SwiperCore.use([Navigation, Thumbs, Autoplay]);
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
 
 import { IMG_URL } from "../../../../config";
 

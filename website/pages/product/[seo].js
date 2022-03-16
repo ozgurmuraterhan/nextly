@@ -4,7 +4,9 @@ import { getBasket_r } from "../../redux/actions";
 import axios from "axios";
 import { API_URL } from "../../../config";
 
-
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 import dynamic from "next/dynamic";
 
 const Head = dynamic(() => import("../../app/core/Head"));

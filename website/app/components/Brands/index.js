@@ -3,7 +3,6 @@ import SwiperCore, { Navigation, Pagination, History } from "swiper";
 import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import Link from "next/link";
-import Image from "next/image";
 import { IMG_URL } from "../../../../config";
 
 SwiperCore.use([Navigation, Pagination, History]);
