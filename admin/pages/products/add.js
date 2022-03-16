@@ -234,7 +234,7 @@ const Default = ({ getCategories = [] }) => {
         ]}
         scrollToFirstError
       >
-        <Card className="card" title={intl.messages["app.pages.product.addd"]}>
+        <Card className="card" title={intl.messages["app.pages.product.add"]}>
           <Form.Item
             name="categories_id"
             label={intl.messages["app.pages.common.category"]}
