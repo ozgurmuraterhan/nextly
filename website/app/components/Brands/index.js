@@ -56,8 +56,7 @@ const Default = () => {
                      <div className="item text-center">
                         <Link href={`/search?brands=${val._id}`}>
                            <a>
-                              <Image
-                                 loader={({ src }) => src}
+                              <img
                                  src={`${IMG_URL + val.image}`}
                                  width="70"
                                  height="70"
