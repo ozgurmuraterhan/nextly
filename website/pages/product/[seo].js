@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBasket_r } from "../../redux/actions";
 import axios from "axios";
@@ -15,6 +15,7 @@ const Page = ({ resData = {}, seo = "" }) => {
    const { user } = useSelector(({ login }) => login);
 
    const state = resData[0];
+   const [contentDescription, seTcontentDescription] = useState("<p></p>");
 
    const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ const Page = ({ resData = {}, seo = "" }) => {
    };
 
    function createMarkup() {
-      return { __html: replaceStyle(state.description) };
+      return { __html: contentDescription };
    }
 
 
@@ -46,7 +47,8 @@ const Page = ({ resData = {}, seo = "" }) => {
 
    useEffect(() => {
       getBasket();
-   }, [resData.description]);
+      seTcontentDescription(replaceStyle(state.description));
+   }, [state.description]);
 
    return (
       <div className="container-custom h-full ">
