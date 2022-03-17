@@ -70,7 +70,7 @@ const Page = ({
             const variantControl = productsDataArray.find(
                (x) =>
                   (x.product_id._id == state._id || x.product_id == state._id) &&
-            JSON.stringify(x.selectedVariants) == JSON.stringify(res)
+                  JSON.stringify(x.selectedVariants) == JSON.stringify(res)
             );
             const variantControlNot = productsDataArray.filter(
                (x) => JSON.stringify(x.selectedVariants) != JSON.stringify(res)
@@ -97,7 +97,7 @@ const Page = ({
             const variantControlIdNot = productsDataArray.filter(
                (x) =>
                   JSON.stringify(x.selectedVariants) != JSON.stringify(res) &&
-            x.product_id != state._id
+                  x.product_id != state._id
             );
 
             if (variantControlId == undefined) {
@@ -125,7 +125,7 @@ const Page = ({
             products: productsData.sort(
                (a, b) =>
                   (a.seo + JSON.stringify(a.selectedVariants)).length -
-            (b.seo + JSON.stringify(b.selectedVariants)).length
+                  (b.seo + JSON.stringify(b.selectedVariants)).length
             ),
          };
          if (isAuthenticated) {
@@ -158,8 +158,7 @@ const Page = ({
 
 
          <Button
-            type="primary"
-            className=" xl:w-8/12 w-full border-black bg-black text-2xl h-auto hover:bg-white hover:border-black hover:text-black"
+            className=" xl:w-8/12 w-full border-black bg-black text-white text-2xl h-auto hover:bg-white hover:border-black hover:text-black"
             disabled={!disabledVariant}
             onClick={() => {
                form
@@ -174,7 +173,7 @@ const Page = ({
                   .catch((err) => console.log("err", err));
             }}
          >
-        Buy Now
+            Buy Now
             {loadingButton ? (
                <CreditCardOutlined />
             ) : (
@@ -183,8 +182,7 @@ const Page = ({
          </Button>
 
          <Button
-            type="primary"
-            className="  xl:w-4/12 w-full border-brand-color bg-brand-color text-2xl h-auto  hover:bg-white hover:border-brand-color hover:text-brand-color"
+            className="  xl:w-4/12 w-full border-brand-color bg-brand-color text-2xl h-auto text-white  hover:bg-white hover:border-brand-color hover:text-brand-color"
             disabled={!disabledVariant}
             onClick={() => {
                form
@@ -198,7 +196,7 @@ const Page = ({
                   .catch((err) => console.log("err", err));
             }}
          >
-        Add to Basket
+            Add to Basket
             {loadingButton ? (
                <ShoppingCartOutlined />
             ) : (
