@@ -3,16 +3,14 @@
 @tailwind utilities;
 
 @import "../public/css/ant-custom.css";
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300;1,400;1,600&display=swap');
-
+ 
 @layer base {
   html,
   body {
     height: 100%;
     display: block!important;
     background-color: #fbfbfb;
-    font-family: 'Source Sans Pro', sans-serif!important;
-            @apply antialiased;
+             @apply antialiased font-sans;
   }
 
   h1 {
@@ -53,7 +51,7 @@
 }
 
 li .ant-menu-submenu-title .ant-menu-title-content {
-  padding: 0 18px;
+  padding: 0 14px;
 }
 .hiddenArrowInputNumber::-webkit-inner-spin-button,
 .hiddenArrowInputNumber::-webkit-outer-spin-button {
