@@ -68,7 +68,8 @@ const Default = () => {
                                  priority
                                  alt={val.title}
                                  style={{ width: "70px" }}
-                                 className="mx-auto border-brand-color border rounded-full  block border-solid  "
+
+                                 className="mx-auto border-brand-color border box-border rounded-full  block border-solid  "
                               />
                               <span className="  w-full float-left text-xs mt-2"> {val.title}</span>
                            </a>
