@@ -55,7 +55,9 @@ const Page = () => {
             onChange={onChangeSearch}
             suffix={<SearchOutlined />}
          />
-         <div className="BrandsFilter rounded-bottom">
+
+
+         <div className=" w-full float-left h-64 overflow-scroll pl-2 border rounded-bottom">
             <Checkbox.Group
                options={state.brands}
                value={[...filterProducts.brands]}

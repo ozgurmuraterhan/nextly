@@ -12,7 +12,7 @@ const Default = ({ state = [], title = { title: "", description: "" } }) => {
       <div className="bg-gray-100 ">
          <div className=" mx-auto w-11/12 py-5 ">
             <div className="row">
-               <div className=" relative  homeSliderReslative mb-3 pb-0  ">
+               <div className=" relative w-full mb-3 pb-0  ">
                   <div className="  w-full   ">
                      <div className=" text-center mb-5 mt-3">
                         <h1>{title.title}</h1>

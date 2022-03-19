@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "../public/css/ant-custom.css";
+ @import "../public/css/ant-custom.css";
+
  
 @layer base {
   html,
@@ -33,6 +34,7 @@
     @apply xl:w-9/12 w-full lg:px-5 px-3 mx-auto;
   }
 
+   
   input[type="checkbox"]:focus {
     @apply outline-none ring-transparent;
   }
@@ -48,11 +50,13 @@
   .formItems {
     @apply grid grid-cols-1 sm:grid-cols-2 gap-4;
   }
-}
 
-li .ant-menu-submenu-title .ant-menu-title-content {
-  padding: 0 14px;
+
 }
+.swiper-button-disabled {
+  opacity: 0.3;
+ }
+
 .hiddenArrowInputNumber::-webkit-inner-spin-button,
 .hiddenArrowInputNumber::-webkit-outer-spin-button {
   -webkit-appearance: none;

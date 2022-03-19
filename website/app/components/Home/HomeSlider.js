@@ -15,7 +15,7 @@ const Default = ({ state = [] }) => {
    useEffect(() => { }, []);
 
    return (
-      <div className=" relative float-left homeSliderReslative">
+      <div className=" relative float-left w-full">
          <div className="position-absolute w-full  ">
 
             <div className="slider-arrow-left absolute z-40 left-2  top-1/2">

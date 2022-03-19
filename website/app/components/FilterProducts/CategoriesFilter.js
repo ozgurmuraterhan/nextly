@@ -57,7 +57,7 @@ const Page = () => {
             suffix={<SearchOutlined />}
          />
 
-         <div className="CategoriesFilter rounded-bottom bg-transparent">
+         <div className="categoriesFilter w-full float-left h-64 overflow-scroll border pl-1 rounded-bottom bg-transparent">
             <Tree
                expandedKeys={func.selectCategoriesFilterData(state.allData)}
                multiple

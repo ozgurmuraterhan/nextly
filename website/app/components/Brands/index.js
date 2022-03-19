@@ -14,10 +14,12 @@ const Default = () => {
    return (
       <div className="container-custom  relative mt-4 h-28">
          <div className="position-absolute container px-xs-0">
-            <div className="top-brands-arrow-left">
+
+            <div className="top-brands-arrow-left left-0 h-full w-4 z-10 cursor-pointer top-5 absolute  " >
                <DoubleLeftOutlined />
             </div>
-            <div className="top-brands-arrow-right">
+
+            <div className="top-brands-arrow-right  absolute right-0 h-full w-4 z-10 cursor-pointer top-5 ">
                <DoubleRightOutlined />
             </div>
 
@@ -48,22 +50,26 @@ const Default = () => {
                      slidesPerView: 10,
                   },
                }}
-               className="brands-slider"
+               className=" flex overflow-x-auto"
             >
+
                {brands.map((val) => (
                   <SwiperSlide key={val.title}>
-                     <div className="item text-center">
+
+
+                     <div className=" flex-row-reverse items-center text-center">
                         <Link href={`/search?brands=${val._id}`}>
                            <a>
+
                               <img
                                  src={`${IMG_URL + val.image}`}
                                  width="70"
                                  height="70"
                                  priority
                                  alt={val.title}
-                                 className="mx-auto"
+                                 className="mx-auto border-brand-color border rounded-full  block w-7/12 h-7/12 border-solid  "
                               />
-                              <span className="  w-full float-left"> {val.title}</span>
+                              <span className="  w-full float-left text-xs mt-2"> {val.title}</span>
                            </a>
                         </Link>
                      </div>
