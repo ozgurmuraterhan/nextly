@@ -20,12 +20,12 @@ const Page = () => {
    return (
       < >
          {categoriesData?.length > 0 ? (
-            <Menu mode="horizontal" className=" block border-0 bg-transparent    " onClick={onClickMenu}>
+            <Menu mode="horizontal" className="   border-0 bg-transparent  flex   " onClick={onClickMenu}>
                {categoriesData?.map((val) => (
                   <React.Fragment key={val.title + val._id}>
                      {val.children ? (
                         <Menu.SubMenu
-                           className="border-0 uppercase !h-11 !font-semibold after:!right-0 after:!left-0 !p-0 "
+                           className="border-0 uppercase !h-11 !font-semibold after:!right-0 after:!left-0 !px-3"
                            key={val._id}
                            title={val.title}
                         >

@@ -1,4 +1,4 @@
-// if you need all ant component css. can you use blow line
+// if you need all ant component css use blow line
 // @import "./node_modules/antd/dist/antd.less";
 
 @import "./node_modules/antd/lib/style/default.less";
@@ -30,7 +30,17 @@
 .ant-input-search-button,.ant-btn-primary{
   background-color:@primary-color!important
 }
+ 
+
+.anticon svg { 
+  display: block;
+}
+ 
+.swiper-button-disabled {
+  opacity: 0.3;
+}
   
+
 .categoriesFilter {
  
   .ant-tree-treenode-disabled {
@@ -77,6 +87,7 @@
   .ant-select-tree-node-content-wrapper.ant-select-tree-node-selected {
   background-color: #dddddd;
 }
+ 
 
 .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
   color: rgba(0, 0, 0, 0.85);
@@ -89,10 +100,4 @@
   opacity: 0.8;
   padding-bottom: 0 !important;
 }
-.anticon svg { 
-  display:block
-}
-
-li .ant-menu-submenu-title .ant-menu-title-content {
-  padding: 0 14px;
-}
+  

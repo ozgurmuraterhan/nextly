@@ -24,7 +24,6 @@ const haveCookie = checkCookies("isuser");
 
 axios.defaults.withCredentials = true;
 
-const { Content } = Layout;
 
 const AppLayout = ({ children }) => {
 
@@ -72,7 +71,7 @@ const AppLayout = ({ children }) => {
    ) : (
       <>
          {/* <CircularProgress className={!isLoaded ? "visible" : "hidden"} /> */}
-         <Layout>
+         <div>
             <div className="border-b bg-white">
                <div className=" container-custom   ">
                   <div className="h-7">
@@ -91,7 +90,7 @@ const AppLayout = ({ children }) => {
                </div>
             </div>
             <div className="  min-h-screen ">
-               <Content >{children}</Content>
+               {children}
             </div>
             <Footer
                footerMenu={func.getCategoriesTree(
@@ -99,7 +98,7 @@ const AppLayout = ({ children }) => {
                   "6154a5a279053f941d1b786c"
                )}
             />
-         </Layout>
+         </div>
       </>
    );
 };
