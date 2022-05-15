@@ -2,10 +2,10 @@
   "name": "Nextly-eCommerce-website",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next",
-    "watch:less": "watch 'npm run goless && npm run dev'  ./public/less",
+    "dev": "next -- --port 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
+    "watch:less": "watch 'npm run goless && npm run dev'  ./public/less",
     "goless": "lessc -js public/less/var.less public/css/ant-custom.css  -x",
     "eslint": " eslint pages/**/**/**/*.js --fix && eslint app/**/**/**/*.js --fix && eslint redux/**/**/**/*.js --fix && eslint util/**/**/**/*.js --fix",
     "prettier": "prettier --write ."
