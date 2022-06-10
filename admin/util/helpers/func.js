@@ -35,8 +35,8 @@ export default {
   getCategoriesTreeOptions: (data, option = false) => {
     const nest = (items, _id = null, link = "categories_id") => {
       return items
-        .filter((item) => item[link] === _id)
-        .map((item) => ({
+        ?.filter((item) => item[link] === _id)
+        ?.map((item) => ({
           ...item,
           value: item._id,
           key: item._id,

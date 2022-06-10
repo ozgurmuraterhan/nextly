@@ -17,6 +17,14 @@ const ProductsSchema = new Schema(
       required: true,
       default: false,
     },
+    customization: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    customization_inputs: {
+      type: Array,
+    },
     categories_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Categories",

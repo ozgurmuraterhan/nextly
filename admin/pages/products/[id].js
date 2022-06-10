@@ -22,11 +22,12 @@ import func from "../../util/helpers/func";
 import { useIntl } from "react-intl";
 import IntlMessages from "../../util/IntlMessages";
 
-const Default = ({ getCategories = [], getData = [] }) => {
+const Default = ({ getCategories = [], getData = {} }) => {
   const Editor = dynamic(() => import("../../app/components/Editor/index"));
   const intl = useIntl();
   const [form] = Form.useForm();
   const [state, seTstate] = useState(getData);
+  const [customizationMeta, seTcustomizationMeta] = useState([]);
   const [fields, seTfields] = useState(
     Object.entries(getData).map(([name, value]) => ({ name, value }))
   );
@@ -84,7 +85,9 @@ const Default = ({ getCategories = [], getData = [] }) => {
   };
   // componentDidMount = useEffect
   useEffect(() => {
-    getDataFc();
+    if (id !== "add") {
+      getDataFc();
+    }
     getDataCategory();
     getDataVariants();
     getDataBrands();
@@ -102,20 +105,39 @@ const Default = ({ getCategories = [], getData = [] }) => {
   };
 
   const onSubmit = (Data) => {
-    axios
-      .post(`${API_URL}/products/${id}`, Data)
-      .then((res) => {
-        if (res.data.variant == "error") {
-          message.error(
-            intl.messages["app.pages.product.notUpdated"] + res.data.messagge
-          );
-        } else {
-          message.success(intl.messages["app.pages.product.updated"]);
+    if (id === "add") {
+      Data["created_user"] = { name: user.name, id: user.id };
 
-          router.push("/products/list");
-        }
-      })
-      .catch((err) => console.log(err));
+      axios
+        .post(`${API_URL}/products/add`, Data)
+        .then((res) => {
+          if (res.data.variant == "error") {
+            message.error(
+              intl.messages["app.pages.product.notAdded"] + res.data.messagge
+            );
+          } else {
+            message.success(intl.messages["app.pages.product.added"]);
+
+            router.push("/products/list");
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      axios
+        .post(`${API_URL}/products/${id}`, Data)
+        .then((res) => {
+          if (res.data.variant == "error") {
+            message.error(
+              intl.messages["app.pages.product.notUpdated"] + res.data.messagge
+            );
+          } else {
+            message.success(intl.messages["app.pages.product.updated"]);
+
+            router.push("/products/list");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -214,11 +236,9 @@ const Default = ({ getCategories = [], getData = [] }) => {
         if (formData.variants[0] !== undefined) {
           for (const i in formData.variants) {
             const varib2 = [];
-
             for (const j in formData.variants[i].value) {
               varib2.push(formData.variants[i].value[j]);
             }
-
             varib[formData.variants[i].name] = varib2;
           }
         }
@@ -228,7 +248,6 @@ const Default = ({ getCategories = [], getData = [] }) => {
           const variantsP = Object.entries(objToArr[i]).map(
             ([key, initialValue]) => ({ key, initialValue })
           );
-
           DataS.push(variantsP);
         }
         seTmeta(DataS);
@@ -287,6 +306,7 @@ const Default = ({ getCategories = [], getData = [] }) => {
           <Form.Item
             name="order"
             label={intl.messages["app.pages.common.order"]}
+            initialValue={0}
             rules={[
               {
                 required: true,
@@ -358,16 +378,78 @@ const Default = ({ getCategories = [], getData = [] }) => {
             <Select
               style={{ width: "100%" }}
               options={dataBrands}
+              initialValue={false}
               placeholder={intl.messages["app.pages.common.pleaseSelect"]}
             />
           </Form.Item>
-          <Divider />
+        </Card>
+        <Card
+          className="card"
+          title={intl.messages["app.pages.product.customization"]}
+        >
           <Form.Item
-            name="type"
-            label={intl.messages["app.pages.product.productType"]}
+            name="customization"
+            label={intl.messages["app.pages.product.customization"]}
+            initialValue={false}
           >
             <Select
               style={{ width: "100%" }}
+              options={[
+                {
+                  label: intl.messages["app.pages.product.no"],
+                  value: false,
+                },
+                {
+                  label: intl.messages["app.pages.product.yes"],
+                  value: true,
+                },
+              ]}
+              placeholder={intl.messages["app.pages.common.pleaseSelect"]}
+              onChange={(newValue) => {
+                seTstate({ ...state, customization: newValue });
+              }}
+            />
+          </Form.Item>
+          {state.customization && (
+            <>
+              <Form.Item
+                name="customization_input_select"
+                label={intl.messages["app.pages.product.customization"]}
+                initialValue={false}
+              >
+                <Select
+                  style={{ width: "100%" }}
+                  options={[
+                    {
+                      label: intl.messages["app.pages.product.no"],
+                      value: false,
+                    },
+                    {
+                      label: intl.messages["app.pages.product.yes"],
+                      value: true,
+                    },
+                  ]}
+                  placeholder={intl.messages["app.pages.common.pleaseSelect"]}
+                  onChange={(newValue) => {
+                    seTstate({ ...state, customization: newValue });
+                  }}
+                />
+              </Form.Item>
+              liste
+            </>
+          )}
+        </Card>
+        <Card
+          className="card"
+          title={intl.messages["app.pages.product.productType"]}
+        >
+          <Form.Item
+            name="type"
+            className={"pl-10 mb-38 "}
+            label={intl.messages["app.pages.product.productType"]}
+            initialValue={false}
+          >
+            <Select
               options={[
                 {
                   label: intl.messages["app.pages.product.simple"],
@@ -384,297 +466,317 @@ const Default = ({ getCategories = [], getData = [] }) => {
               }}
             />
           </Form.Item>
-        </Card>
+          {state.type && (
+            <>
+              <Form.List name="variants" style={{ width: "100%" }}>
+                {(fields, { add, remove }) => (
+                  <>
+                    {fields.map((field, i) => (
+                      <Row
+                        className="float-left w-full "
+                        key={i}
+                        gutter={[8, 8]}
+                      >
+                        <Col xs={8}>
+                          <Form.Item
+                            {...field}
+                            {...formItemLayout}
+                            className="float-left w-full  mx-0 px-0"
+                            name={[field.name, "name"]}
+                            label={intl.messages["app.pages.common.variants"]}
+                            fieldKey={[field.fieldKey, "variants"]}
+                            value="Size"
+                            hasFeedback
+                            rules={[
+                              {
+                                message:
+                                  intl.messages[
+                                    "app.pages.common.confirmPassword"
+                                  ],
+                              },
+                              ({ getFieldValue }) => ({
+                                validator(rule, value) {
+                                  const item = getFieldValue("variants").filter(
+                                    (x) => x.name === value
+                                  );
 
-        <Card
-          className="card"
-          style={{ display: state.type ? "" : "none" }}
-          title={intl.messages["app.pages.product.productType"]}
-        >
-          <Form.List name="variants" style={{ width: "100%" }}>
-            {(fields, { add, remove }) => (
-              <>
-                {fields.map((field, i) => (
-                  <Row className="float-left w-full " key={i} gutter={[8, 8]}>
-                    <Col xs={8}>
-                      <Form.Item
-                        {...field}
-                        {...formItemLayout}
-                        className="float-left w-full  mx-0 px-0"
-                        name={[field.name, "name"]}
-                        label={intl.messages["app.pages.common.variants"]}
-                        fieldKey={[field.fieldKey, "variants"]}
-                        value="Size"
-                        hasFeedback
-                        rules={[
-                          {
-                            message:
-                              intl.messages["app.pages.common.confirmPassword"],
-                          },
-                          ({ getFieldValue }) => ({
-                            validator(rule, value) {
-                              const item = getFieldValue("variants").filter(
-                                (x) => x.name === value
-                              );
-
-                              if (!value || item.length <= 1) {
-                                return Promise.resolve();
+                                  if (!value || item.length <= 1) {
+                                    return Promise.resolve();
+                                  }
+                                  return Promise.reject(
+                                    intl.messages["app.pages.common.duplicate"]
+                                  );
+                                },
+                              }),
+                            ]}
+                          >
+                            <Select
+                              showSearch
+                              options={dataVariants.options}
+                              placeholder={
+                                intl.messages["app.pages.common.searchVariant"]
                               }
-                              return Promise.reject(
-                                intl.messages["app.pages.common.duplicate"]
-                              );
-                            },
-                          }),
-                        ]}
-                      >
-                        <Select
-                          showSearch
-                          options={dataVariants.options}
-                          placeholder={
-                            intl.messages["app.pages.common.searchVariant"]
-                          }
-                          optionFilterProp="children"
-                          filterOption={(input, option) =>
-                            option.label
-                              .toLowerCase()
-                              .indexOf(input.toLowerCase()) >= 0
-                          }
-                          onChange={(selected) => {
-                            const dataVariant = dataVariants.data.filter(
-                              (x) => x.name === selected
-                            );
-                            const dataManipulate = [];
-                            const datas = variantsOp.options;
+                              optionFilterProp="children"
+                              filterOption={(input, option) =>
+                                option.label
+                                  .toLowerCase()
+                                  .indexOf(input.toLowerCase()) >= 0
+                              }
+                              onChange={(selected) => {
+                                const dataVariant = dataVariants.data.filter(
+                                  (x) => x.name === selected
+                                );
+                                const dataManipulate = [];
+                                const datas = variantsOp.options;
 
-                            for (const i in dataVariant[0].variants) {
-                              dataManipulate.push({
-                                label: dataVariant[0].variants[i].name,
-                                value: dataVariant[0].variants[i].value,
-                              });
-                            }
-                            datas[i] = dataManipulate;
+                                for (const i in dataVariant[0].variants) {
+                                  dataManipulate.push({
+                                    label: dataVariant[0].variants[i].name,
+                                    value: dataVariant[0].variants[i].value,
+                                  });
+                                }
+                                datas[i] = dataManipulate;
 
-                            seTvariantsOp({
-                              options: datas,
-                              data: dataVariant.variants,
-                            });
-                          }}
-                        />
-                      </Form.Item>
-                    </Col>
-                    <Col xs={15}>
-                      <Form.Item
-                        {...field}
-                        {...formItemLayout}
-                        className="float-left w-full  mx-0 px-0"
-                        label={intl.messages["app.pages.common.values"]}
-                        name={[field.name, "value"]}
-                        fieldKey={[field.fieldKey, "value"]}
-                        rules={[
-                          {
-                            required: true,
-                            message:
-                              intl.messages["app.pages.common.pleaseFill"],
-                          },
-                        ]}
-                      >
-                        <Select
-                          showSearch
-                          mode="multiple"
-                          showArrow
-                          options={variantsOp.options[i]}
-                          placeholder="Search Variant Name"
-                          optionFilterProp="children"
-                          filterOption={(input, option) =>
-                            option.label
-                              .toLowerCase()
-                              .indexOf(input.toLowerCase()) >= 0
-                          }
-                          onChange={() => {
-                            selectVariants();
-                          }}
-                        />
-                      </Form.Item>
-                    </Col>
-                    <Col xs={1}>
-                      <Form.Item className="float-left">
-                        <Button
-                          type="primary"
-                          shape="circle"
-                          onClick={() => {
-                            remove(field.name);
-                            selectVariants();
-                          }}
-                          icon={<DeleteOutlined />}
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                ))}
-                <Form.Item className="float-right">
-                  <Button
-                    className="float-right"
-                    type="dashed"
-                    onClick={() => {
-                      add();
-                    }}
-                    icon={<PlusOutlined />}
-                  >
-                    <IntlMessages id="app.pages.common.addVariant" />
-                  </Button>
-                </Form.Item>
-                <Divider />
-              </>
-            )}
-          </Form.List>
-          <Form.List name="variant_products">
-            {() => (
-              <>
-                {meta.map((field, i) => (
-                  <Form.List name={i} key={i}>
-                    {() => (
-                      <>
-                        {field.map((field2, j) => (
-                          <div className="float-left" key={j}>
-                            <div className="float-left w-full">
-                              <h5 className="float-left text-xl pr-2">
-                                {j == 0
-                                  ? intl.messages["app.pages.common.variants"]
-                                  : ""}
-                              </h5>
-                              {field2.display == true ? (
-                                ""
-                              ) : (
-                                <Tag color="blue" className="float-left">
-                                  {field2.initialValue}
-                                </Tag>
-                              )}
-                            </div>
-                            <Form.Item
-                              style={{
-                                display: field2.display == true ? "" : "none",
+                                seTvariantsOp({
+                                  options: datas,
+                                  data: dataVariant.variants,
+                                });
                               }}
-                              {...field2}
-                              label={field2.label}
+                            />
+                          </Form.Item>
+                        </Col>
+                        <Col xs={15}>
+                          <Form.Item
+                            {...field}
+                            {...formItemLayout}
+                            className="float-left w-full  mx-0 px-0"
+                            label={intl.messages["app.pages.common.values"]}
+                            name={[field.name, "value"]}
+                            fieldKey={[field.fieldKey, "value"]}
+                            rules={[
+                              {
+                                required: true,
+                                message:
+                                  intl.messages["app.pages.common.pleaseFill"],
+                              },
+                            ]}
+                          >
+                            <Select
+                              showSearch
+                              mode="multiple"
+                              showArrow
+                              options={variantsOp.options[i]}
+                              placeholder="Search Variant Name"
+                              optionFilterProp="children"
+                              filterOption={(input, option) =>
+                                option.label
+                                  .toLowerCase()
+                                  .indexOf(input.toLowerCase()) >= 0
+                              }
+                              onChange={() => {
+                                selectVariants();
+                              }}
+                            />
+                          </Form.Item>
+                        </Col>
+                        <Col xs={1}>
+                          <Form.Item className="float-left">
+                            <Button
+                              type="primary"
+                              shape="circle"
+                              onClick={() => {
+                                remove(field.name);
+                                selectVariants();
+                              }}
+                              icon={<DeleteOutlined />}
+                            />
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                    ))}
+                    <Form.Item className="float-right">
+                      <Button
+                        className="float-right"
+                        type="dashed"
+                        onClick={() => {
+                          add();
+                        }}
+                        icon={<PlusOutlined />}
+                      >
+                        <IntlMessages id="app.pages.common.addVariant" />
+                      </Button>
+                    </Form.Item>
+                    <Divider />
+                  </>
+                )}
+              </Form.List>
+
+              <Form.List name="variant_products">
+                {() => (
+                  <>
+                    {meta.map((field, i) => (
+                      <Form.List name={i} key={i}>
+                        {() => (
+                          <>
+                            {field.map((field2, j) => (
+                              <div className="float-left" key={j}>
+                                <div className="float-left w-full">
+                                  <h5 className="float-left text-xl pr-2">
+                                    {j == 0
+                                      ? intl.messages[
+                                          "app.pages.common.variants"
+                                        ]
+                                      : ""}
+                                  </h5>
+                                  {field2.display == true ? (
+                                    ""
+                                  ) : (
+                                    <Tag color="blue" className="float-left">
+                                      {field2.initialValue}
+                                    </Tag>
+                                  )}
+                                </div>
+                                <Form.Item
+                                  style={{
+                                    display:
+                                      field2.display == true ? "" : "none",
+                                  }}
+                                  {...field2}
+                                  label={field2.label}
+                                  {...formItemLayout}
+                                  className="float-left w-full  mx-0 px-0"
+                                  name={field2.key}
+                                  defaultValue={field2.initialValue}
+                                  fieldKey={field2.fieldKey}
+                                  rules={[
+                                    {
+                                      required: true,
+                                      message:
+                                        intl.messages[
+                                          "app.pages.common.pleaseFill"
+                                        ],
+                                    },
+                                  ]}
+                                >
+                                  <Input />
+                                </Form.Item>
+                              </div>
+                            ))}
+
+                            <Form.Item
+                              label={intl.messages["app.pages.common.price"]}
                               {...formItemLayout}
                               className="float-left w-full  mx-0 px-0"
-                              name={field2.key}
-                              defaultValue={field2.initialValue}
-                              fieldKey={field2.fieldKey}
+                              name="price"
+                              defaultValue={1}
                               rules={[
                                 {
                                   required: true,
                                   message:
                                     intl.messages[
-                                    "app.pages.common.pleaseFill"
+                                      "app.pages.common.pleaseFill"
                                     ],
                                 },
                               ]}
                             >
-                              <Input />
+                              <InputNumber className="!w-1/2" />
                             </Form.Item>
-                          </div>
-                        ))}
 
-                        <Form.Item
-                          label={intl.messages["app.pages.common.price"]}
-                          {...formItemLayout}
-                          className="float-left w-full  mx-0 px-0"
-                          name="price"
-                          defaultValue={1}
-                          rules={[
-                            {
-                              required: true,
-                              message:
-                                intl.messages["app.pages.common.pleaseFill"],
-                            },
-                          ]}
-                        >
-                          <InputNumber className="!w-1/2" />
-                        </Form.Item>
+                            <Form.Item
+                              label={
+                                intl.messages["app.pages.common.beforePrice"]
+                              }
+                              {...formItemLayout}
+                              className="float-left w-full  mx-0 px-0"
+                              name="before_price"
+                              initialValue={0}
+                              rules={[
+                                {
+                                  required: true,
+                                  message:
+                                    intl.messages[
+                                      "app.pages.common.pleaseFill"
+                                    ],
+                                },
+                              ]}
+                            >
+                              <InputNumber className="!w-1/2" />
+                            </Form.Item>
 
-                        <Form.Item
-                          label={intl.messages["app.pages.common.beforePrice"]}
-                          {...formItemLayout}
-                          className="float-left w-full  mx-0 px-0"
-                          name="before_price"
-                          initialValue={0}
-                          rules={[
-                            {
-                              required: true,
-                              message:
-                                intl.messages["app.pages.common.pleaseFill"],
-                            },
-                          ]}
-                        >
-                          <InputNumber className="!w-1/2" />
-                        </Form.Item>
+                            <Form.Item
+                              label={intl.messages["app.pages.common.qty"]}
+                              {...formItemLayout}
+                              className="float-left w-full  mx-0 px-0"
+                              name="qty"
+                              initialValue={100}
+                              rules={[
+                                {
+                                  required: true,
+                                  message:
+                                    intl.messages[
+                                      "app.pages.common.pleaseFill"
+                                    ],
+                                },
+                              ]}
+                            >
+                              <InputNumber className="!w-1/2" />
+                            </Form.Item>
+                            <Form.Item
+                              label={intl.messages["app.pages.common.salesqty"]}
+                              name="saleqty"
+                              className="float-left w-full  mx-0 px-0"
+                              initialValue={0}
+                            >
+                              <Input readOnly className=" !w-1/5" />
+                            </Form.Item>
 
-                        <Form.Item
-                          label={intl.messages["app.pages.common.qty"]}
-                          {...formItemLayout}
-                          className="float-left w-full  mx-0 px-0"
-                          name="qty"
-                          initialValue={100}
-                          rules={[
-                            {
-                              required: true,
-                              message:
-                                intl.messages["app.pages.common.pleaseFill"],
-                            },
-                          ]}
-                        >
-                          <InputNumber className="!w-1/2" />
-                        </Form.Item>
-                        <Form.Item
-                          label={intl.messages["app.pages.common.salesqty"]}
-                          name="saleqty"
-                          className="float-left w-full  mx-0 px-0"
-                          initialValue={0}
-                        >
-                          <Input readOnly className=" !w-1/5" />
-                        </Form.Item>
+                            <Form.Item
+                              name="visible"
+                              label={intl.messages["app.pages.common.visible"]}
+                              className="float-left w-full  mx-0 px-0"
+                              initialValue={true}
+                            >
+                              <Select
+                                className=" !w-1/5"
+                                options={[
+                                  {
+                                    label:
+                                      intl.messages[
+                                        "app.pages.common.beActive"
+                                      ],
+                                    value: true,
+                                  },
+                                  {
+                                    label:
+                                      intl.messages[
+                                        "app.pages.common.bePassive"
+                                      ],
+                                    value: false,
+                                  },
+                                ]}
+                                placeholder={
+                                  intl.messages["app.pages.common.pleaseSelect"]
+                                }
+                              />
+                            </Form.Item>
 
-                        <Form.Item
-                          name="visible"
-                          label={intl.messages["app.pages.common.visible"]}
-                          className="float-left w-full  mx-0 px-0"
-                          initialValue={true}
-                        >
-                          <Select
-                            className=" !w-1/5"
-                            options={[
-                              {
-                                label:
-                                  intl.messages["app.pages.common.beActive"],
-                                value: true,
-                              },
-                              {
-                                label:
-                                  intl.messages["app.pages.common.bePassive"],
-                                value: false,
-                              },
-                            ]}
-                            placeholder={
-                              intl.messages["app.pages.common.pleaseSelect"]
-                            }
-                          />
-                        </Form.Item>
-
-                        <Divider />
-                      </>
-                    )}
-                  </Form.List>
-                ))}
-                <Divider />
-              </>
-            )}
-          </Form.List>
+                            <Divider />
+                          </>
+                        )}
+                      </Form.List>
+                    ))}
+                    <Divider />
+                  </>
+                )}
+              </Form.List>
+            </>
+          )}
         </Card>
         <Card className="card" style={{ display: state.type ? "none" : "" }}>
           <Form.Item
             name="before_price"
             label={intl.messages["app.pages.common.beforePrice"]}
+            initialValue={0}
             rules={[
               {
                 required: true,
@@ -687,6 +789,7 @@ const Default = ({ getCategories = [], getData = [] }) => {
           <Form.Item
             name="price"
             label={intl.messages["app.pages.common.price"]}
+            initialValue={0}
             rules={[
               {
                 required: true,
@@ -700,7 +803,7 @@ const Default = ({ getCategories = [], getData = [] }) => {
           <Form.Item
             name="qty"
             label={intl.messages["app.pages.common.qty"]}
-            InitialValue={100}
+            initialValue={100}
             rules={[
               {
                 required: true,
@@ -713,6 +816,7 @@ const Default = ({ getCategories = [], getData = [] }) => {
           <Form.Item
             name="isActive"
             label={intl.messages["app.pages.common.visible"]}
+            initialValue={true}
           >
             <Select
               style={{ width: "100%" }}
